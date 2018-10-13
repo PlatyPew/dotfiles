@@ -40,6 +40,8 @@ set si " Smartindent
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
 " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+set lazyredraw
+set ttyfast
 
 """ Mappings
 map <C-o> :NERDTreeToggle<CR>
@@ -52,7 +54,7 @@ nmap <leader>l :Limelight!!<CR>
 nmap <leader>G :Goyo <bar> :highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c<CR>
 nmap <leader>d :call deoplete#toggle()<CR>
 nmap <leader>t :call ToggleTransparentMode()<CR>
-nmap <leader>g au VimEnter * GitGutterToggle<CR> 
+nmap <leader>g :au VimEnter * GitGutterToggle<CR> 
 
 """ Set transparency
 function SetTransparentBackground()
