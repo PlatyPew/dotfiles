@@ -4,7 +4,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/daryllim/.oh-my-zsh"
 
-# ZSH Theme
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Powerlevel9k configs #######################################
@@ -18,7 +22,7 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=''
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv os_icon user_joined dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time date_joined battery)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status date time_joined battery)
 
 POWERLEVEL9K_VIRTUALENV_FOREGROUND="226"
 POWERLEVEL9K_VIRTUALENV_BACKGROUND="26"
@@ -99,14 +103,7 @@ POWERLEVEL9K_PUBLIC_IP_BACKGROUND="cyan"
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
+## Plugins
 plugins=(
   git
   zsh-completions
@@ -126,34 +123,9 @@ ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=white'
 ZSH_HIGHLIGHT_STYLES[path]='fg=117'
 ZSH_HIGHLIGHT_STYLES[assign]='fg=192,bold'
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=201,bold'
-# User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+## Aliases
 alias vi="nvim"
 
+## Sources
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

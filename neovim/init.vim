@@ -15,6 +15,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'jiangmiao/auto-pairs'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -42,6 +45,11 @@ map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+nmap <leader>r :RainbowParentheses!!<CR>
+nmap <leader>l :Limelight!!<CR>
+nmap <leader>g :Goyo <bar> :highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c<CR>
+nmap <leader>d :call deoplete#toggle()<CR>
+nmap <leader>t :call ToggleTransparentMode()<CR>
 
 """ Set transparency
 function SetTransparentBackground()
@@ -53,6 +61,17 @@ endfunction
 function UnsetTransparentBackground()
 	colorscheme space-vim-dark
 	highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c
+endfunction
+
+let s:transparent = 0
+function ToggleTransparentMode()
+    if s:transparent
+        call UnsetTransparentBackground()
+		let s:transparent = 0
+	else
+        call SetTransparentBackground()
+		let s:transparent = 1
+	endif
 endfunction
 
 """ Vim Airline
@@ -82,4 +101,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
 """ Deoplete
-" let g:deoplete#enable_at_startup = 1
