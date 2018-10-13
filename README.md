@@ -61,8 +61,5 @@ Copy `.zshrc` into `~`
 ### Transparent Mode
 ![transparent](screenshots/transparent.png)
 
-### Goyo, Rainbow and Limelight
-![goyo_rainbow_limelight](screenshots/goyo_rainbow_limelight.png)
-
-### Deoplete
-![deoplete](screenshots/deoplete.png)
+### Goyo, Rainbow, Limelight and Deoplete
+![goyo_rainbow_limelight_deoplete](screenshots/goyo_rainbow_limelight_deoplete.png)
