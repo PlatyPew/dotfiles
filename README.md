@@ -1,5 +1,5 @@
 # Dotfiles
-Basic terminal configurations for OSX.
+Basic terminal configurations for OSX. [Screenshots](#Screenshots)
 
 ## Iterm 2
 Install profile: `Preferences` -> `General` -> `Load preferences from a custom folder or URL` -> `Browse`
@@ -32,7 +32,9 @@ Install [powerlevel9k](https://github.com/bhilburn/powerlevel9k)
 
 Copy `.zshrc` into `~`
 
-## Screenshots
+# Screenshots
+
+## ZSH
 
 ### Neofetch
 ![neofetch](screenshots/screenshot1.png)
@@ -40,4 +42,22 @@ Copy `.zshrc` into `~`
 ### VCS (Git)
 ![vcs](screenshots/screenshot2.png)
 
-![vcs](screenshots/screenshot3.png)
+### Virtual Environment (virtualenv)
+![virtualenv](screenshots/screenshot3.png)
+
+## Neovim
+
+### Normal
+![neovim](screenshots/screenshot4.png)
+
+### NERDTree
+![nerdtree](screenshots/screenshot5.png)
+
+### Transparent Mode
+![transparent](screenshots/screenshot6.png)
+
+### Goyo
+![goyo](screenshots/screenshot7.png)
+
+### Rainbow and Limelight
+![rainbow_limelight](screenshots/screenshot8.png)
