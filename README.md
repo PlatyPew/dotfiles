@@ -1,7 +1,7 @@
 # Dotfiles
 Basic terminal configurations for OSX. [Screenshots](#screenshots)
 
-## Iterm 2
+## iTerm 2
 Install profile: `Preferences` -> `General` -> `Load preferences from a custom folder or URL` -> `Browse`
 
 ## Neovim
@@ -28,7 +28,9 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/mas
 
 Download powerline fonts (can be found on Homebrew)
 
-Install [powerlevel9k](https://github.com/bhilburn/powerlevel9k)
+Install [powerlevel9k](https://github.com/bhilburn/powerlevel9k) into `~/.oh-my-zsh/custom/themes`
+
+Install [zsh-completions](https://github.com/zsh-users/zsh-completions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) into `~/.oh-my-zsh/custom/plugins`
 
 Copy `.zshrc` into `~`
 
@@ -37,27 +39,30 @@ Copy `.zshrc` into `~`
 ## ZSH
 
 ### Neofetch
-![neofetch](screenshots/screenshot1.png)
+![neofetch](screenshots/neofetch.png)
 
 ### VCS (Git)
-![vcs](screenshots/screenshot2.png)
+![vcs](screenshots/vcs.png)
 
 ### Virtual Environment (virtualenv)
-![virtualenv](screenshots/screenshot3.png)
+![virtualenv](screenshots/virtualenv.png)
+
+### Syntax Highlighting
+![syntaxhighlight](screenshots/syntaxhighlight.png)
 
 ## Neovim
 
 ### Normal
-![neovim](screenshots/screenshot4.png)
+![neovim](screenshots/neovim.png)
 
 ### NERDTree
-![nerdtree](screenshots/screenshot5.png)
+![nerdtree](screenshots/nerdtree.png)
 
 ### Transparent Mode
-![transparent](screenshots/screenshot6.png)
+![transparent](screenshots/transparent.png)
 
-### Goyo
-![goyo](screenshots/screenshot7.png)
+### Goyo, Rainbow and Limelight
+![goyo_rainbow_limelight](screenshots/goyo_rainbow_limelight.png)
 
-### Rainbow and Limelight
-![rainbow_limelight](screenshots/screenshot8.png)
+### Deoplete
+![deoplete](screenshots/deoplete.png)

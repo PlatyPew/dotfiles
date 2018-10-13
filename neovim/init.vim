@@ -11,6 +11,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
+
+" Functionalities
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -47,9 +49,10 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 nmap <leader>r :RainbowParentheses!!<CR>
 nmap <leader>l :Limelight!!<CR>
-nmap <leader>g :Goyo <bar> :highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c<CR>
+nmap <leader>G :Goyo <bar> :highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c<CR>
 nmap <leader>d :call deoplete#toggle()<CR>
 nmap <leader>t :call ToggleTransparentMode()<CR>
+nmap <leader>g au VimEnter * GitGutterToggle<CR> 
 
 """ Set transparency
 function SetTransparentBackground()
@@ -88,6 +91,7 @@ let g:limelight_conceal_ctermfg = 254
 
 """ Git Gutter
 " set signcolumn=yes
+au VimEnter * GitGutterDisable
 set updatetime=200
 
 """ NERD Tree
@@ -99,5 +103,3 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 "autocmd vimenter * NERDTree
 "autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
-
-""" Deoplete
