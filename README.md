@@ -1,8 +1,10 @@
 # Dotfiles
 Basic terminal configurations for OSX. [Screenshots](#screenshots)
 
-## iTerm 2
+## iTerm2
 Install profile: `Preferences` -> `General` -> `Load preferences from a custom folder or URL` -> `Browse`
+
+Image Used: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=39759178
 
 ## Neovim
 Install [Vim-Plug](https://github.com/junegunn/vim-plug) to use. Copy file `init.vim` into `~/.config/nvim`
