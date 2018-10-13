@@ -1,5 +1,5 @@
 # Dotfiles
-Basic terminal configurations for OSX. [Screenshots](#Screenshots)
+Basic terminal configurations for OSX. [Screenshots](#screenshots)
 
 ## Iterm 2
 Install profile: `Preferences` -> `General` -> `Load preferences from a custom folder or URL` -> `Browse`
