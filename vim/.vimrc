@@ -14,6 +14,8 @@ set si " Smartindent
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
 " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+set lazyredraw
+set ttyfast
 
 """ Mappings
 map <C-j> <C-W>j
