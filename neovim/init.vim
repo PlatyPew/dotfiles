@@ -20,6 +20,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/LargeFile'
 
 call plug#end()
 
@@ -41,21 +42,34 @@ set si " Smartindent
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
 " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+
+""" Optimisation config
 set lazyredraw
 set ttyfast
+set foldmethod=syntax
+set foldmethod=expr
+" set eventignore=all " Uncommenting this line stops deoplete and gitgutter from working
 
 """ Mappings
+" Ctrl-o to open sidebar
 map <C-o> :NERDTreeToggle<CR>
+" Better window switching
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+" Activate rainbow parentheses \r
 nmap <leader>r :RainbowParentheses!!<CR>
+" Activate Limelight \l
 nmap <leader>l :Limelight!!<CR>
+" Activate Goyo \G
 nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic guifg=#7c7c7c<CR>
+" Activate Deoplete \d
 nmap <leader>d :call deoplete#toggle()<CR>
+" Activate Transparent mode \t
 nmap <leader>t :call ToggleTransparentMode()<CR>
-nmap <leader>g :au VimEnter * GitGutterToggle<CR> 
+" Activate GitGutter \g
+nmap <leader>g :GitGutterToggle<CR> 
 
 """ Set transparency
 function SetTransparentBackground()
@@ -95,7 +109,7 @@ let g:limelight_conceal_ctermfg = 254
 
 """ Git Gutter
 " set signcolumn=yes
-"au VimEnter * GitGutterDisable
+" au VimEnter * GitGutterDisable
 set updatetime=200
 
 """ NERD Tree

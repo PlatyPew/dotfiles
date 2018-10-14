@@ -65,3 +65,7 @@ Copy `.zshrc` into `~`
 
 ### Goyo, Rainbow, Limelight and Deoplete
 ![goyo_rainbow_limelight_deoplete](screenshots/goyo_rainbow_limelight_deoplete.png)
+
+## Tmux
+![tmux](screenshots/tmux.png)
+
