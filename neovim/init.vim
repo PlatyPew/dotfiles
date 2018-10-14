@@ -27,7 +27,8 @@ call plug#end()
 let g:space_vim_dark_background = 234
 syntax on
 colorscheme space-vim-dark
-highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c
+highlight clear Comment
+highlight Comment cterm=italic guifg=#7c7c7c
 set number
 set termguicolors
 
@@ -51,7 +52,7 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 nmap <leader>r :RainbowParentheses!!<CR>
 nmap <leader>l :Limelight!!<CR>
-nmap <leader>G :Goyo <bar> :highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c<CR>
+nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic guifg=#7c7c7c<CR>
 nmap <leader>d :call deoplete#toggle()<CR>
 nmap <leader>t :call ToggleTransparentMode()<CR>
 nmap <leader>g :au VimEnter * GitGutterToggle<CR> 
@@ -65,16 +66,17 @@ endfunction
 
 function UnsetTransparentBackground()
 	colorscheme space-vim-dark
-	highlight Comment cterm=italic ctermfg=240 guifg=#7c7c7c
+	highlight Comment cterm=italic guifg=#7c7c7c
+	highlight clear Comment
 endfunction
 
 let s:transparent = 0
 function ToggleTransparentMode()
-    if s:transparent
-        call UnsetTransparentBackground()
+	if s:transparent
+		call UnsetTransparentBackground()
 		let s:transparent = 0
 	else
-        call SetTransparentBackground()
+		call SetTransparentBackground()
 		let s:transparent = 1
 	endif
 endfunction
@@ -93,7 +95,7 @@ let g:limelight_conceal_ctermfg = 254
 
 """ Git Gutter
 " set signcolumn=yes
-au VimEnter * GitGutterDisable
+"au VimEnter * GitGutterDisable
 set updatetime=200
 
 """ NERD Tree
