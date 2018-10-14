@@ -4,7 +4,7 @@ Basic terminal configurations for OSX. [Screenshots](#screenshots)
 ## iTerm2
 Install profile: `Preferences` -> `General` -> `Load preferences from a custom folder or URL` -> `Browse`
 
-Image Used: https://www.pixiv.net/member_illust.php?mode=medium&illust_id=39759178
+Image Used: [灯柱 by コーラ](https://www.pixiv.net/member_illust.php?mode=medium&illust_id=39759178)
 
 ## Neovim
 Install [Vim-Plug](https://github.com/junegunn/vim-plug) to use. Copy file `init.vim` into `~/.config/nvim`
@@ -35,6 +35,11 @@ Install [powerlevel9k](https://github.com/bhilburn/powerlevel9k) into `~/.oh-my-
 Install [zsh-completions](https://github.com/zsh-users/zsh-completions) and [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) into `~/.oh-my-zsh/custom/plugins`
 
 Copy `.zshrc` into `~`
+
+## Tmux
+Create a folder `~/.tmux` and put the 2 scripts inside.
+
+Copy file `.tmux.conf` into `~`
 
 # Screenshots
 
