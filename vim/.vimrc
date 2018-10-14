@@ -18,10 +18,14 @@ set lazyredraw
 set ttyfast
 
 """ Mappings
+" Better window switching
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+" Better tab switching
+map <C-t><left> :tabn<cr>
+map <C-t><right> :tabN<cr>
 nmap <leader>t :call ToggleTransparentMode()<CR>
 
 """ Set transparency

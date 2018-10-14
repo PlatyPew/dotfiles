@@ -1,3 +1,5 @@
+# 256 colour support
+export TERM="xterm-256color"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -43,6 +45,8 @@ POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
 POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="32"
 POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
 POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="32"
+
+POWERLEVEL9K_DATE_FORMAT="%D{%d-%b-%y}"
 
 POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
 
@@ -108,6 +112,7 @@ plugins=(
   git
   zsh-completions
   zsh-syntax-highlighting
+  brew
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -115,7 +120,7 @@ source $ZSH/oh-my-zsh.sh
 ## syntax highlighting configs
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=10,bold'
-ZSH_HIGHLIGHT_STYLES[redirection]='fg=44'
+ZSH_HIGHLIGHT_STYLES[redirection]='fg=44,bold'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=81,bold'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=226,bold'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=226,bold'
@@ -123,6 +128,8 @@ ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=white'
 ZSH_HIGHLIGHT_STYLES[path]='fg=117'
 ZSH_HIGHLIGHT_STYLES[assign]='fg=192,bold'
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=201,bold'
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
 
 ## Aliases
 alias vi="nvim"
