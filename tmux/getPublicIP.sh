@@ -1,11 +1,9 @@
 #!/bin/zsh
 
-res=$(curl -s ipinfo.io)
+res=$(dig +short myip.opendns.com @resolver1.opendns.com)
 
 if [ $? -eq 0 ]; then
-	ipaddr=$(echo $res | grep ip | awk '{print $2}' | cut -d '"' -f 2)
-	code=$(echo $res | grep country | awk '{print $2}' | cut -d '"' -f 2)
-	echo "\uf0ac ${ipaddr} @ ${code}"
+	echo "\uf0ac ${res}"
 else
 	echo '\uf071 No Internet Access'
 fi
