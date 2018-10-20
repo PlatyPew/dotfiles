@@ -76,3 +76,5 @@ git clone https://github.com/zsh-users/zsh-completions.git ~/.oh-my-zsh/custom/p
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 cp ${dir}zsh/.zshrc ~
+
+env zsh -l
