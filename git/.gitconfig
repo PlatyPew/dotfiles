@@ -1,7 +1,6 @@
 [user]
-	email = # Redacted
+    email = # Redacted
 	name = PlatyPew
-	signingkey = D6E03142516AD45FA4CD509AC95CC11BF75CD64F
 [alias]
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [commit]
@@ -10,3 +9,5 @@
 	program = gpg
 [credential]
 	helper = store
+[diff]
+	tool = vimdiff
