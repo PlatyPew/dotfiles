@@ -11,6 +11,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'morhetz/gruvbox'
 
 " Functionalities
 Plug 'airblade/vim-gitgutter'
@@ -20,6 +21,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -41,6 +44,10 @@ set si " Smartindent
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
 " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+set tabstop=4
+set softtabstop=4
+set expandtab
+" set listchars=tab:»\ ,extends:›,precedes:‹,trail:·
 
 """ Optimisation config
 set lazyredraw
