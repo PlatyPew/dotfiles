@@ -49,6 +49,7 @@ set softtabstop=4
 set expandtab
 set list listchars=tab:»·,trail:·,nbsp:·
 set cursorline
+set splitright
 
 """ Optimisation config
 set lazyredraw
@@ -81,6 +82,20 @@ nmap <leader>d :call deoplete#toggle()<CR>
 nmap <leader>t :call ToggleTransparentMode()<CR>
 " Activate GitGutter \g
 nmap <leader>g :GitGutterToggle<CR> 
+" Spawn shell \s
+nmap <leader>s :vsp<CR> :term<CR> i
+
+" Allow better window switching in terminal mode
+augroup vimrc_term
+    autocmd!
+    autocmd WinEnter term://* nohlsearch
+    autocmd WinEnter term://* startinsert
+    autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
+    autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
+    autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
+    autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
+    autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
+augroup END
 
 """ Set transparency
 function SetTransparentBackground()
