@@ -47,6 +47,7 @@ call plug#end()" > ~/.config/nvim/init.vim
 python3 -m pip install neovim
 nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # Installs neovim plugins
 
+rm ~/.config/nvim/init.vim
 ln -s ${dir}neovim/init.vim ~/.config/nvim/init.vim
 
 echo "Removing login message from terminal"
