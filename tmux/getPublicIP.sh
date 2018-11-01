@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-res=$(dig +short myip.opendns.com @resolver1.opendns.com)
+res=$(dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}')
 
 if [ $? -eq 0 ]; then
 	echo "\uf0ac ${res}"

@@ -54,8 +54,8 @@ ln -s ${dir}osx/hushlogin ~/.hushlogin
 
 echo "Installing vim profile"
 mkdir -p ~/.vim/colors
-ln -s ~/.config/nvim/plugged/space-vim-dark/colors/space-vim-dark.vim ~/.vim/colors/space-vim-dark.vim
-ln -s ${dir}/vim/vimrc ~/.vimrc
+cp ~/.config/nvim/plugged/space-vim-dark/colors/space-vim-dark.vim ~/.vim/colors/space-vim-dark.vim
+ln -s ${dir}vim/vimrc ~/.vimrc
 
 echo "Installing Tmux"
 mkdir -p ~/.tmux
@@ -67,7 +67,7 @@ echo "Install git"
 cp ${dir}git/.gitconfig ~
 
 echo "Installing iTerm2:"
-ln -s ${dir}iterm2/Background1.png ~/Pictures/Background1.png
+cp ${dir}iterm2/iterm_bg.png ~/Pictures/iterm_bg.png
 
 echo "Installing oh my zsh"
 sh -c "$(sed -e '111d' <(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh))"
