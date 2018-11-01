@@ -47,7 +47,8 @@ set tabstop=4 shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab
-" set listchars=tab:»\ ,extends:›,precedes:‹,trail:·
+set list listchars=tab:»·,trail:·,nbsp:·
+set cursorline
 
 """ Optimisation config
 set lazyredraw
@@ -65,8 +66,9 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 " Better tab switching
-map <C-t><left> :tabn<cr>
-map <C-t><right> :tabN<cr>
+"nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
+"nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
+map <C-t> :tabnew<CR>
 " Activate rainbow parentheses \r
 nmap <leader>r :RainbowParentheses!!<CR>
 " Activate Limelight \l
@@ -82,26 +84,26 @@ nmap <leader>g :GitGutterToggle<CR>
 
 """ Set transparency
 function SetTransparentBackground()
-	highlight Normal ctermbg=NONE guibg=NONE
-	highlight LineNr ctermbg=NONE guibg=NONE
-	highlight SignColumn ctermbg=NONE guibg=NONE
+    highlight Normal ctermbg=NONE guibg=NONE
+    highlight LineNr ctermbg=NONE guibg=NONE
+    highlight SignColumn ctermbg=NONE guibg=NONE
 endfunction
 
 function UnsetTransparentBackground()
-	colorscheme space-vim-dark
-	highlight Comment cterm=italic guifg=#7c7c7c
-	highlight clear Comment
+    colorscheme space-vim-dark
+    highlight Comment cterm=italic guifg=#7c7c7c
+    highlight clear Comment
 endfunction
 
 let s:transparent = 0
 function ToggleTransparentMode()
-	if s:transparent
-		call UnsetTransparentBackground()
-		let s:transparent = 0
-	else
-		call SetTransparentBackground()
-		let s:transparent = 1
-	endif
+    if s:transparent
+        call UnsetTransparentBackground()
+        let s:transparent = 0
+    else
+        call SetTransparentBackground()
+        let s:transparent = 1
+    endif
 endfunction
 
 """ Vim Airline
@@ -109,6 +111,7 @@ let g:airline_powerline_fonts = 1
 let g:airline_section_warning = ''
 let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_theme='powerlineish'
+let g:airline#extensions#tabline#enabled = 1
 
 """ Limelight
 let g:limelight_conceal_ctermfg = 254
