@@ -30,22 +30,22 @@ nmap <leader>t :call ToggleTransparentMode()<CR>
 
 """ Set transparency
 function SetTransparentBackground()
-	highlight Normal ctermbg=NONE guibg=NONE
-	highlight LineNr ctermbg=NONE guibg=NONE
-	highlight SignColumn ctermbg=NONE guibg=NONE
+    highlight Normal ctermbg=NONE guibg=NONE
+    highlight LineNr ctermbg=NONE guibg=NONE
+    highlight SignColumn ctermbg=NONE guibg=NONE
 endfunction
 
 function UnsetTransparentBackground()
-	colorscheme space-vim-dark
+    colorscheme space-vim-dark
 endfunction
 
 let s:transparent = 0
 function ToggleTransparentMode()
     if s:transparent
         call UnsetTransparentBackground()
-		let s:transparent = 0
-	else
+        let s:transparent = 0
+    else
         call SetTransparentBackground()
-		let s:transparent = 1
-	endif
+        let s:transparent = 1
+    endif
 endfunction
