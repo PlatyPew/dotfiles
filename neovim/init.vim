@@ -11,13 +11,13 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/goyo.vim'
 
 " Functionalities
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-multiple-cursors'
-Plug 'junegunn/goyo.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
