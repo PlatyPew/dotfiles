@@ -23,6 +23,8 @@ Plug 'vim-scripts/LargeFile'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
+Plug 'terryma/vim-multiple-cursors'
+Plug 'w0rp/ale'
 
 call plug#end()
 
@@ -57,6 +59,8 @@ set ttyfast
 set foldmethod=syntax
 set foldmethod=expr
 " set eventignore=all " Uncommenting this line stops deoplete and gitgutter from working
+set noshowcmd
+set noruler
 
 """ Mappings
 " Ctrl-o to open sidebar
@@ -85,7 +89,7 @@ nmap <leader>g :GitGutterToggle<CR>
 " Spawn shell \s
 nmap <leader>s :vsp \| term<CR> i
 " UndoTree
-nmap <C-u> :UndotreeToggle<CR>
+nmap <C-i> :UndotreeToggle<CR>
 " Vim Fugitive
 nnoremap <silent> <leader>gp :Gpull -pr<CR>
 nnoremap <silent> <leader>gf :Gfetch -p<CR>
@@ -144,7 +148,7 @@ let g:limelight_conceal_ctermfg = 254
 """ Git Gutter
 " set signcolumn=yes
 " au VimEnter * GitGutterDisable
-set updatetime=200
+set updatetime=50
 
 """ NERD Tree
 let NERDTreeShowHidden=1
