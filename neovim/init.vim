@@ -28,6 +28,7 @@ Plug 'w0rp/ale'
 
 call plug#end()
 
+
 """ Coloring
 let g:space_vim_dark_background = 234
 syntax on
@@ -37,6 +38,7 @@ highlight Comment cterm=italic guifg=#7c7c7c
 set number
 set termguicolors
 
+
 """ Other config
 set encoding=UTF-8
 set backspace=eol,start,indent
@@ -45,51 +47,65 @@ set ai " Autoindent
 set si " Smartindent
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
-" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
 set tabstop=4
 set softtabstop=4
 set expandtab
 set list listchars=tab:»·,trail:·,nbsp:·
 set cursorline
 set splitright
+" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+
 
 """ Optimisation config
 set lazyredraw
 set ttyfast
 set foldmethod=syntax
 set foldmethod=expr
-" set eventignore=all " Uncommenting this line stops deoplete and gitgutter from working
 set noshowcmd
 set noruler
+" set eventignore=all " Uncommenting this line stops deoplete and gitgutter from working
+
 
 """ Mappings
+
 " Ctrl-o to open sidebar
 nmap <C-o> :NERDTreeToggle<CR>
+
 " Better window switching
 nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
+
 " Better tab switching
 "nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 "nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
 nmap <C-t> :tabnew<CR>
+
 " Activate rainbow parentheses \r
 nmap <leader>r :RainbowParentheses!!<CR>
+
 " Activate Limelight \l
 nmap <leader>l :Limelight!!<CR>
+
 " Activate Goyo \G
 nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic guifg=#7c7c7c<CR>
+
 " Activate Deoplete \d
 nmap <leader>d :call deoplete#toggle()<CR>
+
 " Activate Transparent mode \t
 nmap <leader>t :call ToggleTransparentMode()<CR>
+
 " Activate GitGutter \g
 nmap <leader>g :GitGutterToggle<CR> 
+
 " Spawn shell \s
 nmap <leader>s :vsp \| term<CR> i
+
 " UndoTree
 nmap <C-i> :UndotreeToggle<CR>
+
 " Vim Fugitive
 nnoremap <silent> <leader>gp :Gpull -pr<CR>
 nnoremap <silent> <leader>gf :Gfetch -p<CR>
@@ -107,6 +123,7 @@ augroup vimrc_term
     autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
     autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
 augroup END
+
 
 """ Set transparency
 function SetTransparentBackground()
@@ -132,6 +149,7 @@ function ToggleTransparentMode()
     endif
 endfunction
 
+
 """ Vim Airline
 let g:airline_powerline_fonts = 1
 let g:airline_section_warning = ''
@@ -139,23 +157,23 @@ let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
 let g:airline_theme='powerlineish'
 let g:airline#extensions#tabline#enabled = 1
 
+
 """ Limelight
 let g:limelight_conceal_ctermfg = 254
 
+
 """ Rainbow Parentheses
-" au VimEnter * RainbowParentheses
+" au VimEnter * RainbowParentheses " Enable Rainbow Parentheses by default
+
 
 """ Git Gutter
 " set signcolumn=yes
 " au VimEnter * GitGutterDisable
 set updatetime=50
 
+
 """ NERD Tree
 let NERDTreeShowHidden=1
 let g:NERDTreeDirArrowExpandable = '↠'
 let g:NERDTreeDirArrowCollapsible = '↡'
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd vimenter * NERDTree
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
