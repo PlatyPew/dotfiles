@@ -60,8 +60,8 @@ ln -s ${dir}vim/vimrc ~/.vimrc
 
 echo "Installing Tmux"
 mkdir -p ~/.tmux
-ln -s ${dir}tmux/getPublicIP ~/.tmux/getPublicIP
-ln -s ${dir}tmux/getLocalIP ~/.tmux/getLocalIP
+ln -s ${dir}tmux/getPublicIP.sh ~/.tmux/getPublicIP.sh
+ln -s ${dir}tmux/getLocalIP.sh ~/.tmux/getLocalIP.sh
 ln -s ${dir}tmux/tmux.conf ~/.tmux.conf
 
 echo "Install git"
