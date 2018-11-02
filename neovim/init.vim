@@ -11,7 +11,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/limelight.vim'
 Plug 'junegunn/vim-journal'
 Plug 'junegunn/rainbow_parentheses.vim'
-Plug 'morhetz/gruvbox'
 
 " Functionalities
 Plug 'airblade/vim-gitgutter'
@@ -23,6 +22,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 
 call plug#end()
 
@@ -60,16 +60,16 @@ set foldmethod=expr
 
 """ Mappings
 " Ctrl-o to open sidebar
-map <C-o> :NERDTreeToggle<CR>
+nmap <C-o> :NERDTreeToggle<CR>
 " Better window switching
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
 " Better tab switching
 "nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
 "nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
-map <C-t> :tabnew<CR>
+nmap <C-t> :tabnew<CR>
 " Activate rainbow parentheses \r
 nmap <leader>r :RainbowParentheses!!<CR>
 " Activate Limelight \l
@@ -83,7 +83,14 @@ nmap <leader>t :call ToggleTransparentMode()<CR>
 " Activate GitGutter \g
 nmap <leader>g :GitGutterToggle<CR> 
 " Spawn shell \s
-nmap <leader>s :vsp<CR> :term<CR> i
+nmap <leader>s :vsp \| term<CR> i
+" UndoTree
+nmap <C-u> :UndotreeToggle<CR>
+" Vim Fugitive
+nnoremap <silent> <leader>gp :Gpull -pr<CR>
+nnoremap <silent> <leader>gf :Gfetch -p<CR>
+nnoremap <silent> <leader>gs :Gstatus<CR>
+nnoremap <silent> <leader>gb :Gblame<CR>
 
 " Allow better window switching in terminal mode
 augroup vimrc_term
