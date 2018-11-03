@@ -16,7 +16,7 @@ echo Installing Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" # Installs Homebrew
 
 echo Installing all necessary programs
-brew install gpg2 neovim pinentry-mac tmux python3
+brew install gpg2 neovim pinentry-mac tmux python3 node
 brew cask install homebrew/cask-fonts/font-inconsolata-nerd-font iterm2 # Installs font and iTerm for powerline
 
 echo Installing plugins for neovim
@@ -51,6 +51,9 @@ nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # Installs neovim pl
 
 rm ~/.config/nvim/init.vim
 ln -s ${dir}neovim/init.vim ~/.config/nvim/init.vim
+
+echo "Installing JavaScript Linter"
+npm install -g eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard
 
 echo "Removing login message from terminal"
 ln -s ${dir}osx/hushlogin ~/.hushlogin
