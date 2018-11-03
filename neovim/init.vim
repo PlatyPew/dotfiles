@@ -111,6 +111,7 @@ nnoremap <silent> <leader>gp :Gpull -pr<CR>
 nnoremap <silent> <leader>gf :Gfetch -p<CR>
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
+nnoremap <silent> <leader>gd :Gdiff<CR>
 
 " Allow better window switching in terminal mode
 augroup vimrc_term
