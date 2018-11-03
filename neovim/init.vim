@@ -20,11 +20,10 @@ Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
+Plug 'kien/ctrlp.vim'
 
 call plug#end()
 
