@@ -5,6 +5,9 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 
 # Temporary init.vim to prevent vim from complaining that space-vim-dark does not exist
 mkdir -p ~/.config/nvim
+
+mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak 2> /dev/null
+
 cat << EOF > ~/.config/nvim/init.vim
 call plug#begin()
 Plug 'liuchengxu/space-vim-dark'
@@ -32,5 +35,5 @@ EOF
 python3 -m pip install neovim
 nvim -c ':PlugInstall' -c ':UpdateRemotePlugins' -c ':qall' # Installs neovim plugins
 
-mv ~/.config/nvim/init.vim ~/.config/nvim/init.vim.bak 2> /dev/null
+rm ~/.config/nvim/init.vim
 ln -s ${dir}init.vim ~/.config/nvim/init.vim
