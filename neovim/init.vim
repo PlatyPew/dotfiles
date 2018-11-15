@@ -24,6 +24,8 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'hdima/python-syntax'
 
 call plug#end()
 
