@@ -21,7 +21,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'terryma/vim-multiple-cursors'
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
@@ -46,6 +45,7 @@ set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 set ai " Autoindent
 set si " Smartindent
+" set smarttab
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
 set tabstop=4
@@ -54,7 +54,9 @@ set expandtab
 set list listchars=tab:»·,trail:·,nbsp:·
 set cursorline
 set splitright
+" set incsearch
 " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+au TermOpen * setlocal nonumber norelativenumber
 
 
 """ Optimisation config

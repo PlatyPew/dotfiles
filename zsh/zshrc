@@ -48,6 +48,8 @@ plugins=(
     zsh-completions
     zsh-syntax-highlighting
     brew
+    colored-man-pages
+    docker
 )
 ##############################################################
 
@@ -112,7 +114,7 @@ POWERLEVEL9K_PUBLIC_IP_BACKGROUND="cyan"
 source $ZSH/oh-my-zsh.sh
 
 ## Syntax highlighting configs
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=10,bold'
 ZSH_HIGHLIGHT_STYLES[redirection]='fg=44,bold'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=81,bold'
@@ -125,5 +127,29 @@ ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=201,bold'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
 
+## Functions
+weather() {
+    sed '38,39d' <(curl -s wttr.in/${1});
+}
+
+qrcode() {
+    if [ -z ${1} ]; then
+        echo "Usage: ${0} <string>"
+    else
+        printf "${1}" | curl -s -F-=\<- qrenco.de
+    fi
+}
+
+howdafak() {
+    if [ -z ${1} ] || [ -z ${2} ]; then
+        echo "Usage:    ${0} <topic> <query>"
+        echo "Example:  ${0} c \"get string length\""
+    else
+        where="$1"; shift
+        IFS=+ curl -s "https://cht.sh/${where}/${*}"
+    fi
+}
+
 ## Aliases
 alias vi="nvim -O"
+alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
