@@ -24,7 +24,7 @@ Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
 Plug 'w0rp/ale'
 Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'hdima/python-syntax'
+Plug 'vim-python/python-syntax'
 
 call plug#end()
 
@@ -37,6 +37,8 @@ highlight clear Comment
 highlight Comment cterm=italic guifg=#7c7c7c
 set number
 set termguicolors
+let g:python_highlight_all = 1
+let g:python_slow_sync = 0
 
 
 """ Other config
