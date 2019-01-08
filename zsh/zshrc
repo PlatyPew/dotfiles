@@ -179,5 +179,6 @@ rate() {
 ## Aliases
 alias vi="nvim -O"
 alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
+alias :q='exit'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
