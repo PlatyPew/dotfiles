@@ -17,6 +17,9 @@ Plug 'junegunn/goyo.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'shougo/neoinclude.vim'
+Plug 'zchee/deoplete-clang'
+Plug 'zchee/deoplete-jedi'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
@@ -27,6 +30,17 @@ Plug 'pangloss/vim-javascript'
 Plug 'vim-python/python-syntax'
 
 call plug#end()
+
+""" Deoplete
+autocmd InsertEnter * call deoplete#enable()
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+set completeopt-=preview
+" Clang
+let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
+let g:deoplete#sources#clang#sort_algo = 'priority'
+
+" JS
 
 
 """ Coloring
