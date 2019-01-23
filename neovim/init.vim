@@ -20,6 +20,7 @@ Plug 'shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'shougo/neoinclude.vim'
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-jedi'
+Plug 'carlitux/deoplete-ternjs', { 'do': 'npm -g install tern' }
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
@@ -34,13 +35,17 @@ call plug#end()
 """ Deoplete
 autocmd InsertEnter * call deoplete#enable()
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
 set completeopt-=preview
-" Clang
+
+" C/C++
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
 let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 
 " JS
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
 
 
 """ Coloring
@@ -86,7 +91,6 @@ set noruler
 
 
 """ Mappings
-
 " Ctrl-o to open sidebar
 nmap <C-o> :NERDTreeToggle<CR>
 
@@ -183,7 +187,7 @@ let g:limelight_conceal_ctermfg = 254
 
 
 """ Rainbow Parentheses
-" au VimEnter * RainbowParentheses " Enable Rainbow Parentheses by default
+au VimEnter * RainbowParentheses " Enable Rainbow Parentheses by default
 
 
 """ Git Gutter
