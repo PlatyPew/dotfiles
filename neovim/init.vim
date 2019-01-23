@@ -25,28 +25,25 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/LargeFile'
 Plug 'mbbill/undotree', { 'on': 'UndotreeToggle' }
-Plug 'w0rp/ale'
+Plug 'w0rp/ale', { 'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8' }
 Plug 'kien/ctrlp.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'vim-python/python-syntax'
+Plug 'majutsushi/tagbar', { 'do': 'brew install ctags-exuberant' }
+Plug 'hushicai/tagbar-javascript.vim', { 'do': 'npm -g install esctags' }
 
 call plug#end()
 
-""" Deoplete
-autocmd InsertEnter * call deoplete#enable()
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-set completeopt-=preview
 
-" C/C++
-let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
-let g:deoplete#sources#clang#sort_algo = 'priority'
-
-" JS
-let g:tern_request_timeout = 1
-let g:tern_request_timeout = 6000
-
+""" Anti-Pleb rebindings (Arrow keys still work in insert mode)
+nnoremap <Up> <nop>
+vnoremap <Up> <nop>
+nnoremap <Down> <nop>
+vnoremap <Down> <nop>
+nnoremap <Left> <nop>
+vnoremap <Left> <nop>
+nnoremap <Right> <nop>
+vnoremap <Right> <nop>
 
 """ Coloring
 let g:space_vim_dark_background = 234
@@ -126,8 +123,14 @@ nmap <leader>g :GitGutterToggle<CR>
 " Spawn shell \s
 nmap <leader>s :vsp \| term<CR> i
 
+" Toggle ALE \a
+nmap <leader>a :ALEToggle<CR>
+
 " UndoTree
-nmap <C-i> :UndotreeToggle<CR>
+nmap <Tab> :UndotreeToggle<CR>
+
+" TagBar
+nmap <S-Tab> :TagbarToggle<CR>
 
 " Vim Fugitive
 nnoremap <silent> <leader>gp :Gpull -pr<CR>
@@ -135,6 +138,22 @@ nnoremap <silent> <leader>gf :Gfetch -p<CR>
 nnoremap <silent> <leader>gs :Gstatus<CR>
 nnoremap <silent> <leader>gb :Gblame<CR>
 nnoremap <silent> <leader>gd :Gdiff<CR>
+
+"
+""" Deoplete
+autocmd InsertEnter * call deoplete#enable()
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+set completeopt-=preview
+
+" C/C++
+let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
+let g:deoplete#sources#clang#sort_algo = 'priority'
+
+" JS
+let g:tern_request_timeout = 1
+let g:tern_request_timeout = 6000
 
 " Allow better window switching in terminal mode
 augroup vimrc_term
@@ -198,6 +217,6 @@ set updatetime=50
 
 """ NERD Tree
 let NERDTreeShowHidden=1
-let g:NERDTreeDirArrowExpandable = '↠'
-let g:NERDTreeDirArrowCollapsible = '↡'
+let g:NERDTreeDirArrowExpandable = ' '
+let g:NERDTreeDirArrowCollapsible = ' '
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
