@@ -36,14 +36,14 @@ call plug#end()
 
 
 """ Anti-Pleb rebindings (Arrow keys still work in insert mode)
-nnoremap <Up> <nop>
-vnoremap <Up> <nop>
-nnoremap <Down> <nop>
-vnoremap <Down> <nop>
-nnoremap <Left> <nop>
-vnoremap <Left> <nop>
-nnoremap <Right> <nop>
-vnoremap <Right> <nop>
+nnoremap <silent> <Up> :resize +2 <CR>
+vnoremap <silent> <Up> :resize +2 <CR>
+nnoremap <silent> <Down> :resize -2 <CR>
+vnoremap <silent> <Down> :resize -2 <CR>
+nnoremap <silent> <Left> :vertical resize -2 <CR>
+vnoremap <silent> <Left> :vertical resize -2 <CR>
+nnoremap <silent> <Right> :vertical resize +2 <CR>
+vnoremap <silent> <Right> :vertical resize +2 <CR>
 
 """ Coloring
 let g:space_vim_dark_background = 234
