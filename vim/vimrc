@@ -5,17 +5,32 @@ colorscheme space-vim-dark
 set number
 set termguicolors
 
+
 """ Other config
 set encoding=UTF-8
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 set ai " Autoindent
 set si " Smartindent
+" set smarttab
 set wrap " Wrap lines
 set tabstop=4 shiftwidth=4 
-" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
+set tabstop=4
+set softtabstop=4
+set expandtab
+set list listchars=tab:»·,trail:·,nbsp:·
+set cursorline
+set splitright
+
+
+""" Optimisation config
 set lazyredraw
 set ttyfast
+set foldmethod=syntax
+set foldmethod=expr
+set noshowcmd
+set noruler
+
 
 """ Mappings
 " Better window switching
