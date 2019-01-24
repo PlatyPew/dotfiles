@@ -50,6 +50,11 @@ plugins=(
     brew
     colored-man-pages
     docker
+    osx
+#    vi-mode
+    web-search
+    sudo
+    tmux
 )
 ##############################################################
 
@@ -180,5 +185,9 @@ rate() {
 alias vi="nvim -O"
 alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 alias :q='exit'
+
+brew_autoremove() {
+    brew rm $(join <(brew leaves) <(brew deps ${1}))
+}
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

@@ -31,9 +31,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'vim-python/python-syntax'
 Plug 'majutsushi/tagbar', { 'do': 'brew install ctags-exuberant' }
 Plug 'hushicai/tagbar-javascript.vim', { 'do': 'npm -g install esctags' }
+Plug 'jiangmiao/auto-pairs'
 
 call plug#end()
-
 
 """ Anti-Pleb rebindings (Arrow keys still work in insert mode)
 nnoremap <silent> <Up> :resize +2 <CR>
