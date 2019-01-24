@@ -75,6 +75,7 @@ set splitright
 " set incsearch
 " au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif " Return to last edit position
 au TermOpen * setlocal nonumber norelativenumber
+set clipboard=unnamed
 
 
 """ Optimisation config
@@ -82,7 +83,7 @@ set lazyredraw
 set ttyfast
 set foldmethod=syntax
 set foldmethod=expr
-set noshowcmd
+set showcmd
 set noruler
 " set eventignore=all " Uncommenting this line stops deoplete and gitgutter from working
 
@@ -98,9 +99,7 @@ nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
 
 " Better tab switching
-"nnoremap <silent> <tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR>
-"nnoremap <silent> <s-tab> :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR>
-nmap <C-t> :tabnew<CR>
+nmap <silent><C-t> :tabnew<CR>
 
 " Activate rainbow parentheses \r
 nmap <leader>r :RainbowParentheses!!<CR>
@@ -141,14 +140,13 @@ nnoremap <silent> <leader>gd :Gdiff<CR>
 
 "
 """ Deoplete
-autocmd InsertEnter * call deoplete#enable()
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+au InsertEnter * call deoplete#enable()
+inoremap <silent><expr><tab>  pumvisible() ? "\<C-n>" : "\<tab>"
+inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 set completeopt-=preview
 
 " C/C++
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
-let g:deoplete#sources#clang#clang_header = '/Library/Developer/CommandLineTools/usr/lib/clang'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 
 " JS
