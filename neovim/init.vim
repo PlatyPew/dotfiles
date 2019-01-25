@@ -46,11 +46,13 @@ let g:python_slow_sync = 0
 
 
 """ Vanilla Colouring ---------------------------------------------------------
-syntax on
+syntax on                                                               " Enable syntax highlighting
 set termguicolors
-colorscheme space-vim-dark
+colorscheme space-vim-dark                                              " Set colour scheme SpaceVimDark
 highlight clear Comment
+" Set colours for comments
 highlight Comment cterm=italic guifg=#7c7c7c
+" Set colours for colour coloumn
 highlight ColorColumn guifg=#ff0000 guibg=#000000
 """ End Of Vanilla Colouring --------------------------------------------------
 
@@ -59,20 +61,19 @@ highlight ColorColumn guifg=#ff0000 guibg=#000000
 set number
 set encoding=UTF-8
 set backspace=eol,start,indent
-set whichwrap+=<,>,h,l
+set whichwrap+=<,>,h,l                                                  " Cursor wrap around in normal mode
 set autoindent
 set smartindent
-set wrap " Wrap lines
+set wrap
 set tabstop=4 shiftwidth=4 
 set tabstop=4
 set softtabstop=4
-set expandtab
-set list listchars=tab:»·,trail:·,nbsp:·
+set expandtab                                                           " #spacemasterrace
+set list listchars=tab:»·,trail:·,nbsp:·                                " Show trailing spaces and hard tabs
 set cursorline
-set splitright
-au TermOpen * setlocal nonumber norelativenumber
-set clipboard=unnamed
-call matchadd('ColorColumn', '\%101v', 100)
+set splitright                                                          " Set vertical split to always split to the right
+set clipboard=unnamed                                                   " Share yank and paste buffer with MacOS' pbcopy and pbpaste
+call matchadd('ColorColumn', '\%101v', 100)                             " Show colour coloumn only at lines that pass 101 characters
 """ End Of Vanilla Configurations ----------------------------------------------
 
 
@@ -103,12 +104,17 @@ nnoremap <silent> <Right> :vertical resize +2 <CR>
 vnoremap <silent> <Right> :vertical resize +2 <CR>
 
 "" Better window switching
-nmap <C-j> <C-W>j
-nmap <C-k> <C-W>k
+" Move to pane on the left      Ctrl-h
 nmap <C-h> <C-W>h
+" Move to lower pane            Ctrl-j
+nmap <C-j> <C-W>j
+" Move to upper pane            Ctrl-j
+nmap <C-k> <C-W>k
+" Move to pane on the right     Ctrl-h
 nmap <C-l> <C-W>l
 
-"" Better tab switching
+"" Better tab
+" Create new tabs    Ctrl-t
 nmap <silent><C-t> :tabnew<CR>
 
 "" Remap semicolon to colon
@@ -136,7 +142,7 @@ let g:limelight_conceal_ctermfg = 254
 
 
 """ Vim Journal Configurations ------------------------------------------------
-au BufNewFile,BufRead *.md set filetype=journal
+au BufNewFile,BufRead *.md set filetype=journal                         " Enable better syntax highlighting for .md files
 """ End Of Vim Journal Configurations -----------------------------------------
 
 
@@ -146,7 +152,7 @@ au BufNewFile,BufRead *.md set filetype=journal
 nmap <leader>r :RainbowParentheses!!<CR>
 
 "" Auto Commands
-au VimEnter * RainbowParentheses " Enable Rainbow Parentheses by default
+au VimEnter * RainbowParentheses                                        " Enable Rainbow Parentheses by default
 """ End Of Rainbow Parentheses Configurations ---------------------------------
 
 
@@ -163,7 +169,7 @@ nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cter
 nmap <leader>g :GitGutterToggle<CR> 
 
 "" Settings
-set updatetime=50
+set updatetime=50                                                       " Update git gutter every 50ms
 " set signcolumn=yes
 " au VimEnter * GitGutterDisable
 """ End Of Git Gutter Configurations ------------------------------------------
@@ -176,17 +182,17 @@ nmap <C-o> :NERDTreeToggle<CR>
 
 "" Settings
 let NERDTreeShowHidden=1
-let g:NERDTreeDirArrowExpandable = ' '
-let g:NERDTreeDirArrowCollapsible = ' '
+let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
+let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 """ End Of Nerd Tree Configurations -------------------------------------------
 
 
 """ Deoplete Configurations ---------------------------------------------------
 "" Mappings
-" Activate Deoplete    \d
-nmap <leader>d :call deoplete#toggle()<CR>
+" Go down    Tab
 inoremap <silent><expr><tab>  pumvisible() ? "\<C-n>" : "\<tab>"
+" Go up      Shift-Tab
 inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "" Settings
@@ -200,12 +206,14 @@ let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
 """ End Of Deoplete Configurations --------------------------------------------
 
+
 """ Vim Fugitive Configurations -----------------------------------------------
 "" Mappings
-nnoremap <silent> <leader>gp :Gpull -pr<CR>
-nnoremap <silent> <leader>gf :Gfetch -p<CR>
+" Show git status    Tab
 nnoremap <silent> <leader>gs :Gstatus<CR>
+" Show git blame     Tab
 nnoremap <silent> <leader>gb :Gblame<CR>
+" Show git diff      Tab
 nnoremap <silent> <leader>gd :Gdiff<CR>
 """ End Of Vim Fugitive Configurations ----------------------------------------
 
@@ -223,11 +231,13 @@ nmap <leader>a :ALEToggle<CR>
 nmap <Tab> :UndotreeToggle<CR>
 
 "" Settings
+" Loads persistent undo tree to ~/.cache
 if has("persistent_undo")
     set undodir=~/.cache/undotree
     set undofile
 endif
 """ End Of UndoTree Configurations --------------------------------------------
+
 
 """ Tagbar Configurations -----------------------------------------------------
 "" Mappings
@@ -258,6 +268,9 @@ augroup END
 "" Mappings
 " Activate Transparent mode    \t
 nmap <leader>t :call ToggleTransparentMode()<CR>
+
+"" Settings
+au TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
 
 "" Functions
 function SetTransparentBackground()
