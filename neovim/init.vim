@@ -73,7 +73,7 @@ set list listchars=tab:»·,trail:·,nbsp:·                                " Sh
 set cursorline
 set splitright                                                          " Set vertical split to always split to the right
 set clipboard=unnamed                                                   " Share yank and paste buffer with MacOS' pbcopy and pbpaste
-call matchadd('ColorColumn', '\%101v', 100)                             " Show colour coloumn only at lines that pass 101 characters
+call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
 """ End Of Vanilla Configurations ----------------------------------------------
 
 

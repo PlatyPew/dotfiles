@@ -138,8 +138,11 @@ ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
             virtualenv -p python3 venv
+            source venv/bin/activate
+            pip install pynvim
+        else
+            source venv/bin/activate
         fi
-        source venv/bin/activate
     else
         echo "You are already in a virtual environment"
         return 1
