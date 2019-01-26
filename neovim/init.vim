@@ -10,9 +10,9 @@ Plug 'liuchengxu/space-vim-dark'                                        " Colour
 Plug 'vim-airline/vim-airline'                                          " Plugin that gives blocks on the top and bottom neovim
 Plug 'vim-airline/vim-airline-themes'                                   " Imports a library of themes for vim-arline
 Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
-Plug 'junegunn/limelight.vim'                                           " Grey-out paragraphs the cursor is not on
-Plug 'junegunn/rainbow_parentheses.vim'                                 " Adds rainbow colouring for nested parenthesis
-Plug 'junegunn/goyo.vim'                                                " Distraction-free setting
+Plug 'junegunn/limelight.vim', {'on': 'Limelight!!'}                    " Grey-out paragraphs the cursor is not on
+Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
+Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
 Plug 'junegunn/vim-journal'                                             " Nicer syntax highlighting for markdown
@@ -24,7 +24,7 @@ Plug 'vim-python/python-syntax'                                         " Nicer 
 Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
 Plug 'tpope/vim-fugitive'                                               " Git wrapper
 " File finding
-Plug 'scrooloose/nerdtree'                                              " Shows file tree
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}                    " Shows file tree
 Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
 " Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
@@ -32,10 +32,10 @@ Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-c
 Plug 'zchee/deoplete-clang'                                             " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi'                                              " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern'}          " Auto-Completion support for Javascript
-" More efficient (lazy) plugins
+"More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
-Plug 'shime/vim-livedown', {'do': 'npm -g install livedown'}            " Live preview of markdown in browser
+Plug 'shime/vim-livedown', {'do': 'npm -g install livedown', 'on': 'LivedownToggle'} " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
 " Misc
