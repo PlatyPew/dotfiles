@@ -4,35 +4,46 @@
 call plug#begin()                                                       " Plugin manager Vim-Plug
 
 "" Aesthetics
+" Colours
 Plug 'liuchengxu/space-vim-dark'                                        " Colour Scheme SpaceVimDark
+" User Interface
 Plug 'vim-airline/vim-airline'                                          " Plugin that gives blocks on the top and bottom neovim
 Plug 'vim-airline/vim-airline-themes'                                   " Imports a library of themes for vim-arline
 Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
 Plug 'junegunn/limelight.vim'                                           " Grey-out paragraphs the cursor is not on
-Plug 'junegunn/vim-journal'                                             " Nicer syntax highlighting for markdown
-Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
-Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
 Plug 'junegunn/rainbow_parentheses.vim'                                 " Adds rainbow colouring for nested parenthesis
 Plug 'junegunn/goyo.vim'                                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
+" Syntax highlighting
+Plug 'junegunn/vim-journal'                                             " Nicer syntax highlighting for markdown
+Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
+Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
 
 "" Functionalities
+" Git
 Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
+Plug 'tpope/vim-fugitive'                                               " Git wrapper
+" File finding
 Plug 'scrooloose/nerdtree'                                              " Shows file tree
-Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
+Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
+" Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
+Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
 Plug 'zchee/deoplete-clang'                                             " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi'                                              " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern'}          " Auto-Completion support for Javascript
+" More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
-Plug 'tpope/vim-fugitive'                                               " Git wrapper
+Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
+Plug 'shime/vim-livedown', {'do': 'npm -g install livedown'}            " Live preview of markdown in browser
+Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
+Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
+" Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'}                                                                   " Asynchronous linting
-Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
 Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
-Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -53,7 +64,7 @@ highlight clear Comment
 " Set colours for comments
 highlight Comment cterm=italic guifg=#7c7c7c
 " Set colours for colour coloumn
-highlight ColorColumn guifg=#ff0000 guibg=#000000
+highlight ColorColumn guifg=#ff0000 guibg=#1c1c1c
 """ End Of Vanilla Colouring --------------------------------------------------
 
 
@@ -116,6 +127,10 @@ nmap <C-l> <C-W>l
 "" Better tab
 " Create new tabs    Ctrl-t
 nmap <silent><C-t> :tabnew<CR>
+
+"" Easy Save
+" Save files    Ctrl-s
+imap <C-s> <Esc>:w<CR>a
 
 "" Remap semicolon to colon
 nnoremap ; :
@@ -239,11 +254,36 @@ endif
 """ End Of UndoTree Configurations --------------------------------------------
 
 
+""" Livedown Configurations ---------------------------------------------------
+"" Mappings
+" Activate Livedown    \L
+nmap <leader>L :LivedownToggle<CR>
+
+"" Settings
+let g:livedown_autorun = 0
+let g:livedown_open = 1 
+let g:livedown_port = 1337
+let g:livedown_browser = "safari"
+""" End Of Livedown Configurations --------------------------------------------
+
+
 """ Tagbar Configurations -----------------------------------------------------
 "" Mappings
 " Activate Tabar    Shift-Tab
 nmap <S-Tab> :TagbarToggle<CR>
 """ End Of Tagbar Configurations ----------------------------------------------
+
+""" Nerd Commenter Configurations ---------------------------------------------
+"" Settings
+let g:NERDSpaceDelims = 1                                               " Add spaces after comment delimiters by default
+let g:NERDCompactSexyComs = 1                                           " Use compact syntax for prettified multi-line comments
+let g:NERDAltDelims_java = 1                                            " Set a language to use its alternate delimiters by default
+let g:NERDTrimTrailingWhitespace = 1                                    " Enable trimming of trailing whitespace when uncommenting
+let g:NERDToggleCheckAllLines = 1                                       " Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDCustomDelimiters = {
+    \ 'python': { 'left': '#', 'right': '' }
+    \ }                                                                 " Fix for double spacing while commenting Python
+""" End Of Nerd Commenter Configurations --------------------------------------
 
 
 """ Vanilla Terminal Support --------------------------------------------------
