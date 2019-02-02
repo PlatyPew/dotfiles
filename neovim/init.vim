@@ -15,7 +15,6 @@ Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds r
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
-Plug 'junegunn/vim-journal'                                             " Nicer syntax highlighting for markdown
 Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
 Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
 
@@ -41,7 +40,7 @@ Plug 'scrooloose/nerdcommenter'                                         " Easy c
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'}                                                                   " Asynchronous linting
+Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'} " Asynchronous linting
 Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
 
@@ -83,6 +82,7 @@ set expandtab                                                           " #space
 set list listchars=tab:»·,trail:·,nbsp:·                                " Show trailing spaces and hard tabs
 set cursorline
 set splitright                                                          " Set vertical split to always split to the right
+set splitbelow
 set clipboard=unnamed                                                   " Share yank and paste buffer with MacOS' pbcopy and pbpaste
 call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
 """ End Of Vanilla Configurations ----------------------------------------------
@@ -156,11 +156,6 @@ let g:limelight_conceal_ctermfg = 254
 """ End Of Limelight Configurations -------------------------------------------
 
 
-""" Vim Journal Configurations ------------------------------------------------
-au BufNewFile,BufRead *.md set filetype=journal                         " Enable better syntax highlighting for .md files
-""" End Of Vim Journal Configurations -----------------------------------------
-
-
 """ Rainbow Parentheses Configurations ----------------------------------------
 "" Mappings
 " Activate Rainbow Parentheses    \r
@@ -205,13 +200,14 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 """ Deoplete Configurations ---------------------------------------------------
 "" Mappings
+" Activate deoplete    \d
+nmap <leader>d :call deoplete#toggle()<CR>
 " Go down    Tab
 inoremap <silent><expr><tab>  pumvisible() ? "\<C-n>" : "\<tab>"
 " Go up      Shift-Tab
 inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "" Settings
-au InsertEnter * call deoplete#enable()
 set completeopt-=preview
 " C/C++
 let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
@@ -272,6 +268,7 @@ let g:livedown_browser = "safari"
 " Activate Tabar    Shift-Tab
 nmap <S-Tab> :TagbarToggle<CR>
 """ End Of Tagbar Configurations ----------------------------------------------
+
 
 """ Nerd Commenter Configurations ---------------------------------------------
 "" Settings
@@ -336,3 +333,33 @@ function ToggleTransparentMode()
     endif
 endfunction
 """ End Of Vanilla Transparent Mode -------------------------------------------
+
+
+""" Vanilla IDE Mode ----------------------------------------------------------
+"" Mappings
+" Activate IDE mode    \i
+nmap <silent><leader>i :call SetIDE()<CR>
+
+let s:ide = 0
+function SetIDE()
+    if s:ide
+        echo "IDE Mode is already activated"
+    else
+        silent execute("NERDTreeToggle")
+        silent execute("vertical resize -6")
+        silent execute("execute 'norm \<C-l>'")
+        silent execute("sp")
+        silent execute("resize -10")
+        silent execute("term")
+        silent execute("execute 'norm \<C-k>'")
+        silent execute("TagbarOpen")
+        silent execute("execute 'norm \<C-l>'")
+        silent execute("vertical resize -8")
+        silent execute("execute 'norm \<C-h>'")
+        silent execute("ALEEnable")
+        silent call deoplete#enable()
+        echo "IDE Mode activated"
+        let s:ide = 1
+    endif
+endfunction
+""" End Of Vanilla IDE Mode ---------------------------------------------------
