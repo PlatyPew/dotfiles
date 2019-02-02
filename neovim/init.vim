@@ -17,6 +17,7 @@ Plug 'mhinz/vim-startify'                                               " Better
 " Syntax highlighting
 Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
 Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
+Plug 'octol/vim-cpp-enhanced-highlight'                                 " Nicer syntax highlighting for clang
 
 "" Functionalities
 " Git
@@ -49,9 +50,17 @@ call plug#end()
 
 
 """ Plugin Colouring ----------------------------------------------------------
+"" Space Vim Dark
 let g:space_vim_dark_background = 234
+"" Python
 let g:python_highlight_all = 1
 let g:python_slow_sync = 0
+"" Clang
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+let g:cpp_experimental_simple_template_highlight = 1
+let g:cpp_concepts_highlight = 1
 """ End Of Plugin Colouring ---------------------------------------------------
 
 
@@ -191,9 +200,10 @@ set updatetime=50                                                       " Update
 nmap <C-o> :NERDTreeToggle<CR>
 
 "" Settings
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
 let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
+let NERDTreeShowHidden = 0
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 """ End Of Nerd Tree Configurations -------------------------------------------
 
@@ -286,7 +296,7 @@ let g:NERDCustomDelimiters = {
 """ Vanilla Terminal Support --------------------------------------------------
 "" Mappings
 " Spawn shell \s
-nmap <leader>s :vsp \| term<CR> i
+nmap <leader>s :call StartShell()<CR> i
 " Allow better window switching in terminal mode
 augroup vimrc_term
     autocmd!
@@ -298,6 +308,13 @@ augroup vimrc_term
     autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
     autocmd TermOpen * tnoremap <buffer> <Esc> <C-\><C-n>
 augroup END
+
+"" Functions
+function StartShell()
+    set shell=/bin/zsh
+    silent execute("vsp")
+    silent execute("term")
+endfunction
 """ End Of Vanilla Terminal Support ------------------------------------------
 
 
@@ -345,6 +362,7 @@ function SetIDE()
     if s:ide
         echo "IDE Mode is already activated"
     else
+        set shell=/bin/bash
         silent execute("NERDTreeToggle")
         silent execute("vertical resize -6")
         silent execute("execute 'norm \<C-l>'")
