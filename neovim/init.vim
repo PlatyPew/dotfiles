@@ -300,6 +300,9 @@ let g:NERDCustomDelimiters = {
 "" Mappings
 " Spawn shell \s
 nmap <leader>s :call StartShell()<CR> i
+
+"" Settings
+au TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
 " Allow better window switching in terminal mode
 augroup vimrc_term
     autocmd!
@@ -326,29 +329,18 @@ endfunction
 " Activate Transparent mode    \t
 nmap <leader>t :call ToggleTransparentMode()<CR>
 
-"" Settings
-au TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
-
 "" Functions
-function SetTransparentBackground()
-    highlight Normal ctermbg=NONE guibg=NONE
-    highlight LineNr ctermbg=NONE guibg=NONE
-    highlight SignColumn ctermbg=NONE guibg=NONE
-endfunction
-
-function UnsetTransparentBackground()
-    colorscheme space-vim-dark
-    highlight Comment cterm=italic guifg=#7c7c7c
-    highlight clear Comment
-endfunction
-
 let s:transparent = 0
 function ToggleTransparentMode()
     if s:transparent
-        call UnsetTransparentBackground()
+        colorscheme space-vim-dark
+        highlight clear Comment
+        highlight Comment cterm=italic guifg=#7c7c7c
         let s:transparent = 0
     else
-        call SetTransparentBackground()
+        highlight Normal ctermbg=NONE guibg=NONE
+        highlight LineNr ctermbg=NONE guibg=NONE
+        highlight SignColumn ctermbg=NONE guibg=NONE
         let s:transparent = 1
     endif
 endfunction
