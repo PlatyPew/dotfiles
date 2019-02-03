@@ -243,6 +243,9 @@ nnoremap <silent> <leader>gd :Gdiff<CR>
 "" Mappings
 " Activate ALE    \a
 nmap <leader>a :ALEToggle<CR>
+
+"" Settings
+let g:ale_enabled = 0
 """ End Of ALE Configurations -------------------------------------------------
 
 
@@ -355,28 +358,35 @@ endfunction
 """ Vanilla IDE Mode ----------------------------------------------------------
 "" Mappings
 " Activate IDE mode    \i
-nmap <silent><leader>i :call SetIDE()<CR>
+nmap <leader>i :call ToggleIDE()<CR>
 
 let s:ide = 0
-function SetIDE()
+function ToggleIDE()
     if s:ide
-        echo "IDE Mode is already activated"
+        set shell=/bin/zsh
+        silent execute("NERDTreeToggle")
+        silent execute("TagbarClose")
+        silent execute("norm \<C-j>")
+        autocmd WinEnter * stopinsert
+        silent execute("q")
+        silent execute("ALEDisable")
+        silent call deoplete#disable()
+        let s:ide = 0
     else
         set shell=/bin/bash
         silent execute("NERDTreeToggle")
         silent execute("vertical resize -6")
-        silent execute("execute 'norm \<C-l>'")
+        silent execute("norm \<C-l>")
         silent execute("sp")
         silent execute("resize -10")
         silent execute("term")
-        silent execute("execute 'norm \<C-k>'")
+        silent execute("norm \<C-k>")
         silent execute("TagbarOpen")
-        silent execute("execute 'norm \<C-l>'")
+        silent execute("norm \<C-l>")
         silent execute("vertical resize -8")
-        silent execute("execute 'norm \<C-h>'")
+        silent execute("norm \<C-h>")
         silent execute("ALEEnable")
         silent call deoplete#enable()
-        echo "IDE Mode activated"
         let s:ide = 1
     endif
 endfunction
