@@ -23,6 +23,7 @@ Plug 'octol/vim-cpp-enhanced-highlight'                                 " Nicer 
 " Git
 Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
 Plug 'tpope/vim-fugitive'                                               " Git wrapper
+Plug 'Xuyuanp/nerdtree-git-plugin'
 " File finding
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}                    " Shows file tree
 Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
@@ -356,6 +357,8 @@ let s:ide = 0
 function ToggleIDE()
     if s:ide
         set shell=/bin/zsh
+        silent execute("norm \<C-h>")
+        silent execute("vertical resize +6")
         silent execute("NERDTreeToggle")
         silent execute("TagbarClose")
         silent execute("norm \<C-j>")
@@ -372,6 +375,7 @@ function ToggleIDE()
         silent execute("sp")
         silent execute("resize -10")
         silent execute("term")
+        autocmd WinEnter term://* startinsert
         silent execute("norm \<C-k>")
         silent execute("TagbarOpen")
         silent execute("norm \<C-l>")
