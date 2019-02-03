@@ -206,3 +206,14 @@ bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
+
+ide() {
+    if [[ -z $TMUX ]] then
+        SESSION='dev'
+        tmux -2 new-session -d -s $SESSION
+        tmux send-keys "vi ${1} '+call ToggleIDE()'" C-m
+        tmux -2 attach-session -t $SESSION
+    else
+        vi ${1} '+call ToggleIDE()'
+    fi
+}
