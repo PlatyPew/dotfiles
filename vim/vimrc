@@ -2,6 +2,8 @@
 let g:space_vim_dark_background = 234
 syntax on
 colorscheme space-vim-dark
+highlight clear Comment
+highlight Comment cterm=italic guifg=#7c7c7c
 set number
 set termguicolors
 
@@ -42,6 +44,20 @@ map <C-l> <C-W>l
 map <C-t><left> :tabn<cr>
 map <C-t><right> :tabN<cr>
 nmap <leader>t :call ToggleTransparentMode()<CR>
+
+"" Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
+" Increase horizontal split
+nnoremap <silent> <Up> :resize +2 <CR>
+vnoremap <silent> <Up> :resize +2 <CR>
+" Decrease horizontal split
+nnoremap <silent> <Down> :resize -2 <CR>
+vnoremap <silent> <Down> :resize -2 <CR>
+" Increase vertical split
+nnoremap <silent> <Left> :vertical resize -2 <CR>
+vnoremap <silent> <Left> :vertical resize -2 <CR>
+" Decrease horizontal split
+nnoremap <silent> <Right> :vertical resize +2 <CR>
+vnoremap <silent> <Right> :vertical resize +2 <CR>
 
 """ Set transparency
 function SetTransparentBackground()
