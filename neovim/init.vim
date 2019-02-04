@@ -39,6 +39,7 @@ Plug 'jiangmiao/auto-pairs'                                             " Insert
 Plug 'shime/vim-livedown', {'do': 'npm -g install livedown', 'on': 'LivedownToggle'} " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
+Plug 'anyakichi/vim-surround'
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser

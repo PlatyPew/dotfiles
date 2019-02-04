@@ -4,43 +4,7 @@ export TERM="xterm-256color"
 # Path to your oh-my-zsh installation.
 export ZSH="$(echo ~$USER)/.oh-my-zsh"
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
 
 # Plugins ####################################################
 plugins=(
@@ -57,7 +21,6 @@ plugins=(
     tmux
     extract
 )
-
 ##############################################################
 
 # Powerlevel9k configs #######################################
@@ -134,7 +97,7 @@ ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=201,bold'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
 
-## Python related stuff
+## Python ##################################################
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
@@ -151,12 +114,15 @@ ve() {
 }
 
 alias de='deactivate'
+############################################################
 
-## Functions
+## Misc Functions ##########################################
+# Get Weather
 weather() {
     sed '$ d' <(curl -s wttr.in/${1} | grep -v '@igor');
 }
 
+# Convert text to QR code
 qrcode() {
     if [ -z ${1} ]; then
         echo "Usage: ${0} <string>"
@@ -166,6 +132,7 @@ qrcode() {
     fi
 }
 
+# Ulimate cheat sheet
 howdafak() {
     if [ -z ${1} ]; then
         echo "Usage:    ${0} [-l] <topic> [query]"
@@ -182,18 +149,34 @@ howdafak() {
     fi
 }
 
+# Get rates of crypto currency
 rate() {
     curl -s "https://sgd.rate.sx/${1}" | grep -v '@igor'
 }
 
-## Aliases
-alias vi="nvim -O"
-alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
-alias :q='exit'
+# Spawn IDE like environment using Neovim
+ide() {
+    if [[ -z $TMUX ]] then
+        SESSION='dev'
+        tmux -2 new-session -d -s $SESSION
+        tmux send-keys "vi ${1} '+call ToggleIDE()'" C-m
+        tmux -2 attach-session -t $SESSION
+    else
+        vi ${1} '+call ToggleIDE()'
+    fi
+}
 
 brew_autoremove() {
     brew rm $(join <(brew leaves) <(brew deps ${1}))
 }
+############################################################
+
+## Aliases #################################################
+alias vi="nvim -O"
+alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
+alias :q='exit'
+alias cls='clear'
+############################################################
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -206,14 +189,3 @@ bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
 bindkey -M vicmd "j" down-line-or-beginning-search
-
-ide() {
-    if [[ -z $TMUX ]] then
-        SESSION='dev'
-        tmux -2 new-session -d -s $SESSION
-        tmux send-keys "vi ${1} '+call ToggleIDE()'" C-m
-        tmux -2 attach-session -t $SESSION
-    else
-        vi ${1} '+call ToggleIDE()'
-    fi
-}
