@@ -33,6 +33,8 @@ Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-c
 Plug 'zchee/deoplete-clang'                                             " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi'                                              " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern'}          " Auto-Completion support for Javascript
+Plug 'zchee/deoplete-zsh'
+Plug 'shougo/neco-syntax'
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -43,7 +45,7 @@ Plug 'anyakichi/vim-surround'
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'w0rp/ale', {'do': 'npm -g install eslint eslint-config-standard eslint-plugin-import eslint-plugin-node eslint-plugin-promise eslint-plugin-standard; pip3 install flake8'} " Asynchronous linting
+Plug 'w0rp/ale', {'do': 'npm -g --save-dev eslint eslint-config-google; pip3 install flake8'} " Asynchronous linting
 Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
 
@@ -136,8 +138,13 @@ nmap <C-k> <C-W>k
 nmap <C-l> <C-W>l
 
 "" Better tab
-" Create new tabs    Ctrl-t
-nmap <silent><C-t> :tabnew<CR>
+" Create new tabs    \t
+nnoremap <leader>tn :tabnew<CR>
+nnoremap <leader>th :tabfirst<CR>
+nnoremap <leader>tj :tabNext<CR>
+nnoremap <leader>tk :tabprevious<CR>
+nnoremap <leader>tl :tablast<CR>
+nnoremap <leader>tq :tabclose<CR>
 
 "" Easy Save
 " Save files    Ctrl-s
@@ -145,6 +152,13 @@ imap <C-s> <Esc>:w<CR>a
 
 "" Remap semicolon to colon
 nnoremap ; :
+
+"" Cycling buffers
+nnoremap <leader>bh :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR>
+nnoremap <leader>bj :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR>
+nnoremap <leader>bk :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>
+nnoremap <leader>bl :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>
+nnoremap <leader>bq :bdelete<CR>
 """ End Of Vanilla Rebindings -------------------------------------------------
 
 
@@ -310,6 +324,7 @@ augroup vimrc_term
     autocmd!
     autocmd WinEnter term://* nohlsearch
     autocmd WinEnter term://* startinsert
+    autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
     autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
     autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
     autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
@@ -329,7 +344,7 @@ endfunction
 """ Vanilla Transparent Mode -------------------------------------------------
 "" Mappings
 " Activate Transparent mode    \t
-nmap <leader>t :call ToggleTransparentMode()<CR>
+nmap <leader>T :call ToggleTransparentMode()<CR>
 
 "" Functions
 let s:transparent = 0

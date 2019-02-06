@@ -23,6 +23,10 @@ ve() {
         else
             source venv/bin/activate
         fi
+        echo "python:  $(which python)"
+        echo "python3: $(which python3)"
+        echo "pip:     $(which pip)"
+        echo "pip3:    $(which pip3)"
     else
         echo "You are already in a virtual environment"
         return 1
@@ -58,4 +62,3 @@ then
     bind '"\e[A": history-search-backward'
     bind '"\e[B": history-search-forward'
 fi
-
