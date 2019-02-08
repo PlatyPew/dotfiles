@@ -15,39 +15,40 @@ Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds r
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
-Plug 'pangloss/vim-javascript'                                          " Nicer syntax highlighting for javascript
-Plug 'vim-python/python-syntax'                                         " Nicer syntax highlighting for python
-Plug 'octol/vim-cpp-enhanced-highlight'                                 " Nicer syntax highlighting for clang
+Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer syntax highlighting for javascript
+Plug 'vim-python/python-syntax', {'for': 'python'}                      " Nicer syntax highlighting for python
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}          " Nicer syntax highlighting for clang
 
 "" Functionalities
 " Git
 Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
 Plug 'tpope/vim-fugitive'                                               " Git wrapper
-Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " File finding
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}                    " Shows file tree
 Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
 " Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
-Plug 'zchee/deoplete-clang'                                             " Auto-Completion support for C/C++
-Plug 'zchee/deoplete-jedi'                                              " Auto-Completion support for Python
-Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g install tern'}          " Auto-Completion support for Javascript
-Plug 'zchee/deoplete-zsh'
-Plug 'shougo/neco-syntax'
+Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
+Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
+Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g --save-dev install tern', 'for': 'javascript'} " Auto-Completion support for Javascript
+Plug 'zchee/deoplete-zsh', {'for': ['sh', 'bash', 'zsh']}               " Auto-Completion for Zsh
+Plug 'shougo/neco-syntax'                                               " Auto-Completion for other languages
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
-Plug 'shime/vim-livedown', {'do': 'npm -g install livedown', 'on': 'LivedownToggle'} " Live preview of markdown in browser
+Plug 'shime/vim-livedown', {'do': 'npm -g --save-dev install livedown', 'on': 'LivedownToggle'} " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
-Plug 'anyakichi/vim-surround'
+Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'w0rp/ale', {'do': 'npm -g --save-dev eslint eslint-config-google; pip3 install flake8'} " Asynchronous linting
 Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
-Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g install esctags'} " Shows tags for javascript
+Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g --save-dev install esctags'} " Shows tags for javascript
+" Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}         " Collaborative editing
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -187,7 +188,11 @@ let g:limelight_conceal_ctermfg = 254
 nmap <leader>r :RainbowParentheses!!<CR>
 
 "" Auto Commands
-au VimEnter * RainbowParentheses                                        " Enable Rainbow Parentheses by default
+augroup rainbow_lisp
+    autocmd!
+    autocmd VimEnter * RainbowParentheses
+augroup END
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 """ End Of Rainbow Parentheses Configurations ---------------------------------
 
 
@@ -220,7 +225,7 @@ let NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
 let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
 let NERDTreeShowHidden = 0
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 """ End Of Nerd Tree Configurations -------------------------------------------
 
 
@@ -378,7 +383,10 @@ function ToggleIDE()
         silent execute("NERDTreeToggle")
         silent execute("TagbarClose")
         silent execute("norm \<C-j>")
-        autocmd WinEnter * stopinsert
+        augroup stop_insertmode
+            autocmd!
+            autocmd WinEnter * stopinsert
+        augroup END
         silent execute("q")
         silent execute("ALEDisable")
         silent call deoplete#disable()
@@ -391,7 +399,10 @@ function ToggleIDE()
         silent execute("sp")
         silent execute("resize -10")
         silent execute("term")
-        autocmd WinEnter term://* startinsert
+        augroup start_insertmode
+            autocmd!
+            autocmd WinEnter term://* startinsert
+        augroup END
         silent execute("norm \<C-k>")
         silent execute("TagbarOpen")
         silent execute("norm \<C-l>")
