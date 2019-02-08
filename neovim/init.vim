@@ -48,7 +48,7 @@ Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo v
 Plug 'w0rp/ale', {'do': 'npm -g --save-dev eslint eslint-config-google; pip3 install flake8'} " Asynchronous linting
 Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g --save-dev install esctags'} " Shows tags for javascript
-" Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}         " Collaborative editing
+" Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -210,8 +210,6 @@ nmap <leader>g :GitGutterToggle<CR>
 
 "" Settings
 set updatetime=50                                                       " Update git gutter every 50ms
-" set signcolumn=yes
-" au VimEnter * GitGutterDisable
 """ End Of Git Gutter Configurations ------------------------------------------
 
 
@@ -225,7 +223,10 @@ let NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
 let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
 let NERDTreeShowHidden = 0
-autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup nerdtree_stuff
+    autocmd!
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 """ End Of Nerd Tree Configurations -------------------------------------------
 
 
@@ -277,7 +278,7 @@ nmap <Tab> :UndotreeToggle<CR>
 
 "" Settings
 " Loads persistent undo tree to ~/.cache
-if has("persistent_undo")
+if has('persistent_undo')
     set undodir=~/.cache/undotree
     set undofile
 endif
@@ -293,9 +294,16 @@ nmap <leader>L :LivedownToggle<CR>
 let g:livedown_autorun = 0
 let g:livedown_open = 1 
 let g:livedown_port = 1337
-let g:livedown_browser = "safari"
+let g:livedown_browser = 'safari'
 """ End Of Livedown Configurations --------------------------------------------
 
+""" Autopairs Configurations --------------------------------------------------
+"" Settings
+augroup quote_pair
+    autocmd!
+    autocmd FileType vim :let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'", "`":"`", '```':'```', "'''":"'''"}
+augroup END
+""" End Of Autopairs Configurations -------------------------------------------
 
 """ Tagbar Configurations -----------------------------------------------------
 "" Mappings
@@ -323,7 +331,10 @@ let g:NERDCustomDelimiters = {
 nmap <leader>s :call StartShell()<CR> i
 
 "" Settings
-au TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
+augroup term_nonumber
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
+augroup END
 " Allow better window switching in terminal mode
 augroup vimrc_term
     autocmd!
@@ -340,8 +351,8 @@ augroup END
 "" Functions
 function StartShell()
     set shell=/bin/zsh
-    silent execute("vsp")
-    silent execute("term")
+    silent execute('vsp')
+    silent execute('term')
 endfunction
 """ End Of Vanilla Terminal Support ------------------------------------------
 
@@ -379,36 +390,36 @@ function ToggleIDE()
     if s:ide
         set shell=/bin/zsh
         silent execute("norm \<C-h>")
-        silent execute("vertical resize +6")
-        silent execute("NERDTreeToggle")
-        silent execute("TagbarClose")
+        silent execute('vertical resize +6')
+        silent execute('NERDTreeToggle')
+        silent execute('TagbarClose')
         silent execute("norm \<C-j>")
         augroup stop_insertmode
             autocmd!
             autocmd WinEnter * stopinsert
         augroup END
-        silent execute("q")
-        silent execute("ALEDisable")
+        silent execute('q')
+        silent execute('ALEDisable')
         silent call deoplete#disable()
         let s:ide = 0
     else
         set shell=/bin/bash
-        silent execute("NERDTreeToggle")
-        silent execute("vertical resize -6")
+        silent execute('NERDTreeToggle')
+        silent execute('vertical resize -6')
         silent execute("norm \<C-l>")
-        silent execute("sp")
-        silent execute("resize -10")
-        silent execute("term")
+        silent execute('sp')
+        silent execute('resize -10')
+        silent execute('term')
         augroup start_insertmode
             autocmd!
             autocmd WinEnter term://* startinsert
         augroup END
         silent execute("norm \<C-k>")
-        silent execute("TagbarOpen")
+        silent execute('TagbarOpen')
         silent execute("norm \<C-l>")
-        silent execute("vertical resize -8")
+        silent execute('vertical resize -8')
         silent execute("norm \<C-h>")
-        silent execute("ALEEnable")
+        silent execute('ALEEnable')
         silent call deoplete#enable()
         let s:ide = 1
     endif
