@@ -49,6 +49,7 @@ Plug 'w0rp/ale', {'do': 'npm -g --save-dev eslint eslint-config-google; pip3 ins
 Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g --save-dev install esctags'} " Shows tags for javascript
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
+Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -76,7 +77,7 @@ colorscheme space-vim-dark                                              " Set co
 highlight clear Comment
 " Set colours for comments
 highlight Comment cterm=italic guifg=#7c7c7c
-" Set colours for colour coloumn
+" Set colours for colour column
 highlight ColorColumn guifg=#ff0000 guibg=#1c1c1c
 """ End Of Vanilla Colouring --------------------------------------------------
 
@@ -97,8 +98,25 @@ set list listchars=tab:»·,trail:·,nbsp:·                                " Sh
 set cursorline
 set splitright                                                          " Set vertical split to always split to the right
 set splitbelow
-set clipboard=unnamed                                                   " Share yank and paste buffer with MacOS' pbcopy and pbpaste
 call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
+set noshowmode
+set spelllang=en
+augroup spell_check
+    autocmd!
+    autocmd FileType text,markdown setlocal spell
+augroup END
+let g:clipboard = {
+  \ 'name': 'pbcopy',
+  \ 'copy': {
+  \    '+': 'pbcopy',
+  \    '*': 'pbcopy',
+  \  },
+  \ 'paste': {
+  \    '+': 'pbpaste',
+  \    '*': 'pbpaste',
+  \ },
+  \ 'cache_enabled': 0,
+  \ }
 """ End Of Vanilla Configurations ----------------------------------------------
 
 
@@ -231,6 +249,10 @@ augroup END
 
 
 """ Deoplete Configurations ---------------------------------------------------
+"" Colours
+highlight Pmenu guifg=#b2b2b2 guibg=#26252d
+highlight PmenuSel guifg=#f489e9 guibg=#3a3a3a
+
 "" Mappings
 " Activate deoplete    \d
 nmap <leader>d :call deoplete#toggle()<CR>
