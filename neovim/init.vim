@@ -248,6 +248,12 @@ augroup END
 """ End Of Nerd Tree Configurations -------------------------------------------
 
 
+""" CtrlP Configurations ------------------------------------------------------
+"" Settings
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+""" End Of Ctrlp Configurations -----------------------------------------------
+
+
 """ Deoplete Configurations ---------------------------------------------------
 "" Colours
 highlight Pmenu guifg=#b2b2b2 guibg=#26252d
