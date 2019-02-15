@@ -96,7 +96,7 @@ Plugins:
 - vim-devicons
 - limelight.vim
 - vim-journal
-- rainbow_parentheses.vim
+- rainbow\_parentheses.vim
 - gruvbox
 - vim-gitgutter
 - nerdtree
@@ -163,3 +163,4 @@ Key Bindings:
 
 ## Tmux
 ![tmux](screenshots/tmux.png)
+
