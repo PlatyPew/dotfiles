@@ -138,7 +138,7 @@ qrcode() {
 
 # Ulimate cheat sheet
 howdafak() {
-    if [ -z ${1} ]; then
+    if [[ -z ${1} || "${1}" == "-h" ]] then
         echo "Usage:    ${0} [-l] <topic> [query]"
         echo "Example:  ${0} c \"get string length\""
         echo "          ${0} python \"~file\" # Uses keyword \"file\""
@@ -170,10 +170,10 @@ dash() {
 
     DOC=${1}
     if [[ -z ${2} ]] then
-        open "dash://${DOC}"
+        open "dash-plugin://query=${DOC}"
     else
         shift
-        open "dash://${DOC}:${*}"
+        open "dash-plugin://keys=${DOC}&query=${*}"
     fi
 
     if [[ $? -ne 0 ]] then

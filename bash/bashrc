@@ -1,8 +1,8 @@
 # Path to the bash it configuration
-export BASH_IT="/Users/daryllim/.bash_it"
+export BASH_IT="$(echo $HOME)/.bash_it"
 
 # location /.bash_it/themes/
-export BASH_IT_THEME='powerline'
+export BASH_IT_THEME="${BASH_IT}/custom/powerline/powerline.theme.bash"
 
 # Don't check mail when opening terminal.
 unset MAILCHECK
