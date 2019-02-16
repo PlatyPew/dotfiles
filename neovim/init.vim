@@ -325,6 +325,28 @@ let g:livedown_port = 1337
 let g:livedown_browser = 'safari'
 """ End Of Livedown Configurations --------------------------------------------
 
+""" Multiple Cursors Configurations -------------------------------------------
+"" Functions
+" Disable Deoplete when selecting multiple cursors starts
+function! Multiple_cursors_before()
+    if exists('*deoplete#disable')
+        exe 'call deoplete#disable()'
+    elseif exists(':NeoCompleteLock') == 2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+
+" Enable Deoplete when selecting multiple cursors ends
+function! Multiple_cursors_after()
+    if exists('*deoplete#toggle')
+        exe 'call deoplete#toggle()'
+    elseif exists(':NeoCompleteUnlock') == 2
+        exe 'NeoCompleteUnlock'
+    endif
+endfunction
+""" End Of Multiple Cursors Configurations ------------------------------------
+
+
 """ Autopairs Configurations --------------------------------------------------
 "" Settings
 augroup quote_pair
