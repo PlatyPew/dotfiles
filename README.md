@@ -12,6 +12,8 @@ This script has been only tested macOS Mojave (10.14).
 
 This script will overwrite all existing settings permanently. Do not run unless you know what you're doing.
 
+**I having been updating the install script so it may not work**
+
 Installation
 ```bash
 git clone https://github.com/PlatyPew/dotfiles.git

@@ -1,4 +1,13 @@
-""" Platy's Ultimate Neovim Config
+"  ██▓ ███▄    █  ██▓▄▄▄█████▓      ██▒   █▓ ██▓ ███▄ ▄███▓
+" ▓██▒ ██ ▀█   █ ▓██▒▓  ██▒ ▓▒     ▓██░   █▒▓██▒▓██▒▀█▀ ██▒
+" ▒██▒▓██  ▀█ ██▒▒██▒▒ ▓██░ ▒░      ▓██  █▒░▒██▒▓██    ▓██░
+" ░██░▓██▒  ▐▌██▒░██░░ ▓██▓ ░        ▒██ █░░░██░▒██    ▒██
+" ░██░▒██░   ▓██░░██░  ▒██▒ ░  ██▓    ▒▀█░  ░██░▒██▒   ░██▒
+" ░▓  ░ ▒░   ▒ ▒ ░▓    ▒ ░░    ▒▓▒    ░ ▐░  ░▓  ░ ▒░   ░  ░
+"  ▒ ░░ ░░   ░ ▒░ ▒ ░    ░     ░▒     ░ ░░   ▒ ░░  ░      ░
+"  ▒ ░   ░   ░ ░  ▒ ░  ░       ░        ░░   ▒ ░░      ░
+"  ░           ░  ░             ░        ░   ░         ░
+"                               ░       ░
 
 """ Vim-Plug -----------------------------------------------------------------
 call plug#begin()                                                       " Plugin manager Vim-Plug
@@ -46,7 +55,7 @@ Plug 'anyakichi/vim-surround'                                           " Surrou
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'w0rp/ale', {'do': 'npm -g --save-dev eslint eslint-config-google; pip3 install flake8'} " Asynchronous linting
-Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant'}        " Shows tags while programming
+Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant', 'on': ['TagbarToggle', 'TagbarOpen']} " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g --save-dev install esctags'} " Shows tags for javascript
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
@@ -354,6 +363,7 @@ augroup quote_pair
     autocmd FileType vim :let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'", "`":"`", '```':'```', "'''":"'''"}
 augroup END
 """ End Of Autopairs Configurations -------------------------------------------
+
 
 """ Tagbar Configurations -----------------------------------------------------
 "" Mappings
