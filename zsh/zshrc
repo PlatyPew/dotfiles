@@ -209,17 +209,13 @@ ide() {
         nvim ${1} '+call ToggleIDE()'
     fi
 }
-
-brew_autoremove() {
-    brew rm $(join <(brew leaves) <(brew deps ${1}))
-}
 ############################################################
 
 ## Aliases #################################################
 alias vi="nvim -O"
-alias yolo='git commit -m "$(curl -s https://whatthecommit.com/index.txt)"'
 alias :q='exit'
 alias cls='clear'
+alias speed='speed-test -v'
 ############################################################
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
