@@ -1,20 +1,26 @@
 [alias]
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all
-    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)' --all
+    lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)' --all -p
     lg = !"git lg1"
+    yolo = !"git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\""
+    st = !"git-st"
 [commit]
     gpgsign = true
 [gpg]
     program = gpg
-[credential]
-    helper = store
 [diff]
     tool = vimdiff
 [merge]
     tool = vimdiff
+    ff = false
 [difftool "vimdiff"]
     path = nvim
 [mergetool "vimdiff"]
     path = nvim
 [core]
     editor = nvim
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
