@@ -35,7 +35,8 @@ Plug 'tpope/vim-fugitive'                                               " Git wr
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " File finding
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}                    " Shows file tree
-Plug 'kien/ctrlp.vim'                                                   " Fuzzy finder
+Plug '/usr/local/opt/fzf'                                               " Fuzzy finder
+Plug 'junegunn/fzf.vim'
 " Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
@@ -257,10 +258,32 @@ augroup END
 """ End Of Nerd Tree Configurations -------------------------------------------
 
 
-""" CtrlP Configurations ------------------------------------------------------
+""" FZF Configurations --------------------------------------------------------
 "" Settings
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-""" End Of Ctrlp Configurations -----------------------------------------------
+set rtp+=/usr/local/opt/fzf
+let g:fzf_layout = { 'down': '~30%' }
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'Type'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Character'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+"" Mappings
+nnoremap <C-p> :FZF<CR>
+""" End Of FZF Configurations -------------------------------------------------
 
 
 """ Deoplete Configurations ---------------------------------------------------
