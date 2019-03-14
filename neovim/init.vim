@@ -282,7 +282,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 "" Mappings
-nnoremap <C-p> :FZF<CR>
+nnoremap <C-p> :FZF --preview=head\ -13\ {}<CR>
 """ End Of FZF Configurations -------------------------------------------------
 
 
