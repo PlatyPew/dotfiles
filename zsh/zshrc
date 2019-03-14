@@ -229,11 +229,25 @@ f() {
     fi
 }
 
-vio() {
+ff() {
     FILE="$(f $*)"
     if [ ! -z $FILE ]
     then
         nvim "${FILE}"
+    fi
+}
+
+fd() {
+    if [ -z ${1} ]
+    then
+        DIR="$(find $(pwd) -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf --ansi --preview 'exa -T --level 1 --color always {}')"
+    else
+        DIR="$(find $(pwd) -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf -q ${1} --ansi --preview 'exa -T --level 1 --color always {}')"
+    fi
+
+    if [ ! -z $DIR ]
+    then
+        cd "${DIR}"
     fi
 }
 ############################################################
