@@ -216,6 +216,7 @@ alias vi="nvim -O"
 alias :q='exit'
 alias cls='clear'
 alias speed='speed-test -v'
+alias ls='exa --git'
 ############################################################
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
