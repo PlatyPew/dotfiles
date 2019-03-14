@@ -20,7 +20,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Plugins ####################################################
 plugins=(
     git
-    zsh-completions
     zsh-syntax-highlighting
     brew
     colored-man-pages
@@ -32,6 +31,7 @@ plugins=(
     tmux
     extract
     autojump
+    zsh-autosuggestions
 )
 ##############################################################
 
@@ -108,6 +108,10 @@ ZSH_HIGHLIGHT_STYLES[assign]='fg=192,bold'
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=135,bold'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
+
+## ZSH autosuggestions config
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 
 ## Python ##################################################
 ve() {
@@ -209,6 +213,29 @@ ide() {
         nvim ${1} '+call ToggleIDE()'
     fi
 }
+
+f() {
+    if [ -z ${1} ]
+    then
+        find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | \
+            fzf --ansi --preview '[[ $(file --mime {}) =~ binary ]] &&
+                echo {} is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) ||
+                (bat --color=always --style=header,grid --line-range :200 {})'
+    else
+        find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | \
+            fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] &&
+                echo {} is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) ||
+                (bat --color=always --style=header,grid --line-range :200 {})'
+    fi
+}
+
+vio() {
+    FILE="$(f $*)"
+    if [ ! -z $FILE ]
+    then
+        nvim "${FILE}"
+    fi
+}
 ############################################################
 
 ## Aliases #################################################
@@ -217,6 +244,7 @@ alias :q='exit'
 alias cls='clear'
 alias speed='speed-test -v'
 alias ls='exa --git'
+alias cat='bat'
 ############################################################
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
@@ -259,3 +287,5 @@ _fix_cursor() {
 }
 
 precmd_functions+=(_fix_cursor)
+
+export FZF_DEFAULT_COMMAND='find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null'
