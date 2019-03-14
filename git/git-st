@@ -11,9 +11,6 @@ diff="$(git diff --color --stat HEAD 2> /dev/null | sed '$d; s/^ //' | cut -d '|
 IFS=$'\n' status=($status)
 IFS=$'\n' diff=($diff)
 
-branch=$(echo "${status[0]}" | cut -d ' ' -f 2-)
-echo $branch
-
 len=-1
 for i in $(seq 1 $(( ${#status[@]} - 1)))
 do
@@ -24,13 +21,17 @@ do
 done
 (( len *= -1 ))
 
-for i in $(seq 1 $(( ${#status[@]} - 1)))
+for i in $(seq 0 $(( ${#status[@]} - 1)))
 do
     currStatus=${status[i]}
-    currDiff=${diff[i - 1]}
-    if [ ! -z $currDiff ]
+    if [ $i -eq 0 ]
     then
-        currDiff="|${currDiff}"
+        echo "${status[0]}" | cut -d ' ' -f 2-
+    else
+        if [ ! -z ${diff[i - 1]} ]
+        then
+            currDiff="|${diff[i - 1]}"
+        fi
+        printf "%*s  %s\n" $len "${currStatus}" "${currDiff}"
     fi
-    printf "%*s  %s\n" $len "${currStatus}" "${currDiff}"
 done
