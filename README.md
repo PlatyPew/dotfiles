@@ -2,45 +2,9 @@
 Basic terminal configurations for macOS. [Screenshots](#screenshots)
 
 ## Contents
-- [Quick Installation](#quick-installation)
 - [Manual Installaion](#manual-installation)
 - [Documentation](#documentation)
 - [Screenshots](#screenshots)
-
-# Quick Installation
-This script has been only tested macOS Mojave (10.14).
-
-This script will overwrite all existing settings permanently. Do not run unless you know what you're doing.
-
-**I having been updating the install script so it may not work**
-
-Installation
-```bash
-git clone https://github.com/PlatyPew/dotfiles.git
-cd dotfiles/
-./install.sh
-```
-
-Set your email, name and signing key for git
-```bash
-git config --global user.name "John Doe"
-git config --global user.email "john.doe@email.com"
-git config --global user.signingkey "<hash here>"
-```
-
-## Possible Issues
-### iTerm2
-The configurations may not be imported. You can manually change the profile settings.
-Do `Command` + `,` to open Preferences.
-- `Colors` -> `Color Presets`: _Tango Dark_
-- `Text` -> `Font`: _16pt Inconsolata Nerd Font Complete_
-- `Window` -> `Background Image`: _~/Documents/Background1.png_
-- `Window` -> `Settings for New Windows`: _Columns: 90, Rows: 25_
-
-### Tmux
-Local IP does not show up for tmux
-
-Go into `~/.tmux/getLocalIP.sh`, and change the network interface.
 
 # Manual Installation
 
@@ -165,4 +129,3 @@ Key Bindings:
 
 ## Tmux
 ![tmux](screenshots/tmux.png)
-
