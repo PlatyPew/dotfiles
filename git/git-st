@@ -1,27 +1,24 @@
-#!/bin/bash
-gawk -vOFS='' '
-    NR==FNR {
-        all[i++] = $0;
-        difffiles[$1] = $0;
-        next;
-    }
-    ! ($2 in difffiles) {
-        print; next;
-    }
-    {
-        gsub($2, difffiles[$2]);
-        print;
-    }
-    END {
-        if (NR != FNR) {
-            # Had diff output
-            exit;
-        }
-        # Had no diff output, just print lines from git status -sb
-        for (i in all) {
-            print all[i];
-        }
-    }
-' \
-    <(git diff --color --stat HEAD | sed '$d; s/^ //') \
-    <(git -c color.status=always status -sb)
+#!/bin/sh
+IFS=
+diff="$(git diff --color --stat HEAD | sed '$d; s/^ //' | cut -d '|' -f 2)"
+status="$(git -c color.status=always status -sb)"
+
+IFS=$'\n' status=($status)
+IFS=$'\n' diff=($diff)
+
+branch=$(echo "${status[0]}" | cut -d ' ' -f 2-)
+echo $branch
+
+for i in $(seq 1 ${#status[@] - 1})
+do
+    currStatus=${status[i]}
+    currDiff=${diff[i - 1]}
+    if [ ! -z $currDiff ]
+    then
+        currDiff=" |${diff[i - 1]}"
+    fi
+    if [ $i -ne ${#status[@] - 1} ]
+    then
+        printf "%*s%s\n" -30 "${currStatus}" "${currDiff}"
+    fi
+done
