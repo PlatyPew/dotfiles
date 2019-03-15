@@ -95,7 +95,7 @@ POWERLEVEL9K_PUBLIC_IP_BACKGROUND="cyan"
 
 source $ZSH/oh-my-zsh.sh
 
-## Syntax highlighting configs
+## Syntax highlighting configs ##############################
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
 ZSH_HIGHLIGHT_STYLES[arg0]='fg=10,bold'
 ZSH_HIGHLIGHT_STYLES[redirection]='fg=44,bold'
@@ -108,10 +108,12 @@ ZSH_HIGHLIGHT_STYLES[assign]='fg=192,bold'
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=135,bold'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
+############################################################
 
-## ZSH autosuggestions config
+## Autosuggestions config ##################################
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=true
+############################################################
 
 ## Python ##################################################
 ve() {
@@ -213,20 +215,14 @@ ide() {
         nvim ${1} '+call ToggleIDE()'
     fi
 }
+############################################################
 
+## FZF functions ###########################################
 f() {
-    if [ -z ${1} ]
-    then
-        find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | \
-            fzf --ansi --preview '[[ $(file --mime {}) =~ binary ]] &&
-                echo {} is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) ||
-                (bat --color=always --style=header,grid --line-range :200 {})'
-    else
-        find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | \
-            fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] &&
-                echo {} is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) ||
-                (bat --color=always --style=header,grid --line-range :200 {})'
-    fi
+    find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | \
+        fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] &&
+            echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) ||
+            (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
@@ -238,12 +234,7 @@ ff() {
 }
 
 fd() {
-    if [ -z ${1} ]
-    then
-        DIR="$(find $(pwd) -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf --ansi --preview 'exa -T --level 1 --color always {}')"
-    else
-        DIR="$(find $(pwd) -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf -q ${1} --ansi --preview 'exa -T --level 1 --color always {}')"
-    fi
+    DIR="$(find $(pwd) -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf -q "${1}" --ansi --preview 'exa -T --level 1 --color always {}')"
 
     if [ ! -z $DIR ]
     then
@@ -263,12 +254,12 @@ alias cat='bat'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# Vim Mode config
-## Better searching in command mode
+## Vi-Mode ZSH #############################################
+# Better searching in command mode
 bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
 
-## Beginning search with arrow keys
+# Beginning search with arrow keys
 bindkey "^[OA" up-line-or-beginning-search
 bindkey "^[OB" down-line-or-beginning-search
 bindkey -M vicmd "k" up-line-or-beginning-search
@@ -301,5 +292,6 @@ _fix_cursor() {
 }
 
 precmd_functions+=(_fix_cursor)
+############################################################
 
 export FZF_DEFAULT_COMMAND='find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null'
