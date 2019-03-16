@@ -219,14 +219,11 @@ ide() {
 
 ## FZF functions ###########################################
 f() {
-    find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | \
-        fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] &&
-            echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) ||
-            (bat --color=always --style=header,grid --line-range :200 {})'
+    find ~ -type d -name ".git" -prune -o -type f -print 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
-    FILE="$(f $*)"
+    FILE=$(find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})')
     if [ ! -z $FILE ]
     then
         nvim "${FILE}"
