@@ -1,0 +1,5 @@
+- shell:
+    - [/bin/sh configs/bash/install.sh]
+- link:
+    ~/.bashrc: configs/bash/.bashrc
+    ~/.bash_it/custom/powerline: configs/bash/powerline
