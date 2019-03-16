@@ -1,0 +1,4 @@
+- shell:
+    - [/bin/sh configs/tmux/install.sh]
+- link:
+    ~/.tmux.conf: configs/tmux/.tmux.conf
