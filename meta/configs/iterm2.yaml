@@ -1,2 +1,2 @@
 - shell:
-    - [/bin/sh configs/nvim/install.sh]
+    - [/bin/sh configs/iterm2/install.sh]
