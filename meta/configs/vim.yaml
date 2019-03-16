@@ -1,0 +1,4 @@
+- shell:
+    - [/bin/sh configs/vim/install.sh]
+- link:
+    ~/.vimrc: configs/vim/.vimrc
