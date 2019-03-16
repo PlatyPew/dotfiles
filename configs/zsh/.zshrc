@@ -219,11 +219,11 @@ ide() {
 
 ## FZF functions ###########################################
 f() {
-    find ~ -type d -name ".git" -prune -o -type f -print 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
+    rg ~ --files --hidden --no-ignore-vcs -g '!.git/*' 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
-    FILE=$(find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})')
+    FILE=$(rg $(pwd) --files --hidden --no-ignore-vcs -g '!.git/*' 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})')
     if [ ! -z $FILE ]
     then
         nvim "${FILE}"
@@ -231,7 +231,7 @@ ff() {
 }
 
 fd() {
-    DIR="$(find $(pwd) -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf -q "${1}" --ansi --preview 'exa -T --level 1 --color always {}')"
+    DIR="$(find ~ -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf -q "${1}" --ansi --preview 'exa -T --level 1 --color always {}')"
 
     if [ ! -z $DIR ]
     then
@@ -291,4 +291,4 @@ _fix_cursor() {
 precmd_functions+=(_fix_cursor)
 ############################################################
 
-export FZF_DEFAULT_COMMAND='find $(pwd) -type d -name ".git" -prune -o -type f -print 2> /dev/null'
+export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
