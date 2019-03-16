@@ -1,0 +1,2 @@
+- shell:
+    - [/bin/sh configs/nvim/install.sh]
