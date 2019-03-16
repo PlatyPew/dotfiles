@@ -1,6 +1,6 @@
 - shell:
     - [/bin/sh configs/neovim/install.sh]
 - link:
-    ~/.eslintrc.json configs/neovim/.eslintrc.json
-    ~/.tern-config configs/neovim/.tern-config
-    ~/.config/nvim/init.vim configs/neovim/init.vim
+    ~/.eslintrc.json: configs/neovim/.eslintrc.json
+    ~/.tern-config: configs/neovim/.tern-config
+    ~/.config/nvim/init.vim: configs/neovim/init.vim
