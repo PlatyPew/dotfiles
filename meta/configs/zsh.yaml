@@ -1,0 +1,4 @@
+- shell:
+    - [/bin/sh configs/zsh/install.sh]
+- link:
+    ~/.zshrc: configs/zsh/.zshrc
