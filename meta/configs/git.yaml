@@ -1,0 +1,5 @@
+- shell:
+    - [/bin/sh configs/git/install.sh]
+- link:
+    ~/.gitconfig: configs/git/.gitconfig
+    /usr/local/bin/git-st: configs/git/git-st

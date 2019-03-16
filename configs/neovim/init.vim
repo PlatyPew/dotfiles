@@ -42,22 +42,22 @@ Plug 'shougo/neoinclude.vim'                                            " Comple
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
 Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
-Plug 'carlitux/deoplete-ternjs', {'do': 'npm -g --save-dev install tern', 'for': 'javascript'} " Auto-Completion support for Javascript
+Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
 Plug 'zchee/deoplete-zsh', {'for': ['sh', 'bash', 'zsh']}               " Auto-Completion for Zsh
 Plug 'shougo/neco-syntax'                                               " Auto-Completion for other languages
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
-Plug 'shime/vim-livedown', {'do': 'npm -g --save-dev install livedown', 'on': 'LivedownToggle'} " Live preview of markdown in browser
+Plug 'shime/vim-livedown', {'on': 'LivedownToggle'}                     " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'w0rp/ale', {'do': 'npm -g --save-dev eslint eslint-config-google; pip3 install flake8'} " Asynchronous linting
-Plug 'majutsushi/tagbar', {'do': 'brew install ctags-exuberant', 'on': ['TagbarToggle', 'TagbarOpen']} " Shows tags while programming
-Plug 'hushicai/tagbar-javascript.vim', {'do': 'npm -g --save-dev install esctags'} " Shows tags for javascript
+Plug 'w0rp/ale'                                                         " Asynchronous linting
+Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows tags while programming
+Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
 

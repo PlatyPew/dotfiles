@@ -1,0 +1,2 @@
+- shell:
+    - [/bin/sh configs/iterm2/install.sh]
