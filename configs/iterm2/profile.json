@@ -1,4 +1,4 @@
-{
+ {
   "Use Non-ASCII Font" : false,
   "Tags" : [
 
@@ -20,15 +20,15 @@
     "Blue Component" : "0",
     "Red Component" : "0.8"
   },
-  "Horizontal Spacing" : 1,
-  "Ansi 3 Color" : {
-    "Green Component" : "0.627451",
-    "Blue Component" : "0",
-    "Red Component" : "0.7686275"
+  "Ansi 2 Color" : {
+    "Green Component" : "0.6039215999999999",
+    "Blue Component" : "0.02352941",
+    "Red Component" : "0.3058824"
   },
+  "Custom Directory" : "No",
   "Rows" : 25,
   "Default Bookmark" : "No",
-  "Blend" : 0.60416666666666674,
+  "Blend" : 0.33862054286858984,
   "Cursor Guide Color" : {
     "Red Component" : 0.70213186740875244,
     "Color Space" : "sRGB",
@@ -38,6 +38,7 @@
   },
   "Non-ASCII Anti Aliased" : true,
   "Use Bright Bold" : true,
+  "Show Mark Indicators" : false,
   "Ansi 10 Color" : {
     "Green Component" : "0.8862745",
     "Blue Component" : "0.2039216",
@@ -61,7 +62,7 @@
     "Red Component" : "1"
   },
   "Working Directory" : "\/Users\/daryllim",
-  "Blinking Cursor" : false,
+  "Blinking Cursor" : true,
   "Disable Window Resizing" : true,
   "Sync Title" : false,
   "Prompt Before Closing 2" : false,
@@ -289,6 +290,7 @@
   "Terminal Type" : "xterm-256color",
   "Visual Bell" : true,
   "Flashing Bell" : false,
+  "Place Prompt at First Column" : false,
   "Silence Bell" : false,
   "Ansi 14 Color" : {
     "Green Component" : "0.8862745",
@@ -315,11 +317,7 @@
     "Red Component" : "0"
   },
   "Guid" : "01D2964A-2CBA-4841-90F5-99C5DC4659A5",
-  "Ansi 2 Color" : {
-    "Green Component" : "0.6039215999999999",
-    "Blue Component" : "0.02352941",
-    "Red Component" : "0.3058824"
-  },
+  "Horizontal Spacing" : 1,
   "Link Color" : {
     "Red Component" : 0,
     "Color Space" : "sRGB",
@@ -327,7 +325,11 @@
     "Alpha Component" : 1,
     "Green Component" : 0.35916060209274292
   },
-  "Custom Directory" : "No",
+  "Ansi 3 Color" : {
+    "Green Component" : "0.627451",
+    "Blue Component" : "0",
+    "Red Component" : "0.7686275"
+  },
   "Right Option Key Sends" : 0,
   "Ansi 6 Color" : {
     "Green Component" : "0.5960785",
@@ -359,4 +361,4 @@
     "Blue Component" : "0.4823529",
     "Red Component" : "0.4588235"
   }
-}
+ }
