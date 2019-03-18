@@ -62,10 +62,6 @@ let g:clipboard = {
   \ 'cache_enabled': 0,
   \ }
 
-let &t_SI = "\e[6 q"
-let &t_EI = "\e[2 q"
-execute("norm i")
-
 """ Mappings
 nmap <C-h> <C-W>h
 nmap <C-j> <C-W>j
