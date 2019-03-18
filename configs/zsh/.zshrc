@@ -219,7 +219,7 @@ ide() {
 
 ## FZF functions ###########################################
 f() {
-    rg ~ --files --hidden --no-ignore-vcs -g '!.git/*' 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
+    rg ~ --files --hidden --no-ignore-vcs 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
