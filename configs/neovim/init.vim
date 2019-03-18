@@ -247,7 +247,6 @@ set updatetime=50                                                       " Update
 nmap <C-o> :NERDTreeToggle<CR>
 
 "" Settings
-let NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
 let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
 let NERDTreeShowHidden = 0
@@ -282,7 +281,7 @@ let g:fzf_colors =
   \ 'header':  ['fg', 'Comment'] }
 
 "" Mappings
-nnoremap <C-p> :FZF --preview=head\ -13\ {}<CR>
+nnoremap <silent><C-p> :FZF --preview=head\ -13\ {}<CR>
 """ End Of FZF Configurations -------------------------------------------------
 
 
