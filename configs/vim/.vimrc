@@ -9,15 +9,25 @@
 "       ░   ░         ░      ░     ░ ░
 "      ░                           ░
 
-""" Vanilla Colouring ---------------------------------------------------------
-let g:space_vim_dark_background = 234
+""" Vim-Plug
+call plug#begin()
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vim-python/python-syntax', {'for': 'python'}
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}
+Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jiangmiao/auto-pairs'
+Plug 'vim-scripts/LargeFile'
+Plug 'w0rp/ale', {'for': ['c', 'cpp', 'python', 'javascript', 'sh', 'bash']}
+call plug#end()
+
+""" Settings
 syntax on
+colorscheme gruvbox
 set termguicolors
-colorscheme space-vim-dark
-""" End Of Vanilla Colouring --------------------------------------------------
-
-
-""" Vanilla Configurations ----------------------------------------------------
 set number
 set encoding=UTF-8
 set backspace=eol,start,indent
@@ -25,19 +35,20 @@ set whichwrap+=<,>,h,l
 set autoindent
 set smartindent
 set wrap
-set tabstop=4 shiftwidth=4 
+set tabstop=4 shiftwidth=4
 set tabstop=4
 set softtabstop=4
 set expandtab
 set list listchars=tab:»·,trail:·,nbsp:·
-set cursorline
 set splitright
-set splitbelow
-set spelllang=en
-augroup spell_check
-    autocmd!
-    autocmd FileType text,markdown setlocal spell
-augroup END
+set lazyredraw
+set ttyfast
+set foldmethod=syntax
+set foldmethod=expr
+set showcmd
+set noruler
+set noshowmode
+set cursorline
 let g:clipboard = {
   \ 'name': 'pbcopy',
   \ 'copy': {
@@ -50,87 +61,31 @@ let g:clipboard = {
   \ },
   \ 'cache_enabled': 0,
   \ }
-""" End Of Vanilla Configurations ----------------------------------------------
 
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+execute("norm i")
 
-""" Optimisation ---------------------------------------------------------------
-set lazyredraw
-set ttyfast
-set foldmethod=syntax
-set foldmethod=expr
-set showcmd
-set noruler
-""" End Of Optimisation ---------------------------------------------------------
-
-
-""" Vanilla Rebindings -------------------------------------------------------
-"" Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
-" Increase horizontal split
-nnoremap <silent> <Up> :resize +2 <CR>
-vnoremap <silent> <Up> :resize +2 <CR>
-" Decrease horizontal split
-nnoremap <silent> <Down> :resize -2 <CR>
-vnoremap <silent> <Down> :resize -2 <CR>
-" Increase vertical split
-nnoremap <silent> <Left> :vertical resize -2 <CR>
-vnoremap <silent> <Left> :vertical resize -2 <CR>
-" Decrease horizontal split
-nnoremap <silent> <Right> :vertical resize +2 <CR>
-vnoremap <silent> <Right> :vertical resize +2 <CR>
-
-"" Better window switching
-" Move to pane on the left      Ctrl-h
+""" Mappings
 nmap <C-h> <C-W>h
-" Move to lower pane            Ctrl-j
 nmap <C-j> <C-W>j
-" Move to upper pane            Ctrl-j
 nmap <C-k> <C-W>k
-" Move to pane on the right     Ctrl-h
 nmap <C-l> <C-W>l
-
-"" Better tab
-" Create new tabs    \t
-nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>th :tabfirst<CR>
-nnoremap <leader>tj :tabNext<CR>
-nnoremap <leader>tk :tabprevious<CR>
-nnoremap <leader>tl :tablast<CR>
-nnoremap <leader>tq :tabclose<CR>
-
-"" Easy Save
-" Save files    Ctrl-s
-imap <C-s> <Esc>:w<CR>a
-
-"" Remap semicolon to colon
 nnoremap ; :
 
-"" Cycling buffers
-nnoremap <leader>bh :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR>
-nnoremap <leader>bj :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR>
-nnoremap <leader>bk :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>
-nnoremap <leader>bl :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>
-nnoremap <leader>bq :bdelete<CR>
-""" End Of Vanilla Rebindings -------------------------------------------------
+""" Vim airlines
+let g:airline_powerline_fonts = 1
+let g:airline_section_warning = ''
+let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
+let g:airline_theme='tomorrow'
+nmap <C-o> :NERDTreeToggle<CR>
+set ttimeoutlen=10
 
-
-""" Vanilla Transparent Mode -------------------------------------------------
-"" Mappings
-" Activate Transparent mode    \t
-nmap <leader>T :call ToggleTransparentMode()<CR>
-
-"" Functions
-let s:transparent = 0
-function ToggleTransparentMode()
-    if s:transparent
-        colorscheme space-vim-dark
-        highlight clear Comment
-        highlight Comment cterm=italic guifg=#7c7c7c
-        let s:transparent = 0
-    else
-        highlight Normal ctermbg=NONE guibg=NONE
-        highlight LineNr ctermbg=NONE guibg=NONE
-        highlight SignColumn ctermbg=NONE guibg=NONE
-        let s:transparent = 1
-    endif
-endfunction
-""" End Of Vanilla Transparent Mode -------------------------------------------
+""" Nerd Tree
+let g:NERDTreeDirArrowExpandable = ' '
+let g:NERDTreeDirArrowCollapsible = ' '
+let NERDTreeShowHidden = 0
+augroup nerdtree_stuff
+    autocmd!
+    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
