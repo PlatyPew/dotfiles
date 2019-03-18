@@ -219,11 +219,24 @@ ide() {
 
 ## FZF functions ###########################################
 f() {
-    rg ~ --files --hidden --no-ignore-vcs 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
+    MYPATH="$(pwd)"
+    if [ ! -z $1 ]
+    then
+        MYPATH="${1}"
+    fi
+
+    rg ${MYPATH} --files --hidden --no-ignore-vcs 2> /dev/null | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
-    FILE=$(rg $(pwd) --files --hidden --no-ignore-vcs -g '!.git/*' 2> /dev/null | fzf --ansi -q "${1}" --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})')
+    MYPATH="$(pwd)"
+    if [ ! -z $1 ]
+    then
+        MYPATH="${1}"
+    fi
+
+        FILE=$(rg ${MYPATH} --files --hidden --no-ignore-vcs -g '!.git/*' 2> /dev/null | fzf --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})')
+
     if [ ! -z $FILE ]
     then
         nvim "${FILE}"
@@ -231,13 +244,37 @@ ff() {
 }
 
 fd() {
-    DIR="$(find ~ -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf -q "${1}" --ansi --preview 'exa -T --level 1 --color always {}')"
+    MYPATH="$(pwd)"
+    if [ ! -z $1 ]
+    then
+        MYPATH="${1}"
+    fi
+
+    DIR="$(find ${MYPATH} -type d -name ".git" -prune -o -type d -print 2> /dev/null | fzf --ansi --preview 'exa -T --level 1 --color always {}')"
 
     if [ ! -z $DIR ]
     then
         cd "${DIR}"
     fi
 }
+
+ft(){
+    if [ -z ${1} ]
+    then
+        echo "Usage: ${0} <search term>"
+        return
+    fi
+    local match=$(
+      rg --trim --vimgrep --color=never --line-number "$1" 2> /dev/null |
+        fzf --no-multi --delimiter : \
+            --preview "bat --color=always --line-range {2}: {1}"
+      )
+    local file=$(echo "$match" | cut -d':' -f1)
+    if [[ -n $file ]]; then
+        nvim $file +$(echo "$match" | cut -d':' -f2)
+    fi
+}
+
 ############################################################
 
 ## Aliases #################################################
@@ -247,6 +284,8 @@ alias cls='clear'
 alias speed='speed-test -v'
 alias ls='exa --git'
 alias cat='bat'
+alias sed='gsed'
+alias awk='gawk'
 ############################################################
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
