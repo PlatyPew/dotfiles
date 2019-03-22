@@ -1,2 +1,4 @@
+- shell:
+    - [/bin/sh configs/macos/install.sh]
 - link:
     ~/.hushlogin: configs/macos/.hushlogin
