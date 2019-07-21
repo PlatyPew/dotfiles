@@ -32,6 +32,8 @@ plugins=(
     autojump
     zsh-autosuggestions
     zsh-vimode-visual
+    zsh-aliases-exa
+    zsh-autopair
 )
 ##############################################################
 
