@@ -27,6 +27,7 @@ Plug 'mhinz/vim-startify'                                               " Better
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer syntax highlighting for javascript
 Plug 'vim-python/python-syntax', {'for': 'python'}                      " Nicer syntax highlighting for python
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}          " Nicer syntax highlighting for clang
+Plug 'calviken/vim-gdscript3', {'for': 'gd'}
 
 "" Functionalities
 " Git
@@ -60,6 +61,7 @@ Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows 
 Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown']}
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -353,7 +355,7 @@ nmap <leader>L :LivedownToggle<CR>
 let g:livedown_autorun = 0
 let g:livedown_open = 1 
 let g:livedown_port = 1337
-let g:livedown_browser = 'safari'
+let g:livedown_browser = 'firefox'
 """ End Of Livedown Configurations --------------------------------------------
 
 """ Multiple Cursors Configurations -------------------------------------------

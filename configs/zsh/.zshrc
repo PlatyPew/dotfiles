@@ -8,7 +8,6 @@
 # ░ ░ ░ ░ ░░  ░  ░   ░  ░░ ░  ░░   ░ ░
 #   ░ ░          ░   ░  ░  ░   ░     ░ ░
 # ░                                  ░
-
 # 256 colour support
 export TERM="xterm-256color"
 
@@ -32,11 +31,12 @@ plugins=(
     extract
     autojump
     zsh-autosuggestions
+    zsh-vimode-visual
 )
 ##############################################################
 
 # Powerlevel9k configs #######################################
-ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="powerlevel10k/powerlevel10k"
 
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 POWERLEVEL9K_MODE='nerdfont-complete'
@@ -108,18 +108,23 @@ ZSH_HIGHLIGHT_STYLES[assign]='fg=192,bold'
 ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=135,bold'
 ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
 ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
+
+# Disable highlight on paste
+zle_highlight+=(paste:none)
 ############################################################
 
 ## Autosuggestions config ##################################
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 ZSH_AUTOSUGGEST_USE_ASYNC=true
+# Disables lag
+zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ############################################################
 
 ## Python ##################################################
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
-            virtualenv -p python3 venv
+            virtualenv -p python2 --system-site-packages venv
             source venv/bin/activate
         else
             source venv/bin/activate
@@ -219,7 +224,7 @@ ide() {
 
 ## FZF functions ###########################################
 f() {
-    MYPATH="$(pwd)"
+    MYPATH="$HOME"
     if [ ! -z $1 ]
     then
         MYPATH="${1}"
@@ -278,7 +283,7 @@ ft(){
 ############################################################
 
 ## Aliases #################################################
-alias vi="nvim -O"
+alias vi="nvim -O 2> /dev/null"
 alias :q='exit'
 alias cls='clear'
 alias speed='speed-test -v'
@@ -328,6 +333,20 @@ _fix_cursor() {
 }
 
 precmd_functions+=(_fix_cursor)
+
+# Allow for text objects
+autoload -U select-bracketed select-quoted
+zle -N select-bracketed
+zle -N select-quoted
+for km in viopp visual; do
+    bindkey -M $km -- '-' vi-up-line-or-history
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $km $c select-quoted
+    done
+    for c in {a,i}${(s..):-'()[]{}<>bB'}; do
+        bindkey -M $km $c select-bracketed
+    done
+done
 ############################################################
 
 export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
