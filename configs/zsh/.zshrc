@@ -246,7 +246,7 @@ ff() {
 
     if [ ! -z $FILE ]
     then
-        nvim "${FILE}"
+        nvim "${FILE}" 2> /dev/null
     fi
 }
 
