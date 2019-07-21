@@ -31,6 +31,8 @@ do
         if [ ! -z ${diff[i - 1]} ]
         then
             currDiff="|${diff[i - 1]}"
+        else
+            currDiff=""
         fi
         printf "%*s  %s\n" $len "${currStatus}" "${currDiff}"
     fi
