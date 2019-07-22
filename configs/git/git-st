@@ -39,5 +39,5 @@ do
 done
 if [ $(( ${#status[@]} - 1)) -eq 0 ]
 then
-    echo "\033[93mNothing to commit, working tree clean\033[0m"
+    printf "\033[93mNothing to commit, working tree clean\033[0m\n"
 fi
