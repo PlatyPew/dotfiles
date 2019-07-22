@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 IFS=
 status="$(git -c color.status=always status -sb)"
 if [ $? -ne 0 ]
@@ -28,7 +28,7 @@ do
     then
         echo "${status[0]}" | cut -d ' ' -f 2-
     else
-        if [ ! -z ${diff[i - 1]} ]
+        if [ -n ${diff[i - 1]} ]
         then
             currDiff="|${diff[i - 1]}"
         else
