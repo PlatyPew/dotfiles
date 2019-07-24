@@ -246,7 +246,7 @@ ff() {
 
     if [ ! -z $FILE ]
     then
-        nvim "${FILE}" 2> /dev/null
+        nvim "${FILE}"
     fi
 }
 
@@ -282,10 +282,11 @@ ft(){
     fi
 }
 
+export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
 ############################################################
 
 ## Aliases #################################################
-alias vi="nvim -O 2> /dev/null"
+alias vi="nvim -O"
 alias :q='exit'
 alias cls='clear'
 alias speed='speed-test -v'
@@ -351,4 +352,4 @@ for km in viopp visual; do
 done
 ############################################################
 
-export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
+export LC_ALL=en_US.UTF-8
