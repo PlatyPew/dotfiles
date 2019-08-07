@@ -294,9 +294,12 @@ alias ls='exa --git'
 alias cat='bat'
 alias sed='gsed'
 alias awk='gawk'
+alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 ############################################################
 
+## iTerm2 shell integration ################################
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+############################################################
 
 ## Vi-Mode ZSH #############################################
 # Better searching in command mode
@@ -352,4 +355,38 @@ for km in viopp visual; do
 done
 ############################################################
 
+# Set locale ###############################################
 export LC_ALL=en_US.UTF-8
+############################################################
+
+# Pwnbox Integration #######################################
+pwnstart() {
+    if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
+        echo "Docker daemon is not running"
+        return 1
+    fi
+    if [ -n ${1} ]; then
+        cd ~/PwnBox
+        ./run.sh ${1}
+        cd - > /dev/null
+    else
+        echo "Usage: ${0} <container name>"
+        return 1
+    fi
+}
+
+pwnstop() {
+    if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
+        echo "Docker daemon is not running"
+        return 1
+    fi
+    if [ -n ${1} ]; then
+        cd ~/PwnBox
+        ./clean.sh ${1}
+        cd - > /dev/null
+    else
+        echo "Usage: ${0} <container name>"
+        return 1
+    fi
+}
+############################################################
