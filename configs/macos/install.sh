@@ -1,4 +1,7 @@
 #!/bin/sh
 
 # Install packages
-brew install autojump cmatrix entr figlet lolcat neofetch pandoc pypy3 watch wget zsh
+brew install $(cat packagelist/brewformulae.txt)
+brew cask install $(cat packagelist/brewcask.txt)
+npm -g install $(cat packagelist/npm.txt)
+pip3 install $(cat packagelist/pip.txt)

@@ -126,15 +126,13 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
-            virtualenv -p python2 --system-site-packages venv
+            virtualenv --system-site-packages venv
             source venv/bin/activate
         else
             source venv/bin/activate
         fi
         echo "python:  $(which python)"
-        echo "python3: $(which python3)"
         echo "pip:     $(which pip)"
-        echo "pip3:    $(which pip3)"
     else
         echo "You are already in a virtual environment"
         return 1
