@@ -358,33 +358,31 @@ export LC_ALL=en_US.UTF-8
 ############################################################
 
 # Pwnbox Integration #######################################
-pwnstart() {
+pwn() {
     if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
-        echo "Docker daemon is not running"
+        echo "Docker daemon is not running!"
         return 1
     fi
-    if [ -n ${1} ]; then
-        cd ~/PwnBox
-        ./run.sh ${1}
-        cd - > /dev/null
-    else
-        echo "Usage: ${0} <container name>"
-        return 1
-    fi
-}
 
-pwnstop() {
-    if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
-        echo "Docker daemon is not running"
+    if [ -z ${1} ] || [ -z ${2} ]; then
+        echo "Usage: ${0} <start/stop> <container name>"
         return 1
     fi
-    if [ -n ${1} ]; then
-        cd ~/PwnBox
-        ./clean.sh ${1}
-        cd - > /dev/null
-    else
-        echo "Usage: ${0} <container name>"
-        return 1
-    fi
+
+    case ${1} in
+        start)
+                cd ~/PwnBox
+                ./run.sh ${2}
+                cd - > /dev/null
+            ;;
+        stop)
+                cd ~/PwnBox
+                ./clean.sh ${2}
+                cd - > /dev/null
+            ;;
+        *)
+            echo "Usage: ${0} <start/stop> <container name>"
+            ;;
+    esac
 }
 ############################################################
