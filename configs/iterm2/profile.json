@@ -80,7 +80,7 @@
   "Unlimited Scrollback" : false,
   "Allow Title Setting" : true,
   "Custom Command" : "No",
-  "Title Components" : 262,
+  "Title Components" : 260,
   "Keyboard Map" : {
     "0xf700-0x260000" : {
       "Text" : "[1;6A",
@@ -289,7 +289,7 @@
     "Red Component" : "0.8",
     "Blue Component" : "0"
   },
-  "Name" : "Default",
+  "Name" : "Platy's Dots",
   "Blinking Cursor" : true,
   "Guid" : "01D2964A-2CBA-4841-90F5-99C5DC4659A5",
   "Idle Code" : 0,
