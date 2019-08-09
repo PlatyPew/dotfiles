@@ -221,6 +221,11 @@ ide() {
         nvim ${1} '+call ToggleIDE()'
     fi
 }
+
+# List directories when directory is changed
+chpwd() {
+    ls -a
+}
 ############################################################
 
 ## FZF functions ###########################################
@@ -294,6 +299,7 @@ alias cat='bat'
 alias sed='gsed'
 alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
+alias rtv='rtv --enable-media'
 ############################################################
 
 ## iTerm2 shell integration ################################
