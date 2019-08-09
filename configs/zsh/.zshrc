@@ -15,6 +15,7 @@ export TERM="xterm-256color"
 export ZSH="$(echo ~$USER)/.oh-my-zsh"
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
+ZSH_DISABLE_COMPFIX="true"
 
 # Plugins ####################################################
 plugins=(
