@@ -1,5 +1,5 @@
 #!/bin/zsh
-NetInterface='en0'
+NetInterface="$(route -n get 0.0.0.0 2>/dev/null | awk '/interface: / {print $2}')"
 
 ip=$(ipconfig getifaddr $NetInterface)
 
