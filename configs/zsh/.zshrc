@@ -365,23 +365,26 @@ pwn() {
         return 1
     fi
 
-    if [ -z ${1} ] || [ -z ${2} ]; then
-        echo "Usage: ${0} <start/stop> <container name>"
+    if [ ${1} != "list" ] && ([ -z ${1} ] || [ -z ${2} ]); then
+        echo "Usage: ${0} <start,clean,list> (container name)"
         return 1
     fi
 
     cd ~/PwnBox2
     case ${1} in
         start)
-                ./run.sh ${2}
-                cd - > /dev/null
+            ./run.sh ${2}
+            cd - > /dev/null
             ;;
-        stop)
-                ./clean.sh ${2}
-                cd - > /dev/null
+        clean)
+            ./clean.sh ${2}
+            cd - > /dev/null
+            ;;
+        list)
+            docker container ls --filter "ancestor=platypew/pwnbox2" --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.RunningFor}}"
             ;;
         *)
-            echo "Usage: ${0} <start/stop> <container name>"
+            echo "Usage: ${0} <start,clean,list> (container name)"
             ;;
     esac
 }
