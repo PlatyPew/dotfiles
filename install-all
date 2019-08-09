@@ -1,0 +1,8 @@
+./install-standalone bash
+./install-standalone git
+./install-standalone iterm2
+./install-standalone macos
+./install-standalone neovim
+./install-standalone tmux
+./install-standalone vim
+./install-standalone zsh
