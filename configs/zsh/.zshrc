@@ -370,14 +370,13 @@ pwn() {
         return 1
     fi
 
+    cd ~/PwnBox2
     case ${1} in
         start)
-                cd ~/PwnBox
                 ./run.sh ${2}
                 cd - > /dev/null
             ;;
         stop)
-                cd ~/PwnBox
                 ./clean.sh ${2}
                 cd - > /dev/null
             ;;
