@@ -72,6 +72,7 @@ python
 python@2
 readline
 ripgrep
+rtv
 screenresolution
 shared-mime-info
 shellcheck
