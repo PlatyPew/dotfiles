@@ -1,5 +1,9 @@
 - shell:
-    - [/bin/sh configs/git/install.sh]
+    -
+        command: [/bin/sh configs/git/install.sh]
+        stdin: true
+        stdout: true
+        stderr: true
 - link:
     ~/.gitconfig: configs/git/.gitconfig
     /usr/local/bin/git-st: configs/git/git-st

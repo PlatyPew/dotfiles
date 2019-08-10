@@ -1,5 +1,9 @@
 - shell:
-    - [/bin/sh configs/bash/install.sh]
+    -
+        command: [/bin/sh configs/bash/install.sh]
+        stdin: true
+        stdout: true
+        stderr: true
 - link:
     ~/.bashrc: configs/bash/.bashrc
     ~/.bash_it/custom/powerline: configs/bash/powerline

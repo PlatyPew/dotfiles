@@ -1,5 +1,9 @@
 - shell:
-    - [/bin/sh configs/neovim/install.sh]
+    -
+        command: [/bin/sh configs/neovim/install.sh]
+        stdin: true
+        stdout: true
+        stderr: true
 - link:
     ~/.eslintrc.json: configs/neovim/.eslintrc.json
     ~/.tern-config: configs/neovim/.tern-config

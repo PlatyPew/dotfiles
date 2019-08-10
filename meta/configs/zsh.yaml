@@ -1,4 +1,8 @@
 - shell:
-    - [/bin/sh configs/zsh/install.sh]
+    -
+        command: [/bin/sh configs/zsh/install.sh]
+        stdin: true
+        stdout: true
+        stderr: true
 - link:
     ~/.zshrc: configs/zsh/.zshrc
