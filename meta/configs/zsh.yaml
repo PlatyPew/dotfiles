@@ -2,5 +2,3 @@
     - [/bin/sh configs/zsh/install.sh]
 - link:
     ~/.zshrc: configs/zsh/.zshrc
-    ~/.mailcap: configs/zsh/.mailcap
-    ~/.config/rtv/rtv.cfg: configs/zsh/rtv.cfg

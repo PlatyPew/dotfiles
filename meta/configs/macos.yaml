@@ -2,3 +2,5 @@
     - [/bin/sh configs/macos/install.sh]
 - link:
     ~/.hushlogin: configs/macos/.hushlogin
+    ~/.mailcap: configs/macos/.mailcap
+    ~/.config/rtv/rtv.cfg: configs/macos/rtv.cfg
