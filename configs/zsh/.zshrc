@@ -39,7 +39,7 @@ plugins=(
 )
 ##############################################################
 
-# Powerlevel9k configs #######################################
+# Powerlevel10k configs ######################################
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
@@ -124,7 +124,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ############################################################
 
-## Python ##################################################
+## Python2 #################################################
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
@@ -365,7 +365,7 @@ done
 export LC_ALL=en_US.UTF-8
 ############################################################
 
-# Pwnbox Integration #######################################
+# Pwnbox2 Integration ######################################
 pwn() {
     if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
         echo "Docker daemon is not running!"
@@ -388,7 +388,7 @@ pwn() {
             cd - > /dev/null
             ;;
         list)
-            docker container ls --filter "ancestor=platypew/pwnbox2" --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.RunningFor}}"
+            docker container ls -a --filter "ancestor=platypew/pwnbox2" --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.RunningFor}}"
             ;;
         *)
             echo "Usage: ${0} <start,clean,list> (container name)"
@@ -396,3 +396,5 @@ pwn() {
     esac
 }
 ############################################################
+
+eval $(thefuck --alias)
