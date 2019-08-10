@@ -19,22 +19,23 @@ ZSH_DISABLE_COMPFIX="true"
 
 # Plugins ####################################################
 plugins=(
-    git
-    zsh-syntax-highlighting
+    autojump
     brew
     colored-man-pages
     docker
+    extract
+    git
     osx
-    vi-mode
-    web-search
     sudo
     tmux
-    extract
-    autojump
-    zsh-autosuggestions
-    zsh-vimode-visual
+    vi-mode
+    web-search
+
     zsh-aliases-exa
     zsh-autopair
+    zsh-autosuggestions
+    zsh-syntax-highlighting
+    zsh-vimode-visual
 )
 ##############################################################
 
@@ -376,7 +377,7 @@ pwn() {
         return 1
     fi
 
-    cd ~/PwnBox2
+    cd ~/PwnBox2 > /dev/null
     case ${1} in
         start)
             ./run.sh ${2}
