@@ -1,6 +1,7 @@
 esctags
 eslint
 eslint-config-google
+fx
 livedown
 localtunnel
 npm

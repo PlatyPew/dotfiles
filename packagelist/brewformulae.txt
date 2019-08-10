@@ -9,6 +9,7 @@ entr
 exa
 figlet
 freetype
+fx
 fzf
 gawk
 gdbm
@@ -22,10 +23,12 @@ gnutls
 icu4c
 ilmbase
 imagemagick
+jansson
 jemalloc
 jpeg
 lame
 libassuan
+libconfig
 libde265
 libevent
 libffi
@@ -77,6 +80,7 @@ screenresolution
 shared-mime-info
 shellcheck
 sqlite
+tg
 tmux
 unbound
 unibilium
