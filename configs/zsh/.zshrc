@@ -227,6 +227,9 @@ ide() {
 chpwd() {
     ls -a
 }
+
+# Autocorrect previous command
+eval $(thefuck --alias)
 ############################################################
 
 ## FZF functions ###########################################
@@ -301,6 +304,7 @@ alias sed='gsed'
 alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 alias rtv='rtv --enable-media'
+alias tg='tg -N'
 ############################################################
 
 ## iTerm2 shell integration ################################
@@ -396,5 +400,3 @@ pwn() {
     esac
 }
 ############################################################
-
-eval $(thefuck --alias)
