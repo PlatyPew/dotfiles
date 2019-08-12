@@ -393,6 +393,7 @@ pwn() {
             ;;
         list)
             docker container ls -a --filter "ancestor=platypew/pwnbox2" --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.RunningFor}}"
+            cd - > /dev/null
             ;;
         *)
             echo "Usage: ${0} <start,clean,list> (container name)"
