@@ -371,6 +371,11 @@ export LC_ALL=en_US.UTF-8
 
 # Pwnbox2 Integration ######################################
 pwn() {
+    if [ -z ${1} ];then
+        echo "Usage: ${0} <start,clean,list> (container name)"
+        return 1
+    fi
+
     if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
         echo "Docker daemon is not running!"
         return 1

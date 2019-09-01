@@ -3,6 +3,7 @@ autojump
 bash
 bat
 bdw-gc
+cmake
 cmatrix
 ctags
 entr
