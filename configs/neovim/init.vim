@@ -28,6 +28,7 @@ Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer 
 Plug 'vim-python/python-syntax', {'for': 'python'}                      " Nicer syntax highlighting for python
 Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}          " Nicer syntax highlighting for clang
 Plug 'calviken/vim-gdscript3', {'for': 'gd'}
+Plug 'posva/vim-vue', {'for': 'vue'}
 
 "" Functionalities
 " Git
@@ -61,7 +62,7 @@ Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows 
 Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
-Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
