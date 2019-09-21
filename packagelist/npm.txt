@@ -1,6 +1,8 @@
+@vue/cli
 esctags
 eslint
 eslint-config-google
+eslint-plugin-vue
 fx
 livedown
 localtunnel

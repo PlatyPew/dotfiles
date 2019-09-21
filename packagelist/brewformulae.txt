@@ -52,6 +52,7 @@ little-cms2
 lolcat
 lua
 luajit
+mongodb-community
 mpfr
 msgpack
 ncurses
@@ -63,6 +64,7 @@ npth
 openexr
 openjpeg
 openssl
+openssl@1.1
 p11-kit
 p7zip
 pandoc
