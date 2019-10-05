@@ -164,9 +164,9 @@ qrcode() {
 howdafak() {
     if [[ -z ${1} || "${1}" == "-h" ]] then
         echo "Usage:    ${0} [-l] <topic> [query]"
-        echo "Example:  ${0} c \"get string length\""
-        echo "          ${0} python \"~file\" # Uses keyword \"file\""
-        echo "          ${0} -l # Shows list of all topics"
+        echo "Example:  ${0} c \"get string length\"  # Shows how to get string length in C"
+        echo "          ${0} python \"~file\"         # Uses keyword \"file\""
+        echo "          ${0} -l                     # Shows list of all topics"
         return 1
     elif [ ${1} = "-l" ]; then
         curl -s "https://cht.sh/:list" | grep -v '[/:]' | xargs -s 100 | tr " " "\t"

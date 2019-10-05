@@ -1,0 +1,13 @@
+image: linuxbrew/brew:latest
+
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+
+before_script:
+    - rm ~/.bashrc
+
+build:
+    stage: build
+    script:
+        - bash install-all
+
