@@ -6,4 +6,3 @@
         stderr: true
 - link:
     ~/.gitconfig: configs/git/.gitconfig
-    /usr/local/bin/git-st: configs/git/git-st
