@@ -372,7 +372,7 @@ export LC_ALL=en_US.UTF-8
 # Pwnbox2 Integration ######################################
 pwn() {
     if [ -z ${1} ];then
-        echo "Usage: ${0} <start,clean,list> (container name)"
+        echo "Usage: ${0} <start,clean,list,enter> (container name)"
         return 1
     fi
 
@@ -382,7 +382,7 @@ pwn() {
     fi
 
     if [ ${1} != "list" ] && ([ -z ${1} ] || [ -z ${2} ]); then
-        echo "Usage: ${0} <start,clean,list> (container name)"
+        echo "Usage: ${0} <start,clean,list,enter> (container name)"
         return 1
     fi
 
@@ -400,8 +400,11 @@ pwn() {
             docker container ls -a --filter "ancestor=platypew/pwnbox2" --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.RunningFor}}"
             cd - > /dev/null
             ;;
+        enter)
+            cd ~/PwnBox2/${2}
+            ;;
         *)
-            echo "Usage: ${0} <start,clean,list> (container name)"
+            echo "Usage: ${0} <start,clean,list,enter> (container name)"
             ;;
     esac
 }
