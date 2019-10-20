@@ -10,11 +10,11 @@ entr
 exa
 figlet
 freetype
-fx
 fzf
 gawk
 gdbm
 gettext
+git
 git-lfs
 glib
 gmp
@@ -25,9 +25,7 @@ icu4c
 ilmbase
 imagemagick
 jansson
-jemalloc
 jpeg
-lame
 libassuan
 libconfig
 libde265
@@ -72,7 +70,6 @@ pcre
 pcre2
 pinentry
 pinentry-mac
-pkg-config
 pypy3
 python
 python@2
@@ -81,7 +78,6 @@ ripgrep
 rtv
 screenresolution
 shared-mime-info
-shellcheck
 sqlite
 tg
 tmux
@@ -94,5 +90,4 @@ webp
 wget
 x265
 xz
-zplug
 zsh

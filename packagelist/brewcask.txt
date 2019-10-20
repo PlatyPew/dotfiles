@@ -4,8 +4,6 @@ dash
 discord
 docker
 firefox
-gimp
-gitkraken
 godot
 google-backup-and-sync
 iterm2
