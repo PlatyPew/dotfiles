@@ -405,6 +405,34 @@ pwn() {
             ;;
         *)
             echo "Usage: ${0} <start,clean,list,enter> (container name)"
+            return 1
+            ;;
+    esac
+}
+############################################################
+
+# Kali VMware Integration ##################################
+kali() {
+    if [ -z ${1} ];then
+        echo "Usage: ${0} <start,stop,reboot,enter>"
+        return 1
+    fi
+    case ${1} in
+        start)
+            vmrun -T fusion start "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" nogui
+            ;;
+        stop)
+            vmrun -T fusion stop "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" soft
+            ;;
+        reboot)
+            vmrun -T fusion reset "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" soft
+            ;;
+        enter)
+            ssh root@`vmrun getGuestIPAddress "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" -wait`
+            ;;
+        *)
+            echo "Usage: ${0} <start,stop,reboot,enter>"
+            return 1
             ;;
     esac
 }
