@@ -14,6 +14,7 @@ ngrok
 onyx
 postman
 telegram-desktop
+tiles
 tunnelblick
 vmware-fusion
 vnc-viewer

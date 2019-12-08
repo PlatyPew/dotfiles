@@ -1,17 +1,4 @@
-colorama
-decorator
-entrypoints
 flake8
-greenlet
-mccabe
-msgpack
 neovim
-psutil
-pycodestyle
-pyflakes
-pynvim
-pyte
-six
 thefuck
 virtualenv
-wcwidth

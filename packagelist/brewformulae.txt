@@ -1,14 +1,15 @@
-adns
+ adns
 autojump
-bash
 bat
 bdw-gc
 cmake
 cmatrix
 ctags
+docker-compose
 entr
 exa
 figlet
+flawfinder
 freetype
 fzf
 gawk
@@ -46,7 +47,9 @@ libunistring
 libusb
 libuv
 libvterm
+libyaml
 little-cms2
+llvm
 lolcat
 lua
 luajit
@@ -79,7 +82,9 @@ rtv
 screenresolution
 shared-mime-info
 sqlite
-tg
+swig
+tcl-tk
+telegram-cli
 tmux
 unbound
 unibilium
