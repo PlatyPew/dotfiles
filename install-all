@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-./install-standalone bash && \
 ./install-standalone git && \
 ./install-standalone iterm2 && \
 ./install-standalone macos && \
