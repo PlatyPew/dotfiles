@@ -304,7 +304,7 @@ alias sed='gsed'
 alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 alias rtv='rtv --enable-media'
-alias tg='tg -N'
+alias tg='telegram -N'
 ############################################################
 
 ## iTerm2 shell integration ################################
@@ -367,6 +367,11 @@ done
 
 # Set locale ###############################################
 export LC_ALL=en_US.UTF-8
+############################################################
+
+# Set default compilation flags ############################
+export CC=clang
+export CFLAGS='-fsanitize=signed-integer-overflow -fsanitize=undefined -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
 ############################################################
 
 # Pwnbox2 Integration ######################################

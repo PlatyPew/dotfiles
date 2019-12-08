@@ -330,6 +330,9 @@ nmap <leader>a :ALEToggle<CR>
 
 "" Settings
 let g:ale_enabled = 0
+let g:ale_echo_msg_format = '[%linter%] %s'
+let g:ale_c_clang_options = '-std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
+let g:ale_c_clangtidy_executable = '/usr/local/opt/llvm/bin/clang-tidy'
 """ End Of ALE Configurations -------------------------------------------------
 
 
@@ -473,7 +476,6 @@ nmap <leader>i :call ToggleIDE()<CR>
 let s:ide = 0
 function ToggleIDE()
     if s:ide
-        set shell=/bin/zsh
         silent execute("norm \<C-h>")
         silent execute('vertical resize +6')
         silent execute('NERDTreeToggle')
@@ -488,7 +490,6 @@ function ToggleIDE()
         silent call deoplete#disable()
         let s:ide = 0
     else
-        set shell=/bin/bash
         silent execute('NERDTreeToggle')
         silent execute('vertical resize -6')
         silent execute("norm \<C-l>")
