@@ -228,10 +228,6 @@ chpwd() {
     ls -a
 }
 
-# Autocorrect previous command
-eval $(thefuck --alias)
-############################################################
-
 ## FZF functions ###########################################
 f() {
     MYPATH="$HOME"
@@ -305,6 +301,7 @@ alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 alias rtv='rtv --enable-media'
 alias tg='telegram -N'
+alias pdb='python3 -m pdb'
 ############################################################
 
 ## iTerm2 shell integration ################################
@@ -371,7 +368,10 @@ export LC_ALL=en_US.UTF-8
 
 # Set default compilation flags ############################
 export CC=clang
-export CFLAGS='-fsanitize=signed-integer-overflow -fsanitize=undefined -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
+export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
+export CXX=clang++
+export CXXFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
+export LDFLAGS="-L /usr/local/opt/llvm/lib"
 ############################################################
 
 # Pwnbox2 Integration ######################################

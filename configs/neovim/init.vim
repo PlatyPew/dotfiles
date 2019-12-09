@@ -304,7 +304,7 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 "" Settings
 set completeopt-=preview
 " C/C++
-let g:deoplete#sources#clang#libclang_path = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib'
+let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/9.0.0_1/lib/libclang.dylib'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 " JS
 let g:tern_request_timeout = 1
@@ -333,6 +333,7 @@ let g:ale_enabled = 0
 let g:ale_echo_msg_format = '[%linter%] %s'
 let g:ale_c_clang_options = '-std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
 let g:ale_c_clangtidy_executable = '/usr/local/opt/llvm/bin/clang-tidy'
+let g:ale_c_flawfinder_minlevel = 3
 """ End Of ALE Configurations -------------------------------------------------
 
 
