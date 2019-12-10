@@ -124,7 +124,7 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ############################################################
 
-## Python2 #################################################
+## Python3 #################################################
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
@@ -142,6 +142,9 @@ ve() {
 }
 
 alias de='deactivate'
+alias pdb='python3 -m pdb'
+alias python='python3'
+alias pip='pip3'
 ############################################################
 
 ## Misc Functions ##########################################
@@ -301,7 +304,6 @@ alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 alias rtv='rtv --enable-media'
 alias tg='telegram -N'
-alias pdb='python3 -m pdb'
 ############################################################
 
 ## iTerm2 shell integration ################################
@@ -368,9 +370,9 @@ export LC_ALL=en_US.UTF-8
 
 # Set default compilation flags ############################
 export CC=clang
-export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
+export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
 export CXX=clang++
-export CXXFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable -Wshadow'
+export CXXFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
 export LDFLAGS="-L /usr/local/opt/llvm/lib"
 ############################################################
 
