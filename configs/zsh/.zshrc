@@ -370,7 +370,7 @@ export LC_ALL=en_US.UTF-8
 
 # Set default compilation flags ############################
 export CC=clang
-export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c11 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
+export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c18 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
 export CXX=clang++
 export CXXFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
 export LDFLAGS="-L /usr/local/opt/llvm/lib"
