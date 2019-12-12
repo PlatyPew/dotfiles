@@ -4,3 +4,6 @@
 [submodule "configs/git/gitz"]
 	path = configs/git/gitz
 	url = https://gitlab.com/PlatyPew/gitz.git
+[submodule "docs"]
+	path = docs
+	url = git@gitlab.com:PlatyPew/dotfiles.wiki.git
