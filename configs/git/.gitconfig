@@ -5,10 +5,8 @@
     aliases = config --get-regexp alias
     amp = !"~/dotfiles/configs/git/gitz/git-amp"
     branches = branch -a
-    combine = !"~/dotfiles/configs/git/gitz/git-combine"
     copy = !"~/dotfiles/configs/git/gitz/git-copy"
     delete = !"~/dotfiles/configs/git/gitz/git-delete"
-    fresh = !"~/dotfiles/configs/git/gitz/git-fresh"
     infer = !"~/dotfiles/configs/git/gitz/git-infer"
     lg = !"git lg1"
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -17,13 +15,10 @@
     multipick = !"~/dotfiles/configs/git/gitz/git-multi-pick"
     remotes = remote -v
     rename = !"~/dotfiles/configs/git/gitz/git-rename"
-    rotate = !"~/dotfiles/configs/git/gitz/git-rotate"
-    sh = !"git log --oneline | fzf -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1"
+    sh = !"git log --oneline | fzf -m -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1 | xargs -n 9999"
     shuffle = !"~/dotfiles/configs/git/gitz/git-shuffle"
-    snip = !"~/dotfiles/configs/git/gitz/git-snip"
     split = !"~/dotfiles/configs/git/gitz/git-split"
     st = !"~/dotfiles/configs/git/gitz/git-st"
-    stripe = !"~/dotfiles/configs/git/gitz/git-stripe"
     tags = tag -l
     yolo = !"git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\""
 [commit]
