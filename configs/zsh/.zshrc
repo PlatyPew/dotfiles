@@ -8,8 +8,18 @@
 # ░ ░ ░ ░ ░░  ░  ░   ░  ░░ ░  ░░   ░ ░
 #   ░ ░          ░   ░  ░  ░   ░     ░ ░
 # ░                                  ░
-# 256 colour support
+
+# 256 colour support #######################################
 export TERM="xterm-256color"
+############################################################
+
+# Set locale ###############################################
+export LC_ALL=en_US.UTF-8
+############################################################
+
+# Set editor ###############################################
+export EDITOR=nvim
+############################################################
 
 # Path to your oh-my-zsh installation.
 export ZSH="$(echo ~$USER)/.oh-my-zsh"
@@ -239,7 +249,7 @@ f() {
         MYPATH="${1}"
     fi
 
-    rg ${MYPATH} --files --hidden --no-ignore-vcs 2> /dev/null | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
+    locate * | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
@@ -364,10 +374,6 @@ for km in viopp visual; do
 done
 ############################################################
 
-# Set locale ###############################################
-export LC_ALL=en_US.UTF-8
-############################################################
-
 # Set default compilation flags ############################
 export CC=clang
 export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c18 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
@@ -379,7 +385,7 @@ export LDFLAGS="-L /usr/local/opt/llvm/lib"
 # Pwnbox2 Integration ######################################
 pwn() {
     if [ -z ${1} ];then
-        echo "Usage: ${0} <start,clean,list,enter> (container name)"
+        echo "Usage: ${0} <start|clean|list|enter> (container name)"
         return 1
     fi
 
@@ -389,7 +395,7 @@ pwn() {
     fi
 
     if [ ${1} != "list" ] && ([ -z ${1} ] || [ -z ${2} ]); then
-        echo "Usage: ${0} <start,clean,list,enter> (container name)"
+        echo "Usage: ${0} <start|clean|list|enter> (container name)"
         return 1
     fi
 
