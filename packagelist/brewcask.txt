@@ -1,9 +1,10 @@
 burp-suite
-cutter
 dash
 discord
 docker
 firefox
+font-inconsolata-nerd-font
+ghidra
 godot
 google-backup-and-sync
 iterm2
@@ -18,6 +19,5 @@ tiles
 tunnelblick
 vmware-fusion
 vnc-viewer
-wireshark
 wkhtmltopdf
 xquartz
