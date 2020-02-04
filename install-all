@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
+sudo spctl --master-disable
+
 which -s brew
 if [[ $? != 0 ]] ; then
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 else
     brew update
 fi
+
 ./install-standalone git && \
 ./install-standalone iterm2 && \
 ./install-standalone macos && \
