@@ -152,10 +152,10 @@ vnoremap <silent> <Up> :resize +2 <CR>
 " Decrease horizontal split
 nnoremap <silent> <Down> :resize -2 <CR>
 vnoremap <silent> <Down> :resize -2 <CR>
-" Increase vertical split
+" Decrease vertical split
 nnoremap <silent> <Left> :vertical resize -2 <CR>
 vnoremap <silent> <Left> :vertical resize -2 <CR>
-" Decrease horizontal split
+" Increase vertical split
 nnoremap <silent> <Right> :vertical resize +2 <CR>
 vnoremap <silent> <Right> :vertical resize +2 <CR>
 
