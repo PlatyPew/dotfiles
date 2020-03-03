@@ -17,13 +17,14 @@
 1. [Installation](#installation)
 2. [Usage](#usage)
 
+<br/>
 <div align="center">
-    <h2>Installation</h2>
+    <h1>Installation</h1>
 </div>
 
 **"One-click" install**
 ```
-git clone https://gitlab.com/PlatyPew/dotfiles.git ~/dotfiles && \
+git clone https://gitlab.com/PlatyPew/dotfiles.git --recursive ~/dotfiles && \
     cd ~/dotfiles && ./install-all
 ```
 
@@ -43,10 +44,10 @@ _You may also be prompted to enter in the administrator password during installa
 
 <br/>
 <div align="center">
-    <h2>Usage</h2>
+    <h1>Usage</h1>
 </div>
 
-### Documentation
+## Documentation
 Documentation is available in the repository's [wiki](https://gitlab.com/PlatyPew/dotfiles/-/wikis/home)
 - [Git](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Git)
 - [iTerm2](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Iterm2)
@@ -55,6 +56,15 @@ Documentation is available in the repository's [wiki](https://gitlab.com/PlatyPe
 - [Tmux](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Tmux)
 - [Zsh](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Zsh)
 
-### Features
+## Features
 This section will showcase the basic features.
 The wiki has a more comprehensive list of all the features available
+
+### Git Aliases
+You can list all the aliases used by git
+<br>
+<img src="images/git-alias.gif" height="208" width="454"/>
+
+```
+$ git aliases
+```
