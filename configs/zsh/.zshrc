@@ -36,7 +36,6 @@ plugins=(
     extract
     git
     osx
-    sudo
     tmux
     vi-mode
     web-search
@@ -249,7 +248,7 @@ f() {
         MYPATH="${1}"
     fi
 
-    locate * | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
+    locate \* | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {

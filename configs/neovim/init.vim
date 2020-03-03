@@ -449,7 +449,7 @@ endfunction
 
 """ Vanilla Transparent Mode -------------------------------------------------
 "" Mappings
-" Activate Transparent mode    \t
+" Activate Transparent mode    \T
 nmap <leader>T :call ToggleTransparentMode()<CR>
 
 "" Functions
