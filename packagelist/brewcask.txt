@@ -1,3 +1,4 @@
+amethyst
 burp-suite
 dash
 discord
@@ -17,7 +18,7 @@ postman
 telegram-desktop
 tiles
 tunnelblick
-vmware-fusion
 vnc-viewer
+wireshark
 wkhtmltopdf
 xquartz
