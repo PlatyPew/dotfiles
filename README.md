@@ -45,3 +45,16 @@ _You may also be prompted to enter in the administrator password during installa
 <div align="center">
     <h2>Usage</h2>
 </div>
+
+### Documentation
+Documentation is available in the repository's [wiki](https://gitlab.com/PlatyPew/dotfiles/-/wikis/home)
+- [Git](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Git)
+- [iTerm2](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Iterm2)
+- [MacOS](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/MacOS)
+- [Neovim](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Neovim)
+- [Tmux](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Tmux)
+- [Zsh](https://gitlab.com/PlatyPew/dotfiles/-/wikis/Configurations/Zsh)
+
+### Features
+This section will showcase the basic features.
+The wiki has a more comprehensive list of all the features available
