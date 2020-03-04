@@ -22,6 +22,14 @@
         - [Git List Commits](#git-list-commits)
         - [Git Show Commits](#git-show-commits)
         - [Git Condensed Status](#git-condensed-status)
+        - [Neovim IDE Mode](#neovim-ide-mode)
+        - [tmux](#tmux)
+        - [Zsh Autopairs](#zsh-autopairs)
+        - [Zsh Fuzzy Find File](#zsh-fuzzy-find-file)
+        - [Zsh Fuzzy Find Term](#zsh-fuzzy-find-term)
+        - [Zsh Vi-Mode](#zsh-vi-mode)
+3. [License](#license)
+
 
 <br/>
 <div align="center">
@@ -47,6 +55,8 @@ git clone https://gitlab.com/PlatyPew/dotfiles.git --recursive ~/dotfiles && \
 _You might need to install Xcode Command Line Tools if you're running git on MacOS for the very first time_
 
 _You may also be prompted to enter in the administrator password during installation_
+
+_Also, there's currently no uninstallation program now, you'll have to manually uninstall everything_
 
 <br/>
 <div align="center">
@@ -106,7 +116,7 @@ $ git st
 ### Neovim IDE Mode
 A integrated development environment within Neovim with autocomplete and linting
 <br>
-<img src="images/neovim.gif" height="208" width="454"/>
+<img src="images/neovim.gif" height="382" width="640"/>
 
 ```
 $ nvim
@@ -142,3 +152,8 @@ Usage of vi-mode with text objects and inline visual mode
 <img src="images/zsh-vimode.gif" height="208" width="454"/>
 
 _It's jokeeee_
+
+<div align="center">
+    <h1>License</h1>
+    <p>This project is released under the <a href="https://gitlab.com/PlatyPew/dotfiles/-/blob/master/LICENSE">MIT License</a></p>
+</div>
