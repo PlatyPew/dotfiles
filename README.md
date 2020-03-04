@@ -16,6 +16,12 @@
 ## Contents 
 1. [Installation](#installation)
 2. [Usage](#usage)
+    - [Documentation](#documentation)
+    - [Features](#features)
+        - [Git Aliases](#git-aliases)
+        - [Git List Commits](#git-list-commits)
+        - [Git Show Commits](#git-show-commits)
+        - [Git Condensed Status](#git-condensed-status)
 
 <br/>
 <div align="center">
@@ -45,6 +51,7 @@ _You may also be prompted to enter in the administrator password during installa
 <br/>
 <div align="center">
     <h1>Usage</h1>
+    <p>A relatively comprehensive documentation, and showcases of a few features available!</p>
 </div>
 
 ## Documentation
@@ -67,4 +74,31 @@ You can list all the aliases used by git
 
 ```
 $ git aliases
+```
+
+### Git List Commits
+List all commits in a tree-like form
+<br>
+<img src="images/git-lg.gif" height="208" width="454"/>
+
+```
+$ git lg
+```
+
+### Git Show Commits
+List all commits with the changes
+<br>
+<img src="images/git-sh.gif" height="208" width="454"/>
+
+```
+$ git sh
+```
+
+### Git Condensed Status
+List status of repository in a more condensed form
+<br>
+<img src="images/git-st.gif" height="208" width="454"/>
+
+```
+$ git st
 ```
