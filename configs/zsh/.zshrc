@@ -313,6 +313,7 @@ alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 alias rtv='rtv --enable-media'
 alias tg='telegram -N'
+alias ql='quick-look'
 ############################################################
 
 ## iTerm2 shell integration ################################
