@@ -103,6 +103,15 @@ List status of repository in a more condensed form
 $ git st
 ```
 
+### Tmux
+Basic tmux theme and shortcuts
+<br>
+<img src="images/tmux.gif" height="382" width="640"/>
+
+```
+$ tmux
+```
+
 ### Zsh Autopairs
 Autocompletes brackets and quotes
 <br>
