@@ -103,6 +103,15 @@ List status of repository in a more condensed form
 $ git st
 ```
 
+### Neovim IDE Mode
+A integrated development environment within Neovim with autocomplete and linting
+<br>
+<img src="images/neovim.gif" height="208" width="454"/>
+
+```
+$ nvim
+```
+
 ### Tmux
 Basic tmux theme and shortcuts
 <br>
