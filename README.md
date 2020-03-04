@@ -102,3 +102,25 @@ List status of repository in a more condensed form
 ```
 $ git st
 ```
+
+### Zsh Autopairs
+Autocompletes brackets and quotes
+<br>
+<img src="images/zsh-autopairs.gif" height="208" width="454"/>
+
+### Zsh Fuzzy Find File
+Fuzzy find file recursively from current directory
+<br>
+<img src="images/zsh-fuzzyfile.gif" height="208" width="454"/>
+
+### Zsh Fuzzy Find Term
+Fuzzy find term recursively from current directory
+<br>
+<img src="images/zsh-fuzzyterm.gif" height="208" width="454"/>
+
+### Zsh Vi-Mode
+Usage of vi-mode with text objects and inline visual mode
+<br>
+<img src="images/zsh-vimode.gif" height="208" width="454"/>
+
+_It's jokeeee_
