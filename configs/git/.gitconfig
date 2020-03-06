@@ -15,6 +15,7 @@
     multipick = !"~/dotfiles/configs/git/gitz/git-multi-pick"
     remotes = remote -v
     rename = !"~/dotfiles/configs/git/gitz/git-rename"
+    ri = !"git rebase -i `git sh`"
     sh = !"git log --oneline | fzf -m -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1 | xargs -n 9999"
     shuffle = !"~/dotfiles/configs/git/gitz/git-shuffle"
     split = !"~/dotfiles/configs/git/gitz/git-split"
