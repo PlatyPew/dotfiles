@@ -1,3 +1,13 @@
+before_script:
+    - sudo spctl --master-disable
+    - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    - echo "font-inconsolata-nerd-font" > packagelist/brewcask.txt
+
 install:
     script:
-        - ./install-all
+        - ./install-standalone git
+        - ./install-standalone iterm2
+        - ./install-standalone macos
+        - ./install-standalone neovim
+        - ./install-standalone tmux
+        - ./install-standalone zsh

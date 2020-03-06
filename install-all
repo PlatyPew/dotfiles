@@ -13,5 +13,4 @@ fi
 ./install-standalone macos && \
 ./install-standalone neovim && \
 ./install-standalone tmux && \
-./install-standalone vim && \
 ./install-standalone zsh
