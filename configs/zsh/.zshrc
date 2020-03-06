@@ -383,9 +383,9 @@ export LDFLAGS="-L /usr/local/opt/llvm/lib"
 ############################################################
 
 # Pwnbox2 Integration ######################################
-pwn() {
+p2() {
     if [ -z ${1} ];then
-        echo "Usage: ${0} <start|clean|list|enter> (container name)"
+        echo "Usage: ${0} <attach|rm|list|mount> (container name)"
         return 1
     fi
 
@@ -395,13 +395,13 @@ pwn() {
     fi
 
     if [ ${1} != "list" ] && ([ -z ${1} ] || [ -z ${2} ]); then
-        echo "Usage: ${0} <start|clean|list|enter> (container name)"
+        echo "Usage: ${0} <attach|rm|list|mount> (container name)"
         return 1
     fi
 
     cd ~/PwnBox2 > /dev/null
     case ${1} in
-        start)
+        attach)
             ./run.sh ${2}
             cd - > /dev/null
             ;;
@@ -417,7 +417,7 @@ pwn() {
             cd ~/PwnBox2/${2}
             ;;
         *)
-            echo "Usage: ${0} <start,clean,list,enter> (container name)"
+            echo "Usage: ${0} <attach|rm|list|mount> (container name)"
             return 1
             ;;
     esac
