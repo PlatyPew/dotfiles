@@ -405,7 +405,7 @@ p2() {
             ./run.sh ${2}
             cd - > /dev/null
             ;;
-        clean)
+        rm)
             ./clean.sh ${2}
             cd - > /dev/null
             ;;
