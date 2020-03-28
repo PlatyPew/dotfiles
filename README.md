@@ -52,6 +52,8 @@ git clone https://gitlab.com/PlatyPew/dotfiles.git --recursive ~/dotfiles && \
 ./install-standalone zsh
 ```
 
+Please check `packagelist/` for programs that will be installed. Remove/add any additional software required.
+
 _You might need to install Xcode Command Line Tools if you're running git on MacOS for the very first time_
 
 _You may also be prompted to enter in the administrator password during installation_
