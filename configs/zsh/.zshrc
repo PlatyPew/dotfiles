@@ -385,7 +385,7 @@ export LDFLAGS="-L /usr/local/opt/llvm/lib"
 # Pwnbox2 Integration ######################################
 p2() {
     if [ -z ${1} ];then
-        echo "Usage: ${0} <attach|rm|list|mount> (container name)"
+        echo "Usage: ${0} <attach|rm|list|mount|update> (container name)"
         return 1
     fi
 
@@ -394,8 +394,8 @@ p2() {
         return 1
     fi
 
-    if [ ${1} != "list" ] && ([ -z ${1} ] || [ -z ${2} ]); then
-        echo "Usage: ${0} <attach|rm|list|mount> (container name)"
+    if [ ${1} != "list" ] && [ ${1} != "update" ] && ([ -z ${1} ] || [ -z ${2} ]); then
+        echo "Usage: ${0} <attach|rm|list|mount|update> (container name)"
         return 1
     fi
 
@@ -416,8 +416,13 @@ p2() {
         enter)
             cd ~/PwnBox2/${2}
             ;;
+        update)
+            ID=$(docker images platypew/pwnbox2 -q)
+            docker pull platypew/pwnbox2:latest
+            docker rmi $ID
+            ;;
         *)
-            echo "Usage: ${0} <attach|rm|list|mount> (container name)"
+        echo "Usage: ${0} <attach|rm|list|mount> (container name)"
             return 1
             ;;
     esac
