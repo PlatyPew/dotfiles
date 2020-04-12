@@ -383,50 +383,7 @@ export LDFLAGS="-L /usr/local/opt/llvm/lib"
 ############################################################
 
 # Pwnbox2 Integration ######################################
-p2() {
-    if [ -z ${1} ];then
-        echo "Usage: ${0} <attach|rm|list|mount|update> (container name)"
-        return 1
-    fi
-
-    if [ -z "$(docker stats --no-stream 2> /dev/null)" ]; then
-        echo "Docker daemon is not running!"
-        return 1
-    fi
-
-    if [ ${1} != "list" ] && [ ${1} != "update" ] && ([ -z ${1} ] || [ -z ${2} ]); then
-        echo "Usage: ${0} <attach|rm|list|mount|update> (container name)"
-        return 1
-    fi
-
-    cd ~/PwnBox2 > /dev/null
-    case ${1} in
-        attach)
-            ./run.sh ${2}
-            cd - > /dev/null
-            ;;
-        rm)
-            ./clean.sh ${2}
-            cd - > /dev/null
-            ;;
-        list)
-            docker container ls -a --filter "ancestor=platypew/pwnbox2" --format "table {{.Names}}\t{{.Status}}\t{{.Size}}\t{{.RunningFor}}"
-            cd - > /dev/null
-            ;;
-        enter)
-            cd ~/PwnBox2/${2}
-            ;;
-        update)
-            ID=$(docker images platypew/pwnbox2 -q)
-            docker pull platypew/pwnbox2:latest
-            docker rmi $ID
-            ;;
-        *)
-        echo "Usage: ${0} <attach|rm|list|mount> (container name)"
-            return 1
-            ;;
-    esac
-}
+alias p2="~/PwnBox2/p2"
 ############################################################
 
 # Kali VMware Integration ##################################
