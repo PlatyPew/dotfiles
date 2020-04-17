@@ -242,17 +242,17 @@ chpwd() {
 
 ## FZF functions ###########################################
 f() {
-    MYPATH="$HOME"
+    MYSEARCH="*"
     if [ ! -z $1 ]
     then
-        MYPATH="${1}"
+        MYSEARCH="${1}"
     fi
 
-    locate \* | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
+    locate "${MYSEARCH}" | fzf -m --ansi --preview '[[ $(file --mime {}) =~ binary ]] && echo $(basename {}) is a binary file \($(file --mime-type {} | cut -d ":" -f 2 | cut -c 2-)\) || (bat --color=always --style=header,grid --line-range :200 {})'
 }
 
 ff() {
-    MYPATH="$(pwd)"
+    MYPATH="."
     if [ ! -z $1 ]
     then
         MYPATH="${1}"
@@ -267,7 +267,7 @@ ff() {
 }
 
 fd() {
-    MYPATH="$(pwd)"
+    MYPATH="."
     if [ ! -z $1 ]
     then
         MYPATH="${1}"
@@ -284,11 +284,18 @@ fd() {
 ft(){
     if [ -z ${1} ]
     then
-        echo "Usage: ${0} <search term>"
+        echo "Usage: ${0} <search term> [path]"
         return
     fi
+
+    MYPATH="."
+    if [ ! -z $2 ]
+    then
+        MYPATH="${2}"
+    fi
+
     local match=$(
-      rg --trim --vimgrep --color=never --line-number "$1" 2> /dev/null |
+      rg --trim --vimgrep --color=never --line-number "$1" ${MYPATH} 2> /dev/null |
         fzf --no-multi --delimiter : \
             --preview "bat --color=always --line-range {2}: {1}"
       )
