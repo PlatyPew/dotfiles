@@ -1,10 +1,10 @@
 amethyst
-discord
+discord-ptb
 docker
 firefox
 font-inconsolata-nerd-font
 google-backup-and-sync
-iterm2
+iterm2-beta
 java
 keycastr
 libreoffice
