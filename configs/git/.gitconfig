@@ -3,7 +3,6 @@
 [alias]
     adjust = !"~/dotfiles/configs/git/gitz/git-adjust"
     aliases = config --get-regexp alias
-    amp = !"~/dotfiles/configs/git/gitz/git-amp"
     branches = branch -a
     copy = !"~/dotfiles/configs/git/gitz/git-copy"
     delete = !"~/dotfiles/configs/git/gitz/git-delete"
@@ -13,11 +12,11 @@
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)' --all -p
     ls = !"~/dotfiles/configs/git/gitz/git-when -a | less -RS"
     multipick = !"~/dotfiles/configs/git/gitz/git-multi-pick"
+    permute = !"~/dotfiles/configs/git/gitz/git-permute"
     remotes = remote -v
     rename = !"~/dotfiles/configs/git/gitz/git-rename"
     ri = !"git rebase -i `git sh`"
     sh = !"git log --oneline | fzf -m -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1 | xargs -n 9999"
-    shuffle = !"~/dotfiles/configs/git/gitz/git-shuffle"
     split = !"~/dotfiles/configs/git/gitz/git-split"
     st = !"~/dotfiles/configs/git/gitz/git-st"
     tags = tag -l
