@@ -1,5 +1,5 @@
 amethyst
-discord-ptb
+discord
 docker
 firefox
 font-inconsolata-nerd-font
