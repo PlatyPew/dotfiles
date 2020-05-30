@@ -157,11 +157,6 @@ alias pip='pip3'
 ############################################################
 
 ## Misc Functions ##########################################
-# Get Weather
-weather() {
-    sed '$ d' <(curl -s wttr.in/${1} | grep -v '@igor');
-}
-
 # Convert text to QR code
 qrcode() {
     if [ -z ${1} ]; then
@@ -216,11 +211,6 @@ dash() {
         echo "You may not have dash installed. Install by doing: brew cask install dash"
         return 1
     fi
-}
-
-# Get rates of crypto currency
-rate() {
-    curl -s "https://sgd.rate.sx/${1}" | grep -v '@igor'
 }
 
 # Spawn IDE like environment using Neovim
@@ -318,8 +308,6 @@ alias cat='bat'
 alias sed='gsed'
 alias awk='gawk'
 alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
-alias rtv='rtv --enable-media'
-alias tg='telegram -N'
 alias ql='quick-look'
 ############################################################
 
@@ -381,41 +369,6 @@ for km in viopp visual; do
 done
 ############################################################
 
-# Set default compilation flags ############################
-export CC=clang
-export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c18 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
-export CXX=clang++
-export CXXFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
-export LDFLAGS="-L /usr/local/opt/llvm/lib"
-############################################################
-
-# Pwnbox2 Integration ######################################
-alias p2="~/PwnBox2/p2"
-############################################################
-
-# Kali VMware Integration ##################################
-kali() {
-    if [ -z ${1} ];then
-        echo "Usage: ${0} <start,stop,reboot,enter>"
-        return 1
-    fi
-    case ${1} in
-        start)
-            vmrun -T fusion start "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" nogui
-            ;;
-        stop)
-            vmrun -T fusion stop "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" soft
-            ;;
-        reboot)
-            vmrun -T fusion reset "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" soft
-            ;;
-        enter)
-            ssh root@`vmrun getGuestIPAddress "${HOME}/Virtual Machines/Kali Wireless.vmwarevm/Kali Wireless.vmx" -wait`
-            ;;
-        *)
-            echo "Usage: ${0} <start,stop,reboot,enter>"
-            return 1
-            ;;
-    esac
-}
+## Additional stuff ########################################
+source $HOME/.zsh_profile
 ############################################################

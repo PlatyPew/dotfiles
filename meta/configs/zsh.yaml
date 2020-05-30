@@ -6,3 +6,4 @@
         stderr: true
 - link:
     ~/.zshrc: configs/zsh/.zshrc
+    ~/.zsh_profile: configs/zsh/.zsh_profile
