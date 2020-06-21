@@ -3,7 +3,6 @@ bat
 cmake
 cmatrix
 ctags
-docker-compose
 entr
 exa
 figlet
@@ -17,7 +16,6 @@ gnupg
 llvm
 lolcat
 lua
-mongodb-community
 neofetch
 neovim
 node
