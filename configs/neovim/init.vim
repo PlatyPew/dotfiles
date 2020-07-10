@@ -45,8 +45,6 @@ Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-c
 Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
-Plug 'zchee/deoplete-zsh', {'for': ['sh', 'bash', 'zsh']}               " Auto-Completion for Zsh
-Plug 'shougo/neco-syntax'                                               " Auto-Completion for other languages
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -304,7 +302,7 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 "" Settings
 set completeopt-=preview
 " C/C++
-let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/10.0.0_1/lib/libclang.dylib'
+let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/10.0.0_3/lib/libclang.dylib'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 " JS
 let g:tern_request_timeout = 1

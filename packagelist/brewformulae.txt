@@ -23,7 +23,6 @@ p7zip
 pandoc
 pinentry-mac
 pypy3
-python
 ripgrep
 rtv
 telegram-cli
