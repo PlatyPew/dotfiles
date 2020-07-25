@@ -19,3 +19,7 @@ git clone https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/theme
 # Install other stuff
 python3 -m pip install virtualenv
 npm install -g speed-test
+
+# Fix git completions
+rm /usr/local/share/zsh/site-functions/git-completion.bash
+rm -rf /usr/local/share/zsh/site-functions/_git
