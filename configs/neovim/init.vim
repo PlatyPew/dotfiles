@@ -63,6 +63,7 @@ Plug 'hushicai/tagbar-javascript.vim'                                   " Shows 
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}
+" Plug 'puremourning/vimspector', {'do': './install_gadget.py --all'}
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -423,6 +424,14 @@ let g:NERDCustomDelimiters = {
     \ }                                                                 " Fix for double spacing while commenting Python
 """ End Of Nerd Commenter Configurations --------------------------------------
 
+""" Vimspector Configurations ------------------------------------------------
+" let g:vimspector_enable_mappings = 'HUMAN'
+" nmap <leader>dd :call vimspector#Launch()<CR>
+" nmap <leader>dx :VimspectorReset<CR>
+" nmap <leader>de :VimspectorEval
+" nmap <leader>dw :VimspectorWatch
+" nmap <leader>do :VimspectorShowOutput
+""" End Of Vimspector Configurations ------------------------------------------
 
 """ Vanilla Terminal Support --------------------------------------------------
 "" Mappings
