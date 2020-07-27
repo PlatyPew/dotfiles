@@ -45,6 +45,8 @@ Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-c
 Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
+Plug 'SirVer/ultisnips'                                                 " Snippets Engine
+Plug 'honza/vim-snippets'                                               " Snippets
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -308,6 +310,15 @@ let g:deoplete#sources#clang#sort_algo = 'priority'
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
 """ End Of Deoplete Configurations --------------------------------------------
+
+
+""" Ultisnips Configurations --------------------------------------------------
+"" Mappings
+let g:UltiSnipsExpandTrigger="<C-i>"
+let g:UltiSnipsJumpForwardTrigger="<C-f>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
+let g:UltiSnipsEditSplit="vertical"
+""" End Of Ultisnips Configurations -------------------------------------------
 
 
 """ Vim Fugitive Configurations -----------------------------------------------
