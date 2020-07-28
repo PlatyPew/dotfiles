@@ -7,4 +7,4 @@
 - link:
     ~/.hushlogin: configs/macos/.hushlogin
     ~/.mailcap: configs/macos/.mailcap
-    ~/.config/rtv/rtv.cfg: configs/macos/rtv.cfg
+    ~/.config/tuir/tuir.cfg: configs/macos/tuir.cfg

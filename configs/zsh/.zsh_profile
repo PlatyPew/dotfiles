@@ -1,6 +1,6 @@
 # Aliases ##################################################
 alias tg='telegram -N'
-alias rtv='rtv --enable-media'
+alias tuir='tuir --enable-media'
 alias minecraft='java -jar ~/.local/share/minecraft/TLauncher.jar'
 ############################################################
 

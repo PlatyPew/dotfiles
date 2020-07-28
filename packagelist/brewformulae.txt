@@ -24,7 +24,6 @@ pandoc
 pinentry-mac
 pypy3
 ripgrep
-rtv
 telegram-cli
 tmux
 unrar
