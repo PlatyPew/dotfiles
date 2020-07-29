@@ -1,5 +1,6 @@
 autojump
 bat
+bettercap
 cmake
 cmatrix
 ctags
@@ -13,6 +14,7 @@ git
 git-lfs
 gnu-sed
 gnupg
+lastpass-cli
 llvm
 lolcat
 lua
@@ -28,6 +30,7 @@ telegram-cli
 tmux
 unrar
 w3m
+wakeonlan
 watch
 wget
 zsh
