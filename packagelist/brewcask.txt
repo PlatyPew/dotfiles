@@ -1,6 +1,5 @@
 amethyst
 appcleaner
-dash
 discord
 docker-edge
 firefox

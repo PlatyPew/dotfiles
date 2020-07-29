@@ -61,7 +61,6 @@ Plug 'w0rp/ale'                                                         " Asynch
 Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
-Plug 'rizzatti/dash.vim', {'on': ['Dash', 'DashKeywords']}
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}
 " Plug 'puremourning/vimspector', {'do': './install_gadget.py --all'}
 

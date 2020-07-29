@@ -184,35 +184,6 @@ howdafak() {
     fi
 }
 
-# Super docs
-dash() {
-    if [[ "$OSTYPE" != "darwin"* ]] then
-        echo "Only available for MacOS :("
-        return 1
-    fi
-
-    if [[ ${1} == "-h" ]] then
-        echo "Usage:    ${0} [-h] <doc> [query]"
-        echo "Example:  ${0} python3 \"subprocess\"   # Shows docs from Python 3 subprocess"
-        echo "          ${0} c \"format\"             # Shows docs from C printf"
-        echo "          ${0} promises               # Shows docs for promises"
-        return 0
-    fi
-
-    DOC=${1}
-    if [[ -z ${2} ]] then
-        open "dash-plugin://query=${DOC}"
-    else
-        shift
-        open "dash-plugin://keys=${DOC}&query=${*}"
-    fi
-
-    if [[ $? -ne 0 ]] then
-        echo "You may not have dash installed. Install by doing: brew cask install dash"
-        return 1
-    fi
-}
-
 # Spawn IDE like environment using Neovim
 ide() {
     if [[ -z $TMUX ]] then
