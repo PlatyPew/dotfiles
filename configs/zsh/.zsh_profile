@@ -61,3 +61,5 @@ rate() {
     curl -s "https://sgd.rate.sx/${1}" | grep -v '@igor'
 }
 ############################################################
+
+source <(k3d completion zsh && print "compdef _k3d k3d")
