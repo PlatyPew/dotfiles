@@ -44,12 +44,6 @@ kali() {
 # export LDFLAGS="-L /usr/local/opt/llvm/lib"
 ############################################################
 
-# Enable proxycapd #########################################
-alias proxycapd-start="sudo launchctl load -w /Library/LaunchDaemons/com.proxylabs.proxycapd.plist"
-
-alias proxycapd-stop="sudo launchctl unload -w /Library/LaunchDaemons/com.proxylabs.proxycapd.plist"
-############################################################
-
 # Other QoL functions #######################################
 # Get Weather
 weather() {
