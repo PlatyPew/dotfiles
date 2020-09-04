@@ -154,6 +154,7 @@ alias de='deactivate'
 alias pdb='python3 -m pdb'
 alias python='python3'
 alias pip='pip3'
+alias n='navi'
 ############################################################
 
 ## Misc Functions ##########################################

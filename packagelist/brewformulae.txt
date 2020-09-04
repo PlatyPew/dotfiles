@@ -18,6 +18,7 @@ lastpass-cli
 llvm
 lolcat
 lua
+navi
 neofetch
 neovim
 node

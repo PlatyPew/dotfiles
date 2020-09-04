@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Installing packages
-brew install autojump bat exa fzf zsh npm python3 gawk gnu-sed ripgrep
+brew install autojump bat exa fzf zsh npm python3 gawk gnu-sed ripgrep navi
 
 # Install oh-my-zsh
 git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
