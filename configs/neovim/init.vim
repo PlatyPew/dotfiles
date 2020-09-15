@@ -304,7 +304,7 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 "" Settings
 set completeopt-=preview
 " C/C++
-let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/10.0.0_3/lib/libclang.dylib'
+let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/10.0.1/lib/libclang.dylib'
 let g:deoplete#sources#clang#sort_algo = 'priority'
 " JS
 let g:tern_request_timeout = 1
