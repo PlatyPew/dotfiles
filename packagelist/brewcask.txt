@@ -8,7 +8,6 @@ ghidra
 gimp
 google-backup-and-sync
 iterm2-beta
-java
 keycastr
 lmms
 ngrok
