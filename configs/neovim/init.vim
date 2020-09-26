@@ -320,7 +320,6 @@ let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
 nnoremap <silent> <C-Space> :Snippets<CR>
-inoremap <silent> <C-Space> <Esc>:Snippets<CR>
 """ End Of Ultisnips Configurations -------------------------------------------
 
 
