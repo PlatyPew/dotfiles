@@ -45,8 +45,8 @@ Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-c
 Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
-Plug 'SirVer/ultisnips', {'for': ['javascript', 'markdown', 'php', 'python', 'ruby']}   " Snippets Engine
-Plug 'honza/vim-snippets', {'for': ['javascript', 'markdown', 'php', 'python', 'ruby']} " Snippets
+Plug 'SirVer/ultisnips'                                                 " Snippets Engine
+Plug 'honza/vim-snippets'                                               " Snippets
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -304,8 +304,9 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 "" Settings
 set completeopt-=preview
 " C/C++
-let g:deoplete#sources#clang#libclang_path = '/usr/local/Cellar/llvm/10.0.1/lib/libclang.dylib'
+let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
 let g:deoplete#sources#clang#sort_algo = 'priority'
+let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
 " JS
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
@@ -318,6 +319,8 @@ let g:UltiSnipsExpandTrigger="<C-Space>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
+nnoremap <silent> <C-Space> :Snippets<CR>
+inoremap <silent> <C-Space> <Esc>:Snippets<CR>
 """ End Of Ultisnips Configurations -------------------------------------------
 
 
