@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 brew update && brew outdated && brew upgrade && brew cleanup
-brew cask reinstall $(brew outdated --cask) && brew cleanup
+brew reinstall $(brew outdated --cask) && brew cleanup
 npm update -g
 pip install --upgrade `pip freeze | cut -d '=' -f 1`
 git -C ~/.oh-my-zsh fetch --all && git -C ~/.oh-my-zsh pull --all --rebase
