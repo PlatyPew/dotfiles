@@ -26,9 +26,8 @@ Plug 'mhinz/vim-startify'                                               " Better
 " Syntax highlighting
 Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer syntax highlighting for javascript
 Plug 'vim-python/python-syntax', {'for': 'python'}                      " Nicer syntax highlighting for python
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['c', 'cpp']}          " Nicer syntax highlighting for clang
-Plug 'calviken/vim-gdscript3', {'for': 'gd'}
-Plug 'posva/vim-vue', {'for': 'vue'}
+Plug 'justinmk/vim-syntax-extra'
+Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}               " Nicer syntax highlighting for clang
 
 "" Functionalities
 " Git
@@ -37,7 +36,7 @@ Plug 'tpope/vim-fugitive'                                               " Git wr
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " File finding
 Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}                    " Shows file tree
-Plug '/usr/local/opt/fzf'                                               " Fuzzy finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                     " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 " Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
@@ -63,10 +62,10 @@ Plug 'hushicai/tagbar-javascript.vim'                                   " Shows 
 " Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}
 " Plug 'puremourning/vimspector', {'do': './install_gadget.py --all'}
+Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }                " Documentation Generator
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
-
 
 """ Plugin Colouring ----------------------------------------------------------
 "" Space Vim Dark
@@ -433,6 +432,11 @@ let g:NERDCustomDelimiters = {
 " nmap <leader>dw :VimspectorWatch
 " nmap <leader>do :VimspectorShowOutput
 """ End Of Vimspector Configurations ------------------------------------------
+
+""" Doge Configurations -------------------------------------------------------
+let g:doge_mapping = '<Leader>K'
+let g:doge_doc_standard_c = 'kernel_doc'
+""" End of Doge Configurations ------------------------------------------------
 
 """ Vanilla Terminal Support --------------------------------------------------
 "" Mappings
