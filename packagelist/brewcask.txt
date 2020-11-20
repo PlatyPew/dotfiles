@@ -1,8 +1,7 @@
-amethyst
 appcleaner
+brave-browser
 discord
 docker-edge
-firefox
 font-inconsolata-nerd-font
 ghidra
 gimp
@@ -12,8 +11,8 @@ keycastr
 lmms
 ngrok
 onyx
+rectangle
 telegram-desktop
-tiles
 tunnelblick
 vmware-fusion
 wireshark

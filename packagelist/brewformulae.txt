@@ -3,6 +3,7 @@ bat
 bettercap
 cmake
 ctags
+curl
 entr
 exa
 figlet
@@ -13,6 +14,7 @@ git
 git-lfs
 gnu-sed
 gnupg
+k3d
 lastpass-cli
 llvm
 lolcat
@@ -25,6 +27,8 @@ p7zip
 pandoc
 pinentry-mac
 pypy3
+python@3.8
+python@3.9
 ripgrep
 telegram-cli
 tmux
@@ -33,4 +37,5 @@ w3m
 wakeonlan
 watch
 wget
+youtube-dl
 zsh

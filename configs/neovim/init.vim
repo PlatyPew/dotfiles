@@ -63,6 +63,7 @@ Plug 'hushicai/tagbar-javascript.vim'                                   " Shows 
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}
 " Plug 'puremourning/vimspector', {'do': './install_gadget.py --all'}
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }                " Documentation Generator
+Plug 'nvim-treesitter/nvim-treesitter'
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -314,11 +315,11 @@ let g:tern_request_timeout = 6000
 
 """ Ultisnips Configurations --------------------------------------------------
 "" Mappings
-let g:UltiSnipsExpandTrigger="<C-Space>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
-nnoremap <silent> <C-Space> :Snippets<CR>
+
+nnoremap <silent> <c-u> :Snippets<CR>
 """ End Of Ultisnips Configurations -------------------------------------------
 
 
@@ -371,7 +372,7 @@ nmap <leader>L :LivedownToggle<CR>
 let g:livedown_autorun = 0
 let g:livedown_open = 1 
 let g:livedown_port = 1337
-let g:livedown_browser = 'firefox'
+let g:livedown_browser = 'brave'
 """ End Of Livedown Configurations --------------------------------------------
 
 """ Multiple Cursors Configurations -------------------------------------------
@@ -437,6 +438,17 @@ let g:NERDCustomDelimiters = {
 let g:doge_mapping = '<Leader>K'
 let g:doge_doc_standard_c = 'kernel_doc'
 """ End of Doge Configurations ------------------------------------------------
+
+""" Tres sitter Configurations ------------------------------------------------
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+  },
+}
+EOF
+""" End of Tree sitter --------------------------------------------------------
 
 """ Vanilla Terminal Support --------------------------------------------------
 "" Mappings
