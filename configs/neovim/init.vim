@@ -41,6 +41,8 @@ Plug 'junegunn/fzf.vim'
 " Auto-completion
 Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
@@ -315,9 +317,12 @@ let g:tern_request_timeout = 6000
 
 """ Ultisnips Configurations --------------------------------------------------
 "" Mappings
+let g:UltiSnipsExpandTrigger = "<Nop>"
+let g:UltiSnipsListSnippets = "<Nop>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsRemoveSelectModeMappings = 0
 
 nnoremap <silent> <c-u> :Snippets<CR>
 """ End Of Ultisnips Configurations -------------------------------------------
