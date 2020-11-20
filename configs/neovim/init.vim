@@ -324,7 +324,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
-nnoremap <silent> <c-u> :Snippets<CR>
+nnoremap <silent> <c-j> :Snippets<CR>
 """ End Of Ultisnips Configurations -------------------------------------------
 
 
