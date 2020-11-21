@@ -61,11 +61,10 @@ Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo v
 Plug 'w0rp/ale'                                                         " Asynchronous linting
 Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows tags while programming
 Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
-" Plug 'floobits/floobits-neovim', {'do': ':UpdateRemotePlugins'}        " Collaborative editing (Laggy as heck)
-Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}
-" Plug 'puremourning/vimspector', {'do': './install_gadget.py --all'}
+Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }                " Documentation Generator
-Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'nvim-treesitter/nvim-treesitter'                                  " Better syntax parser
+Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -444,15 +443,35 @@ let g:doge_mapping = '<Leader>K'
 let g:doge_doc_standard_c = 'kernel_doc'
 """ End of Doge Configurations ------------------------------------------------
 
-""" Tres sitter Configurations ------------------------------------------------
+""" Tree Sitter Configurations ------------------------------------------------
+"" Enable tree sitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
-  highlight = {
-    enable = true,
-    disable = {},
-  },
+     ensure_installed = "maintained",
+     highlight = {
+          enable = true,
+          disable = {},
+     },
+     refactor = {
+          highlight_definitions = { enable = true },
+          smart_rename = {
+               enable = true,
+               keymaps = {
+                    smart_rename = "grr",
+               },
+          },
+          navigation = {
+               enable = true,
+               keymaps = {
+                    goto_definition = "gnd",
+                    list_definitions = "gnD",
+                    goto_next_usage = "<a-*>",
+                    goto_previous_usage = "<a-#>",
+               },
+          },
+     },
 }
+
 
 -- Fix rainbow paretheses
 require"nvim-treesitter.highlight"
