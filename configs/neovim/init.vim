@@ -324,7 +324,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsRemoveSelectModeMappings = 0
 
-nnoremap <silent> <c-j> :Snippets<CR>
+nnoremap <silent> <c-u> :Snippets<CR>
 """ End Of Ultisnips Configurations -------------------------------------------
 
 
@@ -450,8 +450,16 @@ require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,
+    disable = {},
   },
 }
+
+-- Fix rainbow paretheses
+require"nvim-treesitter.highlight"
+local hlmap = vim.treesitter.highlighter.hl_map
+hlmap.error = nil
+hlmap["punctuation.delimiter"] = "Delimiter"
+hlmap["punctuation.bracket"] = nil
 EOF
 """ End of Tree sitter --------------------------------------------------------
 
