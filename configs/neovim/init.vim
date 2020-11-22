@@ -225,6 +225,8 @@ augroup rainbow_lisp
     autocmd VimEnter * RainbowParentheses
 augroup END
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+let g:rainbow#blacklist = ['foreground', '#d1951d']
 """ End Of Rainbow Parentheses Configurations ---------------------------------
 
 
