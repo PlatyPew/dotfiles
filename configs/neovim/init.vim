@@ -24,10 +24,7 @@ Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds r
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
-Plug 'pangloss/vim-javascript', {'for': 'javascript'}                   " Nicer syntax highlighting for javascript
-Plug 'vim-python/python-syntax', {'for': 'python'}                      " Nicer syntax highlighting for python
-Plug 'justinmk/vim-syntax-extra'
-Plug 'octol/vim-cpp-enhanced-highlight', {'for': ['cpp']}               " Nicer syntax highlighting for clang
+Plug 'nvim-treesitter/nvim-treesitter'                                  " Better syntax parser
 
 "" Functionalities
 " Git
@@ -63,7 +60,6 @@ Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows 
 Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }                " Documentation Generator
-Plug 'nvim-treesitter/nvim-treesitter'                                  " Better syntax parser
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 
 call plug#end()
@@ -445,7 +441,7 @@ let g:doge_mapping = '<Leader>K'
 let g:doge_doc_standard_c = 'kernel_doc'
 """ End of Doge Configurations ------------------------------------------------
 
-""" Tree Sitter Configurations ------------------------------------------------
+""" TreeSitter Configurations -------------------------------------------------
 "" Enable tree sitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -474,7 +470,6 @@ require'nvim-treesitter.configs'.setup {
      },
 }
 
-
 -- Fix rainbow paretheses
 require"nvim-treesitter.highlight"
 local hlmap = vim.treesitter.highlighter.hl_map
@@ -482,7 +477,7 @@ hlmap.error = nil
 hlmap["punctuation.delimiter"] = "Delimiter"
 hlmap["punctuation.bracket"] = nil
 EOF
-""" End of Tree sitter --------------------------------------------------------
+""" End of TreeSitter ---------------------------------------------------------
 
 """ Vanilla Terminal Support --------------------------------------------------
 "" Mappings
