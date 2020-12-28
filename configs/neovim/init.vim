@@ -23,6 +23,7 @@ Plug 'junegunn/limelight.vim', {'on': 'Limelight!!'}                    " Grey-o
 Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter'                                  " Better syntax parser
 
@@ -32,7 +33,7 @@ Plug 'airblade/vim-gitgutter'                                           " Shows 
 Plug 'tpope/vim-fugitive'                                               " Git wrapper
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " File finding
-Plug 'scrooloose/nerdtree', {'on': 'NERDTreeToggle'}                    " Shows file tree
+Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}                     " Shows file tree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                     " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 " Auto-completion
@@ -68,27 +69,22 @@ call plug#end()
 """ Plugin Colouring ----------------------------------------------------------
 "" Space Vim Dark
 let g:space_vim_dark_background = 234
-"" Python
-let g:python_highlight_all = 1
-let g:python_slow_sync = 0
-"" Clang
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_simple_template_highlight = 1
-let g:cpp_concepts_highlight = 1
 """ End Of Plugin Colouring ---------------------------------------------------
 
 
 """ Vanilla Colouring ---------------------------------------------------------
 syntax on                                                               " Enable syntax highlighting
-set termguicolors
+" Enable true colours
 colorscheme space-vim-dark                                              " Set colour scheme SpaceVimDark
+set notermguicolors t_Co=256
+highlight LineNr ctermbg=NONE guibg=NONE
 highlight clear Comment
 " Set colours for comments
-highlight Comment cterm=italic guifg=#7c7c7c
+highlight Comment cterm=italic ctermfg=8
 " Set colours for colour column
-highlight ColorColumn guifg=#ff0000 guibg=#1c1c1c
+highlight ColorColumn ctermfg=9 ctermbg=233
+" Set colours for constants
+highlight Constant ctermfg=215
 """ End Of Vanilla Colouring --------------------------------------------------
 
 
@@ -195,7 +191,7 @@ nnoremap <leader>bq :bdelete<CR>
 let g:airline_powerline_fonts = 1
 let g:airline_section_warning = ''
 let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-let g:airline_theme='powerlineish'
+let g:airline_theme='wombat'
 let g:airline#extensions#tabline#enabled = 1
 """ End Of Vim-Airline Configurations -----------------------------------------
 
@@ -229,7 +225,7 @@ let g:rainbow#blacklist = ['foreground', '#d1951d']
 """ Goyo Configurations -------------------------------------------------------
 "" Mappings
 " Activate Goyo    \G
-nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic guifg=#7c7c7c<CR>
+nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic ctermfg=8<CR>
 """ End Of Goyo Configurations ------------------------------------------------
 
 
@@ -256,6 +252,22 @@ augroup nerdtree_stuff
     autocmd!
     autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 augroup END
+
+" Highlight full name and only certain extensions
+let g:NERDTreeFileExtensionHighlightFullName = 1
+let g:NERDTreeExactMatchHighlightFullName = 1
+let g:NERDTreePatternMatchHighlightFullName = 1
+let g:NERDTreeSyntaxDisableDefaultExtensions = 1
+let g:NERDTreeSyntaxDisableDefaultExactMatches = 1
+let g:NERDTreeSyntaxDisableDefaultPatternMatches = 1
+let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'cpp', 'py', 'rb', 'js', 'css', 'html', 'java',
+  \ 'class', 'md']
+let g:NERDTreeSyntaxEnabledExactMatches = ['node_modules', 'favicon.ico']
+
+" Open directories with nerdtree instead of netrw
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
 """ End Of Nerd Tree Configurations -------------------------------------------
 
 
@@ -289,8 +301,8 @@ nnoremap <silent><C-p> :FZF --preview=head\ -13\ {}<CR>
 
 """ Deoplete Configurations ---------------------------------------------------
 "" Colours
-highlight Pmenu guifg=#b2b2b2 guibg=#26252d
-highlight PmenuSel guifg=#f489e9 guibg=#3a3a3a
+highlight Pmenu ctermfg=247 ctermbg=235
+highlight PmenuSel ctermfg=0 ctermbg=13
 
 "" Mappings
 " Activate deoplete    \d
@@ -314,8 +326,6 @@ let g:tern_request_timeout = 6000
 
 """ Ultisnips Configurations --------------------------------------------------
 "" Mappings
-let g:UltiSnipsExpandTrigger = "<Nop>"
-let g:UltiSnipsListSnippets = "<Nop>"
 let g:UltiSnipsJumpForwardTrigger="<C-f>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 let g:UltiSnipsEditSplit="vertical"
@@ -520,7 +530,7 @@ function ToggleTransparentMode()
     if s:transparent
         colorscheme space-vim-dark
         highlight clear Comment
-        highlight Comment cterm=italic guifg=#7c7c7c
+        highlight Comment cterm=italic ctermfg=8
         let s:transparent = 0
     else
         highlight Normal ctermbg=NONE guibg=NONE

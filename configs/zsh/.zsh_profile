@@ -1,7 +1,6 @@
 # Aliases ##################################################
 alias tg='telegram -N'
 alias tuir='tuir --enable-media'
-alias minecraft='java -jar ~/.local/share/minecraft/TLauncher.jar'
 ############################################################
 
 # Pwnbox2 Integration ######################################
