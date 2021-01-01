@@ -3,4 +3,4 @@
 	url = https://github.com/anishathalye/dotbot.git
 [submodule "configs/git/gitz"]
 	path = configs/git/gitz
-	url = https://gitlab.com/PlatyPew/gitz.git
+	url = https://github.com/rec/gitz
