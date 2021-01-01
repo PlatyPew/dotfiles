@@ -2,7 +2,7 @@ appcleaner
 brave-browser
 discord
 docker-edge
-font-inconsolata-nerd-font
+font-iosevka-nerd-font
 ghidra
 gimp
 google-backup-and-sync
