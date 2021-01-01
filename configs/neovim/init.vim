@@ -479,28 +479,33 @@ EOF
 let g:instant_username = trim(system('whoami'))
 
 function StartInstantSession()
-    let port = input('IP address of port: ')
+    let port = input('Server Port: ')
     silent execute('InstantStartServer 127.0.0.1 ' . port)
     silent execute('InstantStartSession 127.0.0.1 ' . port)
     execute('InstantStatus')
 endfunction
 
 function JoinInstantSession()
-    let host = input('IP address of host: ')
-    let port = input('IP address of port: ')
+    let host = input('Server Host to connect: ')
+    let port = input('Server Port to connect: ')
     silent execute('InstantJoinSession ' . host . ' ' . port)
     execute('InstantStatus')
 endfunction
 
 function StopInstantSession()
     silent execute('InstantStop')
+    execute('InstantStatus')
+endfunction
+
+function StopInstantServer()
     silent execute('InstantStopServer')
     execute('InstantStatus')
 endfunction
 
 nmap <leader>Is :call StartInstantSession()<CR>
 nmap <leader>Ij :call JoinInstantSession()<CR>
-nmap <leader>IS :call StopInstantSession()<CR>
+nmap <leader>Iq :call StopInstantSession()<CR>
+nmap <leader>IQ :call StopInstantServer()<CR>
 """ End of Instant  -----------------------------------------------------------
 
 
