@@ -23,7 +23,6 @@ export EDITOR=nvim
 
 # Path to your oh-my-zsh installation.
 export ZSH="$(echo ~$USER)/.oh-my-zsh"
-
 # Use beam shape cursor on startup.
 echo -ne '\e[5 q'
 
@@ -298,6 +297,49 @@ ft(){
 }
 
 export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
+############################################################
+
+## Ngrok ###################################################
+# Publish a port online using ngrok
+publish() {
+    local USAGE() {
+        printf "publish <start|stop|status> [port]\n"
+    }
+
+    if [ -z ${1} ]; then
+        USAGE
+        return 1
+    fi
+
+    if [ ${1} = "start" ]; then
+        if [ -z ${2} ]; then
+            USAGE
+            return 1
+        fi
+
+        if [ ! -f "$HOME/.ngrok2/ngrok.yml" ]; then
+            printf "Enter auth token: "
+            read token
+            ngrok authtoken $token
+        fi
+
+        ngrok tcp -log=stdout ${2} > /dev/null &
+        export NGROK_PID=$!
+        sleep 2
+        export NGROK_PORT=${2}
+        printf "Port forwarding 0.0.0.0:${NGROK_PORT} -> "
+        curl -s http://localhost:4040/api/tunnels | python3 -c "import sys, json; print(json.load(sys.stdin)['tunnels'][0]['public_url'])" | cut -f 3 -d '/'
+    elif [ ${1} = "stop" ]; then
+        kill $NGROK_PID
+        export NGROK_PORT=""
+    elif [ ${1} = "status" ]; then
+        printf "Port forwrding 0.0.0.0:${NGROK_PORT} -> "
+        curl -s http://localhost:4040/api/tunnels | python3 -c "import sys, json; print(json.load(sys.stdin)['tunnels'][0]['public_url'])" | cut -f 3 -d '/'
+    else
+        USAGE
+        return 1
+    fi
+}
 ############################################################
 
 ## Aliases #################################################
