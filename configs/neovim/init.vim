@@ -39,29 +39,33 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } , 'on': 'FZF'}        " Fuzzy 
 Plug 'junegunn/fzf.vim', {'on': 'FZF'}
 " Auto-completion
 Plug 'shougo/neoinclude.vim',
-            \ {'for': ['c', 'cpp', 'python', 'javascript']}             " Completion framework for deoplete
+            \ {'for': ['c', 'cpp', 'python', 'javascript', 'java']}     " Completion framework for deoplete
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins',
-            \ 'for': ['c', 'cpp', 'python', 'javascript']}              " Auto-completion plugin
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
-Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
+            \ 'for': ['c', 'cpp', 'python', 'javascript', 'java']}      " Auto-completion plugin
+Plug 'Shougo/deoplete-clangx', {'for': ['c', 'cpp']}                    " Auto-Completion support for C/C++
+Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}                " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
-Plug 'shime/vim-livedown', {'on': 'LivedownToggle'}                     " Live preview of markdown in browser
+Plug 'shime/vim-livedown', {'for': 'md', 'on': 'LivedownToggle'}        " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'preservim/nerdcommenter'                                          " Easy commenting
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'w0rp/ale'                                                         " Asynchronous linting
-Plug 'majutsushi/tagbar', {'on': ['TagbarToggle', 'TagbarOpen']}        " Shows tags while programming
-Plug 'hushicai/tagbar-javascript.vim'                                   " Shows tags for javascript
+Plug 'dense-analysis/ale',
+            \ {'for': ['c', 'cpp', 'python', 'javascript', 'java']}     " Asynchronous linting
+Plug 'majutsushi/tagbar',
+            \ {'for': ['c', 'cpp', 'python', 'java'],
+            \ 'on': ['TagbarToggle', 'TagbarOpen']}                     " Shows tags while programming
+Plug 'hushicai/tagbar-javascript.vim',
+            \ {'for': 'javascript',
+            \ 'on': ['TagbarToggle', 'TagbarOpen']}                     " Shows tags for javascript
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
-Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }                " Documentation Generator
+Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
+            \ 'for': ['c', 'cpp', 'python', 'javascript', 'java']}      " Documentation Generator
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
@@ -92,7 +96,7 @@ highlight Constant ctermfg=215
 
 
 """ Vanilla Configurations ----------------------------------------------------
-set relativenumber
+set number relativenumber
 set encoding=UTF-8
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l                                                  " Cursor wrap around in normal mode
@@ -317,10 +321,7 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "" Settings
 set completeopt-=preview
-" C/C++
-let g:deoplete#sources#clang#libclang_path = '/usr/local/opt/llvm/lib/libclang.dylib'
-let g:deoplete#sources#clang#sort_algo = 'priority'
-let g:deoplete#sources#clang#clang_header = '/usr/local/opt/llvm/lib/clang'
+let g:deoplete#enable_at_startup = 0
 " JS
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
@@ -350,6 +351,9 @@ let g:ale_c_clang_options = '-std=c18 -Wall -Werror -Wextra -Wno-sign-compare -W
 let g:ale_c_clangtidy_executable = '/usr/local/opt/llvm/bin/clang-tidy'
 let g:ale_c_flawfinder_minlevel = 3
 let g:ale_cpp_clang_options = '-std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_error = ''
+let g:ale_sign_warning = ''
 """ End Of ALE Configurations -------------------------------------------------
 
 
@@ -472,7 +476,7 @@ EOF
 """ End of TreeSitter ---------------------------------------------------------
 
 """ Instant Settings-----------------------------------------------------------
-let g:instant_username = system('whoami')
+let g:instant_username = trim(system('whoami'))
 
 function StartInstantSession()
     let port = input('IP address of port: ')
@@ -489,7 +493,7 @@ function JoinInstantSession()
 endfunction
 
 function StopInstantSession()
-    silent execute('InstantStopServer')
+    silent execute('InstantStop')
     silent execute('InstantStopServer')
     execute('InstantStatus')
 endfunction
