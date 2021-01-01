@@ -23,9 +23,10 @@ Plug 'junegunn/limelight.vim', {'on': 'Limelight!!'}                    " Grey-o
 Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
 Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight',
+            \ {'on': 'NERDTreeToggle'}                                  " Colours for nerd tree
 " Syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter'                                  " Better syntax parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}             " Better syntax parser
 
 "" Functionalities
 " Git
@@ -34,24 +35,24 @@ Plug 'tpope/vim-fugitive'                                               " Git wr
 Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " File finding
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}                     " Shows file tree
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }                     " Fuzzy finder
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } , 'on': 'FZF'}        " Fuzzy finder
+Plug 'junegunn/fzf.vim', {'on': 'FZF'}
 " Auto-completion
-Plug 'shougo/neoinclude.vim'                                            " Completion framework for deoplete
-Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins'}             " Auto-completion plugin
+Plug 'shougo/neoinclude.vim',
+            \ {'for': ['c', 'cpp', 'python', 'javascript']}             " Completion framework for deoplete
+Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins',
+            \ 'for': ['c', 'cpp', 'python', 'javascript']}              " Auto-completion plugin
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'zchee/deoplete-clang', {'for': ['c', 'cpp']}                      " Auto-Completion support for C/C++
 Plug 'zchee/deoplete-jedi', {'for': 'python'}                           " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
-Plug 'SirVer/ultisnips'                                                 " Snippets Engine
-Plug 'honza/vim-snippets'                                               " Snippets
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
 Plug 'shime/vim-livedown', {'on': 'LivedownToggle'}                     " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
-Plug 'scrooloose/nerdcommenter'                                         " Easy commenting
+Plug 'preservim/nerdcommenter'                                          " Easy commenting
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
@@ -62,6 +63,8 @@ Plug 'hushicai/tagbar-javascript.vim'                                   " Shows 
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
 Plug 'kkoomen/vim-doge', { 'do': { -> doge#install() } }                " Documentation Generator
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
+Plug 'jbyuki/instant.nvim',
+            \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -89,7 +92,7 @@ highlight Constant ctermfg=215
 
 
 """ Vanilla Configurations ----------------------------------------------------
-set number
+set relativenumber
 set encoding=UTF-8
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l                                                  " Cursor wrap around in normal mode
@@ -262,7 +265,7 @@ let g:NERDTreeSyntaxDisableDefaultExactMatches = 1
 let g:NERDTreeSyntaxDisableDefaultPatternMatches = 1
 let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'cpp', 'py', 'rb', 'js', 'css', 'html', 'java',
   \ 'class', 'md']
-let g:NERDTreeSyntaxEnabledExactMatches = ['node_modules', 'favicon.ico']
+let g:NERDTreeSyntaxEnabledExactMatches = ['venv', 'node_modules', 'favicon.ico']
 
 " Open directories with nerdtree instead of netrw
 autocmd StdinReadPre * let s:std_in=1
@@ -324,17 +327,6 @@ let g:tern_request_timeout = 6000
 """ End Of Deoplete Configurations --------------------------------------------
 
 
-""" Ultisnips Configurations --------------------------------------------------
-"" Mappings
-let g:UltiSnipsJumpForwardTrigger="<C-f>"
-let g:UltiSnipsJumpBackwardTrigger="<C-z>"
-let g:UltiSnipsEditSplit="vertical"
-let g:UltiSnipsRemoveSelectModeMappings = 0
-
-nnoremap <silent> <c-u> :Snippets<CR>
-""" End Of Ultisnips Configurations -------------------------------------------
-
-
 """ Vim Fugitive Configurations -----------------------------------------------
 "" Mappings
 " Show git status    Tab
@@ -382,9 +374,9 @@ nmap <leader>L :LivedownToggle<CR>
 
 "" Settings
 let g:livedown_autorun = 0
-let g:livedown_open = 1 
+let g:livedown_open = 1
 let g:livedown_port = 1337
-let g:livedown_browser = 'brave'
+let g:livedown_browser = 'Brave'
 """ End Of Livedown Configurations --------------------------------------------
 
 """ Multiple Cursors Configurations -------------------------------------------
@@ -427,24 +419,16 @@ nmap <S-Tab> :TagbarToggle<CR>
 
 """ Nerd Commenter Configurations ---------------------------------------------
 "" Settings
-let g:NERDSpaceDelims = 1                                               " Add spaces after comment delimiters by default
-let g:NERDCompactSexyComs = 1                                           " Use compact syntax for prettified multi-line comments
-let g:NERDAltDelims_java = 1                                            " Set a language to use its alternate delimiters by default
-let g:NERDTrimTrailingWhitespace = 1                                    " Enable trimming of trailing whitespace when uncommenting
-let g:NERDToggleCheckAllLines = 1                                       " Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDSpaceDelims = 1                      " Add spaces after comment delimiters by default
+let g:NERDCompactSexyComs = 1                  " Use compact syntax for prettified multi-line comments
+let g:NERDAltDelims_java = 1                   " Set a language to use its alternate delimiters by default
+let g:NERDTrimTrailingWhitespace = 1           " Enable trimming of trailing whitespace when uncommenting
+let g:NERDToggleCheckAllLines = 1              " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDCustomDelimiters = {
     \ 'python': { 'left': '#', 'right': '' }
-    \ }                                                                 " Fix for double spacing while commenting Python
+    \ }                                        " Fix for double spacing while commenting Python
 """ End Of Nerd Commenter Configurations --------------------------------------
 
-""" Vimspector Configurations ------------------------------------------------
-" let g:vimspector_enable_mappings = 'HUMAN'
-" nmap <leader>dd :call vimspector#Launch()<CR>
-" nmap <leader>dx :VimspectorReset<CR>
-" nmap <leader>de :VimspectorEval
-" nmap <leader>dw :VimspectorWatch
-" nmap <leader>do :VimspectorShowOutput
-""" End Of Vimspector Configurations ------------------------------------------
 
 """ Doge Configurations -------------------------------------------------------
 let g:doge_mapping = '<Leader>K'
@@ -486,6 +470,35 @@ hlmap["punctuation.delimiter"] = "Delimiter"
 hlmap["punctuation.bracket"] = nil
 EOF
 """ End of TreeSitter ---------------------------------------------------------
+
+""" Instant Settings-----------------------------------------------------------
+let g:instant_username = system('whoami')
+
+function StartInstantSession()
+    let port = input('IP address of port: ')
+    silent execute('InstantStartServer 127.0.0.1 ' . port)
+    silent execute('InstantStartSession 127.0.0.1 ' . port)
+    execute('InstantStatus')
+endfunction
+
+function JoinInstantSession()
+    let host = input('IP address of host: ')
+    let port = input('IP address of port: ')
+    silent execute('InstantJoinSession ' . host . ' ' . port)
+    execute('InstantStatus')
+endfunction
+
+function StopInstantSession()
+    silent execute('InstantStopServer')
+    silent execute('InstantStopServer')
+    execute('InstantStatus')
+endfunction
+
+nmap <leader>Is :call StartInstantSession()<CR>
+nmap <leader>Ij :call JoinInstantSession()<CR>
+nmap <leader>IS :call StopInstantSession()<CR>
+""" End of Instant  -----------------------------------------------------------
+
 
 """ Vanilla Terminal Support --------------------------------------------------
 "" Mappings

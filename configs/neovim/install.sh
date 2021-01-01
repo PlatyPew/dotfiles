@@ -1,6 +1,6 @@
 # Installs packages
 brew install npm python3 ctags-exuberant
-brew install --HEAD neovim
+brew install --HEAD --build-from-source neovim
 python3 -m pip install neovim flake8
 npm install -g tern livedown eslint eslint-config-google esctags
 
