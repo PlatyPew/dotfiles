@@ -1,7 +1,6 @@
 esctags
 eslint
 eslint-config-google
-fx
 livedown
 npm
 speed-test

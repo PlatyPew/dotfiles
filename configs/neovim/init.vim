@@ -39,11 +39,11 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } , 'on': 'FZF'}        " Fuzzy 
 Plug 'junegunn/fzf.vim', {'on': 'FZF'}
 " Auto-completion
 Plug 'shougo/neoinclude.vim',
-            \ {'for': ['c', 'cpp', 'python', 'javascript', 'java']}     " Completion framework for deoplete
+            \ {'for': ['javascript', 'java']}     " Completion framework for deoplete
 Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins',
-            \ 'for': ['c', 'cpp', 'python', 'javascript', 'java']}      " Auto-completion plugin
-Plug 'Shougo/deoplete-clangx', {'for': ['c', 'cpp']}                    " Auto-Completion support for C/C++
-Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}                " Auto-Completion support for Python
+            \ 'for': ['javascript', 'java']}      " Auto-completion plugin
+" Plug 'Shougo/deoplete-clangx', {'for': ['c', 'cpp']}                    " Auto-Completion support for C/C++
+" Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}                " Auto-Completion support for Python
 Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
@@ -56,7 +56,7 @@ Plug 'anyakichi/vim-surround'                                           " Surrou
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'dense-analysis/ale',
-            \ {'for': ['c', 'cpp', 'python', 'javascript', 'java']}     " Asynchronous linting
+            \ {'for': ['javascript', 'java']}     " Asynchronous linting
 Plug 'majutsushi/tagbar',
             \ {'for': ['c', 'cpp', 'python', 'java'],
             \ 'on': ['TagbarToggle', 'TagbarOpen']}                     " Shows tags while programming
@@ -69,6 +69,8 @@ Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -306,10 +308,12 @@ nnoremap <silent><C-p> :FZF --preview=head\ -13\ {}<CR>
 """ End Of FZF Configurations -------------------------------------------------
 
 
-""" Deoplete Configurations ---------------------------------------------------
+""" LSP Configurations --------------------------------------------------------
 "" Colours
 highlight Pmenu ctermfg=247 ctermbg=235
 highlight PmenuSel ctermfg=0 ctermbg=13
+highlight LspDiagnosticsDefaultError ctermfg=9
+highlight LspDiagnosticsDefaultWarning ctermfg=3
 
 "" Mappings
 " Activate deoplete    \d
@@ -320,8 +324,11 @@ inoremap <silent><expr><tab>  pumvisible() ? "\<C-n>" : "\<tab>"
 inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "" Settings
-set completeopt-=preview
 let g:deoplete#enable_at_startup = 0
+set completeopt=menuone,noinsert,noselect
+set shortmess+=c
+let g:completion_sorting = "length"
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
 " JS
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
@@ -331,7 +338,21 @@ augroup multithread
     autocmd!
     autocmd FileType javascript call deoplete#custom#option('num_processes', 4)
 augroup END
-""" End Of Deoplete Configurations --------------------------------------------
+
+" LSP settings
+lua <<EOF
+    local lspconfig = require'lspconfig'
+    lspconfig.clangd.setup{
+        on_attach = require'completion'.on_attach,
+        cmd = {"/usr/local/opt/llvm/bin/clangd", "--clang-tidy"}
+    }
+
+    lspconfig.pyls.setup{
+        on_attach = require'completion'.on_attach,
+        cmd = {"/usr/local/bin/pyls"}
+    }
+EOF
+""" End Of LSP Configurations -------------------------------------------------
 
 
 """ Vim Fugitive Configurations -----------------------------------------------
