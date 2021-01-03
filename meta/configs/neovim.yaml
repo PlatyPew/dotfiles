@@ -5,6 +5,6 @@
         stdout: true
         stderr: true
 - link:
-    ~/.eslintrc.json: configs/neovim/.eslintrc.json
+    ~/.eslintrc.js: configs/neovim/.eslintrc.js
     ~/.tern-config: configs/neovim/.tern-config
     ~/.config/nvim/init.vim: configs/neovim/init.vim

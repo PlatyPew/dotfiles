@@ -325,6 +325,12 @@ let g:deoplete#enable_at_startup = 0
 " JS
 let g:tern_request_timeout = 1
 let g:tern_request_timeout = 6000
+let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#depths = 1
+augroup multithread
+    autocmd!
+    autocmd FileType javascript call deoplete#custom#option('num_processes', 4)
+augroup END
 """ End Of Deoplete Configurations --------------------------------------------
 
 
