@@ -10,9 +10,11 @@
   },
   "Rows" : 25,
   "Ansi 11 Color" : {
-    "Green Component" : "0.9137255",
-    "Red Component" : "0.9882353",
-    "Blue Component" : "0.3098039"
+    "Red Component" : 0.98039215686274506,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.24313725490196078,
+    "Alpha Component" : 1,
+    "Green Component" : 0.87058823529411766
   },
   "Use Italic Font" : true,
   "Foreground Color" : {
@@ -264,16 +266,20 @@
 
   ],
   "Ansi 9 Color" : {
-    "Green Component" : "0.1607843",
-    "Red Component" : "0.9372549",
-    "Blue Component" : "0.1607843"
+    "Red Component" : 0.89803921568627454,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.27058823529411763,
+    "Alpha Component" : 1,
+    "Green Component" : 0.32549019607843138
   },
   "Use Bold Font" : true,
   "Silence Bell" : false,
   "Ansi 12 Color" : {
-    "Green Component" : "0.6235294",
-    "Red Component" : "0.4470588",
-    "Blue Component" : "0.8117647"
+    "Red Component" : 0.48627450980392156,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.90196078431372551,
+    "Alpha Component" : 1,
+    "Green Component" : 0.69019607843137254
   },
   "Window Type" : 12,
   "Use Bright Bold" : true,
@@ -295,7 +301,7 @@
   },
   "Name" : "Platy's Dots",
   "Blinking Cursor" : true,
-  "Guid" : "CBDA860A-BF9D-4F45-AFD5-FA54A770AB4E",
+  "Guid" : "2EBEE4CA-A7E6-4792-862A-25E39EA484C6",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
     "Green Component" : "0.8862745",
@@ -381,9 +387,11 @@
   },
   "Rows" : 25,
   "Ansi 11 Color" : {
-    "Green Component" : "0.9137255",
-    "Blue Component" : "0.3098039",
-    "Red Component" : "0.9882353"
+    "Red Component" : 0.98039215686274506,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.24313725490196078,
+    "Alpha Component" : 1,
+    "Green Component" : 0.87058823529411766
   },
   "Use Italic Font" : true,
   "Foreground Color" : {
@@ -633,16 +641,20 @@
 
   ],
   "Ansi 9 Color" : {
-    "Green Component" : "0.1607843",
-    "Blue Component" : "0.1607843",
-    "Red Component" : "0.9372549"
+    "Red Component" : 0.89803921568627454,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.27058823529411763,
+    "Alpha Component" : 1,
+    "Green Component" : 0.32549019607843138
   },
   "Use Bold Font" : true,
   "Silence Bell" : false,
   "Ansi 12 Color" : {
-    "Green Component" : "0.6235294",
-    "Blue Component" : "0.8117647",
-    "Red Component" : "0.4470588"
+    "Red Component" : 0.48627450980392156,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.90196078431372551,
+    "Alpha Component" : 1,
+    "Green Component" : 0.69019607843137254
   },
   "Window Type" : 12,
   "Use Bright Bold" : true,
@@ -668,9 +680,11 @@
   "Guid" : "4F0BD879-0A6D-4B8D-8F5E-CEC82C21948A",
   "Idle Code" : 0,
   "Ansi 10 Color" : {
-    "Green Component" : "0.8862745",
-    "Blue Component" : "0.2039216",
-    "Red Component" : "0.5411764999999999"
+    "Red Component" : 0.59607843137254901,
+    "Color Space" : "sRGB",
+    "Blue Component" : 0.25882352941176473,
+    "Alpha Component" : 1,
+    "Green Component" : 0.8901960784313725
   },
   "Ansi 8 Color" : {
     "Green Component" : "0.3411765",
