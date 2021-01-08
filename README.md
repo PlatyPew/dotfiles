@@ -5,7 +5,7 @@
     <img src="https://gitlab.com/PlatyPew/dotfiles/badges/master/pipeline.svg"/>
     <br/>
     <img src="https://img.shields.io/badge/license-MIT-green.svg"/>
-    <img src="https://img.shields.io/badge/macOS-10.15.3-blue.svg"/>
+    <img src="https://img.shields.io/badge/macOS-11.1-blue.svg"/>
     <br/>
     <h1>Platy's MacOS Dotfiles</h1>
     <p>These dotfiles are used to transform a vanilla system, into one that is loaded with all the tools a developer could possibly have. Everything can be installed with a couple of commands away.</p>
