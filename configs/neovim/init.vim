@@ -19,9 +19,7 @@ Plug 'liuchengxu/space-vim-dark'                                        " Colour
 Plug 'vim-airline/vim-airline'                                          " Plugin that gives blocks on the top and bottom neovim
 Plug 'vim-airline/vim-airline-themes'                                   " Imports a library of themes for vim-arline
 Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
-Plug 'junegunn/limelight.vim', {'on': 'Limelight!!'}                    " Grey-out paragraphs the cursor is not on
 Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
-Plug 'junegunn/goyo.vim', {'on': 'Goyo'}                                " Distraction-free setting
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight',
             \ {'on': 'NERDTreeToggle'}                                  " Colours for nerd tree
@@ -38,13 +36,8 @@ Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}                     " Shows 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } , 'on': 'FZF'}        " Fuzzy finder
 Plug 'junegunn/fzf.vim', {'on': 'FZF'}
 " Auto-completion
-Plug 'shougo/neoinclude.vim',
-            \ {'for': ['javascript', 'java']}     " Completion framework for deoplete
-Plug 'shougo/deoplete.nvim', {'do': ':UpdateRemotePlugins',
-            \ 'for': ['javascript', 'java']}      " Auto-completion plugin
-" Plug 'Shougo/deoplete-clangx', {'for': ['c', 'cpp']}                    " Auto-Completion support for C/C++
-" Plug 'deoplete-plugins/deoplete-jedi', {'for': 'python'}                " Auto-Completion support for Python
-Plug 'carlitux/deoplete-ternjs', {'for': 'javascript'}                  " Auto-Completion support for Javascript
+Plug 'neovim/nvim-lspconfig'
+Plug 'nvim-lua/completion-nvim'
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -55,8 +48,6 @@ Plug 'anyakichi/vim-surround'                                           " Surrou
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'dense-analysis/ale',
-            \ {'for': ['javascript', 'java']}     " Asynchronous linting
 Plug 'majutsushi/tagbar',
             \ {'for': ['c', 'cpp', 'python', 'java'],
             \ 'on': ['TagbarToggle', 'TagbarOpen']}                     " Shows tags while programming
@@ -69,8 +60,6 @@ Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
-Plug 'neovim/nvim-lspconfig'
-Plug 'nvim-lua/completion-nvim'
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -205,16 +194,6 @@ let g:airline#extensions#tabline#enabled = 1
 """ End Of Vim-Airline Configurations -----------------------------------------
 
 
-""" Limelight Configurations --------------------------------------------------
-"" Mappings
-" Activate Limelight   \l
-nmap <leader>l :Limelight!!<CR>
-
-"" Colour
-let g:limelight_conceal_ctermfg = 254
-""" End Of Limelight Configurations -------------------------------------------
-
-
 """ Rainbow Parentheses Configurations ----------------------------------------
 "" Mappings
 " Activate Rainbow Parentheses    \r
@@ -229,13 +208,6 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 let g:rainbow#blacklist = ['foreground', '#d1951d']
 """ End Of Rainbow Parentheses Configurations ---------------------------------
-
-
-""" Goyo Configurations -------------------------------------------------------
-"" Mappings
-" Activate Goyo    \G
-nmap <leader>G :Goyo <bar> :highlight clear Comment <CR> :highlight Comment cterm=italic ctermfg=8<CR>
-""" End Of Goyo Configurations ------------------------------------------------
 
 
 """ Git Gutter Configurations -------------------------------------------------
@@ -316,40 +288,38 @@ highlight LspDiagnosticsDefaultError ctermfg=9
 highlight LspDiagnosticsDefaultWarning ctermfg=3
 
 "" Mappings
-" Activate deoplete    \d
-nmap <leader>d :call deoplete#toggle()<CR>
 " Go down    Tab
 inoremap <silent><expr><tab>  pumvisible() ? "\<C-n>" : "\<tab>"
 " Go up      Shift-Tab
 inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 
 "" Settings
-let g:deoplete#enable_at_startup = 0
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 let g:completion_sorting = "length"
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
-" JS
-let g:tern_request_timeout = 1
-let g:tern_request_timeout = 6000
-let g:deoplete#sources#ternjs#types = 1
-let g:deoplete#sources#ternjs#depths = 1
-augroup multithread
-    autocmd!
-    autocmd FileType javascript call deoplete#custom#option('num_processes', 4)
-augroup END
 
 " LSP settings
 lua <<EOF
     local lspconfig = require'lspconfig'
     lspconfig.clangd.setup{
         on_attach = require'completion'.on_attach,
-        cmd = {"/usr/local/opt/llvm/bin/clangd", "--clang-tidy"}
+        cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index" }
     }
 
     lspconfig.pyls.setup{
         on_attach = require'completion'.on_attach,
-        cmd = {"/usr/local/bin/pyls"}
+        cmd = {"pyls"}
+    }
+
+    lspconfig.tsserver.setup{
+        on_attach = require'completion'.on_attach,
+        cmd = {"typescript-language-server", "--stdio"}
+    }
+
+    lspconfig.bashls.setup{
+        on_attach = require'completion'.on_attach,
+        cmd = {"bash-language-server", "start"}
     }
 EOF
 """ End Of LSP Configurations -------------------------------------------------
@@ -364,24 +334,6 @@ nnoremap <silent> <leader>gb :Gblame<CR>
 " Show git diff      Tab
 nnoremap <silent> <leader>gd :Gdiff<CR>
 """ End Of Vim Fugitive Configurations ----------------------------------------
-
-
-""" ALE Configurations --------------------------------------------------------
-"" Mappings
-" Activate ALE    \a
-nmap <leader>a :ALEToggle<CR>
-
-"" Settings
-let g:ale_enabled = 0
-let g:ale_echo_msg_format = '[%linter%] %s'
-let g:ale_c_clang_options = '-std=c18 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
-let g:ale_c_clangtidy_executable = '/usr/local/opt/llvm/bin/clang-tidy'
-let g:ale_c_flawfinder_minlevel = 3
-let g:ale_cpp_clang_options = '-std=c++17 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
-let g:airline#extensions#ale#enabled = 1
-let g:ale_sign_error = ''
-let g:ale_sign_warning = ''
-""" End Of ALE Configurations -------------------------------------------------
 
 
 """ Undo Tree Configurations --------------------------------------------------
@@ -409,28 +361,6 @@ let g:livedown_open = 1
 let g:livedown_port = 1337
 let g:livedown_browser = 'Brave'
 """ End Of Livedown Configurations --------------------------------------------
-
-""" Multiple Cursors Configurations -------------------------------------------
-"" Functions
-" Disable Deoplete when selecting multiple cursors starts
-function! Multiple_cursors_before()
-    if exists('*deoplete#disable')
-        exe 'call deoplete#disable()'
-    elseif exists(':NeoCompleteLock') == 2
-        exe 'NeoCompleteLock'
-    endif
-endfunction
-
-" Enable Deoplete when selecting multiple cursors ends
-function! Multiple_cursors_after()
-    if exists('*deoplete#toggle')
-        exe 'call deoplete#toggle()'
-    elseif exists(':NeoCompleteUnlock') == 2
-        exe 'NeoCompleteUnlock'
-    endif
-endfunction
-""" End Of Multiple Cursors Configurations ------------------------------------
-
 
 """ Autopairs Configurations --------------------------------------------------
 "" Settings
@@ -609,8 +539,6 @@ function ToggleIDE()
             autocmd WinEnter * stopinsert
         augroup END
         silent execute('q')
-        silent execute('ALEDisable')
-        silent call deoplete#disable()
         let s:ide = 0
     else
         silent execute('NERDTreeToggle')
@@ -628,8 +556,6 @@ function ToggleIDE()
         silent execute("norm \<C-l>")
         silent execute('vertical resize -8')
         silent execute("norm \<C-h>")
-        silent execute('ALEEnable')
-        silent call deoplete#enable()
         let s:ide = 1
     endif
 endfunction

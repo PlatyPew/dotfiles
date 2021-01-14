@@ -7,7 +7,6 @@ curl
 entr
 exa
 figlet
-flawfinder
 fzf
 gawk
 git

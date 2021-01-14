@@ -1,7 +1,6 @@
+bash-language-server
 esctags
-eslint
-eslint-config-google
 livedown
 npm
 speed-test
-tern
+typescript-language-server
