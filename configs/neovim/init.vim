@@ -304,7 +304,7 @@ lua <<EOF
     local lspconfig = require'lspconfig'
     lspconfig.clangd.setup{
         on_attach = require'completion'.on_attach,
-        cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index" }
+        cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" }
     }
 
     lspconfig.pyls.setup{
@@ -322,6 +322,21 @@ lua <<EOF
         cmd = {"bash-language-server", "start"}
     }
 EOF
+
+augroup lspmappings
+    autocmd!
+    autocmd FileType c,cpp,python,javascript,java call SetLSPMappings()
+augroup END
+
+function SetLSPMappings()
+    nmap gd :lua vim.lsp.buf.definition()<CR>
+    nmap gh :lua vim.lsp.buf.hover()<CR>
+    nmap gr :lua vim.lsp.buf.references()<CR>
+    nmap gi :lua vim.lsp.buf.implementation()<CR>
+    nmap gi :lua vim.lsp.buf.implementation()<CR>
+    nmap gR :lua vim.lsp.buf.rename()<CR>
+    nmap g= :lua vim.lsp.buf.formatting()<CR>
+endfunction
 """ End Of LSP Configurations -------------------------------------------------
 
 
