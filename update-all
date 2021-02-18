@@ -1,8 +1,13 @@
 #!/usr/bin/env bash
+brew uninstall neovim luajit
+brew install --HEAD --build-from-source neovim luajit
+brew install $(cat packagelist/brewformulae.txt)
 brew update && brew outdated && brew upgrade && brew cleanup
 brew reinstall $(brew outdated --cask) && brew cleanup
+brew autoremove
 npm update -g
 pip3 install --upgrade `pip3 freeze | cut -d '=' -f 1`
 git -C ~/.oh-my-zsh fetch --all && git -C ~/.oh-my-zsh pull --all --rebase
 git -C ~/.oh-my-zsh/custom/themes/powerlevel10k fetch --all && git -C ~/.oh-my-zsh/custom/themes/powerlevel10k pull --all --rebase
-nvim -c ':PlugUpdate' -c ':qall'
+nvim -c ':PlugUpdate' -c ':PlugUpgrade' -c ':qall' update.c
+rm -rf ~/.npm ~/Library/Caches/pip `brew --cache`

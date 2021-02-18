@@ -358,7 +358,6 @@ alias ls='exa --git'
 alias cat='bat'
 alias sed='gsed'
 alias awk='gawk'
-alias bar='brew bundle dump && brew bundle --force cleanup && rm Brewfile'
 alias ql='quick-look'
 ############################################################
 
