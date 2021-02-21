@@ -298,6 +298,7 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 let g:completion_sorting = "length"
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+let g:completion_confirm_key = ""
 
 " LSP settings
 lua <<EOF
@@ -309,17 +310,17 @@ lua <<EOF
 
     lspconfig.pyls.setup{
         on_attach = require'completion'.on_attach,
-        cmd = {"pyls"}
+        cmd = { "pyls" }
     }
 
     lspconfig.tsserver.setup{
         on_attach = require'completion'.on_attach,
-        cmd = {"typescript-language-server", "--stdio"}
+        cmd = { "typescript-language-server", "--stdio" }
     }
 
     lspconfig.bashls.setup{
         on_attach = require'completion'.on_attach,
-        cmd = {"bash-language-server", "start"}
+        cmd = { "bash-language-server", "start" }
     }
 EOF
 
