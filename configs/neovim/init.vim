@@ -25,6 +25,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight',
             \ {'on': 'NERDTreeToggle'}                                  " Colours for nerd tree
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}             " Better syntax parser
+Plug 'machakann/vim-highlightedyank'
 
 "" Functionalities
 " Git
@@ -185,6 +186,15 @@ nnoremap <leader>bq :bdelete<CR>
 """ End Of Vanilla Rebindings -------------------------------------------------
 
 
+""" Highlighted Yank Configurations -------------------------------------------
+"" Colours
+highlight HighlightedyankRegion cterm=reverse
+
+"" Settings
+let g:highlightedyank_highlight_duration = -1
+""" End Of Highlighted Yank Configurations ------------------------------------
+
+
 """ Vim-Airline Configurations ------------------------------------------------
 let g:airline_powerline_fonts = 1
 let g:airline_section_warning = ''
@@ -332,8 +342,7 @@ augroup END
 function SetLSPMappings()
     nmap gd :lua vim.lsp.buf.definition()<CR>
     nmap gh :lua vim.lsp.buf.hover()<CR>
-    nmap gr :lua vim.lsp.buf.references()<CR>
-    nmap gi :lua vim.lsp.buf.implementation()<CR>
+    nmap gre :lua vim.lsp.buf.references()<CR>
     nmap gi :lua vim.lsp.buf.implementation()<CR>
     nmap gR :lua vim.lsp.buf.rename()<CR>
     nmap g= :lua vim.lsp.buf.formatting()<CR>
