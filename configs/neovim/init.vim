@@ -61,6 +61,9 @@ Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
+Plug 'sbdchd/neoformat',
+            \ {'for': ['c', 'cpp', 'python', 'javascript'],
+            \ 'on': 'Neoformat'}                                        " Auto formatter
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -345,7 +348,6 @@ function SetLSPMappings()
     nmap gre :lua vim.lsp.buf.references()<CR>
     nmap gi :lua vim.lsp.buf.implementation()<CR>
     nmap gR :lua vim.lsp.buf.rename()<CR>
-    nmap g= :lua vim.lsp.buf.formatting()<CR>
 endfunction
 """ End Of LSP Configurations -------------------------------------------------
 
@@ -489,6 +491,30 @@ nmap <leader>Ij :call JoinInstantSession()<CR>
 nmap <leader>Iq :call StopInstantSession()<CR>
 nmap <leader>IQ :call StopInstantServer()<CR>
 """ End of Instant  -----------------------------------------------------------
+
+
+""" Neoformat Settings --------------------------------------------------------
+"" Mappings
+" Format code
+nnoremap <silent> g= :Neoformat <CR>
+
+"" Settings
+" Clang-format
+let g:neoformat_c_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['--style="{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100}"']
+\}
+let g:neoformat_cpp_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['--style="{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100}"']
+\}
+
+" Yapf
+let g:neoformat_python_yapf = {
+    \ 'exe': 'yapf',
+    \ 'args': ['--style="{column_limit: 100}"']
+\}
+""" End of Neoformat Settings -------------------------------------------------
 
 
 """ Vanilla Terminal Support --------------------------------------------------
