@@ -1,3 +1,4 @@
+altserver
 appcleaner
 brave-browser
 discord
@@ -8,7 +9,6 @@ gimp
 google-backup-and-sync
 iterm2-beta
 keycastr
-lmms
 ngrok
 onyx
 rectangle
@@ -18,4 +18,3 @@ vmware-fusion
 wireshark
 wkhtmltopdf
 wpsoffice
-xquartz
