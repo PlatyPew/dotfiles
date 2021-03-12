@@ -514,6 +514,13 @@ let g:neoformat_python_yapf = {
     \ 'exe': 'yapf',
     \ 'args': ['--style="{column_limit: 100}"']
 \}
+
+" Prettier
+let g:neoformat_javascript_prettier = {
+    \ 'exe': 'prettier',
+    \ 'args': ['--stdin-filepath', '"%:p"', '--tab-width=4', '--print-width=100'],
+    \ 'stdin': 1,
+\}
 """ End of Neoformat Settings -------------------------------------------------
 
 
