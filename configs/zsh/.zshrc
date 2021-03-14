@@ -413,6 +413,15 @@ done
 export PATH="/usr/local/opt/llvm/bin:$PATH"
 ############################################################
 
+## Fix git completion ######################################
+FILE=/usr/local/share/zsh/site-functions/git-completion.bash
+if [[ -f $FILE ]]
+then
+    rm -f $FILE
+    rm -rf /usr/local/share/zsh/site-functions/_git
+fi
+############################################################
+
 ## Additional stuff ########################################
 source $HOME/.zsh_profile
 ############################################################

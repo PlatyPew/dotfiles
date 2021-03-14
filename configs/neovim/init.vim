@@ -49,12 +49,6 @@ Plug 'anyakichi/vim-surround'                                           " Surrou
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'majutsushi/tagbar',
-            \ {'for': ['c', 'cpp', 'python', 'java'],
-            \ 'on': ['TagbarToggle', 'TagbarOpen']}                     " Shows tags while programming
-Plug 'hushicai/tagbar-javascript.vim',
-            \ {'for': 'javascript',
-            \ 'on': ['TagbarToggle', 'TagbarOpen']}                     " Shows tags for javascript
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
 Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
             \ 'for': ['c', 'cpp', 'python', 'javascript', 'java']}      " Documentation Generator
@@ -339,7 +333,7 @@ EOF
 
 augroup lspmappings
     autocmd!
-    autocmd FileType c,cpp,python,javascript,java call SetLSPMappings()
+    autocmd FileType c,cpp,python,javascript call SetLSPMappings()
 augroup END
 
 function SetLSPMappings()
@@ -590,7 +584,6 @@ function ToggleIDE()
         silent execute("norm \<C-h>")
         silent execute('vertical resize +6')
         silent execute('NERDTreeToggle')
-        silent execute('TagbarClose')
         silent execute("norm \<C-j>")
         augroup stop_insertmode
             autocmd!
@@ -610,10 +603,6 @@ function ToggleIDE()
             autocmd WinEnter term://* startinsert
         augroup END
         silent execute("norm \<C-k>")
-        silent execute('TagbarOpen')
-        silent execute("norm \<C-l>")
-        silent execute('vertical resize -8')
-        silent execute("norm \<C-h>")
         let s:ide = 1
     endif
 endfunction
