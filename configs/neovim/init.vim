@@ -315,9 +315,9 @@ lua <<EOF
         cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" }
     }
 
-    lspconfig.pyls.setup{
+    lspconfig.jedi_language_server.setup{
         on_attach = require'completion'.on_attach,
-        cmd = { "pyls" }
+        cmd = { "jedi-language-server" }
     }
 
     lspconfig.tsserver.setup{

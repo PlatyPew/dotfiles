@@ -1,4 +1,4 @@
 neovim
-python-language-server
+jedi-language-server
 tuir
 virtualenv
