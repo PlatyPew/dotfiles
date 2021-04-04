@@ -458,8 +458,8 @@ let g:instant_username = trim(system('whoami'))
 
 function StartInstantSession()
     let port = input('Server Port: ')
-    silent execute('InstantStartServer 127.0.0.1 ' . port)
-    silent execute('InstantStartSession 127.0.0.1 ' . port)
+    silent execute('InstantStartServer 0.0.0.0 ' . port)
+    silent execute('InstantStartSession 0.0.0.0 ' . port)
     execute('InstantStatus')
 endfunction
 
