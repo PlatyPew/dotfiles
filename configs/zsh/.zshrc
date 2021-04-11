@@ -82,12 +82,15 @@ POWERLEVEL9K_DIR_SHOW_WRITABLE="true"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv user dir vcs newline os_icon prompt_char_joined)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     background_jobs
-    java_version
-    node_version
-    custom_python_version
-    custom_nvim_version
+
     custom_docker_version
     custom_git_version
+    custom_nvim_version
+    custom_python2_version
+    custom_python_version
+    java_version
+    node_version
+
     date
     time_joined
     battery
@@ -108,10 +111,16 @@ POWERLEVEL9K_NODE_VERSION_BACKGROUND=""
 POWERLEVEL9K_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
 POWERLEVEL9K_CUSTOM_PYTHON_VERSION="echo \"$(python3 -V | cut -d ' ' -f 2) \""
-POWERLEVEL9K_CUSTOM_PYTHON_VERSION_SHOW_ON_COMMAND="python|python3|pip|pip3"
+POWERLEVEL9K_CUSTOM_PYTHON_VERSION_SHOW_ON_COMMAND="python3|pip3"
 POWERLEVEL9K_CUSTOM_PYTHON_VERSION_FOREGROUND="4"
 POWERLEVEL9K_CUSTOM_PYTHON_VERSION_BACKGROUND=""
 POWERLEVEL9K_CUSTOM_PYTHON_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+POWERLEVEL9K_CUSTOM_PYTHON2_VERSION="echo \"$(python2 -V 2>&1 | cut -d ' ' -f 2) \""
+POWERLEVEL9K_CUSTOM_PYTHON2_VERSION_SHOW_ON_COMMAND="python2|pip2"
+POWERLEVEL9K_CUSTOM_PYTHON2_VERSION_FOREGROUND="4"
+POWERLEVEL9K_CUSTOM_PYTHON2_VERSION_BACKGROUND=""
+POWERLEVEL9K_CUSTOM_PYTHON2_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
 POWERLEVEL9K_CUSTOM_NVIM_VERSION="echo \"$(nvim --version | cut -d ' ' -f 2 | head -n 1) \""
 POWERLEVEL9K_CUSTOM_NVIM_VERSION_SHOW_ON_COMMAND="nvim"
