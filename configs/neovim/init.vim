@@ -365,7 +365,7 @@ nmap <Tab> :UndotreeToggle<CR>
 "" Settings
 " Loads persistent undo tree to ~/.cache
 if has('persistent_undo')
-    set undodir=~/.cache/undotree
+    set undodir=~/.cache/nvim/undotree
     set undofile
 endif
 """ End Of UndoTree Configurations --------------------------------------------
