@@ -41,6 +41,8 @@ fi
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 ZSH_DISABLE_COMPFIX="true"
 
+DISABLE_AUTO_UPDATE="true"
+
 # Plugins ####################################################
 plugins=(
     autojump
