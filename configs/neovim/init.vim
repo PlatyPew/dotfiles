@@ -515,6 +515,12 @@ let g:neoformat_javascript_prettier = {
     \ 'args': ['--stdin-filepath', '"%:p"', '--tab-width=4', '--print-width=100'],
     \ 'stdin': 1,
 \}
+
+let g:neoformat_vue_prettier = {
+    \ 'exe': 'prettier',
+    \ 'args': ['--stdin-filepath', '"%:p"', '--tab-width=4', '--print-width=100', '--vue-indent-script-and-style'],
+    \ 'stdin': 1,
+\}
 """ End of Neoformat Settings -------------------------------------------------
 
 
