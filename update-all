@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
-brew uninstall neovim
-brew install neovim --HEAD
-brew install $(cat packagelist/brewformulae.txt)
+# brew install $(cat packagelist/brewformulae.txt)
 brew update && brew outdated && brew upgrade && brew cleanup
 brew reinstall $(brew outdated --cask) && brew cleanup
 brew autoremove
