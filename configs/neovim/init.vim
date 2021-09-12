@@ -39,10 +39,11 @@ Plug 'junegunn/fzf.vim', {'on': 'FZF'}
 " Auto-completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 "More efficient (lazy) plugins
 Plug 'terryma/vim-multiple-cursors'                                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
-Plug 'shime/vim-livedown', {'for': 'md', 'on': 'LivedownToggle'}        " Live preview of markdown in browser
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'preservim/nerdcommenter'                                          " Easy commenting
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
@@ -107,6 +108,7 @@ augroup spell_check
     autocmd!
     autocmd FileType text,markdown setlocal spell
 augroup END
+let g:tex_flavor = 'latex'
 let g:clipboard = {
   \ 'name': 'pbcopy',
   \ 'copy': {
@@ -312,22 +314,37 @@ lua <<EOF
     local lspconfig = require'lspconfig'
     lspconfig.clangd.setup{
         on_attach = require'completion'.on_attach,
-        cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" }
+        cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" },
+        flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.jedi_language_server.setup{
         on_attach = require'completion'.on_attach,
-        cmd = { "jedi-language-server" }
+        cmd = { "jedi-language-server" },
+        flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.tsserver.setup{
         on_attach = require'completion'.on_attach,
-        cmd = { "typescript-language-server", "--stdio" }
+        cmd = { "typescript-language-server", "--stdio" },
+        flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.bashls.setup{
         on_attach = require'completion'.on_attach,
-        cmd = { "bash-language-server", "start" }
+        cmd = { "bash-language-server", "start" },
+        flags = { debounce_text_changes = 500 },
+    }
+
+    lspconfig.texlab.setup{
+        on_attach = require'completion'.on_attach,
+        cmd = { "texlab" },
+        flags = { debounce_text_changes = 500 },
+        settings = { texlab = { build = {
+            args = { "-halt-on-error", "%f" },
+            executable = "pdflatex",
+            onSave = true,
+        }, }, },
     }
 EOF
 
@@ -344,6 +361,12 @@ function SetLSPMappings()
     nmap gR :lua vim.lsp.buf.rename()<CR>
 endfunction
 """ End Of LSP Configurations -------------------------------------------------
+
+
+""" Ultisnips Configurations ---------------------------------------------------------
+let g:UltiSnipsExpandTrigger="<C-space>"
+nnoremap <silent><C-u> :Snippets<CR>
+""" End of Ultisnips Configurations --------------------------------------------------
 
 
 """ Vim Fugitive Configurations -----------------------------------------------
@@ -370,18 +393,6 @@ if has('persistent_undo')
 endif
 """ End Of UndoTree Configurations --------------------------------------------
 
-
-""" Livedown Configurations ---------------------------------------------------
-"" Mappings
-" Activate Livedown    \L
-nmap <leader>L :LivedownToggle<CR>
-
-"" Settings
-let g:livedown_autorun = 0
-let g:livedown_open = 1
-let g:livedown_port = 1337
-let g:livedown_browser = 'Brave'
-""" End Of Livedown Configurations --------------------------------------------
 
 """ Autopairs Configurations --------------------------------------------------
 "" Settings

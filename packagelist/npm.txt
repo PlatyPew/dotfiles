@@ -1,6 +1,6 @@
 bash-language-server
 esctags
-livedown
 npm
 speed-test
 typescript-language-server
+typescript

@@ -1,4 +1,3 @@
-anime-downloader
 autojump
 bat
 bettercap
@@ -15,6 +14,7 @@ gnu-sed
 gnupg
 k3d
 lastpass-cli
+libmpc
 llvm
 lolcat
 lua
@@ -29,8 +29,8 @@ prettier
 pypy3
 ripgrep
 telegram-cli
+texlab
 tmux
-unrar
 wakeonlan
 watch
 wget
