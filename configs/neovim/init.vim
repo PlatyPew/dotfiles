@@ -35,7 +35,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
 " File finding
 Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}                     " Shows file tree
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } , 'on': 'FZF'}        " Fuzzy finder
-Plug 'junegunn/fzf.vim', {'on': 'FZF'}
+Plug 'junegunn/fzf.vim'
 " Auto-completion
 Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
@@ -364,8 +364,8 @@ endfunction
 
 
 """ Ultisnips Configurations ---------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<C-space>"
-nnoremap <silent><C-u> :Snippets<CR>
+let g:UltiSnipsExpandTrigger="<c-space>"
+nnoremap <silent><c-u> :Snippets<CR>
 """ End of Ultisnips Configurations --------------------------------------------------
 
 
@@ -399,6 +399,11 @@ endif
 augroup quote_pair
     autocmd!
     autocmd FileType vim :let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'", "`":"`", '```':'```', "'''":"'''"}
+augroup END
+
+augroup quote_pair
+    autocmd!
+    autocmd FileType tex :let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"'", "``":"''", '$':'$'}
 augroup END
 """ End Of Autopairs Configurations -------------------------------------------
 
