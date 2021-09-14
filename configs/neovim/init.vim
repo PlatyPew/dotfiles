@@ -59,6 +59,7 @@ Plug 'jbyuki/instant.nvim',
 Plug 'sbdchd/neoformat',
             \ {'for': ['c', 'cpp', 'python', 'javascript'],
             \ 'on': 'Neoformat'}                                        " Auto formatter
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -364,8 +365,8 @@ endfunction
 
 
 """ Ultisnips Configurations ---------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<c-space>"
-nnoremap <silent><c-u> :Snippets<CR>
+let g:UltiSnipsExpandTrigger="<C-n>"
+nnoremap <silent><C-u> :Snippets<CR>
 """ End of Ultisnips Configurations --------------------------------------------------
 
 
@@ -399,10 +400,6 @@ endif
 augroup quote_pair
     autocmd!
     autocmd FileType vim :let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'", "`":"`", '```':'```', "'''":"'''"}
-augroup END
-
-augroup quote_pair
-    autocmd!
     autocmd FileType tex :let g:AutoPairs = {'(':')', '[':']', '{':'}', "`":"'", "``":"''", '$':'$'}
 augroup END
 """ End Of Autopairs Configurations -------------------------------------------
@@ -441,6 +438,7 @@ require'nvim-treesitter.configs'.setup {
      highlight = {
           enable = true,
           disable = {},
+          additional_vim_regex_highlighting = true,
      },
      refactor = {
           highlight_definitions = { enable = true },
@@ -538,6 +536,14 @@ let g:neoformat_vue_prettier = {
     \ 'stdin': 1,
 \}
 """ End of Neoformat Settings -------------------------------------------------
+
+
+""" Tex Conceal Setings -------------------------------------------------------
+set conceallevel=2
+let g:tex_conceal="abdgm"
+syntax match breakline '\\\\' conceal cchar=⏎
+highlight clear Conceal
+""" End of Tex Conceal Setings ------------------------------------------------
 
 
 """ Vanilla Terminal Support --------------------------------------------------
