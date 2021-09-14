@@ -104,10 +104,11 @@ set splitright                                                          " Set ve
 set splitbelow
 call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
 set noshowmode
-set spelllang=en
+set spelllang=en_gb
 augroup spell_check
     autocmd!
-    autocmd FileType text,markdown setlocal spell
+    autocmd FileType text,markdown,tex setlocal spell
+    autocmd FileType text,markdown,tex highlight clear ColorColumn
 augroup END
 let g:tex_flavor = 'latex'
 let g:clipboard = {
@@ -541,7 +542,7 @@ let g:neoformat_vue_prettier = {
 """ Tex Conceal Setings -------------------------------------------------------
 set conceallevel=2
 let g:tex_conceal="abdgm"
-syntax match breakline '\\\\' conceal cchar=⏎
+let g:tex_conceal_frac=1
 highlight clear Conceal
 """ End of Tex Conceal Setings ------------------------------------------------
 
