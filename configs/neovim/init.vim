@@ -329,6 +329,7 @@ lua <<EOF
     lspconfig.tsserver.setup{
         on_attach = require'completion'.on_attach,
         cmd = { "typescript-language-server", "--stdio" },
+        root_dir = require'lspconfig/util'.path.dirname,
         flags = { debounce_text_changes = 500 },
     }
 
