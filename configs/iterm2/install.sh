@@ -2,5 +2,5 @@
 
 # Install packages
 brew tap homebrew/cask-fonts
-brew cask install iterm2-beta homebrew/cask-fonts/font-inconsolata-nerd-font
+brew install --cask homebrew/cask-fonts/font-iosevka-nerd-font
 brew untap homebrew/cask-fonts

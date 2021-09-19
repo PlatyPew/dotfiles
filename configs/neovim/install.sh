@@ -1,6 +1,5 @@
 # Installs packages
-brew install npm python3 ctags-exuberant
-brew install --HEAD --build-from-source neovim
+brew install npm python3 ctags-exuberant neovim
 python3 -m pip install neovim python-language-server
 npm install -g bash-language-server
 
