@@ -1,9 +1,13 @@
 before_script:
     - sudo spctl --master-disable
-    - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    - echo "font-inconsolata-nerd-font" > packagelist/brewcask.txt
+    - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 install:
+    rules:
+        - if: $CI_COMMIT_BRANCH == 'master'
+          when: always
+        - if: $CI_COMMIT_BRANCH != 'master'
+          when: never
     script:
         - ./install-standalone git
         - ./install-standalone iterm2
