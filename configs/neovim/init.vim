@@ -434,13 +434,6 @@ augroup END
 """ End Of Autopairs Configurations -------------------------------------------
 
 
-""" Tagbar Configurations -----------------------------------------------------
-"" Mappings
-" Activate Tabar    Shift-Tab
-nmap <S-Tab> :TagbarToggle<CR>
-""" End Of Tagbar Configurations ----------------------------------------------
-
-
 """ Nerd Commenter Configurations ---------------------------------------------
 "" Settings
 let g:NERDSpaceDelims = 1                      " Add spaces after comment delimiters by default
