@@ -25,7 +25,7 @@ Plug 'tiagofumo/vim-nerdtree-syntax-highlight',
             \ {'on': 'NERDTreeToggle'}                                  " Colours for nerd tree
 Plug 'onsails/lspkind-nvim'
 " Syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}             " Better syntax parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
 Plug 'machakann/vim-highlightedyank'
 
 "" Functionalities
@@ -186,6 +186,21 @@ nnoremap <leader>bj :if &modifiable && !&readonly && &modified <CR> :write<CR> :
 nnoremap <leader>bk :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>
 nnoremap <leader>bl :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>
 nnoremap <leader>bq :bdelete<CR>
+
+"" Capital Y now actually makes sense
+nnoremap Y yg_
+
+"" Stops cursor from flying everywhere
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+"" Better undo breakpoints
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+
+"" Move stuff in visual mode
+vnoremap J :m '>+1'<CR>gv=gv
+vnoremap K :m '<-2'<CR>gv=gv
 """ End Of Vanilla Rebindings -------------------------------------------------
 
 
