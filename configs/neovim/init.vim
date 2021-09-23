@@ -42,6 +42,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
 "More efficient (lazy) plugins
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
 Plug 'jiangmiao/auto-pairs'                                             " Insert/delete brackets/quotes in pairs
@@ -382,6 +383,8 @@ lua <<EOF
         with_text = true,
         preset = 'default',
     })
+
+    require'lspsaga'.init_lsp_saga()
 EOF
 
 augroup lspmappings
@@ -390,11 +393,10 @@ augroup lspmappings
 augroup END
 
 function SetLSPMappings()
-    nmap gd :lua vim.lsp.buf.definition()<CR>
-    nmap gh :lua vim.lsp.buf.hover()<CR>
-    nmap gre :lua vim.lsp.buf.references()<CR>
-    nmap gi :lua vim.lsp.buf.implementation()<CR>
-    nmap gR :lua vim.lsp.buf.rename()<CR>
+    nmap gd :Lspsaga preview_definition<CR>
+    nmap gh :Lspsaga hover_doc<CR>
+    nmap gre :Lspsaga lsp_finder<CR>
+    nmap gR :Lspsaga rename<CR>
 endfunction
 """ End Of LSP Configurations -------------------------------------------------
 
