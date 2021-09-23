@@ -3,7 +3,6 @@ bat
 bettercap
 bfg
 bitwarden-cli
-ctags
 entr
 exa
 figlet

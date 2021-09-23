@@ -308,39 +308,43 @@ inoremap <silent><expr><s-tab> pumvisible() ? "\<C-p>" : "\<s-tab>"
 set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 let g:completion_sorting = "length"
-let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
+let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy']
 let g:completion_confirm_key = ""
 
 " LSP settings
 lua <<EOF
     local lspconfig = require'lspconfig'
+    local util = require'lspconfig/util'
+    local completion = require'completion'
+
     lspconfig.clangd.setup{
-        on_attach = require'completion'.on_attach,
+        on_attach = completion.on_attach,
         cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" },
         flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.jedi_language_server.setup{
-        on_attach = require'completion'.on_attach,
+        on_attach = completion.on_attach,
         cmd = { "jedi-language-server" },
         flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.tsserver.setup{
-        on_attach = require'completion'.on_attach,
+        on_attach = completion.on_attach,
         cmd = { "typescript-language-server", "--stdio" },
-        root_dir = require'lspconfig/util'.path.dirname,
+        root_dir = util.path.dirname,
         flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.bashls.setup{
-        on_attach = require'completion'.on_attach,
+        on_attach = completion.on_attach,
         cmd = { "bash-language-server", "start" },
+        root_dir = util.path.dirname,
         flags = { debounce_text_changes = 500 },
     }
 
     lspconfig.texlab.setup{
-        on_attach = require'completion'.on_attach,
+        on_attach = completion.on_attach,
         cmd = { "texlab" },
         flags = { debounce_text_changes = 500 },
         settings = { texlab = { build = {
@@ -349,11 +353,34 @@ lua <<EOF
             onSave = true,
         }, }, },
     }
+
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+    local general_on_attach = function(client, bufnr)
+        if client.resolved_capabilities.completion then
+            completion.on_attach(client, bufnr)
+        end
+    end
+
+    lspconfig.html.setup {
+        capabilities = capabilities,
+        on_attach = general_on_attach,
+        cmd = { "vscode-html-language-server", "--stdio" },
+        flags = { debounce_text_changes = 500 },
+    }
+
+    lspconfig.cssls.setup {
+        capabilities = capabilities,
+        on_attach = general_on_attach,
+        cmd = { "vscode-css-language-server", "--stdio" },
+        flags = { debounce_text_changes = 500 },
+    }
 EOF
 
 augroup lspmappings
     autocmd!
-    autocmd FileType c,cpp,python,javascript call SetLSPMappings()
+    autocmd FileType c,cpp,python,javascript,html,css,sh call SetLSPMappings()
 augroup END
 
 function SetLSPMappings()
