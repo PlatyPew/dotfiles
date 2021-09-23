@@ -23,6 +23,7 @@ Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds r
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight',
             \ {'on': 'NERDTreeToggle'}                                  " Colours for nerd tree
+Plug 'onsails/lspkind-nvim'
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}             " Better syntax parser
 Plug 'machakann/vim-highlightedyank'
@@ -376,6 +377,11 @@ lua <<EOF
         cmd = { "vscode-css-language-server", "--stdio" },
         flags = { debounce_text_changes = 500 },
     }
+
+    require('lspkind').init({
+        with_text = true,
+        preset = 'default',
+    })
 EOF
 
 augroup lspmappings
