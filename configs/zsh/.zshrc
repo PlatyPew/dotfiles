@@ -318,7 +318,7 @@ ide() {
 
 # List directories when directory is changed
 chpwd() {
-    ls -a
+    exa -a --icons
 }
 
 ## FZF functions ###########################################
@@ -437,7 +437,7 @@ alias vi="nvim -O"
 alias :q='exit'
 alias cls='clear'
 alias speed='speed-test -v'
-alias ls='exa --git'
+alias ls='exa --git --icons'
 alias cat='bat'
 alias sed='gsed'
 alias awk='gawk'
