@@ -444,6 +444,12 @@ alias awk='gawk'
 alias ql='quick-look'
 ############################################################
 
+## Prevent a Darren ########################################
+alias del='trash -F'
+alias rm="echo Use \'del\' command, or the full path: /bin/rm"
+alias /bin/rm='/bin/rm -i'
+############################################################
+
 ## iTerm2 shell integration ################################
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 ############################################################

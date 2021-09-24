@@ -30,6 +30,7 @@ ripgrep
 telegram-cli
 texlab
 tmux
+trash
 wakeonlan
 watch
 wget
