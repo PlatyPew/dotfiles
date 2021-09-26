@@ -14,7 +14,7 @@ call plug#begin()                                                       " Plugin
 
 "" Aesthetics
 " Colours
-Plug 'liuchengxu/space-vim-dark'                                        " Colour Scheme SpaceVimDark
+Plug 'Pocco81/Catppuccino.nvim'
 " User Interface
 Plug 'vim-airline/vim-airline'                                          " Plugin that gives blocks on the top and bottom neovim
 Plug 'vim-airline/vim-airline-themes'                                   " Imports a library of themes for vim-arline
@@ -62,24 +62,25 @@ call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
 
 """ Plugin Colouring ----------------------------------------------------------
-"" Space Vim Dark
-let g:space_vim_dark_background = 234
+lua <<EOF
+local catppuccino = require("catppuccino")
+catppuccino.setup({
+    colorscheme = 'soft_manilo',
+    transparency = false,
+    integrations = {
+        lsp_saga = true,
+        gitgutter = true,
+    },
+})
+EOF
 """ End Of Plugin Colouring ---------------------------------------------------
 
 
 """ Vanilla Colouring ---------------------------------------------------------
 syntax on                                                               " Enable syntax highlighting
 " Enable true colours
-colorscheme space-vim-dark                                              " Set colour scheme SpaceVimDark
-set notermguicolors t_Co=256
-highlight LineNr ctermbg=NONE guibg=NONE
-highlight clear Comment
-" Set colours for comments
-highlight Comment cterm=italic ctermfg=8
-" Set colours for colour column
-highlight ColorColumn ctermfg=9 ctermbg=233
-" Set colours for constants
-highlight Constant ctermfg=215
+colorscheme catppuccino
+highlight ColorColumn guifg=#d84652 guibg=#000000
 """ End Of Vanilla Colouring --------------------------------------------------
 
 
