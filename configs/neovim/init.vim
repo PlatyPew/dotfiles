@@ -56,9 +56,16 @@ Plug 'sbdchd/neoformat',
             \ {'for': ['c', 'cpp', 'python', 'javascript'],
             \ 'on': 'Neoformat'}                                        " Auto formatter
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
+Plug 'lewis6991/impatient.nvim'
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
+
+
+""" Impatient startup ---------------------------------------------------------
+lua require('impatient')
+""" End of impatient ----------------------------------------------------------
+
 
 """ Plugin Colouring ----------------------------------------------------------
 lua <<EOF
