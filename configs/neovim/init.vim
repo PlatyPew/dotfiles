@@ -444,7 +444,17 @@ lua <<EOF
         preset = 'default',
     })
 
-    require'lspsaga'.init_lsp_saga()
+    require'lspsaga'.init_lsp_saga{
+        finder_action_keys = {
+            open = {'<CR>', 'o'}, quit = {'q', '<esc>', '<C-c>'},
+        },
+        code_action_keys = {
+            quit = {'q', '<esc>', '<C-c>'}
+        },
+        rename_action_keys = {
+            quit = {'<esc>', '<C-c>'}
+        },
+    }
 EOF
 
 augroup lspmappings
@@ -453,10 +463,11 @@ augroup lspmappings
 augroup END
 
 function SetLSPMappings()
-    nmap gd :Lspsaga preview_definition<CR>
-    nmap gh :Lspsaga hover_doc<CR>
-    nmap gre :Lspsaga lsp_finder<CR>
-    nmap gR :Lspsaga rename<CR>
+    nmap <silent>gd :Lspsaga preview_definition<CR>
+    nmap <silent>gh :Lspsaga hover_doc<CR>
+    nmap <silent>gf :Lspsaga lsp_finder<CR>
+    nmap <silent>gr :Lspsaga rename<CR>
+    nmap <silent>gc :Lspsaga code_action<CR>
 endfunction
 """ End Of LSP Configurations -------------------------------------------------
 
@@ -524,28 +535,18 @@ let g:doge_doc_standard_c = 'kernel_doc'
 "" Enable tree sitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
-     ensure_installed = "maintained",
-     highlight = {
-          enable = true,
-          disable = {},
-          additional_vim_regex_highlighting = true,
-     },
-     refactor = {
-          highlight_definitions = { enable = true },
-          smart_rename = {
-               enable = true,
-               keymaps = {
-                    smart_rename = "grr",
-               },
-          },
-          navigation = {
-               enable = true,
-               keymaps = {
-                    goto_definition = "gnd",
-                    list_definitions = "gnD",
-               },
-          },
-     },
+    ensure_installed = "maintained",
+    highlight = {
+        enable = true,
+        disable = {},
+        additional_vim_regex_highlighting = true,
+    },
+    refactor = {
+        highlight_definitions = { enable = true },
+    },
+    indent = {
+        enable = true,
+    }
 }
 
 -- Fix rainbow paretheses
@@ -555,6 +556,9 @@ hlmap.error = nil
 hlmap["punctuation.delimiter"] = "Delimiter"
 hlmap["punctuation.bracket"] = nil
 EOF
+
+"" Underline definitions
+highlight TSDefinitionUsage gui=underline
 """ End of TreeSitter ---------------------------------------------------------
 
 """ Instant Settings-----------------------------------------------------------
