@@ -16,9 +16,8 @@ call plug#begin()                                                       " Plugin
 " Colours
 Plug 'Pocco81/Catppuccino.nvim'
 " User Interface
-Plug 'vim-airline/vim-airline'                                          " Plugin that gives blocks on the top and bottom neovim
-Plug 'vim-airline/vim-airline-themes'                                   " Imports a library of themes for vim-arline
-Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
+Plug 'shadmansaleh/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
 Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'onsails/lspkind-nvim'
@@ -209,13 +208,76 @@ let g:highlightedyank_highlight_duration = -1
 """ End Of Highlighted Yank Configurations ------------------------------------
 
 
-""" Vim-Airline Configurations ------------------------------------------------
-let g:airline_powerline_fonts = 1
-let g:airline_section_warning = ''
-let g:airline_section_z = ' %{strftime("%-I:%M %p")}'
-let g:airline_theme='wombat'
-let g:airline#extensions#tabline#enabled = 1
-""" End Of Vim-Airline Configurations -----------------------------------------
+""" Lualine Configurations ----------------------------------------------------
+lua <<EOF
+require'lualine'.setup {
+    options = {
+        icons_enabled = true,
+        theme = 'catppuccino',
+        section_separators = {left = '', right = ''},
+        component_separators = {left = '', right = ''},
+    },
+    sections = {
+        lualine_a = {'mode'},
+        lualine_b = {'branch', {
+                'diff',
+                colored = false,
+            }
+        },
+        lualine_c = {'filename', 'filesize'},
+        lualine_x = {
+            'location',
+            {
+                'filetype',
+                colored = true,
+            },
+        },
+        lualine_y = {
+            {
+                'encoding',
+                padding = { left = 1, right = 0 },
+            },
+            'fileformat',
+        },
+        lualine_z = {
+            {
+                'diagnostics',
+                sources = { 'nvim_lsp' },
+                symbols = { error = ' ', warn = ' ', info = ' ' },
+                diagnostics_color = {
+                    error = {bg = "#222424", fg = "#cf637e"},
+                    warn = {bg = "#222424", fg = "#f4a261"},
+                    info = {bg = "#222424", fg = "#dbc074"},
+                }
+            },
+        },
+    },
+    inactive_sections = {
+        lualine_a = {},
+        lualine_b = {'branch', {
+                'diff',
+                colored = false,
+            }
+        },
+        lualine_c = {'filename'},
+        lualine_x = {'filetype'},
+    },
+    tabline = {
+        lualine_a = {
+            {
+                'buffers',
+                buffers_color = {
+                    inactive = {bg = '#44475a', fg = '#ffffff'},
+                },
+                padding = 0,
+            }
+        },
+        lualine_y = {function () return [[buffers]] end}
+    },
+    extensions = {'fzf', 'chadtree'},
+}
+EOF
+""" End Of Lualine Configurations ---------------------------------------------
 
 
 """ Rainbow Parentheses Configurations ----------------------------------------
