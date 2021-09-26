@@ -72,7 +72,7 @@ lua <<EOF
 local catppuccino = require("catppuccino")
 catppuccino.setup({
     colorscheme = 'soft_manilo',
-    transparency = false,
+    transparency = true,
     integrations = {
         lsp_saga = true,
         gitgutter = true,
