@@ -21,8 +21,6 @@ Plug 'vim-airline/vim-airline-themes'                                   " Import
 Plug 'ryanoasis/vim-devicons'                                           " Allows for nerdfont icons to be displayed
 Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight',
-            \ {'on': 'NERDTreeToggle'}                                  " Colours for nerd tree
 Plug 'onsails/lspkind-nvim'
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
@@ -31,10 +29,7 @@ Plug 'machakann/vim-highlightedyank'
 "" Functionalities
 " Git
 Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
-Plug 'tpope/vim-fugitive'                                               " Git wrapper
-Plug 'Xuyuanp/nerdtree-git-plugin', {'on': 'NERDTreeToggle'}
-" File finding
-Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}                     " Shows file tree
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } , 'on': 'FZF'}        " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 " Auto-completion
@@ -248,36 +243,16 @@ set updatetime=50                                                       " Update
 """ End Of Git Gutter Configurations ------------------------------------------
 
 
-""" Nerd Tree Configurations --------------------------------------------------
+""" CHADTree Configurations ---------------------------------------------------
 "" Mappings
-" Activate Nerd Tree    Ctrl-o
-nmap <C-o> :NERDTreeToggle<CR>
+" Activate CHADTree    Ctrl-o
+nmap <C-o> :CHADopen --version-ctl<CR>
 
-"" Settings
-let g:NERDTreeDirArrowExpandable = ' '                                 " Closed directory icon
-let g:NERDTreeDirArrowCollapsible = ' '                                " Opened directory icon
-let NERDTreeShowHidden = 0
-augroup nerdtree_stuff
-    autocmd!
-    autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
-
-" Highlight full name and only certain extensions
-let g:NERDTreeFileExtensionHighlightFullName = 1
-let g:NERDTreeExactMatchHighlightFullName = 1
-let g:NERDTreePatternMatchHighlightFullName = 1
-let g:NERDTreeSyntaxDisableDefaultExtensions = 1
-let g:NERDTreeSyntaxDisableDefaultExactMatches = 1
-let g:NERDTreeSyntaxDisableDefaultPatternMatches = 1
-let g:NERDTreeSyntaxEnabledExtensions = ['c', 'h', 'cpp', 'py', 'rb', 'js', 'css', 'html', 'java',
-  \ 'class', 'md']
-let g:NERDTreeSyntaxEnabledExactMatches = ['venv', 'node_modules', 'favicon.ico']
-
-" Open directories with nerdtree instead of netrw
+" Open directories with chadtree instead of netrw
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
-""" End Of Nerd Tree Configurations -------------------------------------------
+    \ execute 'CHADopen' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+""" End Of CHADTree Configurations --------------------------------------------
 
 
 """ FZF Configurations --------------------------------------------------------
@@ -644,39 +619,3 @@ function ToggleTransparentMode()
     endif
 endfunction
 """ End Of Vanilla Transparent Mode -------------------------------------------
-
-
-""" Vanilla IDE Mode ----------------------------------------------------------
-"" Mappings
-" Activate IDE mode    \i
-nmap <leader>i :call ToggleIDE()<CR>
-
-let s:ide = 0
-function ToggleIDE()
-    if s:ide
-        silent execute("norm \<C-h>")
-        silent execute('vertical resize +6')
-        silent execute('NERDTreeToggle')
-        silent execute("norm \<C-j>")
-        augroup stop_insertmode
-            autocmd!
-            autocmd WinEnter * stopinsert
-        augroup END
-        silent execute('q')
-        let s:ide = 0
-    else
-        silent execute('NERDTreeToggle')
-        silent execute('vertical resize -6')
-        silent execute("norm \<C-l>")
-        silent execute('sp')
-        silent execute('resize -10')
-        silent execute('term')
-        augroup start_insertmode
-            autocmd!
-            autocmd WinEnter term://* startinsert
-        augroup END
-        silent execute("norm \<C-k>")
-        let s:ide = 1
-    endif
-endfunction
-""" End Of Vanilla IDE Mode ---------------------------------------------------
