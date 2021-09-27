@@ -62,9 +62,17 @@ call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
-""" Impatient startup ---------------------------------------------------------
+""" Optimisation ---------------------------------------------------------------
+"" Lua cache loading
 lua require('impatient')
-""" End of impatient ----------------------------------------------------------
+set lazyredraw
+set ttyfast
+set foldmethod=syntax
+set foldmethod=expr
+set showcmd
+set noruler
+" set eventignore=all " Ultimate optimisation. Basically no plugins or anything run
+""" End Of Optimisation ---------------------------------------------------------
 
 
 """ Plugin Colouring ----------------------------------------------------------
@@ -128,17 +136,6 @@ let g:clipboard = {
   \ 'cache_enabled': 0,
   \ }
 """ End Of Vanilla Configurations ----------------------------------------------
-
-
-""" Optimisation ---------------------------------------------------------------
-set lazyredraw
-set ttyfast
-set foldmethod=syntax
-set foldmethod=expr
-set showcmd
-set noruler
-" set eventignore=all " Ultimate optimisation. Basically no plugins or anything run
-""" End Of Optimisation ---------------------------------------------------------
 
 
 """ Vanilla Rebindings -------------------------------------------------------
@@ -375,86 +372,86 @@ let g:completion_confirm_key = ""
 
 " LSP settings
 lua <<EOF
-    local lspconfig = require'lspconfig'
-    local util = require'lspconfig/util'
-    local completion = require'completion'
+local lspconfig = require'lspconfig'
+local util = require'lspconfig/util'
+local completion = require'completion'
 
-    lspconfig.clangd.setup{
-        on_attach = completion.on_attach,
-        cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" },
-        flags = { debounce_text_changes = 500 },
-    }
+lspconfig.clangd.setup{
+    on_attach = completion.on_attach,
+    cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" },
+    flags = { debounce_text_changes = 500 },
+}
 
-    lspconfig.jedi_language_server.setup{
-        on_attach = completion.on_attach,
-        cmd = { "jedi-language-server" },
-        flags = { debounce_text_changes = 500 },
-    }
+lspconfig.jedi_language_server.setup{
+    on_attach = completion.on_attach,
+    cmd = { "jedi-language-server" },
+    flags = { debounce_text_changes = 500 },
+}
 
-    lspconfig.tsserver.setup{
-        on_attach = completion.on_attach,
-        cmd = { "typescript-language-server", "--stdio" },
-        root_dir = util.path.dirname,
-        flags = { debounce_text_changes = 500 },
-    }
+lspconfig.tsserver.setup{
+    on_attach = completion.on_attach,
+    cmd = { "typescript-language-server", "--stdio" },
+    root_dir = util.path.dirname,
+    flags = { debounce_text_changes = 500 },
+}
 
-    lspconfig.bashls.setup{
-        on_attach = completion.on_attach,
-        cmd = { "bash-language-server", "start" },
-        root_dir = util.path.dirname,
-        flags = { debounce_text_changes = 500 },
-    }
+lspconfig.bashls.setup{
+    on_attach = completion.on_attach,
+    cmd = { "bash-language-server", "start" },
+    root_dir = util.path.dirname,
+    flags = { debounce_text_changes = 500 },
+}
 
-    lspconfig.texlab.setup{
-        on_attach = completion.on_attach,
-        cmd = { "texlab" },
-        flags = { debounce_text_changes = 500 },
-        settings = { texlab = { build = {
-            args = { "-halt-on-error", "%f" },
-            executable = "pdflatex",
-            onSave = true,
-        }, }, },
-    }
+lspconfig.texlab.setup{
+    on_attach = completion.on_attach,
+    cmd = { "texlab" },
+    flags = { debounce_text_changes = 500 },
+    settings = { texlab = { build = {
+        args = { "-halt-on-error", "%f" },
+        executable = "pdflatex",
+        onSave = true,
+    }, }, },
+}
 
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-    local general_on_attach = function(client, bufnr)
-        if client.resolved_capabilities.completion then
-            completion.on_attach(client, bufnr)
-        end
+local general_on_attach = function(client, bufnr)
+    if client.resolved_capabilities.completion then
+        completion.on_attach(client, bufnr)
     end
+end
 
-    lspconfig.html.setup {
-        capabilities = capabilities,
-        on_attach = general_on_attach,
-        cmd = { "vscode-html-language-server", "--stdio" },
-        flags = { debounce_text_changes = 500 },
-    }
+lspconfig.html.setup {
+    capabilities = capabilities,
+    on_attach = general_on_attach,
+    cmd = { "vscode-html-language-server", "--stdio" },
+    flags = { debounce_text_changes = 500 },
+}
 
-    lspconfig.cssls.setup {
-        capabilities = capabilities,
-        on_attach = general_on_attach,
-        cmd = { "vscode-css-language-server", "--stdio" },
-        flags = { debounce_text_changes = 500 },
-    }
+lspconfig.cssls.setup {
+    capabilities = capabilities,
+    on_attach = general_on_attach,
+    cmd = { "vscode-css-language-server", "--stdio" },
+    flags = { debounce_text_changes = 500 },
+}
 
-    require('lspkind').init({
-        with_text = true,
-        preset = 'default',
-    })
+require('lspkind').init({
+    with_text = true,
+    preset = 'default',
+})
 
-    require'lspsaga'.init_lsp_saga{
-        finder_action_keys = {
-            open = {'<CR>', 'o'}, quit = {'q', '<esc>', '<C-c>'},
-        },
-        code_action_keys = {
-            quit = {'q', '<esc>', '<C-c>'}
-        },
-        rename_action_keys = {
-            quit = {'<esc>', '<C-c>'}
-        },
-    }
+require'lspsaga'.init_lsp_saga{
+    finder_action_keys = {
+        open = {'<CR>', 'o'}, quit = {'q', '<esc>', '<C-c>'},
+    },
+    code_action_keys = {
+        quit = {'q', '<esc>', '<C-c>'}
+    },
+    rename_action_keys = {
+        quit = {'<esc>', '<C-c>'}
+    },
+}
 EOF
 
 augroup lspmappings
