@@ -27,7 +27,8 @@ Plug 'machakann/vim-highlightedyank'
 "" Functionalities
 " Git
 Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps'}
+Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
+                \ 'on': 'CHADopen'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
@@ -56,6 +57,7 @@ Plug 'sbdchd/neoformat',
             \ 'on': 'Neoformat'}                                        " Auto formatter
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'lewis6991/impatient.nvim'
+Plug 'abecodes/tabout.nvim'
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -76,16 +78,26 @@ set noruler
 
 """ Plugin Colouring ----------------------------------------------------------
 lua <<EOF
+vim.g.transparent = true
+
 local catppuccino = require("catppuccino")
 catppuccino.setup({
     colorscheme = 'soft_manilo',
-    transparency = true,
+    transparency = vim.g.transparent,
     integrations = {
         lsp_saga = true,
         gitgutter = true,
     },
 })
+
+function transparency()
+    vim.g.transparent = not vim.g.transparent
+    catppuccino.setup({transparency = vim.g.transparent})
+    vim.cmd("colorscheme catppuccino")
+end
 EOF
+
+nnoremap <silent><Leader>T :lua transparency()<CR>
 """ End Of Plugin Colouring ---------------------------------------------------
 
 
@@ -204,7 +216,7 @@ vnoremap K :m '<-2'<CR>gv=gv
 
 """ Highlighted Yank Configurations -------------------------------------------
 "" Colours
-highlight HighlightedyankRegion cterm=reverse
+highlight HighlightedyankRegion gui=reverse
 
 "" Settings
 let g:highlightedyank_highlight_duration = -1
@@ -664,3 +676,9 @@ let g:tex_conceal="abdgm"
 let g:tex_conceal_frac=1
 highlight clear Conceal
 """ End of Tex Conceal Setings ------------------------------------------------
+
+
+lua <<EOF
+-- Tabout
+require'tabout'.setup()
+EOF
