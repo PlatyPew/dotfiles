@@ -36,7 +36,7 @@ Plug 'airblade/vim-rooter'
 Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'jasonrhansen/lspsaga.nvim', {'branch': 'finder-preview-fixes'}
+Plug 'tami5/lspsaga.nvim'
 "More efficient (lazy) plugins
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
 Plug 'windwp/nvim-autopairs'
@@ -324,7 +324,7 @@ set updatetime=50                                                       " Update
 """ CHADTree Configurations ---------------------------------------------------
 "" Mappings
 " Activate CHADTree    Ctrl-o
-nmap <C-o> :CHADopen --version-ctl<CR>
+nmap <C-o> :CHADopen<CR>
 
 " Open directories with chadtree instead of netrw
 autocmd StdinReadPre * let s:std_in=1
@@ -405,6 +405,7 @@ vim.g.coq_settings = {
     },
     keymap = {
         recommended = false,
+        jump_to_mark = '',
     },
 }
 
