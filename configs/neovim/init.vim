@@ -26,7 +26,7 @@ Plug 'machakann/vim-highlightedyank'
 
 "" Functionalities
 " Git
-Plug 'airblade/vim-gitgutter'                                           " Shows git diff in vim's gutter
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
                 \ 'on': 'CHADopen'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
@@ -61,6 +61,7 @@ Plug 'lewis6991/impatient.nvim'
 Plug 'abecodes/tabout.nvim'
 
 Plug 'andweeb/presence.nvim'
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -237,11 +238,7 @@ require'lualine'.setup {
     },
     sections = {
         lualine_a = {'mode'},
-        lualine_b = {'branch', {
-                'diff',
-                colored = false,
-            }
-        },
+        lualine_b = {'branch', 'diff'},
         lualine_c = {'filename', 'filesize'},
         lualine_x = {
             'location',
@@ -314,17 +311,7 @@ let g:rainbow#blacklist = ['foreground', '#d1951d']
 """ End Of Rainbow Parentheses Configurations ---------------------------------
 
 
-""" Git Gutter Configurations -------------------------------------------------
-"" Mappings
-" Activate GitGutter    \g
-nmap <leader>g :GitGutterToggle<CR> 
-
-"" Settings
-set updatetime=50                                                       " Update git gutter every 50ms
-""" End Of Git Gutter Configurations ------------------------------------------
-
-
-""" CHADTree Configurations ---------------------------------------------------
+"" CHADTree Configurations ---------------------------------------------------
 "" Mappings
 " Activate CHADTree    Ctrl-o
 nmap <C-o> :CHADopen<CR>
@@ -473,17 +460,6 @@ nnoremap <silent>gf :Lspsaga lsp_finder<CR>
 nnoremap <silent>gr :Lspsaga rename<CR>
 nnoremap <silent>gc :Lspsaga code_action<CR>
 """ End Of LSP Configurations -------------------------------------------------
-
-
-""" Vim Fugitive Configurations -----------------------------------------------
-"" Mappings
-" Show git status    Tab
-nnoremap <silent> <leader>gs :Gstatus<CR>
-" Show git blame     Tab
-nnoremap <silent> <leader>gb :Gblame<CR>
-" Show git diff      Tab
-nnoremap <silent> <leader>gd :Gdiff<CR>
-""" End Of Vim Fugitive Configurations ----------------------------------------
 
 
 """ Undo Tree Configurations --------------------------------------------------
@@ -672,4 +648,17 @@ require'tabout'.setup()
 
 -- Discord Rich Presence
 require("presence"):setup({ enable_line_number = true })
+
+-- Gitsigns
+require('gitsigns').setup{
+    signs = {
+        delete = { text = '│' },
+        topdelete = { text = '│' },
+        changedelete = { text = '│' },
+    },
+    numhl = true,
+    keymaps = {
+        ['n <leader>hd'] = '<cmd>lua require"gitsigns".diffthis()<CR>',
+    }
+}
 EOF
