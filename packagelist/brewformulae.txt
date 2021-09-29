@@ -28,7 +28,6 @@ prettier
 pypy3
 ripgrep
 telegram-cli
-texlab
 tmux
 trash
 wakeonlan

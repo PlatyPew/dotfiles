@@ -1,6 +1,2 @@
-bash-language-server
 npm
 speed-test
-typescript-language-server
-typescript
-vscode-langservers-extracted

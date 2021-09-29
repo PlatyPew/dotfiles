@@ -37,6 +37,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'tami5/lspsaga.nvim'
+Plug 'kabouzeid/nvim-lspinstall'
 "More efficient (lazy) plugins
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
 Plug 'windwp/nvim-autopairs'
@@ -412,55 +413,46 @@ vim.g.coq_settings = {
 }
 
 local lspconfig = require'lspconfig'
-local util = require'lspconfig/util'
 local coq = require'coq'
+local lspinstall = require'lspinstall'
 
-lspconfig.clangd.setup(coq.lsp_ensure_capabilities{
-    cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" },
-    flags = { debounce_text_changes = 500 },
-})
+local jedi_config = require"lspinstall/util".extract_config("jedi_language_server")
+jedi_config.default_config.cmd[1] = "./venv/bin/jedi-language-server"
 
-lspconfig.jedi_language_server.setup(coq.lsp_ensure_capabilities{
-    cmd = { "jedi-language-server" },
-    flags = { debounce_text_changes = 500 },
-})
-
-lspconfig.tsserver.setup(coq.lsp_ensure_capabilities{
-    cmd = { "typescript-language-server", "--stdio" },
-    root_dir = util.path.dirname,
-    flags = { debounce_text_changes = 500 },
-})
-
-lspconfig.bashls.setup{
-    cmd = { "bash-language-server", "start" },
-    root_dir = util.path.dirname,
-    flags = { debounce_text_changes = 500 },
-}
-
-lspconfig.texlab.setup(coq.lsp_ensure_capabilities{
-    cmd = { "texlab" },
-    flags = { debounce_text_changes = 500 },
-    settings = { texlab = { build = {
-        args = { "-halt-on-error", "%f" },
-        executable = "pdflatex",
-        onSave = true,
-    }, }, },
+require'lspinstall/servers'.jedi = vim.tbl_extend('error', jedi_config, {
+     install_script = [[
+         python3 -m venv ./venv
+         ./venv/bin/pip3 install --upgrade pip
+         ./venv/bin/pip3 install --upgrade jedi-language-server
+     ]]
 })
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-lspconfig.html.setup(coq.lsp_ensure_capabilities{
-    capabilities = capabilities,
-    cmd = { "vscode-html-language-server", "--stdio" },
-    flags = { debounce_text_changes = 500 },
-})
+lspinstall.setup()
+local servers = lspinstall.installed_servers()
+table.insert(servers, 'clangd')
 
-lspconfig.cssls.setup(coq.lsp_ensure_capabilities{
-    capabilities = capabilities,
-    cmd = { "vscode-css-language-server", "--stdio" },
-    flags = { debounce_text_changes = 500 },
-})
+for _, server in pairs(servers) do
+    local config = {
+        capabilities = capabilities,
+        flags = { debounce_text_changes = 500 },
+        root_dir = lspconfig.util.path.dirname,
+    }
+
+    if server == 'latex' then
+        config.settings = { texlab = { build = {
+            args = { "-halt-on-error", "%f" },
+            executable = "pdflatex",
+            onSave = true,
+        }, }, }
+    elseif server == 'clangd' then
+        config.cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" }
+    end
+
+    lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
+end
 
 require'lspsaga'.init_lsp_saga{
     finder_action_keys = {
@@ -475,18 +467,11 @@ require'lspsaga'.init_lsp_saga{
 }
 EOF
 
-augroup lspmappings
-    autocmd!
-    autocmd FileType c,cpp,python,javascript,html,css,sh call SetLSPMappings()
-augroup END
-
-function SetLSPMappings()
-    nmap <silent>gd :Lspsaga preview_definition<CR>
-    nmap <silent>gh :Lspsaga hover_doc<CR>
-    nmap <silent>gf :Lspsaga lsp_finder<CR>
-    nmap <silent>gr :Lspsaga rename<CR>
-    nmap <silent>gc :Lspsaga code_action<CR>
-endfunction
+nnoremap <silent>gd :Lspsaga preview_definition<CR>
+nnoremap <silent>gh :Lspsaga hover_doc<CR>
+nnoremap <silent>gf :Lspsaga lsp_finder<CR>
+nnoremap <silent>gr :Lspsaga rename<CR>
+nnoremap <silent>gc :Lspsaga code_action<CR>
 """ End Of LSP Configurations -------------------------------------------------
 
 
