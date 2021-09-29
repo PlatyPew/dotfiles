@@ -59,6 +59,8 @@ Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
 Plug 'lewis6991/impatient.nvim'
 Plug 'abecodes/tabout.nvim'
 
+Plug 'andweeb/presence.nvim'
+
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
 
@@ -682,4 +684,7 @@ highlight clear Conceal
 lua <<EOF
 -- Tabout
 require'tabout'.setup()
+
+-- Discord Rich Presence
+require("presence"):setup({ enable_line_number = true })
 EOF
