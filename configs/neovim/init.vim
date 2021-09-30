@@ -44,6 +44,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'preservim/nerdcommenter'                                          " Easy commenting
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
+Plug 'liuchengxu/vim-which-key'
 " Misc
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
@@ -657,8 +658,78 @@ require('gitsigns').setup{
         changedelete = { text = '│' },
     },
     numhl = true,
-    keymaps = {
-        ['n <leader>hd'] = '<cmd>lua require"gitsigns".diffthis()<CR>',
-    }
 }
+
+vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require("gitsigns").diffthis()<CR>]]', { noremap = true, silent = true })
 EOF
+
+let g:maplocalleader = ','
+nnoremap <silent> <localleader> :silent WhichKey ','<CR>
+let g:which_key_sep = '→'
+let g:which_key_use_floating_win = 0
+let g:which_key_map = {}
+
+highlight default link WhichKey          Operator
+highlight default link WhichKeySeperator DiffAdded
+highlight default link WhichKeyGroup     Identifier
+highlight default link WhichKeyDesc      Function
+
+" Hide status line
+autocmd! FileType which_key
+autocmd  FileType which_key set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
+
+let g:which_key_map.r = [':RainbowParentheses!!','Rainbow Parentheses']
+let g:which_key_map.o = [':CHADopen','File Explorer']
+let g:which_key_map.t = [':Lspsaga open_floaterm','Open terminal']
+let g:which_key_map.D = [':DogeGenerate','Generate docs']
+let g:which_key_map.F = [':Neoformat','Format code']
+let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
+
+let g:which_key_map.f = {
+    \ 'name' : '+FZF',
+    \ 'f' : [':Files','Files'],
+    \ 'g' : [':GFiles','Git files'],
+    \ 'G' : [':GFiles?','Git status files'],
+    \ 'b' : [':Buffers','Buffers'],
+    \ 'r' : [':RG','Ripgrep'],
+    \ '\' : [':Lines','Lines'],
+    \ '/' : [':BLines','Lines in buffer'],
+    \ 'm' : [':Marks','Marks'],
+    \ 'h' : [':History:','Command history'],
+    \ 'H' : [':History/','Search history'],
+    \ 'C' : [':Commits','Commits'],
+    \ 'c' : [':BCommits','Commits for buffer'],
+    \ 'M' : [':Maps','Mappings'],
+    \ }
+
+let g:which_key_map.g = {
+    \ 'name' : '+Git' ,
+    \ ']' : [':Gitsigns next_hunk','Next hunk'],
+    \ '[' : [':Gitsigns prev_hunk','Previous hunk'],
+    \ 'S' : [':Gitsigns stage_hunk','Stage hunk'],
+    \ 'u' : [':Gitsigns undo_stage_hunk','Undo stage hunk'],
+    \ 'r' : [':Gitsigns reset_hunk','Reset hunk'],
+    \ 'R' : [':Gitsigns reset_buffer','Reset buffer'],
+    \ 'p' : [':Gitsigns preview_hunk','Preview hunk'],
+    \ 'b' : [':Gitsigns blame_line','Blame line'],
+    \ 's' : [':Gitsigns stage_buffer','Stage buffer'],
+    \ 'U' : [':Gitsigns reset_buffer_index','Reset buffer index'],
+    \ 'd' : [':Gitsigns diffthis','Reset buffer index'],
+    \ }
+
+let g:which_key_map.l = {
+    \ 'name' : '+LSPSaga' ,
+    \ 'f' : [':Lspsaga lsp_finder','Find reference'],
+    \ 'c' : [':Lspsaga code_action','Code action'],
+    \ 'h' : [':Lspsaga hover_doc','Docs'],
+    \ 's' : [':Lspsaga signature_help','Show signature'],
+    \ 'r' : [':Lspsaga rename','Rename variable'],
+    \ 'p' : [':Lspsaga preview_definition','Preview definition'],
+    \ 'd' : [':Lspsaga show_cursor_diagnostics','Show cursor diagnostics'],
+    \ 'D' : [':Lspsaga show_line_diagnostics','Show line diagnostics'],
+    \ 'i' : [':LspInfo','LSP info'],
+    \ }
+
+" Register which key map
+call which_key#register(',', "g:which_key_map")
