@@ -28,7 +28,7 @@ Plug 'machakann/vim-highlightedyank'
 " Git
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
-                \ 'on': 'CHADopen'}
+                \ 'on': ['CHADopen', 'CHADdeps']}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
@@ -50,7 +50,7 @@ Plug 'vim-scripts/LargeFile'                                            " Edit l
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
 Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
-            \ 'for': ['c', 'cpp', 'python', 'javascript', 'java']}      " Documentation Generator
+            \ 'on': 'DogeGenerate'}      " Documentation Generator
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
