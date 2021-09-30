@@ -18,7 +18,7 @@ Plug 'Pocco81/Catppuccino.nvim'
 " User Interface
 Plug 'shadmansaleh/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
-Plug 'junegunn/rainbow_parentheses.vim', {'on': 'RainbowParentheses!!'} " Adds rainbow colouring for nested parenthesis
+Plug 'p00f/nvim-ts-rainbow'
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
@@ -296,22 +296,6 @@ EOF
 """ End Of Lualine Configurations ---------------------------------------------
 
 
-""" Rainbow Parentheses Configurations ----------------------------------------
-"" Mappings
-" Activate Rainbow Parentheses    \r
-nmap <leader>r :RainbowParentheses!!<CR>
-
-"" Auto Commands
-augroup rainbow_lisp
-    autocmd!
-    autocmd VimEnter * RainbowParentheses
-augroup END
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
-
-let g:rainbow#blacklist = ['foreground', '#d1951d']
-""" End Of Rainbow Parentheses Configurations ---------------------------------
-
-
 "" CHADTree Configurations ---------------------------------------------------
 "" Mappings
 " Activate CHADTree    Ctrl-o
@@ -550,14 +534,20 @@ require'nvim-treesitter.configs'.setup {
     refactor = {
         highlight_definitions = { enable = true },
     },
+    rainbow = {
+        enable = true,
+        extended_mode = true,
+        colors = {
+            '#cf637e',
+            '#f4a261',
+            '#dbc074',
+            '#aace8d',
+            '#73d2d4',
+            '#90c7f4',
+            '#d59ee6',
+        },
+    },
 }
-
--- Fix rainbow paretheses
-require"nvim-treesitter.highlight"
-local hlmap = vim.treesitter.highlighter.hl_map
-hlmap.error = nil
-hlmap["punctuation.delimiter"] = "Delimiter"
-hlmap["punctuation.bracket"] = nil
 EOF
 
 "" Underline definitions
@@ -679,7 +669,6 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-let g:which_key_map.r = [':RainbowParentheses!!','Rainbow Parentheses']
 let g:which_key_map.o = [':CHADopen','File Explorer']
 let g:which_key_map.t = [':Lspsaga open_floaterm','Open terminal']
 let g:which_key_map.D = [':DogeGenerate','Generate docs']
