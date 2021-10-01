@@ -1,1 +1,0 @@
-image/*; curl -s %s | ~/.iterm2/imgcat && read -n 1; needsterminal

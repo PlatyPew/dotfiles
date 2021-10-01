@@ -16,7 +16,6 @@ lastpass-cli
 libmpc
 llvm
 lolcat
-lua
 luajit
 navi
 neofetch
@@ -30,6 +29,7 @@ ripgrep
 telegram-cli
 tmux
 trash
+universal-ctags
 wakeonlan
 watch
 wget

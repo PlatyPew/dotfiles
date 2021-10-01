@@ -1,6 +1,3 @@
-basictex
-brave-browser
-discord
 docker
 font-iosevka-nerd-font
 iterm2
@@ -9,7 +6,4 @@ ngrok
 rar
 rectangle
 skim
-telegram-desktop
-utm
 xquartz
-zoom
