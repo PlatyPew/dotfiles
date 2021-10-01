@@ -380,7 +380,7 @@ vim.g.coq_settings = {
     },
     keymap = {
         recommended = false,
-        jump_to_mark = '',
+        jump_to_mark = '<c-b>',
     },
 }
 
