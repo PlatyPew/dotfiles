@@ -38,6 +38,11 @@ Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 Plug 'tami5/lspsaga.nvim'
 Plug 'kabouzeid/nvim-lspinstall'
+" Debugger
+Plug 'mfussenegger/nvim-dap'
+Plug 'Pocco81/DAPInstall.nvim'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
 "More efficient (lazy) plugins
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
 Plug 'windwp/nvim-autopairs'
@@ -653,7 +658,58 @@ require('gitsigns').setup{
 }
 
 vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require("gitsigns").diffthis()<CR>]]', { noremap = true, silent = true })
+
+local dap_install = require("dap-install")
+for _, debugger in ipairs(require("dap-install.api.debuggers").get_installed_debuggers()) do
+    dap_install.config(debugger)
+end
+
+local dap = require('dap')
+dap.adapters.lldb = {
+    type = 'executable',
+    command = '/usr/local/Cellar/llvm/12.0.1/bin/lldb-vscode',
+    name = 'lldb',
+}
+
+dap.configurations.cpp = {{
+    name = "Launch",
+    type = "lldb",
+    request = "launch",
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+}}
+dap.configurations.c = dap.configurations.cpp
+dap.configurations.rust = dap.configurations.cpp
+
+
+vim.g.dap_virtual_text = true
+
+require("dapui").setup()
 EOF
+command DAPContinue lua require'dap'.continue()
+command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
+command DAPStepOver lua require'dap'.step_over()
+command DAPStepInto lua require'dap'.step_into()
+command DAPStepOut lua require'dap'.step_out()
+command DAPRepl lua require'dap'.repl.open()
+command DAPDisconnect lua require'dapui'.disconnect()
+command DAPClose lua require'dap'.close()
+command DAPUIToggle lua require'dapui'.toggle()
+command DAPUIEval lua require'dapui'.eval()
+
+nnoremap <silent> <F5> :DAPContinue<CR>
+nnoremap <silent> <F6> :DAPTBreakpoint<CR>
+nnoremap <silent> <F10> :DAPStepOver<CR>
+nnoremap <silent> <F11> :DAPStepInto<CR>
+nnoremap <silent> <F12> :DAPStepOut<CR>
+nnoremap <silent> <leader>dc :DAPClose<CR>
+nnoremap <silent> <leader>dr :DAPRepl<CR>
+nnoremap <silent> <leader>du :DAPUIToggle<CR>
+nnoremap <silent> <leader>de :DAPUIEval<CR>
 
 let g:maplocalleader = ','
 nnoremap <silent> <localleader> :silent WhichKey ','<CR>
@@ -677,6 +733,20 @@ let g:which_key_map.D = [':DogeGenerate','Generate docs']
 let g:which_key_map.F = [':Neoformat','Format code']
 let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
 let g:which_key_map.T = [':Transparency','Toggle Transparency']
+
+let g:which_key_map.d = {
+    \ 'name' : '+Debugger',
+    \ 'c' : [':DAPContinue','Continue'],
+    \ 'b' : [':DAPTBreakpoint', 'Toggle breakpoint'],
+    \ 's' : [':DAPStepOver', 'Step over'],
+    \ 'S' : [':DAPStepInto', 'Step into'],
+    \ 'o' : [':DAPStepOut', 'Step out'],
+    \ 'R' : [':DAPRepl', 'Repl'],
+    \ 'D' : [':DAPDisconnect', 'Disconnect'],
+    \ 'C' : [':DAPClose', 'Close'],
+    \ 'u' : [':DAPUIToggle', 'Open Ui'],
+    \ 'e' : [':DAPUIEval', 'Evaluate'],
+    \ }
 
 let g:which_key_map.f = {
     \ 'name' : '+FZF',
