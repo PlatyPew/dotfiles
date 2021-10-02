@@ -102,7 +102,8 @@ function transparency()
 end
 EOF
 
-nnoremap <silent><Leader>T :lua transparency()<CR>
+command Transparency lua transparency()
+nnoremap <silent><Leader>T :Transparency<CR>
 """ End Of Plugin Colouring ---------------------------------------------------
 
 
@@ -132,6 +133,7 @@ set splitright                                                          " Set ve
 set splitbelow
 call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
 set noshowmode
+set updatetime=50
 set spelllang=en_gb
 augroup spell_check
     autocmd!
@@ -380,7 +382,7 @@ vim.g.coq_settings = {
     },
     keymap = {
         recommended = false,
-        jump_to_mark = '<c-b>',
+        jump_to_mark = '<c-x>',
     },
 }
 
@@ -674,6 +676,7 @@ let g:which_key_map.t = [':Lspsaga open_floaterm','Open terminal']
 let g:which_key_map.D = [':DogeGenerate','Generate docs']
 let g:which_key_map.F = [':Neoformat','Format code']
 let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
+let g:which_key_map.T = [':Transparency','Toggle Transparency']
 
 let g:which_key_map.f = {
     \ 'name' : '+FZF',
