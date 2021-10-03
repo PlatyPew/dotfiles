@@ -14,61 +14,63 @@ call plug#begin()                                                       " Plugin
 
 "" Aesthetics
 " Colours
-Plug 'Pocco81/Catppuccino.nvim'
+Plug 'Pocco81/Catppuccino.nvim'                                         " Syntax highlighting with treesitter integration
 " User Interface
-Plug 'shadmansaleh/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
-Plug 'p00f/nvim-ts-rainbow'
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
+Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
+Plug 'shadmansaleh/lualine.nvim'                                        " Status line written in lua
 " Syntax highlighting
+Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
+Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
-Plug 'machakann/vim-highlightedyank'
-Plug 'norcalli/nvim-colorizer.lua'
+Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better highlighting tool
 
 "" Functionalities
 " Git
-Plug 'lewis6991/gitsigns.nvim'
+Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
+" File finding
+Plug 'airblade/vim-rooter'                                              " FZF to find root of project
+Plug 'junegunn/fzf.vim'                                                 " Fuzzy finder for vim
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
-                \ 'on': ['CHADopen', 'CHADdeps']}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
+                \ 'on': ['CHADopen', 'CHADdeps']}                       " Fast file finder
 " Auto-completion
-Plug 'neovim/nvim-lspconfig'
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
-Plug 'tami5/lspsaga.nvim'
-Plug 'kabouzeid/nvim-lspinstall'
+Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
+Plug 'kabouzeid/nvim-lspinstall'                                        " LSP server installer
+Plug 'tami5/lspsaga.nvim'                                               " LSP extras
+Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}             " Very fast autocompletion
 " Debugger
-Plug 'mfussenegger/nvim-dap'
-Plug 'Pocco81/DAPInstall.nvim'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
+Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
+Plug 'theHamsta/nvim-dap-virtual-text'                                  " Displays variable informations
+Plug 'Pocco81/DAPInstall.nvim'                                          " Package manager for debuggers
 "More efficient (lazy) plugins
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
-Plug 'windwp/nvim-autopairs'
-Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
-Plug 'preservim/nerdcommenter'                                          " Easy commenting
+Plug 'abecodes/tabout.nvim'                                             " Tabout faster from quotes or parenthesis
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
-Plug 'liuchengxu/vim-which-key'
+Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
+Plug 'liuchengxu/vim-which-key'                                         " Dictionary of features
+Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
+Plug 'preservim/nerdcommenter'                                          " Easy commenting
+Plug 'windwp/nvim-autopairs'                                            " Automatically pair parenthesis and more
 " Misc
-Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
-Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
-Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
-            \ 'on': 'DogeGenerate'}      " Documentation Generator
-Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better refactor tool
+Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}                    " Nicer unicode for conceal
+Plug 'andweeb/presence.nvim'                                            " Flex on dem vscode plebs with discord rich presence
+Plug 'lewis6991/impatient.nvim'                                         " Lua caching for performance
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
+Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
+            \ 'on': 'DogeGenerate'}                                     " Documentation Generator
+Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
+Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'sbdchd/neoformat',
             \ {'for': ['c', 'cpp', 'python', 'javascript'],
             \ 'on': 'Neoformat'}                                        " Auto formatter
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}
-Plug 'lewis6991/impatient.nvim'
-Plug 'abecodes/tabout.nvim'
+Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 
-Plug 'andweeb/presence.nvim'
-Plug 'nvim-lua/plenary.nvim'
+"" Dependencies
+Plug 'nvim-lua/plenary.nvim'                                            " Some library
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
 
 call plug#end()
 """ End Of Vim-Plug -----------------------------------------------------------
@@ -733,70 +735,70 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-let g:which_key_map.o = [':CHADopen','File Explorer']
-let g:which_key_map.t = [':Lspsaga open_floaterm','Open terminal']
 let g:which_key_map.D = [':DogeGenerate','Generate docs']
 let g:which_key_map.F = [':Neoformat','Format code']
-let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
 let g:which_key_map.T = [':Transparency','Toggle Transparency']
+let g:which_key_map.o = [':CHADopen','File Explorer']
+let g:which_key_map.t = [':Lspsaga open_floaterm','Open terminal']
+let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
 
 let g:which_key_map.d = {
     \ 'name' : '+Debugger',
-    \ 'c' : [':DAPContinue','Continue'],
-    \ 'b' : [':DAPTBreakpoint', 'Toggle breakpoint'],
-    \ 's' : [':DAPStepOver', 'Step over'],
-    \ 'S' : [':DAPStepInto', 'Step into'],
-    \ 'o' : [':DAPStepOut', 'Step out'],
-    \ 'R' : [':DAPRepl', 'Repl'],
-    \ 'D' : [':DAPDisconnect', 'Disconnect'],
     \ 'C' : [':DAPClose', 'Close'],
-    \ 'u' : [':DAPUIToggle', 'Open Ui'],
+    \ 'D' : [':DAPDisconnect', 'Disconnect'],
+    \ 'R' : [':DAPRepl', 'Repl'],
+    \ 'S' : [':DAPStepInto', 'Step into'],
+    \ 'b' : [':DAPTBreakpoint', 'Toggle breakpoint'],
+    \ 'c' : [':DAPContinue','Continue'],
     \ 'e' : [':DAPUIEval', 'Evaluate'],
+    \ 'o' : [':DAPStepOut', 'Step out'],
+    \ 's' : [':DAPStepOver', 'Step over'],
+    \ 'u' : [':DAPUIToggle', 'Open Ui'],
     \ }
 
 let g:which_key_map.f = {
     \ 'name' : '+FZF',
+    \ '/' : [':BLines','Lines in buffer'],
+    \ 'C' : [':Commits','Commits'],
+    \ 'G' : [':GFiles?','Git status files'],
+    \ 'H' : [':History/','Search history'],
+    \ 'M' : [':Maps','Mappings'],
+    \ '\' : [':Lines','Lines'],
+    \ 'b' : [':Buffers','Buffers'],
+    \ 'c' : [':BCommits','Commits for buffer'],
     \ 'f' : [':Files','Files'],
     \ 'g' : [':GFiles','Git files'],
-    \ 'G' : [':GFiles?','Git status files'],
-    \ 'b' : [':Buffers','Buffers'],
-    \ 'r' : [':RG','Ripgrep'],
-    \ '\' : [':Lines','Lines'],
-    \ '/' : [':BLines','Lines in buffer'],
-    \ 'm' : [':Marks','Marks'],
     \ 'h' : [':History:','Command history'],
-    \ 'H' : [':History/','Search history'],
-    \ 'C' : [':Commits','Commits'],
-    \ 'c' : [':BCommits','Commits for buffer'],
-    \ 'M' : [':Maps','Mappings'],
+    \ 'm' : [':Marks','Marks'],
+    \ 'r' : [':RG','Ripgrep'],
     \ }
 
 let g:which_key_map.g = {
     \ 'name' : '+Git' ,
-    \ ']' : [':Gitsigns next_hunk','Next hunk'],
-    \ '[' : [':Gitsigns prev_hunk','Previous hunk'],
-    \ 'S' : [':Gitsigns stage_hunk','Stage hunk'],
-    \ 'u' : [':Gitsigns undo_stage_hunk','Undo stage hunk'],
-    \ 'r' : [':Gitsigns reset_hunk','Reset hunk'],
     \ 'R' : [':Gitsigns reset_buffer','Reset buffer'],
-    \ 'p' : [':Gitsigns preview_hunk','Preview hunk'],
-    \ 'b' : [':Gitsigns blame_line','Blame line'],
-    \ 's' : [':Gitsigns stage_buffer','Stage buffer'],
+    \ 'S' : [':Gitsigns stage_hunk','Stage hunk'],
     \ 'U' : [':Gitsigns reset_buffer_index','Reset buffer index'],
+    \ '[' : [':Gitsigns prev_hunk','Previous hunk'],
+    \ ']' : [':Gitsigns next_hunk','Next hunk'],
+    \ 'b' : [':Gitsigns blame_line','Blame line'],
     \ 'd' : [':Gitsigns diffthis','Reset buffer index'],
+    \ 'p' : [':Gitsigns preview_hunk','Preview hunk'],
+    \ 'r' : [':Gitsigns reset_hunk','Reset hunk'],
+    \ 's' : [':Gitsigns stage_buffer','Stage buffer'],
+    \ 'u' : [':Gitsigns undo_stage_hunk','Undo stage hunk'],
     \ }
 
 let g:which_key_map.l = {
     \ 'name' : '+LSPSaga' ,
-    \ 'f' : [':Lspsaga lsp_finder','Find reference'],
-    \ 'c' : [':Lspsaga code_action','Code action'],
-    \ 'h' : [':Lspsaga hover_doc','Docs'],
-    \ 's' : [':Lspsaga signature_help','Show signature'],
-    \ 'r' : [':Lspsaga rename','Rename variable'],
-    \ 'p' : [':Lspsaga preview_definition','Preview definition'],
-    \ 'd' : [':Lspsaga show_cursor_diagnostics','Show cursor diagnostics'],
     \ 'D' : [':Lspsaga show_line_diagnostics','Show line diagnostics'],
+    \ 'c' : [':Lspsaga code_action','Code action'],
+    \ 'd' : [':Lspsaga show_cursor_diagnostics','Show cursor diagnostics'],
+    \ 'f' : [':Lspsaga lsp_finder','Find reference'],
+    \ 'h' : [':Lspsaga hover_doc','Docs'],
     \ 'i' : [':LspInfo','LSP info'],
+    \ 'p' : [':Lspsaga preview_definition','Preview definition'],
+    \ 'r' : [':Lspsaga rename','Rename variable'],
+    \ 's' : [':Lspsaga signature_help','Show signature'],
     \ }
 
 " Register which key map
