@@ -23,6 +23,7 @@ Plug 'mhinz/vim-startify'                                               " Better
 " Syntax highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
 Plug 'machakann/vim-highlightedyank'
+Plug 'norcalli/nvim-colorizer.lua'
 
 "" Functionalities
 " Git
@@ -87,7 +88,9 @@ set noruler
 
 
 """ Plugin Colouring ----------------------------------------------------------
+set termguicolors
 lua <<EOF
+-- Catppuccino
 vim.g.transparent = true
 
 local catppuccino = require("catppuccino")
@@ -105,6 +108,9 @@ function transparency()
     catppuccino.setup({transparency = vim.g.transparent})
     vim.cmd("colorscheme catppuccino")
 end
+
+-- Colorizer
+require'colorizer'.setup()
 EOF
 
 command Transparency lua transparency()
