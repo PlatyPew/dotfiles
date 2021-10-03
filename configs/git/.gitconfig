@@ -15,7 +15,7 @@
     permute = !"~/dotfiles/configs/git/gitz/git-permute"
     remotes = remote -v
     rename = !"~/dotfiles/configs/git/gitz/git-rename"
-    ri = !"git rebase -i `git sh`"
+    ri = !"git rebase -i `git sh`^1"
     sh = !"git log --oneline | fzf -m -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1 | xargs -n 9999"
     split = !"~/dotfiles/configs/git/gitz/git-split"
     st = !"~/dotfiles/configs/git/gitz/git-st"

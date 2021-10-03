@@ -1,6 +1,2 @@
-bash-language-server
-esctags
 npm
 speed-test
-typescript-language-server
-typescript

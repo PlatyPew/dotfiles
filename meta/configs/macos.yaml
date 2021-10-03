@@ -6,5 +6,3 @@
         stderr: true
 - link:
     ~/.hushlogin: configs/macos/.hushlogin
-    ~/.mailcap: configs/macos/.mailcap
-    ~/.config/tuir/tuir.cfg: configs/macos/tuir.cfg

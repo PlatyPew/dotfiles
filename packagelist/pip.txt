@@ -1,4 +1,2 @@
 neovim
-jedi-language-server
-tuir
 virtualenv

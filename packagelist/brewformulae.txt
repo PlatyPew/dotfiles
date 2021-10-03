@@ -3,7 +3,6 @@ bat
 bettercap
 bfg
 bitwarden-cli
-ctags
 entr
 exa
 figlet
@@ -17,7 +16,6 @@ lastpass-cli
 libmpc
 llvm
 lolcat
-lua
 luajit
 navi
 neofetch
@@ -29,8 +27,9 @@ prettier
 pypy3
 ripgrep
 telegram-cli
-texlab
 tmux
+trash
+universal-ctags
 wakeonlan
 watch
 wget

@@ -1,7 +1,6 @@
 # Installs packages
-brew install npm python3 ctags-exuberant neovim
-python3 -m pip install neovim python-language-server
-npm install -g bash-language-server
+brew install npm python3 universal-ctags neovim yapf
+python3 -m pip install neovim
 
 curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim # Installs Vim-plug
 
