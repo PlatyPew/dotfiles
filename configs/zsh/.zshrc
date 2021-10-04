@@ -387,6 +387,7 @@ ft(){
 }
 
 export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
+export BAT_THEME='TwoDark'
 ############################################################
 
 ## Ngrok ###################################################
