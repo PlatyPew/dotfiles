@@ -30,7 +30,6 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better
 " Git
 Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
 " File finding
-Plug 'airblade/vim-rooter'                                              " FZF to find root of project
 Plug 'junegunn/fzf.vim'                                                 " Fuzzy finder for vim
 Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
                 \ 'on': ['CHADopen', 'CHADdeps']}                       " Fast file finder
@@ -675,7 +674,7 @@ end
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
-    command = '/usr/local/Cellar/llvm/12.0.1/bin/lldb-vscode',
+    command = '/usr/local/opt/llvm/bin/lldb-vscode',
     name = 'lldb',
 }
 
