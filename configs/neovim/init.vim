@@ -536,6 +536,10 @@ let g:doge_doc_standard_c = 'kernel_doc'
 """ End of Doge Configurations ------------------------------------------------
 
 """ TreeSitter Configurations -------------------------------------------------
+set foldenable!
+set foldlevel=20
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 "" Enable tree sitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
