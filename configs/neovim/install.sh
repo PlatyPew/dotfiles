@@ -6,5 +6,5 @@ curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.g
 
 BASE_PATH="configs/neovim"
 sed '/call plug#end/q' $BASE_PATH/init.vim > $BASE_PATH/tmp.vim
-nvim -u $BASE_PATH/tmp.vim -c ':PlugInstall' -c ':qall'
+nvim -u $BASE_PATH/tmp.vim --headless +PlugInstall +qall
 rm $BASE_PATH/tmp.vim

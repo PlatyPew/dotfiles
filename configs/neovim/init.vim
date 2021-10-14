@@ -23,7 +23,7 @@ Plug 'shadmansaleh/lualine.nvim'                                        " Status
 " Syntax highlighting
 Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
 Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync all'}    " Better syntax parser
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better highlighting tool
 
 "" Functionalities
@@ -31,14 +31,15 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better
 Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
 " File finding
 Plug 'junegunn/fzf.vim'                                                 " Fuzzy finder for vim
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
-                \ 'on': ['CHADopen', 'CHADdeps']}                       " Fast file finder
+Plug 'ms-jpq/chadtree', {'branch': 'chad',
+            \ 'do': 'python3 -m chadtree deps --nvim',
+            \ 'on': 'CHADopen'}                                         " Fast file finder
 " Auto-completion
 Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
 Plug 'kabouzeid/nvim-lspinstall'                                        " LSP server installer
-Plug 'tami5/lspsaga.nvim'                                               " LSP extras
+Plug 'alphatroya/lspsaga.nvim'                                          " LSP extras
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}             " Very fast autocompletion
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
 " Debugger
 Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
 Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
