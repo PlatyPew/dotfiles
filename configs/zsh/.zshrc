@@ -507,8 +507,8 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 FILE=/usr/local/share/zsh/site-functions/git-completion.bash
 if [[ -f $FILE ]]
 then
-    rm -f $FILE
-    rm -rf /usr/local/share/zsh/site-functions/_git
+    /bin/rm -f $FILE
+    /bin/rm -rf /usr/local/share/zsh/site-functions/_git
 fi
 ############################################################
 
