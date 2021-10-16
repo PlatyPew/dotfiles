@@ -74,6 +74,8 @@ Plug 'nvim-lua/plenary.nvim'                                            " Some l
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
 
 call plug#end()
+
+let g:python3_host_prog = expand('/usr/local/bin/python3')
 """ End Of Vim-Plug -----------------------------------------------------------
 
 

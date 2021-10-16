@@ -256,7 +256,7 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
-            virtualenv --system-site-packages venv
+            virtualenv venv
             source venv/bin/activate
         else
             source venv/bin/activate
