@@ -56,6 +56,7 @@ Plug 'windwp/nvim-autopairs'                                            " Automa
 " Misc
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}                    " Nicer unicode for conceal
 Plug 'andweeb/presence.nvim'                                            " Flex on dem vscode plebs with discord rich presence
+Plug 'hkupty/iron.nvim'                                                 " REPL for programming
 Plug 'lewis6991/impatient.nvim'                                         " Lua caching for performance
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
@@ -652,6 +653,25 @@ highlight clear Conceal
 """ End of Tex Conceal Setings ------------------------------------------------
 
 
+""" Terminal Settings ---------------------------------------------------------
+"" Settings
+augroup term_nonumber
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
+augroup END
+" Allow better window switching in terminal mode
+augroup vimrc_term
+    autocmd!
+    autocmd WinEnter term://* nohlsearch
+    autocmd WinEnter term://* startinsert
+    autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
+    autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
+    autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
+    autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
+    autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
+augroup END
+""" End of Terminal Settings --------------------------------------------------
+
 lua <<EOF
 -- Tabout
 require'tabout'.setup()
@@ -701,6 +721,14 @@ dap.configurations.rust = dap.configurations.cpp
 vim.g.dap_virtual_text = true
 
 require("dapui").setup()
+
+-- Iron REPL
+require'iron'.core.set_config {
+    repl_open_cmd = "botright 15 split",
+    preferred = {
+        python = "ipython",
+    },
+}
 EOF
 command DAPContinue lua require'dap'.continue()
 command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
@@ -728,6 +756,7 @@ nnoremap <silent> <localleader> :silent WhichKey ','<CR>
 let g:which_key_sep = '→'
 let g:which_key_use_floating_win = 0
 let g:which_key_map = {}
+autocmd BufReadPre,FileReadPre * :nunmap ,sl
 
 highlight default link WhichKey          Operator
 highlight default link WhichKeySeperator DiffAdded
@@ -805,5 +834,12 @@ let g:which_key_map.l = {
     \ 's' : [':Lspsaga signature_help','Show signature'],
     \ }
 
+let g:which_key_map.r = {
+    \ 'name': '+REPL',
+    \ 'C': [':IronReplHere', 'Create REPL in same pane'],
+    \ 'r': [':IronRestart', 'Restart REPL'],
+    \ 'c': [':IronRepl', 'Create REPL'],
+    \ 'f': [':IronFocus', 'Focus'],
+    \ }
 " Register which key map
 call which_key#register(',', "g:which_key_map")
