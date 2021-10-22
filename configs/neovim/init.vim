@@ -19,7 +19,7 @@ Plug 'Pocco81/Catppuccino.nvim'                                         " Syntax
 Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
-Plug 'shadmansaleh/lualine.nvim'                                        " Status line written in lua
+Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
 " Syntax highlighting
 Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
 Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
