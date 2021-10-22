@@ -75,7 +75,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy 
 
 call plug#end()
 
-let g:python3_host_prog = expand('/usr/local/bin/python3')
+let g:python3_host_prog = glob('/???/?????*/bin/python3')
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
