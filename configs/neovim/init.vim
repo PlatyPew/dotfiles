@@ -731,6 +731,11 @@ require'iron'.core.set_config {
         python = "ipython",
     },
 }
+
+vim.g.iron_map_defaults = 0
+vim.g.iron_map_extended = 0
+
+vim.api.nvim_set_keymap('v', 'is', '<Plug>(iron-visual-send)', {})
 EOF
 command DAPContinue lua require'dap'.continue()
 command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
@@ -758,7 +763,6 @@ nnoremap <silent> <localleader> :silent WhichKey ','<CR>
 let g:which_key_sep = '→'
 let g:which_key_use_floating_win = 0
 let g:which_key_map = {}
-autocmd BufReadPre,FileReadPre * :nunmap ,sl
 
 highlight default link WhichKey          Operator
 highlight default link WhichKeySeperator DiffAdded
@@ -839,9 +843,12 @@ let g:which_key_map.l = {
 let g:which_key_map.r = {
     \ 'name': '+REPL',
     \ 'C': [':IronReplHere', 'Create REPL in same pane'],
-    \ 'r': [':IronRestart', 'Restart REPL'],
     \ 'c': [':IronRepl', 'Create REPL'],
     \ 'f': [':IronFocus', 'Focus'],
+    \ 'i': ['<Plug>(iron-interrupt)', 'Interrupt REPL'],
+    \ 'l': ['<Plug>(iron-clear)', 'Clear REPL'],
+    \ 'q': ['<Plug>(iron-exit)', 'Quit REPL'],
+    \ 'r': [':IronRestart', 'Restart REPL'],
     \ }
 " Register which key map
 call which_key#register(',', "g:which_key_map")
