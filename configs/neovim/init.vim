@@ -725,10 +725,15 @@ vim.g.dap_virtual_text = true
 require("dapui").setup()
 
 -- Iron REPL
+local pythonrepl = 'python'
+if vim.api.nvim_call_function('executable', {'ipython'}) == 1 then
+    pythonrepl = 'ipython'
+end
+
 require'iron'.core.set_config {
     repl_open_cmd = "botright 15 split",
     preferred = {
-        python = "ipython",
+        python = pythonrepl,
     },
 }
 
