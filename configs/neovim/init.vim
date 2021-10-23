@@ -320,9 +320,12 @@ EOF
 nmap <C-o> :CHADopen<CR>
 
 " Open directories with chadtree instead of netrw
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-    \ execute 'CHADopen' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+augroup Chad
+    autocmd!
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
+        \ exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
+augroup END
 """ End Of CHADTree Configurations --------------------------------------------
 
 
