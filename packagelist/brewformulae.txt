@@ -3,6 +3,7 @@ bat
 bettercap
 bfg
 bitwarden-cli
+commitizen
 entr
 exa
 figlet

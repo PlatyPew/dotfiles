@@ -256,7 +256,7 @@ zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
-            virtualenv --system-site-packages venv
+            virtualenv venv
             source venv/bin/activate
         else
             source venv/bin/activate
@@ -387,6 +387,7 @@ ft(){
 }
 
 export FZF_DEFAULT_COMMAND='rg $(pwd) --files --hidden --no-ignore-vcs -g "!.git/*" 2> /dev/null'
+export BAT_THEME='TwoDark'
 ############################################################
 
 ## Ngrok ###################################################
@@ -446,8 +447,6 @@ alias ql='quick-look'
 
 ## Prevent a Darren ########################################
 alias del='trash -F'
-alias rm="echo Use \'del\' command, or the full path: /bin/rm"
-alias /bin/rm='/bin/rm -i'
 ############################################################
 
 ## iTerm2 shell integration ################################
@@ -506,8 +505,8 @@ export PATH="/usr/local/opt/llvm/bin:$PATH"
 FILE=/usr/local/share/zsh/site-functions/git-completion.bash
 if [[ -f $FILE ]]
 then
-    rm -f $FILE
-    rm -rf /usr/local/share/zsh/site-functions/_git
+    /bin/rm -f $FILE
+    /bin/rm -rf /usr/local/share/zsh/site-functions/_git
 fi
 ############################################################
 

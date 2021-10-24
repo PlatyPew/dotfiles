@@ -19,27 +19,27 @@ Plug 'Pocco81/Catppuccino.nvim'                                         " Syntax
 Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
-Plug 'shadmansaleh/lualine.nvim'                                        " Status line written in lua
+Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
 " Syntax highlighting
 Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
 Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate all'}         " Better syntax parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync all'}    " Better syntax parser
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better highlighting tool
 
 "" Functionalities
 " Git
 Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
 " File finding
-Plug 'airblade/vim-rooter'                                              " FZF to find root of project
 Plug 'junegunn/fzf.vim'                                                 " Fuzzy finder for vim
-Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': ':CHADdeps',
-                \ 'on': ['CHADopen', 'CHADdeps']}                       " Fast file finder
+Plug 'ms-jpq/chadtree', {'branch': 'chad',
+            \ 'do': 'python3 -m chadtree deps --nvim',
+            \ 'on': 'CHADopen'}                                         " Fast file finder
 " Auto-completion
 Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
 Plug 'kabouzeid/nvim-lspinstall'                                        " LSP server installer
-Plug 'tami5/lspsaga.nvim'                                               " LSP extras
+Plug 'tami5/lspsaga.nvim', {'branch': 'nvim51'}                         " LSP extras
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': ':COQdeps'}             " Very fast autocompletion
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
 " Debugger
 Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
 Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
@@ -56,6 +56,7 @@ Plug 'windwp/nvim-autopairs'                                            " Automa
 " Misc
 Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}                    " Nicer unicode for conceal
 Plug 'andweeb/presence.nvim'                                            " Flex on dem vscode plebs with discord rich presence
+Plug 'hkupty/iron.nvim'                                                 " REPL for programming
 Plug 'lewis6991/impatient.nvim'                                         " Lua caching for performance
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
@@ -73,6 +74,8 @@ Plug 'nvim-lua/plenary.nvim'                                            " Some l
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
 
 call plug#end()
+
+let g:python3_host_prog = glob('/???/?????*/bin/python3')
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
@@ -317,9 +320,12 @@ EOF
 nmap <C-o> :CHADopen<CR>
 
 " Open directories with chadtree instead of netrw
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
-    \ execute 'CHADopen' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+augroup Chad
+    autocmd!
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
+        \ exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
+augroup END
 """ End Of CHADTree Configurations --------------------------------------------
 
 
@@ -402,17 +408,6 @@ vim.g.coq_settings = {
 local lspconfig = require'lspconfig'
 local coq = require'coq'
 local lspinstall = require'lspinstall'
-
-local jedi_config = require"lspinstall/util".extract_config("jedi_language_server")
-jedi_config.default_config.cmd[1] = "./venv/bin/jedi-language-server"
-
-require'lspinstall/servers'.jedi = vim.tbl_extend('error', jedi_config, {
-     install_script = [[
-         python3 -m venv ./venv
-         ./venv/bin/pip3 install --upgrade pip
-         ./venv/bin/pip3 install --upgrade jedi-language-server
-     ]]
-})
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -537,6 +532,10 @@ let g:doge_doc_standard_c = 'kernel_doc'
 """ End of Doge Configurations ------------------------------------------------
 
 """ TreeSitter Configurations -------------------------------------------------
+set foldenable!
+set foldlevel=20
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 "" Enable tree sitter
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -648,6 +647,25 @@ highlight clear Conceal
 """ End of Tex Conceal Setings ------------------------------------------------
 
 
+""" Terminal Settings ---------------------------------------------------------
+"" Settings
+augroup term_nonumber
+    autocmd!
+    autocmd TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
+augroup END
+" Allow better window switching in terminal mode
+augroup vimrc_term
+    autocmd!
+    autocmd WinEnter term://* nohlsearch
+    autocmd WinEnter term://* startinsert
+    autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
+    autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
+    autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
+    autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
+    autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
+augroup END
+""" End of Terminal Settings --------------------------------------------------
+
 lua <<EOF
 -- Tabout
 require'tabout'.setup()
@@ -675,7 +693,7 @@ end
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
-    command = '/usr/local/Cellar/llvm/12.0.1/bin/lldb-vscode',
+    command = '/usr/local/opt/llvm/bin/lldb-vscode',
     name = 'lldb',
 }
 
@@ -697,6 +715,24 @@ dap.configurations.rust = dap.configurations.cpp
 vim.g.dap_virtual_text = true
 
 require("dapui").setup()
+
+-- Iron REPL
+local pythonrepl = 'python'
+if vim.api.nvim_call_function('executable', {'ipython'}) == 1 then
+    pythonrepl = 'ipython'
+end
+
+require'iron'.core.set_config {
+    repl_open_cmd = "botright 15 split",
+    preferred = {
+        python = pythonrepl,
+    },
+}
+
+vim.g.iron_map_defaults = 0
+vim.g.iron_map_extended = 0
+
+vim.api.nvim_set_keymap('v', 'is', '<Plug>(iron-visual-send)', {})
 EOF
 command DAPContinue lua require'dap'.continue()
 command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
@@ -801,5 +837,15 @@ let g:which_key_map.l = {
     \ 's' : [':Lspsaga signature_help','Show signature'],
     \ }
 
+let g:which_key_map.r = {
+    \ 'name': '+REPL',
+    \ 'C': [':IronReplHere', 'Create REPL in same pane'],
+    \ 'c': [':IronRepl', 'Create REPL'],
+    \ 'f': [':IronFocus', 'Focus'],
+    \ 'i': ['<Plug>(iron-interrupt)', 'Interrupt REPL'],
+    \ 'l': ['<Plug>(iron-clear)', 'Clear REPL'],
+    \ 'q': ['<Plug>(iron-exit)', 'Quit REPL'],
+    \ 'r': [':IronRestart', 'Restart REPL'],
+    \ }
 " Register which key map
 call which_key#register(',', "g:which_key_map")
