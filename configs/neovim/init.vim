@@ -48,7 +48,6 @@ Plug 'Pocco81/DAPInstall.nvim'                                          " Packag
 "More efficient (lazy) plugins
 Plug 'abecodes/tabout.nvim'                                             " Tabout faster from quotes or parenthesis
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
-Plug 'easymotion/vim-easymotion'                                        " Enhanced mobility in vim
 Plug 'liuchengxu/vim-which-key'                                         " Dictionary of features
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
 Plug 'preservim/nerdcommenter'                                          " Easy commenting
@@ -64,7 +63,7 @@ Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
             \ 'on': 'DogeGenerate'}                                     " Documentation Generator
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'jsx']}     " Quick way to generatre html
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'mhartington/formatter.nvim', {'on': 'Format'}                     " Auto formatter
+Plug 'mhartington/formatter.nvim'                                       " Auto formatter
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 
 "" Dependencies
