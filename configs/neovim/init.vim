@@ -411,7 +411,6 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 lspinstall.setup()
 local servers = lspinstall.installed_servers()
-table.insert(servers, 'clangd')
 
 for _, server in pairs(servers) do
     local config = {
@@ -426,7 +425,7 @@ for _, server in pairs(servers) do
             executable = "pdflatex",
             onSave = true,
         }, }, }
-    elseif server == 'clangd' then
+    elseif server == 'cpp' then
         config.cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" }
     end
 
