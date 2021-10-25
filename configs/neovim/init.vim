@@ -62,11 +62,9 @@ Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
 Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
             \ 'on': 'DogeGenerate'}                                     " Documentation Generator
-Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
+Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'jsx']}     " Quick way to generatre html
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'sbdchd/neoformat',
-            \ {'for': ['c', 'cpp', 'python', 'javascript'],
-            \ 'on': 'Neoformat'}                                        " Auto formatter
+Plug 'mhartington/formatter.nvim', {'on': 'Format'}                     " Auto formatter
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 
 "" Dependencies
@@ -602,41 +600,69 @@ nmap <leader>IQ :call StopInstantServer()<CR>
 """ End of Instant  -----------------------------------------------------------
 
 
-""" Neoformat Settings --------------------------------------------------------
+""" Format Settings -----------------------------------------------------------
 "" Mappings
 " Format code
-nnoremap <silent> g= :Neoformat <CR>
+nnoremap <silent> g= :Format <CR>
 
 "" Settings
-" Clang-format
-let g:neoformat_c_clangformat = {
-    \ 'exe': 'clang-format',
-    \ 'args': ['--style="{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100}"']
-\}
-let g:neoformat_cpp_clangformat = {
-    \ 'exe': 'clang-format',
-    \ 'args': ['--style="{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100}"']
-\}
+lua <<EOF
+local clang_format = {
+    function()
+        return {
+            exe = 'clang-format',
+            args = {
+                '--style', '"{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100}"',
+                '--assume-filename', vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            },
+            stdin = true,
+            cwd = vim.fn.expand('%:p:h'),
+        }
+    end
+}
 
-" Yapf
-let g:neoformat_python_yapf = {
-    \ 'exe': 'yapf',
-    \ 'args': ['--style="{column_limit: 100}"']
-\}
+local prettier = {
+    function()
+        return {
+            exe = 'prettier',
+            args = {
+                '--stdin-filepath', vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+                '--tab-width=4', '--print-width=100',
+            },
+            stdin = true,
+        }
+    end
+}
 
-" Prettier
-let g:neoformat_javascript_prettier = {
-    \ 'exe': 'prettier',
-    \ 'args': ['--stdin-filepath', '"%:p"', '--tab-width=4', '--print-width=100'],
-    \ 'stdin': 1,
-\}
+local yapf = {
+    function()
+        return {
+            exe = 'yapf',
+            args = {
+                '--style', '"{column_limit:100}"',
+                vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)),
+            },
+            stdin = true,
+        }
+    end
+}
 
-let g:neoformat_vue_prettier = {
-    \ 'exe': 'prettier',
-    \ 'args': ['--stdin-filepath', '"%:p"', '--tab-width=4', '--print-width=100', '--vue-indent-script-and-style'],
-    \ 'stdin': 1,
-\}
-""" End of Neoformat Settings -------------------------------------------------
+require('formatter').setup({
+    filetype = {
+        c = clang_format,
+        cpp = clang_format,
+        java = clang_format,
+        javascript = prettier,
+        html = prettier,
+        css = prettier,
+        json = prettier,
+        yaml = prettier,
+        jsx = prettier,
+        python = yapf,
+    },
+})
+EOF
+""" End of format Settings ----------------------------------------------------
 
 
 """ Tex Conceal Setings -------------------------------------------------------
