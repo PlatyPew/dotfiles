@@ -60,7 +60,7 @@ Plug 'hkupty/iron.nvim'                                                 " REPL f
 Plug 'lewis6991/impatient.nvim'                                         " Lua caching for performance
 Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
-Plug 'kkoomen/vim-doge', {'do': { -> doge#install() },
+Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
             \ 'on': 'DogeGenerate'}                                     " Documentation Generator
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'vue']}     " Quick way to generatre html
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
