@@ -279,6 +279,7 @@ require'lualine'.setup {
                     error = {bg = "#222424", fg = "#cf637e"},
                     warn = {bg = "#222424", fg = "#f4a261"},
                     info = {bg = "#222424", fg = "#dbc074"},
+                    hint = {bg = "#222424", fg = "#dbc074"},
                 }
             },
         },
