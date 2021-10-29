@@ -426,8 +426,6 @@ for _, server in pairs(servers) do
             executable = "pdflatex",
             onSave = true,
         }, }, }
-    elseif server == 'cpp' then
-        config.cmd = { "/usr/local/opt/llvm/bin/clangd", "--background-index", "--clang-tidy" }
     end
 
     lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
@@ -718,7 +716,7 @@ end
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
-    command = '/usr/local/opt/llvm/bin/lldb-vscode',
+    command = vim.api.nvim_call_function('glob', {'/???/?????*/opt/llvm/bin/lldb-vscode'}),
     name = 'lldb',
 }
 
