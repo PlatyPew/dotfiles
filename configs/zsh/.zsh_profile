@@ -1,12 +1,3 @@
-# Aliases ##################################################
-alias tg='telegram -N'
-############################################################
-
-# Pwnbox2 Integration ######################################
-# alias p2="~/PwnBox2/p2"
-# source $HOME/PwnBox2/_p2-autocomplete.zsh
-############################################################
-
 # Set default compilation flags ############################
 # export CC=clang
 # export CFLAGS='-I /usr/local/opt/llvm/include -fsanitize=signed-integer-overflow -fsanitize=undefined -ggdb3 -O0 -std=c18 -Wall -Werror -Wextra -Wno-sign-compare -Wno-unused-parameter -Wno-unused-variable'
@@ -27,4 +18,6 @@ rate() {
 }
 ############################################################
 
+# k3d autocomplete #########################################
 source <(k3d completion zsh && print "compdef _k3d k3d")
+############################################################
