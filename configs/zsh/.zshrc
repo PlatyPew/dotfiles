@@ -21,6 +21,10 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
 ############################################################
 
+# Path for homebrew ########################################
+export PATH=/opt/homebrew/bin:$PATH
+############################################################
+
 # Path to your oh-my-zsh installation.
 export ZSH="$(echo ~$USER)/.oh-my-zsh"
 # Use beam shape cursor on startup.
