@@ -23,6 +23,11 @@ export EDITOR=nvim
 
 # Path for homebrew ########################################
 export PATH=/opt/homebrew/bin:$PATH
+export PATH=/opt/homebrew/sbin:$PATH
+
+export BREW_PREFIX=$(brew --prefix)
+
+export PATH=$BREW_PREFIX/opt/llvm/bin:$PATH
 ############################################################
 
 # Path to your oh-my-zsh installation.
@@ -501,16 +506,12 @@ for km in viopp visual; do
 done
 ############################################################
 
-## Path ####################################################
-export PATH="/usr/local/opt/llvm/bin:$PATH"
-############################################################
-
 ## Fix git completion ######################################
-FILE=/usr/local/share/zsh/site-functions/git-completion.bash
+FILE=$BREW_PREFIX/share/zsh/site-functions/git-completion.bash
 if [[ -f $FILE ]]
 then
     /bin/rm -f $FILE
-    /bin/rm -rf /usr/local/share/zsh/site-functions/_git
+    /bin/rm -rf $BREW_PREFIX/share/zsh/site-functions/_git
 fi
 ############################################################
 
