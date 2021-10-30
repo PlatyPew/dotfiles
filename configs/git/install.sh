@@ -6,4 +6,4 @@ git submodule update --remote --recursive
 brew install git-lfs gnupg pinentry-mac commitizen
 
 mkdir -p $HOME/.gnupg
-echo "pinentry-program /usr/local/bin/pinentry-mac" >> $HOME/.gnupg/gpg-agent.conf
+echo "pinentry-program $(brew --prefix)/bin/pinentry-mac" > $HOME/.gnupg/gpg-agent.conf

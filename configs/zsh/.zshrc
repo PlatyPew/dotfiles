@@ -510,8 +510,8 @@ done
 FILE=$BREW_PREFIX/share/zsh/site-functions/git-completion.bash
 if [[ -f $FILE ]]
 then
-    /bin/rm -f $FILE
-    /bin/rm -rf $BREW_PREFIX/share/zsh/site-functions/_git
+    rm -f $FILE
+    rm -rf $BREW_PREFIX/share/zsh/site-functions/_git
 fi
 ############################################################
 

@@ -6,4 +6,4 @@ brew tap homebrew/cask-fonts
 brew install --cask --force $(cat packagelist/brewcask.txt)
 npm -g install $(cat packagelist/npm.txt)
 pip3 install $(cat packagelist/pip.txt)
-sudo ln -sfn /usr/local/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+sudo ln -sfn $(brew --prefix)/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk

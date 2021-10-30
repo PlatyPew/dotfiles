@@ -21,5 +21,5 @@ python3 -m pip install virtualenv
 npm install -g speed-test
 
 # Fix git completions
-rm /usr/local/share/zsh/site-functions/git-completion.bash
-rm -rf /usr/local/share/zsh/site-functions/_git
+rm $(brew --prefix)/share/zsh/site-functions/git-completion.bash
+rm -rf $(brew --prefix)/share/zsh/site-functions/_git
