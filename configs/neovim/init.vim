@@ -72,7 +72,12 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy 
 
 call plug#end()
 
-let g:python3_host_prog = glob('/???/?????*/bin/python3')
+let g:brew_path = '/usr/local'
+if !empty(glob('/opt/homebrew'))
+    let g:brew_path = '/opt/homebrew'
+endif
+
+let g:python3_host_prog = g:brew_path . '/bin/python3'
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
@@ -716,7 +721,7 @@ end
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
-    command = vim.api.nvim_call_function('glob', {'/???/?????*/opt/llvm/bin/lldb-vscode'}),
+    command = vim.g.brew_path .. '/opt/llvm/bin/lldb-vscode',
     name = 'lldb',
 }
 
