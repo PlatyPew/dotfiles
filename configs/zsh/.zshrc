@@ -270,8 +270,8 @@ ve() {
         else
             source venv/bin/activate
         fi
-        echo "python:  $(which python)"
-        echo "pip:     $(which pip)"
+        echo "python:  $(which python3)"
+        echo "pip:     $(which pip3)"
     else
         echo "You are already in a virtual environment"
         return 1
