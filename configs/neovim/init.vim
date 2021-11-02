@@ -36,7 +36,7 @@ Plug 'ms-jpq/chadtree', {'branch': 'chad',
             \ 'on': 'CHADopen'}                                         " Fast file finder
 " Auto-completion
 Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
-Plug 'kabouzeid/nvim-lspinstall'                                        " LSP server installer
+Plug 'williamboman/nvim-lsp-installer'                                  " LSP server installer
 Plug 'tami5/lspsaga.nvim', {'branch': 'nvim51'}                         " LSP extras
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
@@ -410,22 +410,19 @@ vim.g.coq_settings = {
 
 local lspconfig = require'lspconfig'
 local coq = require'coq'
-local lspinstall = require'lspinstall'
+local lspinstall = require'nvim-lsp-installer'
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-lspinstall.setup()
-local servers = lspinstall.installed_servers()
-
-for _, server in pairs(servers) do
+lspinstall.on_server_ready(function(server)
     local config = {
         capabilities = capabilities,
         flags = { debounce_text_changes = 500 },
         root_dir = lspconfig.util.path.dirname,
     }
 
-    if server == 'latex' then
+    if server.name == 'latex' then
         config.settings = { texlab = { build = {
             args = { "-halt-on-error", "%f" },
             executable = "pdflatex",
@@ -433,8 +430,8 @@ for _, server in pairs(servers) do
         }, }, }
     end
 
-    lspconfig[server].setup(coq.lsp_ensure_capabilities(config))
-end
+    server:setup(coq.lsp_ensure_capabilities(config))
+end)
 
 require'lspsaga'.init_lsp_saga{
     finder_action_keys = {
