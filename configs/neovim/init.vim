@@ -740,7 +740,7 @@ dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
 
-vim.g.dap_virtual_text = true
+require'nvim-dap-virtual-text'.setup()
 
 require("dapui").setup()
 
