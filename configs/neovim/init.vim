@@ -30,7 +30,7 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better
 " Git
 Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
 " File finding
-Plug 'junegunn/fzf.vim'                                                 " Fuzzy finder for vim
+Plug 'nvim-telescope/telescope.nvim'                                    " Fuzzy finder for vim
 Plug 'ms-jpq/chadtree', {'branch': 'chad',
             \ 'do': 'python3 -m chadtree deps --nvim',
             \ 'on': 'CHADopen'}                                         " Fast file finder
@@ -68,7 +68,7 @@ Plug 'vim-scripts/LargeFile'                                            " Edit l
 
 "" Dependencies
 Plug 'nvim-lua/plenary.nvim'                                            " Some library
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() }}                      " Fuzzy finder
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 call plug#end()
 
@@ -311,7 +311,7 @@ require'lualine'.setup {
         },
         lualine_y = {function () return [[buffers]] end}
     },
-    extensions = {'fzf', 'chadtree'},
+    extensions = {'chadtree'},
 }
 EOF
 """ End Of Lualine Configurations ---------------------------------------------
@@ -332,58 +332,33 @@ augroup END
 """ End Of CHADTree Configurations --------------------------------------------
 
 
-""" FZF Configurations --------------------------------------------------------
-"" Settings
-let g:fzf_action = {
-  \ 'ctrl-t': 'tab split',
-  \ 'ctrl-x': 'split',
-  \ 'ctrl-v': 'vsplit' }
-let g:fzf_tags_command = 'ctags -R'
-let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Constant', 'border': 'sharp' } }
-
-let $FZF_DEFAULT_OPTS = '--layout=reverse --info=inline'
+""" Telescope Configurations --------------------------------------------------
 let $FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-vcs -g '!.git/*'"
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+lua << EOF
+local telescope = require'telescope'
 
-let $BAT_THEME = 'TwoDark'
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+telescope.setup({
+    defaults = {
+        layout_config = {
+            prompt_position = 'top',
+            preview_width = 0.5,
+        },
+        mappings = {
+            i = {
+                ["<esc>"] = require('telescope.actions').close,
+            },
+        },
+    },
+})
 
-" Ripgrep advanced
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --hidden --column --line-number --no-heading --color=always --smart-case %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
-
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-
-" Git grep
-command! -bang -nargs=* GGrep
-  \ call fzf#vim#grep(
-  \   'git grep --line-number '.shellescape(<q-args>), 0,
-  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
+telescope.load_extension('fzf')
+EOF
 
 "" Mappings
-nnoremap <silent><C-p> :Files<CR>
-nnoremap <silent><C-g> :RG<CR>
-""" End Of FZF Configurations -------------------------------------------------
+nnoremap <silent><C-p> :Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
+nnoremap <silent><C-g> :Telescope live_grep<CR>
+""" End Of Telescope Configurations -------------------------------------------
 
 
 """ LSP Configurations --------------------------------------------------------
@@ -818,20 +793,20 @@ let g:which_key_map.d = {
     \ }
 
 let g:which_key_map.f = {
-    \ 'name' : '+FZF',
-    \ '/' : [':BLines','Lines in buffer'],
-    \ 'C' : [':Commits','Commits'],
-    \ 'G' : [':GFiles?','Git status files'],
-    \ 'H' : [':History/','Search history'],
-    \ 'M' : [':Maps','Mappings'],
-    \ '\' : [':Lines','Lines'],
-    \ 'b' : [':Buffers','Buffers'],
-    \ 'c' : [':BCommits','Commits for buffer'],
-    \ 'f' : [':Files','Files'],
-    \ 'g' : [':GFiles','Git files'],
-    \ 'h' : [':History:','Command history'],
-    \ 'm' : [':Marks','Marks'],
-    \ 'r' : [':RG','Ripgrep'],
+    \ 'name' : '+Telescope',
+    \ '/' : [':Telescope current_buffer_fuzzy_find','Lines in buffer'],
+    \ 'C' : [':Telescope git_commits','Commits'],
+    \ 'G' : [':Telescope git_status','Git status files'],
+    \ 'M' : [':Telescope keymaps','Mappings'],
+    \ 'b' : [':Telescope buffers','Buffers'],
+    \ 'c' : [':Telescope git_bcommits','Commits for buffer'],
+    \ 'f' : [':Telescope find_files find_command=rg,--ignore,--hidden,--files','Files'],
+    \ 'g' : [':Telescope git_files','Git files'],
+    \ 'h' : [':Telescope command_history','Command history'],
+    \ 'm' : [':Telescope marks','Marks'],
+    \ 'r' : [':Telescope live_grep','Ripgrep'],
+    \ 's' : [':Telescope spell_suggest','Spell suggest'],
+    \ 't' : [':Telescope treesitter','Treesitter'],
     \ }
 
 let g:which_key_map.g = {
