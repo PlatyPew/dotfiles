@@ -774,7 +774,6 @@ let g:which_key_map.D = [':DogeGenerate','Generate docs']
 let g:which_key_map.F = [':Neoformat','Format code']
 let g:which_key_map.T = [':Transparency','Toggle Transparency']
 let g:which_key_map.o = [':CHADopen','File Explorer']
-let g:which_key_map.t = [':Lspsaga open_floaterm','Open terminal']
 let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
 
 let g:which_key_map.d = {
@@ -824,8 +823,9 @@ let g:which_key_map.g = {
     \ }
 
 let g:which_key_map.l = {
-    \ 'name' : '+LSPSaga' ,
+    \ 'name' : '+LSP' ,
     \ 'D' : [':Lspsaga show_line_diagnostics','Show line diagnostics'],
+    \ 'I' : [':LspInstallInfo','LSP Installer'],
     \ 'c' : [':Lspsaga code_action','Code action'],
     \ 'd' : [':Lspsaga show_cursor_diagnostics','Show cursor diagnostics'],
     \ 'f' : [':Lspsaga lsp_finder','Find reference'],
