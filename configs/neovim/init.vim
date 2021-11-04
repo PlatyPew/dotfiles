@@ -50,6 +50,7 @@ Plug 'abecodes/tabout.nvim'                                             " Tabout
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
 Plug 'liuchengxu/vim-which-key'                                         " Dictionary of features
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
+Plug 'phaazon/hop.nvim'
 Plug 'preservim/nerdcommenter'                                          " Easy commenting
 Plug 'windwp/nvim-autopairs'                                            " Automatically pair parenthesis and more
 " Misc
@@ -732,6 +733,14 @@ vim.g.iron_map_defaults = 0
 vim.g.iron_map_extended = 0
 
 vim.api.nvim_set_keymap('v', 'is', '<Plug>(iron-visual-send)', {})
+
+require'hop'.setup()
+vim.api.nvim_set_keymap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
+vim.api.nvim_set_keymap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
+vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent=true})
+vim.api.nvim_set_keymap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
+vim.api.nvim_set_keymap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
+vim.api.nvim_set_keymap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
 EOF
 command DAPContinue lua require'dap'.continue()
 command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
