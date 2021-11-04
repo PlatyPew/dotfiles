@@ -21,3 +21,10 @@ rate() {
 # k3d autocomplete #########################################
 source <(k3d completion zsh && print "compdef _k3d k3d")
 ############################################################
+
+# PwnBox2 Integration ######################################
+if [ $BREW_PREFIX = "/usr/local" ]; then
+    alias p2="~/PwnBox2/p2"
+    source $HOME/PwnBox2/_p2-autocomplete.zsh
+fi
+############################################################
