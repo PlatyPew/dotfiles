@@ -40,6 +40,7 @@ Plug 'williamboman/nvim-lsp-installer'                                  " LSP se
 Plug 'tami5/lspsaga.nvim', {'branch': 'nvim51'}                         " LSP extras
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
+Plug 'tom-doerr/vim_codex', {'on': 'CreateCompletion'}
 " Debugger
 Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
 Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
@@ -782,6 +783,7 @@ autocmd  FileType which_key set laststatus=0 noshowmode noruler
 let g:which_key_map.D = [':DogeGenerate','Generate docs']
 let g:which_key_map.F = [':Neoformat','Format code']
 let g:which_key_map.T = [':Transparency','Toggle Transparency']
+let g:which_key_map.a = [':CreateCompletion','Auto-Complete code']
 let g:which_key_map.o = [':CHADopen','File Explorer']
 let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
 
