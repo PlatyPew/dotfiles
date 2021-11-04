@@ -333,8 +333,6 @@ augroup END
 
 
 """ Telescope Configurations --------------------------------------------------
-let $FZF_DEFAULT_COMMAND="rg --files --hidden --no-ignore-vcs -g '!.git/*'"
-
 lua << EOF
 local telescope = require'telescope'
 
@@ -357,7 +355,7 @@ telescope.load_extension('fzf')
 EOF
 
 "" Mappings
-nnoremap <silent><C-p> :Telescope find_files find_command=rg,--ignore,--hidden,--files<CR>
+nnoremap <silent><C-p> :Telescope find_files find_command=rg,--files,--hidden,--no-ignore-vcs,-g,!.git/*<CR>
 nnoremap <silent><C-g> :Telescope live_grep<CR>
 """ End Of Telescope Configurations -------------------------------------------
 
@@ -801,7 +799,7 @@ let g:which_key_map.f = {
     \ 'M' : [':Telescope keymaps','Mappings'],
     \ 'b' : [':Telescope buffers','Buffers'],
     \ 'c' : [':Telescope git_bcommits','Commits for buffer'],
-    \ 'f' : [':Telescope find_files find_command=rg,--ignore,--hidden,--files','Files'],
+    \ 'f' : [':Telescope find_files find_command=rg,--files,--hidden,--no-ignore-vcs,-g,!.git/*','Files'],
     \ 'g' : [':Telescope git_files','Git files'],
     \ 'h' : [':Telescope command_history','Command history'],
     \ 'm' : [':Telescope marks','Marks'],
