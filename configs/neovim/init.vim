@@ -75,12 +75,7 @@ Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 call plug#end()
 
-let g:brew_path = '/usr/local'
-if !empty(glob('/opt/homebrew'))
-    let g:brew_path = '/opt/homebrew'
-endif
-
-let g:python3_host_prog = g:brew_path . '/bin/python3'
+let g:python3_host_prog = $HOME . '/dotfiles/configs/neovim/venv/bin/python3'
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
@@ -695,7 +690,7 @@ end
 local dap = require('dap')
 dap.adapters.lldb = {
     type = 'executable',
-    command = vim.g.brew_path .. '/opt/llvm/bin/lldb-vscode',
+    command = 'lldb-vscode',
     name = 'lldb',
 }
 
