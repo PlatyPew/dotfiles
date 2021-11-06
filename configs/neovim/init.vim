@@ -67,6 +67,7 @@ Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
 Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'jsx']}     " Quick way to generatre html
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'mhartington/formatter.nvim'                                       " Auto formatter
+Plug 'nathom/filetype.nvim'
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 
 "" Dependencies
@@ -88,6 +89,7 @@ set foldmethod=syntax
 set foldmethod=expr
 set showcmd
 set noruler
+let g:did_load_filetypes = 1
 " set eventignore=all " Ultimate optimisation. Basically no plugins or anything run
 """ End Of Optimisation ---------------------------------------------------------
 
