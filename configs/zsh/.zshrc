@@ -60,7 +60,7 @@ plugins=(
     docker
     extract
     git
-    osx
+    macos
     tmux
     vi-mode
     web-search
