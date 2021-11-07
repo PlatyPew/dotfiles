@@ -4,7 +4,7 @@
     adjust = !"~/dotfiles/configs/git/gitz/git-adjust"
     aliases = config --get-regexp alias
     branches = branch -a
-    cm = !"cz commit"
+    cm = !"cz commit -s"
     copy = !"~/dotfiles/configs/git/gitz/git-copy"
     delete = !"~/dotfiles/configs/git/gitz/git-delete"
     infer = !"~/dotfiles/configs/git/gitz/git-infer"
