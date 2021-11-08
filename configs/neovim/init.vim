@@ -820,7 +820,7 @@ let g:which_key_map.f = {
 let g:which_key_map.g = {
     \ 'name' : '+Git' ,
     \ 'R' : [':Gitsigns reset_buffer','Reset buffer'],
-    \ 'S' : [':Gitsigns stage_hunk','Stage hunk'],
+    \ 'S' : [':Gitsigns stage_buffer','Stage buffer'],
     \ 'U' : [':Gitsigns reset_buffer_index','Reset buffer index'],
     \ '[' : [':Gitsigns prev_hunk','Previous hunk'],
     \ ']' : [':Gitsigns next_hunk','Next hunk'],
@@ -828,7 +828,7 @@ let g:which_key_map.g = {
     \ 'd' : [':Gitsigns diffthis','Reset buffer index'],
     \ 'p' : [':Gitsigns preview_hunk','Preview hunk'],
     \ 'r' : [':Gitsigns reset_hunk','Reset hunk'],
-    \ 's' : [':Gitsigns stage_buffer','Stage buffer'],
+    \ 's' : [':Gitsigns stage_hunk','Stage hunk'],
     \ 'u' : [':Gitsigns undo_stage_hunk','Undo stage hunk'],
     \ }
 
