@@ -396,7 +396,7 @@ lspinstall.on_server_ready(function(server)
         root_dir = lspconfig.util.path.dirname,
     }
 
-    if server.name == 'latex' then
+    if server.name == 'texlab' then
         config.settings = { texlab = { build = {
             args = { "-halt-on-error", "%f" },
             executable = "pdflatex",
