@@ -64,7 +64,8 @@ Plug 'jbyuki/instant.nvim',
             \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
 Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
             \ 'on': 'DogeGenerate'}                                     " Documentation Generator
-Plug 'mattn/emmet-vim', {'for': ['html', 'css', 'markdown', 'jsx']}     " Quick way to generatre html
+Plug 'mattn/emmet-vim',
+            \ {'for': ['html', 'css', 'markdown', 'javascriptreact']}   " Quick way to generatre html
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'mhartington/formatter.nvim'                                       " Auto formatter
 Plug 'nathom/filetype.nvim'
@@ -402,6 +403,8 @@ lspinstall.on_server_ready(function(server)
             executable = "pdflatex",
             onSave = true,
         }, }, }
+    elseif server.name == 'html' or server.name == 'emmet_ls' then
+        config.filetypes = { 'html', 'css', 'javascriptreact' }
     end
 
     server:setup(coq.lsp_ensure_capabilities(config))
@@ -628,6 +631,7 @@ require('formatter').setup({
         javascript = prettier,
         html = prettier,
         css = prettier,
+        javascriptreact = prettier,
         json = prettier,
         yaml = prettier,
         jsx = prettier,
