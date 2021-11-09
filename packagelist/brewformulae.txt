@@ -13,11 +13,9 @@ git-lfs
 gnu-sed
 gnupg
 k3d
-lastpass-cli
 libmpc
 llvm
 lolcat
-luajit
 navi
 neofetch
 neovim
@@ -25,12 +23,11 @@ p7zip
 pandoc
 pinentry-mac
 prettier
-pypy3
 ripgrep
-telegram-cli
 tmux
 trash
 universal-ctags
+virtualenv
 wakeonlan
 watch
 wget

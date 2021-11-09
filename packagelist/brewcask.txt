@@ -1,9 +1,6 @@
 docker
 font-iosevka-nerd-font
 iterm2
-keycastr
 ngrok
 rar
 rectangle
-skim
-xquartz
