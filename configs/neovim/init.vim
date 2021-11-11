@@ -16,7 +16,6 @@ call plug#begin()                                                       " Plugin
 " Colours
 Plug 'Pocco81/Catppuccino.nvim'                                         " Syntax highlighting with treesitter integration
 " User Interface
-Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
 Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
@@ -30,7 +29,7 @@ Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better
 " Git
 Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
 " File finding
-Plug 'nvim-telescope/telescope.nvim'                                    " Fuzzy finder for vim
+Plug 'ibhagwan/fzf-lua'
 Plug 'ms-jpq/chadtree', {'branch': 'chad',
             \ 'do': 'python3 -m chadtree deps --nvim',
             \ 'on': 'CHADopen'}                                         " Fast file finder
@@ -72,8 +71,9 @@ Plug 'nathom/filetype.nvim'
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 
 "" Dependencies
+Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
 Plug 'nvim-lua/plenary.nvim'                                            " Some library
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'vijaymarupudi/nvim-fzf'
 
 call plug#end()
 
@@ -335,29 +335,23 @@ augroup END
 
 """ Telescope Configurations --------------------------------------------------
 lua << EOF
-local telescope = require'telescope'
-
-telescope.setup({
-    defaults = {
-        sorting_strategy = 'ascending',
-        layout_config = {
-            prompt_position = 'top',
-            preview_width = 0.5,
-        },
-        mappings = {
-            i = {
-                ["<esc>"] = require('telescope.actions').close,
-            },
+require'fzf-lua'.setup{
+    winopts = {
+        preview = {
+            scrollbar = false,
+            wrap = 'wrap',
         },
     },
-})
+}
 
-telescope.load_extension('fzf')
+vim.api.nvim_set_keymap('n', '<C-p>',
+    "<cmd>lua require('fzf-lua').files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
+    { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<C-g>',
+    "<cmd>lua require('fzf-lua').live_grep_native()<CR>",
+    { noremap = true, silent = true })
 EOF
-
-"" Mappings
-nnoremap <silent><C-p> :Telescope find_files find_command=rg,--files,--hidden,--no-ignore-vcs,-g,!.git/*<CR>
-nnoremap <silent><C-g> :Telescope live_grep<CR>
 """ End Of Telescope Configurations -------------------------------------------
 
 
@@ -806,19 +800,18 @@ let g:which_key_map.d = {
 
 let g:which_key_map.f = {
     \ 'name' : '+Telescope',
-    \ '/' : [':Telescope current_buffer_fuzzy_find','Lines in buffer'],
-    \ 'C' : [':Telescope git_commits','Commits'],
-    \ 'G' : [':Telescope git_status','Git status files'],
-    \ 'M' : [':Telescope keymaps','Mappings'],
-    \ 'b' : [':Telescope buffers','Buffers'],
-    \ 'c' : [':Telescope git_bcommits','Commits for buffer'],
-    \ 'f' : [':Telescope find_files find_command=rg,--files,--hidden,--no-ignore-vcs,-g,!.git/*','Files'],
-    \ 'g' : [':Telescope git_files','Git files'],
-    \ 'h' : [':Telescope command_history','Command history'],
-    \ 'm' : [':Telescope marks','Marks'],
-    \ 'r' : [':Telescope live_grep','Ripgrep'],
-    \ 's' : [':Telescope spell_suggest','Spell suggest'],
-    \ 't' : [':Telescope treesitter','Treesitter'],
+    \ '/' : [':FzfLua blines','Lines in buffer'],
+    \ 'C' : [':FzfLua git_commits','Commits'],
+    \ 'G' : [':FzfLua git_status','Git status files'],
+    \ 'M' : [':FzfLua keymaps','Mappings'],
+    \ 'b' : [':FzfLua buffers','Buffers'],
+    \ 'c' : [':FzfLua git_bcommits','Commits for buffer'],
+    \ 'f' : [':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"','Files'],
+    \ 'g' : [':FzfLua git_files','Git files'],
+    \ 'h' : [':FzfLua command_history','Command history'],
+    \ 'm' : [':FzfLua marks','Marks'],
+    \ 'r' : [':FzfLua live_grep','Ripgrep'],
+    \ 's' : [':FzfLua spell_suggest','Spell suggest'],
     \ }
 
 let g:which_key_map.g = {
