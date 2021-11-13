@@ -799,7 +799,7 @@ let g:which_key_map.d = {
     \ }
 
 let g:which_key_map.f = {
-    \ 'name' : '+Telescope',
+    \ 'name' : '+FZF',
     \ '/' : [':FzfLua blines','Lines in buffer'],
     \ 'C' : [':FzfLua git_commits','Commits'],
     \ 'G' : [':FzfLua git_status','Git status files'],
