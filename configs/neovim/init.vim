@@ -14,7 +14,7 @@ call plug#begin()                                                       " Plugin
 
 "" Aesthetics
 " Colours
-Plug 'Pocco81/Catppuccino.nvim'                                         " Syntax highlighting with treesitter integration
+Plug 'PlatyPew/Catppuccino.nvim'                                        " Syntax highlighting with treesitter integration
 " User Interface
 Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
 Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
