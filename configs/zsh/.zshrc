@@ -22,11 +22,10 @@ export EDITOR=nvim
 ############################################################
 
 # Path for homebrew ########################################
-export PATH=/opt/homebrew/bin:$PATH
-export PATH=/opt/homebrew/sbin:$PATH
-
 export BREW_PREFIX=$(brew --prefix)
 
+export PATH=$BREW_PREFIX/bin:$PATH
+export PATH=$BREW_PREFIX/sbin:$PATH
 export PATH=$BREW_PREFIX/opt/llvm/bin:$PATH
 ############################################################
 
@@ -90,7 +89,7 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
 POWERLEVEL9K_SHORTEN_DELIMITER=""
 POWERLEVEL9K_DIR_SHOW_WRITABLE="true"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(virtualenv ssh user_joined dir vcs newline os_icon prompt_char_joined)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(anaconda virtualenv ssh user_joined dir vcs newline os_icon prompt_char_joined)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     custom_brew_version
     custom_docker_version
@@ -112,6 +111,9 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     ram_joined
     wifi
 )
+
+POWERLEVEL9K_ANACONDA_FOREGROUND="11"
+POWERLEVEL9K_ANACONDA_BACKGROUND="26"
 
 POWERLEVEL9K_VIRTUALENV_FOREGROUND="11"
 POWERLEVEL9K_VIRTUALENV_BACKGROUND="26"
@@ -266,10 +268,8 @@ ve() {
     if [[ -z ${VIRTUAL_ENV} ]]; then
         if [[ ! -d venv ]]; then
             virtualenv venv
-            source venv/bin/activate
-        else
-            source venv/bin/activate
         fi
+        source venv/bin/activate
         echo "python:  $(which python3)"
         echo "pip:     $(which pip3)"
     else
@@ -277,12 +277,38 @@ ve() {
         return 1
     fi
 }
-
 alias de='deactivate'
-alias pdb='python3 -m pdb'
+
+export CONDA_AUTO_ACTIVATE_BASE=false
+__conda_setup="$(\"$BREW_PREFIX/Caskroom/miniforge/base/bin/conda\" 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "$BREW_PREFIX/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        . "$BREW_PREFIX/Caskroom/miniforge/base/etc/profile.d/conda.sh"
+    else
+        export PATH="$BREW_PREFIX/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+
+cve() {
+    if [[ -z ${CONDA_PREFIX} ]]; then
+        if [[ ! -d venv ]]; then
+            conda create -p ./venv -y python=3
+        fi
+        conda activate ./venv
+        echo "python:  $(which python3)"
+        echo "pip:     $(which pip3)"
+    else
+        echo "You are already in a virtual environment"
+        return 1
+    fi
+}
+alias cde='conda deactivate'
+
 alias python='python3'
 alias pip='pip3'
-alias n='navi'
 ############################################################
 
 ## Misc Functions ##########################################
@@ -452,6 +478,7 @@ alias cat='bat'
 alias sed='gsed'
 alias awk='gawk'
 alias ql='quick-look'
+alias n='navi'
 ############################################################
 
 ## Prevent a Darren ########################################

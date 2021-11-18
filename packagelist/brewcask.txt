@@ -1,6 +1,7 @@
 docker
 font-iosevka-nerd-font
 iterm2
+miniforge
 ngrok
 rar
 rectangle
