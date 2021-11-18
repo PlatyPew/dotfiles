@@ -22,11 +22,15 @@ export EDITOR=nvim
 ############################################################
 
 # Path for homebrew ########################################
-export BREW_PREFIX=$(brew --prefix)
+BREW_PREFIX="/opt/homebrew"
+if [[ $(uname -m) == "x86_64" ]]; then
+    BREW_PREFIX="/usr/local"
+fi
 
-export PATH=$BREW_PREFIX/bin:$PATH
-export PATH=$BREW_PREFIX/sbin:$PATH
-export PATH=$BREW_PREFIX/opt/llvm/bin:$PATH
+export PATH=$PATH:$BREW_PREFIX/bin
+export PATH=$PATH:$BREW_PREFIX/sbin
+
+export PATH=$PATH:$BREW_PREFIX/opt/llvm/bin
 ############################################################
 
 # Path to your oh-my-zsh installation.
@@ -287,7 +291,7 @@ else
     if [ -f "$BREW_PREFIX/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
         . "$BREW_PREFIX/Caskroom/miniforge/base/etc/profile.d/conda.sh"
     else
-        export PATH="$BREW_PREFIX/Caskroom/miniforge/base/bin:$PATH"
+        export PATH="$PATH:$BREW_PREFIX/Caskroom/miniforge/base/bin"
     fi
 fi
 unset __conda_setup
