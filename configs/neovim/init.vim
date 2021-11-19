@@ -307,7 +307,7 @@ require'lualine'.setup {
                 buffers_color = {
                     inactive = {bg = '#44475a', fg = '#ffffff'},
                 },
-                padding = 0,
+                padding = 1,
             }
         },
         lualine_y = {function () return [[buffers]] end}
