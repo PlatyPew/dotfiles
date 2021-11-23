@@ -47,7 +47,6 @@ Plug 'rcarriga/nvim-dap-ui'                                             " TUI fo
 Plug 'theHamsta/nvim-dap-virtual-text'                                  " Displays variable informations
 Plug 'Pocco81/DAPInstall.nvim'                                          " Package manager for debuggers
 "More efficient (lazy) plugins
-Plug 'abecodes/tabout.nvim'                                             " Tabout faster from quotes or parenthesis
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
 Plug 'liuchengxu/vim-which-key'                                         " Dictionary of features
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
@@ -664,9 +663,6 @@ augroup END
 """ End of Terminal Settings --------------------------------------------------
 
 lua <<EOF
--- Tabout
-require'tabout'.setup()
-
 -- Discord Rich Presence
 require("presence"):setup({ enable_line_number = true })
 
