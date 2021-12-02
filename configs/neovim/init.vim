@@ -36,7 +36,7 @@ Plug 'ms-jpq/chadtree', {'branch': 'chad',
 " Auto-completion
 Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
 Plug 'williamboman/nvim-lsp-installer'                                  " LSP server installer
-Plug 'tami5/lspsaga.nvim', {'branch': 'nvim51'}                         " LSP extras
+Plug 'tami5/lspsaga.nvim'                                               " LSP extras
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
 Plug 'tom-doerr/vim_codex',
