@@ -66,7 +66,6 @@ Plug 'mattn/emmet-vim',
             \ {'for': ['html', 'css', 'markdown', 'javascriptreact']}   " Quick way to generatre html
 Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
 Plug 'mhartington/formatter.nvim'                                       " Auto formatter
-Plug 'nathom/filetype.nvim'
 Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
 
 "" Dependencies
