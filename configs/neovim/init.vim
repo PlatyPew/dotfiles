@@ -277,7 +277,7 @@ require'lualine'.setup {
         lualine_z = {
             {
                 'diagnostics',
-                sources = { 'nvim_lsp' },
+                sources = { 'nvim_diagnostic' },
                 symbols = { error = ' ', warn = ' ', info = ' ' },
                 diagnostics_color = {
                     error = {bg = "#222424", fg = "#cf637e"},
