@@ -635,7 +635,6 @@ EOF
 
 
 """ Tex Conceal Setings -------------------------------------------------------
-set conceallevel=2
 let g:tex_conceal="abdgm"
 let g:tex_conceal_frac=1
 highlight clear Conceal
