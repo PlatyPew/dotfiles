@@ -33,8 +33,6 @@ export PATH=$PATH:$BREW_PREFIX/sbin
 export PATH=$PATH:$BREW_PREFIX/opt/llvm/bin
 ############################################################
 
-# Path to your oh-my-zsh installation.
-export ZSH="$(echo ~$USER)/.oh-my-zsh"
 # Use beam shape cursor on startup.
 echo -ne '\e[5 q'
 
@@ -50,40 +48,39 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-ZSH_DISABLE_COMPFIX="true"
-
-DISABLE_AUTO_UPDATE="true"
-
 # Plugins ####################################################
-plugins=(
-    autojump
-    brew
-    colored-man-pages
-    docker
-    extract
-    git
-    macos
-    tmux
-    vi-mode
-    web-search
+source "${HOME}/.zgenom/zgenom.zsh"
 
-    zsh-aliases-exa
-    zsh-autopair
-    zsh-autosuggestions
-    zsh-defer
-    zsh-syntax-highlighting
-    zsh-vimode-visual
-)
+if ! zgenom saved; then
+    zgenom ohmyzsh
+
+    zgenom ohmyzsh plugins/autojump
+    zgenom ohmyzsh plugins/brew
+    zgenom ohmyzsh plugins/colored-man-pages
+    zgenom ohmyzsh plugins/docker
+    zgenom ohmyzsh plugins/extract
+    zgenom ohmyzsh plugins/git
+    zgenom ohmyzsh plugins/macos
+    zgenom ohmyzsh plugins/tmux
+    zgenom ohmyzsh plugins/vi-mode
+    zgenom ohmyzsh plugins/web-search
+
+    zgenom load DarrinTisdale/zsh-aliases-exa
+    zgenom load hlissner/zsh-autopair
+    zgenom load zsh-users/zsh-autosuggestions
+    zgenom load zsh-users/zsh-syntax-highlighting
+    zgenom load b4b4r07/zsh-vimode-visual
+    zgenom load romkatv/zsh-defer
+
+    zgenom load romkatv/powerlevel10k powerlevel10k
+
+    zgenom save
+fi
 ##############################################################
 
 # Powerlevel10k configs ######################################
-ZSH_THEME="powerlevel10k/powerlevel10k"
-
 source $HOME/dotfiles/configs/zsh/.p10k.zsh
 #############################################################
-
-source $ZSH/oh-my-zsh.sh
 
 ## Syntax highlighting configs ##############################
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
