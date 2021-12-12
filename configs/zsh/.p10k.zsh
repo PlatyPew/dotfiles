@@ -28,16 +28,15 @@
 
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    custom_brew_version
-    custom_docker_version
-    custom_git_version
-    custom_nvim_version
-    custom_python2_version
-    custom_python_version
-    custom_pip_version
+    my_brew_version
+    my_docker_version
+    my_git_version
+    my_nvim_version
+    my_python_version
+    my_pip_version
     java_version
     node_version
-    custom_npm_version
+    my_npm_version
 
     background_jobs
     date
@@ -50,6 +49,18 @@
   )
 
   typeset -g POWERLEVEL9K_MODE="nerdfont-complete"
+
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+
+  typeset -g POWERLEVEL9K_STATUS_VERBOSE=false
+  typeset -g POWERLEVEL9K_STATUS_OK_IN_NON_VERBOSE=true
+
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+  typeset -g POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX=""
+
+  typeset -g POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+  typeset -g POWERLEVEL9K_SHORTEN_DELIMITER=""
+  typeset -g POWERLEVEL9K_DIR_SHOW_WRITABLE="true"
 
   typeset -g POWERLEVEL9K_ANACONDA_FOREGROUND="11"
   typeset -g POWERLEVEL9K_ANACONDA_BACKGROUND="26"
@@ -80,6 +91,24 @@
   typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=""
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_SEGMENT_SEPARATOR=''
 
+  typeset -g POWERLEVEL9K_MY_BREW_VERSION_SHOW_ON_COMMAND="brew"
+  typeset -g POWERLEVEL9K_MY_BREW_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_SHOW_ON_COMMAND="docker"
+  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_GIT_VERSION_SHOW_ON_COMMAND="git"
+  typeset -g POWERLEVEL9K_MY_GIT_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_NVIM_VERSION_SHOW_ON_COMMAND="nvim"
+  typeset -g POWERLEVEL9K_MY_NVIM_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_SHOW_ON_COMMAND="python3"
+  typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_PIP_VERSION_SHOW_ON_COMMAND="pip3"
+  typeset -g POWERLEVEL9K_MY_PIP_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
   typeset -g POWERLEVEL9K_JAVA_VERSION_SHOW_ON_COMMAND="java|javac|jar"
   typeset -g POWERLEVEL9K_JAVA_VERSION_FOREGROUND="196"
   typeset -g POWERLEVEL9K_JAVA_VERSION_BACKGROUND=""
@@ -89,6 +118,9 @@
   typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND="2"
   typeset -g POWERLEVEL9K_NODE_VERSION_BACKGROUND=""
   typeset -g POWERLEVEL9K_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_NPM_VERSION_SHOW_ON_COMMAND="npm"
+  typeset -g POWERLEVEL9K_MY_NPM_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND="6"
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND="0"
@@ -120,10 +152,95 @@
   typeset -g POWERLEVEL9K_WIFI_BACKGROUND="6"
 
   function p10k-on-pre-prompt() {
-      p10k display '1'=show 'empty_line'=hide '*/load'=show '*/ram'=show '*/wifi'=show
+    p10k display '1'=show 'empty_line'=hide '*/load'=show '*/ram'=show '*/wifi'=show
   }
   function p10k-on-post-prompt() {
-      [[ $P9K_TTY == old ]] && p10k display '1'=hide 'empty_line'=show '*/load'=hide '*/ram'=hide '*/wifi'=hide
+    [[ $P9K_TTY == old ]] && p10k display '1'=hide 'empty_line'=show '*/load'=hide '*/ram'=hide '*/wifi'=hide
+  }
+
+  typeset -g _brew_version
+  typeset -g _docker_version
+  typeset -g _git_version
+  typeset -g _nvim_version
+  typeset -g _python_version
+  typeset -g _pip_version
+  typeset -g _npm_version
+
+  function _brew_version() {
+    local content
+    content="$(brew --version | head -n 1 | cut -d ' ' -f 2)" || content=
+    _brew_version=$content
+  }
+
+  function _docker_version() {
+    local content
+    content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
+    _docker_version=$content
+  }
+
+  function _git_version() {
+    local content
+    content="$(git --version | cut -d ' ' -f 3)" || content=
+    _git_version=$content
+  }
+
+  function _nvim_version() {
+    local content
+    content="$(nvim --version | cut -d ' ' -f 2 | head -n 1)" || content=
+    _nvim_version=$content
+  }
+
+  function _python_version() {
+    local content
+    content="$(python3 -V | cut -d ' ' -f 2)" || content=
+    _python_version=$content
+  }
+
+  function _pip_version() {
+    local content
+    content="$(pip3 --version | cut  -d ' ' -f 2)" || content=
+    _pip_version=$content
+  }
+
+  function _npm_version() {
+    local content
+    content="$(npm --version)" || content=
+    _npm_version=$content
+  }
+
+  function prompt_my_brew_version() {
+    [ -z $_brew_version ] && zsh-defer -a _brew_version
+    p10k segment -f 9 -b "" -i " " -c $_brew_version -t $_brew_version
+  }
+
+  function prompt_my_docker_version() {
+    [ -z $_docker_version ] && zsh-defer -a _docker_version
+    p10k segment -f 4 -b "" -i " " -c $_docker_version -t $_docker_version
+  }
+
+  function prompt_my_git_version() {
+    [ -z $_git_version ] && zsh-defer -a _git_version
+    p10k segment -f 9 -b "" -i " " -c $_git_version -t $_git_version
+  }
+
+  function prompt_my_nvim_version() {
+    [ -z $_nvim_version ] && zsh-defer -a _nvim_version
+    p10k segment -f 10 -b "" -i " " -c $_nvim_version -t $_nvim_version
+  }
+
+  function prompt_my_python_version() {
+    [ -z $_python_version ] && zsh-defer -a _python_version
+    p10k segment -f 4 -b "" -i " " -c $_python_version -t $_python_version
+  }
+
+  function prompt_my_pip_version() {
+    [ -z $_pip_version ] && zsh-defer -a _pip_version
+    p10k segment -f 4 -b "" -i " " -c $_pip_version -t $_pip_version
+  }
+
+  function prompt_my_npm_version() {
+    [ -z $_npm_version ] && zsh-defer -a _npm_version
+    p10k segment -f 2 -b "" -i " " -c $_npm_version -t $_npm_version
   }
 
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
