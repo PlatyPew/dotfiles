@@ -49,6 +49,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Plugins ####################################################
+ZSH_DISABLE_COMPFIX=true
+
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
