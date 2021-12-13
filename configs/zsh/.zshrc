@@ -61,11 +61,8 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/colored-man-pages
     zgenom ohmyzsh plugins/docker
     zgenom ohmyzsh plugins/extract
-    zgenom ohmyzsh plugins/git
     zgenom ohmyzsh plugins/macos
-    zgenom ohmyzsh plugins/tmux
     zgenom ohmyzsh plugins/vi-mode
-    zgenom ohmyzsh plugins/web-search
 
     zgenom load DarrinTisdale/zsh-aliases-exa
     zgenom load hlissner/zsh-autopair
