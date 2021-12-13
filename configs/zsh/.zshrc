@@ -33,6 +33,9 @@ export PATH=$PATH:$BREW_PREFIX/sbin
 export PATH=$PATH:$BREW_PREFIX/opt/llvm/bin
 ############################################################
 
+local zshrc=$HOME/.zshrc
+export DOTFILES=${zshrc:A:h:h:h}
+
 # Use beam shape cursor on startup.
 echo -ne '\e[5 q'
 

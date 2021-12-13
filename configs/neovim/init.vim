@@ -75,7 +75,7 @@ Plug 'vijaymarupudi/nvim-fzf'
 
 call plug#end()
 
-let g:python3_host_prog = $HOME . '/dotfiles/configs/neovim/venv/bin/python3'
+let g:python3_host_prog = $DOTFILES . '/configs/neovim/venv/bin/python3'
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
