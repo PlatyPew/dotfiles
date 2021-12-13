@@ -5,7 +5,6 @@ brew autoremove
 npm update -g
 PIP=$DOTFILES/configs/neovim/venv/bin/pip3
 $PIP install --upgrade `$PIP freeze | cut -d '=' -f 1`
-git -C ~/.oh-my-zsh fetch --all && git -C ~/.oh-my-zsh pull --all --rebase
-git -C ~/.oh-my-zsh/custom/themes/powerlevel10k fetch --all && git -C ~/.oh-my-zsh/custom/themes/powerlevel10k pull --all --rebase
+zgenom update
 nvim -c ':PlugUpdate' -c ':PlugUpgrade' -c ':qall' update.c
 rm -rf ~/.npm ~/Library/Caches/pip `brew --cache`
