@@ -27,8 +27,8 @@ if [[ $(uname -m) == "x86_64" ]]; then
     BREW_PREFIX="/usr/local"
 fi
 
-export PATH=$PATH:$BREW_PREFIX/bin
-export PATH=$PATH:$BREW_PREFIX/sbin
+export PATH=$BREW_PREFIX/bin:$PATH
+export PATH=$BREW_PREFIX/sbin:$PATH
 
 export PATH=$PATH:$BREW_PREFIX/opt/llvm/bin
 ############################################################
