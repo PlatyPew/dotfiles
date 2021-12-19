@@ -16,7 +16,7 @@ call plug#begin()                                                       " Plugin
 " Colours
 Plug 'Pocco81/Catppuccino.nvim', {'branch': 'old-catppuccino'}          " Syntax highlighting with treesitter integration
 " User Interface
-Plug 'mhinz/vim-startify'                                               " Better startup screen for vim
+Plug 'glepnir/dashboard-nvim'                                               " Better startup screen for vim
 Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
 Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
 " Syntax highlighting
@@ -148,7 +148,7 @@ set list listchars=tab:»·,trail:·,nbsp:·                                " Sh
 set cursorline
 set splitright                                                          " Set vertical split to always split to the right
 set splitbelow
-call matchadd('ColorColumn', '\%101v[^\n]')                             " Show colour coloumn only at lines that pass 101 characters
+autocmd Filetype * if &ft!="dashboard" | call matchadd('ColorColumn', '\%101v[^\n]')
 set noshowmode
 set updatetime=50
 set spelllang=en_gb
@@ -236,6 +236,41 @@ inoremap . .<c-g>u
 vnoremap J :m '>+1'<CR>gv=gv
 vnoremap K :m '<-2'<CR>gv=gv
 """ End Of Vanilla Rebindings -------------------------------------------------
+
+
+let g:dashboard_custom_header = [
+    \'          ▀████▀▄▄              ▄█ ',
+    \'            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
+    \'    ▄        █          ▀▀▀▀▄  ▄▀  ',
+    \'   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
+    \'  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
+    \'  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
+    \'   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
+    \'    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
+    \'   █   █  █      ▄▄           ▄▀   ',
+    \'                                   ',
+    \'               PikaVim             ',
+    \]
+let g:dashboard_custom_section={
+    \ 'a': {
+        \ 'description': ['  Find files'],
+        \ 'command': ':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"' },
+    \ 'b': {
+        \ 'description': [' Find Word'],
+        \ 'command': ':FzfLua live_grep' },
+    \ 'c': {
+        \ 'description': [' Find Marks'],
+        \ 'command': ':FzfLua marks' },
+    \ 'd': {
+        \ 'description': [' Transparency'],
+        \ 'command': ':Transparency' },
+    \ 'e': {
+        \ 'description': ['  File Explorer'],
+        \ 'command': ':CHADopen' },
+    \ 'f': {
+        \ 'description': [' Exit'],
+        \ 'command': ':q' }
+    \ }
 
 
 """ Highlighted Yank Configurations -------------------------------------------
