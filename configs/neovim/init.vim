@@ -39,8 +39,7 @@ Plug 'williamboman/nvim-lsp-installer'                                  " LSP se
 Plug 'tami5/lspsaga.nvim'                                               " LSP extras
 Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
 Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
-Plug 'tom-doerr/vim_codex',
-            \ {'on': ['CreateCompletion', 'CreateCompletionLine']}
+Plug 'jameshiew/nvim-magic'
 " Debugger
 Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
 Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
@@ -72,6 +71,7 @@ Plug 'vim-scripts/LargeFile'                                            " Edit l
 Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
 Plug 'nvim-lua/plenary.nvim'                                            " Some library
 Plug 'vijaymarupudi/nvim-fzf'
+Plug 'MunifTanjim/nui.nvim'
 
 call plug#end()
 
@@ -676,6 +676,8 @@ require('gitsigns').setup{
 
 vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require("gitsigns").diffthis()<CR>]]', { noremap = true, silent = true })
 
+require('nvim-magic').setup()
+
 local dap_install = require("dap-install")
 for _, debugger in ipairs(require("dap-install.api.debuggers").get_installed_debuggers()) do
     dap_install.config(debugger)
@@ -770,11 +772,9 @@ autocmd! FileType which_key
 autocmd  FileType which_key set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
 
-let g:which_key_map.A = [':CreateCompletion','Auto-Complete']
 let g:which_key_map.D = [':DogeGenerate','Generate docs']
 let g:which_key_map.F = [':Neoformat','Format code']
 let g:which_key_map.T = [':Transparency','Toggle Transparency']
-let g:which_key_map.a = [':CreateCompletionLine','Auto-Complete line']
 let g:which_key_map.o = [':CHADopen','File Explorer']
 let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
 
