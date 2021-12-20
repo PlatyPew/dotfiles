@@ -79,23 +79,17 @@ let g:python3_host_prog = $DOTFILES . '/configs/neovim/venv/bin/python3'
 """ End Of Vim-Plug -----------------------------------------------------------
 
 
-""" Optimisation ---------------------------------------------------------------
-"" Lua cache loading
-lua require('impatient')
-set lazyredraw
-set ttyfast
-set foldmethod=syntax
-set foldmethod=expr
-set showcmd
-set noruler
-let g:did_load_filetypes = 1
-" set eventignore=all " Ultimate optimisation. Basically no plugins or anything run
-""" End Of Optimisation ---------------------------------------------------------
-
-
-""" Plugin Colouring ----------------------------------------------------------
-set termguicolors
 lua <<EOF
+local remap = vim.api.nvim_set_keymap
+-- Optimisation
+require('impatient') -- Lua cache loading
+vim.o.foldmethod = 'expr'
+vim.o.lazyredraw = true
+vim.o.ruler = false
+
+
+-- Plugin Colouring
+vim.o.termguicolors = true
 -- Catppuccino
 vim.g.transparent = true
 
@@ -117,125 +111,113 @@ end
 
 -- Colorizer
 require'colorizer'.setup()
+
+vim.cmd "command Transparency lua transparency()"
+
+remap('n', '<Leader>T', [[ <Cmd>Transparency<CR> ]], {noremap = true, silent = true})
+
+
+-- Vanilla Configurations
+vim.cmd [[
+    syntax on
+    colorscheme catppuccino
+    highlight ColorColumn guifg=#d84652 guibg=#000000
+
+    augroup highlights
+        autocmd!
+        autocmd Filetype * if &ft!="dashboard" && &ft!="" | call matchadd('ColorColumn', '\%101v[^\n]')
+        autocmd FileType text,markdown,tex setlocal spell
+        autocmd FileType text,markdown,tex highlight clear ColorColumn
+    augroup END
+]]
+
+vim.o.cursorline = true
+vim.o.encoding = 'utf-8'
+vim.o.expandtab = true
+vim.o.list = true
+vim.o.listchars = 'tab:»·,trail:·,nbsp:·'
+vim.o.showmode = false
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.shiftwidth = 4
+vim.o.smartindent = true
+vim.o.softtabstop = 4
+vim.o.spelllang = 'en_gb'
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.tabstop = 4
+vim.o.updatetime = 50
+vim.o.whichwrap = 'b,s,<,>,h,l'
+vim.o.wrap = true
+
+vim.g.tex_flavor = 'latex'
+vim.g.clipboard = {
+    name = "pbcopy",
+    copy = {
+        ["*"] = "pbcopy",
+        ["+"] = "pbcopy"
+    },
+    paste = {
+        ["*"] = "pbpaste",
+        ["+"] = "pbpaste"
+    },
+    cache_enabled = 0,
+}
+
+
+-- Vanilla Rebindings
+-- Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
+-- Increase horizontal split
+remap('n', '<Up>', [[ <Cmd>resize +2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Up>', [[ <Cmd>resize +2<CR> ]], {noremap = true, silent = true})
+
+-- Decrease horizontal split
+remap('n', '<Down>', [[ <Cmd>resize -2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Down>', [[ <Cmd>resize -2<CR> ]], {noremap = true, silent = true})
+
+-- Decrease vertical split
+remap('n', '<Left>', [[ <Cmd>vertical resize -2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Left>', [[ <Cmd>vertical resize -2<CR> ]], {noremap = true, silent = true})
+
+-- Increase vertical split
+remap('n', '<Right>', [[ <Cmd>vertical resize +2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Right>', [[ <Cmd>vertical resize +2<CR> ]], {noremap = true, silent = true})
+
+-- Better window switching
+-- Move to pane on the left      Ctrl-h
+remap('n', '<C-h>', '<C-w>h', {})
+-- Move to lower pane            Ctrl-j
+remap('n', '<C-j>', '<C-w>j', {})
+-- Move to upper pane            Ctrl-j
+remap('n', '<C-k>', '<C-w>k', {})
+-- Move to pane on the right     Ctrl-h
+remap('n', '<C-l>', '<C-w>l', {})
+
+-- Remap semicolon to colon
+remap('n', ';', ':', {noremap = true})
+
+-- Lazy colon, {noremap = true
+remap('n', ';', ':', {noremap = true})
+
+-- Cycling buffers
+remap('n', '<Leader>bh', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bj', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bk', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bl', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bq', [[ <Cmd>bdelete<CR> ]], {noremap = true})
+
+-- Stops cursor from flying everywhere
+remap('n', 'n', 'nzzzv', {noremap = true})
+remap('n', 'N', 'Nzzzv', {noremap = true})
+
+-- Better undo breakpoints
+remap('i', ',', ',<C-g>u', {noremap = true})
+remap('i', '.', '.<C-g>u', {noremap = true})
+
+-- Move stuff in visual mode
+remap('v', 'J', [[ :m '>+1'<CR>gv=gv ]], {noremap = true})
+remap('v', 'K', [[ :m '<-2'<CR>gv=gv ]], {noremap = true})
 EOF
-
-command Transparency lua transparency()
-nnoremap <silent><Leader>T :Transparency<CR>
-""" End Of Plugin Colouring ---------------------------------------------------
-
-
-""" Vanilla Colouring ---------------------------------------------------------
-syntax on                                                               " Enable syntax highlighting
-" Enable true colours
-colorscheme catppuccino
-highlight ColorColumn guifg=#d84652 guibg=#000000
-""" End Of Vanilla Colouring --------------------------------------------------
-
-
-""" Vanilla Configurations ----------------------------------------------------
-set number relativenumber
-set encoding=UTF-8
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l                                                  " Cursor wrap around in normal mode
-set autoindent
-set smartindent
-set wrap
-set tabstop=4 shiftwidth=4 
-set tabstop=4
-set softtabstop=4
-set expandtab                                                           " #spacemasterrace
-set list listchars=tab:»·,trail:·,nbsp:·                                " Show trailing spaces and hard tabs
-set cursorline
-set splitright                                                          " Set vertical split to always split to the right
-set splitbelow
-autocmd Filetype * if &ft!="dashboard" && &ft!="" | call matchadd('ColorColumn', '\%101v[^\n]')
-set noshowmode
-set updatetime=50
-set spelllang=en_gb
-augroup spell_check
-    autocmd!
-    autocmd FileType text,markdown,tex setlocal spell
-    autocmd FileType text,markdown,tex highlight clear ColorColumn
-augroup END
-let g:tex_flavor = 'latex'
-let g:clipboard = {
-  \ 'name': 'pbcopy',
-  \ 'copy': {
-  \    '+': 'pbcopy',
-  \    '*': 'pbcopy',
-  \  },
-  \ 'paste': {
-  \    '+': 'pbpaste',
-  \    '*': 'pbpaste',
-  \ },
-  \ 'cache_enabled': 0,
-  \ }
-""" End Of Vanilla Configurations ----------------------------------------------
-
-
-""" Vanilla Rebindings -------------------------------------------------------
-"" Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
-" Increase horizontal split
-nnoremap <silent> <Up> :resize +2 <CR>
-vnoremap <silent> <Up> :resize +2 <CR>
-" Decrease horizontal split
-nnoremap <silent> <Down> :resize -2 <CR>
-vnoremap <silent> <Down> :resize -2 <CR>
-" Decrease vertical split
-nnoremap <silent> <Left> :vertical resize -2 <CR>
-vnoremap <silent> <Left> :vertical resize -2 <CR>
-" Increase vertical split
-nnoremap <silent> <Right> :vertical resize +2 <CR>
-vnoremap <silent> <Right> :vertical resize +2 <CR>
-
-"" Better window switching
-" Move to pane on the left      Ctrl-h
-nmap <C-h> <C-W>h
-" Move to lower pane            Ctrl-j
-nmap <C-j> <C-W>j
-" Move to upper pane            Ctrl-j
-nmap <C-k> <C-W>k
-" Move to pane on the right     Ctrl-h
-nmap <C-l> <C-W>l
-
-"" Better tab
-" Create new tabs    \t
-nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>th :tabfirst<CR>
-nnoremap <leader>tj :tabNext<CR>
-nnoremap <leader>tk :tabprevious<CR>
-nnoremap <leader>tl :tablast<CR>
-nnoremap <leader>tq :tabclose<CR>
-
-"" Easy Save
-" Save files    Ctrl-s
-imap <C-s> <Esc>:w<CR>a
-
-"" Remap semicolon to colon
-nnoremap ; :
-
-"" Cycling buffers
-nnoremap <leader>bh :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR>
-nnoremap <leader>bj :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR>
-nnoremap <leader>bk :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>
-nnoremap <leader>bl :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>
-nnoremap <leader>bq :bdelete<CR>
-
-"" Capital Y now actually makes sense
-nnoremap Y yg_
-
-"" Stops cursor from flying everywhere
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-"" Better undo breakpoints
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-
-"" Move stuff in visual mode
-vnoremap J :m '>+1'<CR>gv=gv
-vnoremap K :m '<-2'<CR>gv=gv
-""" End Of Vanilla Rebindings -------------------------------------------------
 
 
 let g:dashboard_custom_header = [
