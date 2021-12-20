@@ -82,7 +82,7 @@ let g:python3_host_prog = $DOTFILES . '/configs/neovim/venv/bin/python3'
 lua <<EOF
 local remap = vim.api.nvim_set_keymap
 -- Optimisation
-require('impatient') -- Lua cache loading
+require'impatient' -- Lua cache loading
 vim.o.foldmethod = 'expr'
 vim.o.lazyredraw = true
 vim.o.ruler = false
@@ -93,15 +93,15 @@ vim.o.termguicolors = true
 -- Catppuccino
 vim.g.transparent = true
 
-local catppuccino = require("catppuccino")
-catppuccino.setup({
+local catppuccino = require'catppuccino'
+catppuccino.setup{
     colorscheme = 'soft_manilo',
     transparency = vim.g.transparent,
     integrations = {
         lsp_saga = true,
         gitgutter = true,
     },
-})
+}
 
 function transparency()
     vim.g.transparent = not vim.g.transparent
@@ -267,7 +267,7 @@ vim.g.highlightedyank_highlight_duration = -1
 
 
 -- Lualine Configurations
-require'lualine'.setup {
+require'lualine'.setup{
     options = {
         icons_enabled = true,
         theme = 'catppuccino',
@@ -357,11 +357,11 @@ require'fzf-lua'.setup{
 
 -- Fzf Configurations
 vim.api.nvim_set_keymap('n', '<C-p>',
-    "<cmd>lua require('fzf-lua').files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
+    "<cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
     { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<C-g>',
-    "<cmd>lua require('fzf-lua').live_grep_native()<CR>",
+    "<cmd>lua require'fzf-lua'.live_grep_native()<CR>",
     { noremap = true, silent = true })
 
 
@@ -435,8 +435,7 @@ remap('n', 'gc', [[ <Cmd>Lspsaga code_action<CR> ]], {noremap = true, silent = t
 
 
 -- Autopairs Configurations
-local remap = vim.api.nvim_set_keymap
-local npairs = require('nvim-autopairs')
+local npairs = require'nvim-autopairs'
 
 npairs.setup({ map_bs = false })
 
@@ -507,7 +506,7 @@ vim.o.foldenable = false
 vim.o.foldlevel = 20
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
-require'nvim-treesitter.configs'.setup {
+require'nvim-treesitter.configs'.setup{
     ensure_installed = "maintained",
     highlight = {
         enable = true,
@@ -533,50 +532,11 @@ require'nvim-treesitter.configs'.setup {
 }
 
 vim.cmd "highlight TSDefinitionUsage gui=underline"
-EOF
 
 
-""" Instant Settings-----------------------------------------------------------
-let g:instant_username = trim(system('whoami'))
+-- Format Configurations
+remap('n', 'g=', [[ <Cmd>Format<CR> ]], { noremap = true, silent = true })
 
-function StartInstantSession()
-    let port = input('Server Port: ')
-    silent execute('InstantStartServer 0.0.0.0 ' . port)
-    silent execute('InstantStartSession 0.0.0.0 ' . port)
-    execute('InstantStatus')
-endfunction
-
-function JoinInstantSession()
-    let host = input('Server Host to connect: ')
-    let port = input('Server Port to connect: ')
-    silent execute('InstantJoinSession ' . host . ' ' . port)
-    execute('InstantStatus')
-endfunction
-
-function StopInstantSession()
-    silent execute('InstantStop')
-    execute('InstantStatus')
-endfunction
-
-function StopInstantServer()
-    silent execute('InstantStopServer')
-    execute('InstantStatus')
-endfunction
-
-nmap <leader>Is :call StartInstantSession()<CR>
-nmap <leader>Ij :call JoinInstantSession()<CR>
-nmap <leader>Iq :call StopInstantSession()<CR>
-nmap <leader>IQ :call StopInstantServer()<CR>
-""" End of Instant  -----------------------------------------------------------
-
-
-""" Format Settings -----------------------------------------------------------
-"" Mappings
-" Format code
-nnoremap <silent> g= :Format <CR>
-
-"" Settings
-lua <<EOF
 local clang_format = {
     function()
         return {
@@ -617,7 +577,7 @@ local yapf = {
     end
 }
 
-require('formatter').setup({
+require'formatter'.setup{
     filetype = {
         c = clang_format,
         cpp = clang_format,
@@ -631,43 +591,74 @@ require('formatter').setup({
         jsx = prettier,
         python = yapf,
     },
-})
-EOF
-""" End of format Settings ----------------------------------------------------
+}
 
 
-""" Tex Conceal Setings -------------------------------------------------------
-let g:tex_conceal="abdgm"
-let g:tex_conceal_frac=1
-highlight clear Conceal
-""" End of Tex Conceal Setings ------------------------------------------------
+-- Instant Configurations
+vim.g.instant_username = io.popen('whoami'):read('*a'):sub(0, -2)
+
+function InstantStartSession()
+    local port = vim.fn.input('Server Port: ')
+    vim.api.nvim_exec('InstantStartServer 0.0.0.0 ' .. port, true)
+    vim.api.nvim_exec('InstantStartSession 0.0.0.0 ' .. port, true)
+    vim.cmd 'InstantStatus'
+end
+
+function InstantJoinSession()
+    local host = vim.fn.input('Server Host: ')
+    local port = vim.fn.input('Server Port: ')
+    vim.api.nvim_exec('InstantJoinSession ' .. host .. ' ' .. port , true)
+    vim.cmd 'InstantStatus'
+end
+
+function InstantStopSession()
+    vim.api.nvim_exec('InstantStop')
+    vim.cmd 'InstantStatus'
+end
+
+function InstantStopServer()
+    vim.api.nvim_exec('InstantStopServer')
+    vim.cmd 'InstantStatus'
+end
+
+remap('n', '<Leader>Is', [[ <Cmd>lua InstantStartSession()<CR> ]], {})
+remap('n', '<Leader>Ij', [[ <Cmd>lua InstantJoinSession()<CR> ]], {})
+remap('n', '<Leader>Iq', [[ <Cmd>lua InstantStopSession()<CR> ]], {})
+remap('n', '<Leader>IQ', [[ <Cmd>lua InstantStopServer()<CR> ]], {})
 
 
-""" Terminal Settings ---------------------------------------------------------
-"" Settings
-augroup term_nonumber
-    autocmd!
-    autocmd TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
-augroup END
-" Allow better window switching in terminal mode
-augroup vimrc_term
-    autocmd!
-    autocmd WinEnter term://* nohlsearch
-    autocmd WinEnter term://* startinsert
-    autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
-    autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
-    autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
-    autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
-    autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
-augroup END
-""" End of Terminal Settings --------------------------------------------------
+-- Tex Conceal Configurations
+vim.g.tex_conceal = 'abdgm'
+vim.g.tex_conceal_frac = 1
+vim.cmd 'highlight clear Conceal'
 
-lua <<EOF
--- Discord Rich Presence
-require("presence"):setup({ enable_line_number = true })
 
--- Gitsigns
-require('gitsigns').setup{
+-- Terminal Configurations
+vim.cmd [[
+    augroup term_nonumber
+        autocmd!
+        autocmd TermOpen * setlocal nonumber norelativenumber
+    augroup END
+
+    augroup vimrc_term
+        autocmd!
+        autocmd WinEnter term://* nohlsearch
+        autocmd WinEnter term://* startinsert
+        autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
+        autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
+        autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
+        autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
+        autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
+    augroup END
+]]
+
+
+-- Discord Rich Presence Configurations
+require"presence":setup{ enable_line_number = true }
+
+
+-- Gitsigns Configurations
+require'gitsigns'.setup{
     signs = {
         delete = { text = '│' },
         topdelete = { text = '│' },
@@ -676,16 +667,20 @@ require('gitsigns').setup{
     numhl = true,
 }
 
-vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require("gitsigns").diffthis()<CR>]]', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require"gitsigns".diffthis()<CR>]]', { noremap = true, silent = true })
 
-require('nvim-magic').setup()
 
-local dap_install = require("dap-install")
+-- Nvim magic Configurations
+require'nvim-magic'.setup()
+
+
+-- Nvim DAP Configurations
+local dap_install = require'dap-install'
 for _, debugger in ipairs(require("dap-install.api.debuggers").get_installed_debuggers()) do
     dap_install.config(debugger)
 end
 
-local dap = require('dap')
+local dap = require'dap'
 dap.adapters.lldb = {
     type = 'executable',
     command = 'lldb-vscode',
@@ -709,9 +704,33 @@ dap.configurations.rust = dap.configurations.cpp
 
 require'nvim-dap-virtual-text'.setup()
 
-require("dapui").setup()
+require'dapui'.setup()
 
--- Iron REPL
+vim.cmd [[
+    command DAPContinue lua require'dap'.continue()
+    command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
+    command DAPStepOver lua require'dap'.step_over()
+    command DAPStepInto lua require'dap'.step_into()
+    command DAPStepOut lua require'dap'.step_out()
+    command DAPRepl lua require'dap'.repl.open()
+    command DAPDisconnect lua require'dapui'.disconnect()
+    command DAPClose lua require'dap'.close()
+    command DAPUIToggle lua require'dapui'.toggle()
+    command DAPUIEval lua require'dapui'.eval()
+]]
+
+remap('n', '<F5>', [[ <Cmd>DAPContinue<CR> ]], { noremap = true, silent = true })
+remap('n', '<F6>', [[ <Cmd>DAPTBreakpoint<CR> ]], { noremap = true, silent = true })
+remap('n', '<F10>', [[ <Cmd>DAPStepOver<CR> ]], { noremap = true, silent = true })
+remap('n', '<F11>', [[ <Cmd>DAPStepInto<CR> ]], { noremap = true, silent = true })
+remap('n', '<F12>', [[ <Cmd>DAPStepOut<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>dc', [[ <Cmd>DAPClose<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>dr', [[ <Cmd>DAPRepl<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>du', [[ <Cmd>DAPUIToggle<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>de', [[ <Cmd>DAPUIEval<CR> ]], { noremap = true, silent = true })
+
+
+-- Iron REPL Configurations
 local pythonrepl = 'python'
 if vim.api.nvim_call_function('executable', {'ipython'}) == 1 then
     pythonrepl = 'ipython'
@@ -729,6 +748,8 @@ vim.g.iron_map_extended = 0
 
 vim.api.nvim_set_keymap('v', 'is', '<Plug>(iron-visual-send)', {})
 
+
+-- Hop Configurations
 require'hop'.setup()
 vim.api.nvim_set_keymap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
 vim.api.nvim_set_keymap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
@@ -737,26 +758,6 @@ vim.api.nvim_set_keymap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent
 vim.api.nvim_set_keymap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
 vim.api.nvim_set_keymap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
 EOF
-command DAPContinue lua require'dap'.continue()
-command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
-command DAPStepOver lua require'dap'.step_over()
-command DAPStepInto lua require'dap'.step_into()
-command DAPStepOut lua require'dap'.step_out()
-command DAPRepl lua require'dap'.repl.open()
-command DAPDisconnect lua require'dapui'.disconnect()
-command DAPClose lua require'dap'.close()
-command DAPUIToggle lua require'dapui'.toggle()
-command DAPUIEval lua require'dapui'.eval()
-
-nnoremap <silent> <F5> :DAPContinue<CR>
-nnoremap <silent> <F6> :DAPTBreakpoint<CR>
-nnoremap <silent> <F10> :DAPStepOver<CR>
-nnoremap <silent> <F11> :DAPStepInto<CR>
-nnoremap <silent> <F12> :DAPStepOut<CR>
-nnoremap <silent> <leader>dc :DAPClose<CR>
-nnoremap <silent> <leader>dr :DAPRepl<CR>
-nnoremap <silent> <leader>du :DAPUIToggle<CR>
-nnoremap <silent> <leader>de :DAPUIEval<CR>
 
 let g:maplocalleader = ','
 nnoremap <silent> <localleader> :silent WhichKey ','<CR>
