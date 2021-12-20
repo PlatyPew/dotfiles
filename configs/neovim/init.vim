@@ -217,58 +217,56 @@ remap('i', '.', '.<C-g>u', {noremap = true})
 -- Move stuff in visual mode
 remap('v', 'J', [[ :m '>+1'<CR>gv=gv ]], {noremap = true})
 remap('v', 'K', [[ :m '<-2'<CR>gv=gv ]], {noremap = true})
-EOF
 
 
-let g:dashboard_custom_header = [
-    \'          ▀████▀▄▄              ▄█ ',
-    \'            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
-    \'    ▄        █          ▀▀▀▀▄  ▄▀  ',
-    \'   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
-    \'  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
-    \'  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
-    \'   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
-    \'    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
-    \'   █   █  █      ▄▄           ▄▀   ',
-    \'                                   ',
-    \'               PikaVim             ',
-    \]
-let g:dashboard_custom_section={
-    \ 'a': {
-        \ 'description': ['  New File              :enew'],
-        \ 'command': ':enew' },
-    \ 'b': {
-        \ 'description': ['  Find files            <C-p>'],
-        \ 'command': ':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"' },
-    \ 'c': {
-        \ 'description': ['  Find Word             <C-g>'],
-        \ 'command': ':FzfLua live_grep' },
-    \ 'd': {
-        \ 'description': ['  Find Marks              ,fm'],
-        \ 'command': ':FzfLua marks' },
-    \ 'e': {
-        \ 'description': ['  Transparency          <\-T>'],
-        \ 'command': ':Transparency' },
-    \ 'f': {
-        \ 'description': ['  File Explorer         <C-o>'],
-        \ 'command': ':CHADopen' },
-    \ 'g': {
-        \ 'description': ['  Exit                     :q'],
-        \ 'command': ':q' }
-    \ }
+-- Dashboard Configurations
+vim.g.dashboard_custom_header = {
+    '          ▀████▀▄▄              ▄█ ',
+    '            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
+    '    ▄        █          ▀▀▀▀▄  ▄▀  ',
+    '   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
+    '  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
+    '  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
+    '   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
+    '    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
+    '   █   █  █      ▄▄           ▄▀   ',
+    '                                   ',
+    '               PikaVim             ',
+}
+
+vim.g.dashboard_custom_section = {
+    a = {
+      description = {'  New File              :enew'},
+      command = ':enew' },
+    b = {
+      description = {'  Find files            <C-p>'},
+      command = ':FzfLua files cmd=rg\\ --files\\ --hidden\\ --no-ignore-vcs\\ -g\\ "!.git/*"' },
+    c = {
+      description = {'  Find Word             <C-g>'},
+      command = ':FzfLua live_grep' },
+    d = {
+      description = {'  Find Marks              ,fm'},
+      command = ':FzfLua marks' },
+    e = {
+      description = {'  Transparency          <\\-T>'},
+      command = ':Transparency' },
+    f = {
+      description = {'  File Explorer         <C-o>'},
+      command = ':CHADopen' },
+    g = {
+        description = {'  Exit                     :q'},
+        command = ':q' },
+}
 
 
-""" Highlighted Yank Configurations -------------------------------------------
-"" Colours
-highlight HighlightedyankRegion gui=reverse
-
-"" Settings
-let g:highlightedyank_highlight_duration = -1
-""" End Of Highlighted Yank Configurations ------------------------------------
+-- Highlighted Yank Configurations
+-- Colours
+vim.cmd "highlight HighlightedyankRegion gui=reverse"
+-- Settings
+vim.g.highlightedyank_highlight_duration = -1
 
 
-""" Lualine Configurations ----------------------------------------------------
-lua <<EOF
+-- Lualine Configurations
 require'lualine'.setup {
     options = {
         icons_enabled = true,
@@ -332,27 +330,21 @@ require'lualine'.setup {
     },
     extensions = {'chadtree'},
 }
-EOF
-""" End Of Lualine Configurations ---------------------------------------------
 
 
-"" CHADTree Configurations ---------------------------------------------------
-"" Mappings
-" Activate CHADTree    Ctrl-o
-nmap <C-o> :CHADopen<CR>
+-- Chadtree Configurations
+-- Activate CHADTree    Ctrl-o
+remap('n', '<C-o>', [[ <Cmd>CHADopen<CR> ]], {noremap = true })
 
-" Open directories with chadtree instead of netrw
-augroup Chad
-    autocmd!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
-        \ exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
-augroup END
-""" End Of CHADTree Configurations --------------------------------------------
+-- Open directories with chadtree instead of netrw
+vim.cmd [[
+    augroup Chad
+        autocmd!
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
+    augroup END
+]]
 
-
-""" Telescope Configurations --------------------------------------------------
-lua << EOF
 require'fzf-lua'.setup{
     winopts = {
         preview = {
@@ -362,6 +354,8 @@ require'fzf-lua'.setup{
     },
 }
 
+
+-- Fzf Configurations
 vim.api.nvim_set_keymap('n', '<C-p>',
     "<cmd>lua require('fzf-lua').files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
     { noremap = true, silent = true })
@@ -369,19 +363,18 @@ vim.api.nvim_set_keymap('n', '<C-p>',
 vim.api.nvim_set_keymap('n', '<C-g>',
     "<cmd>lua require('fzf-lua').live_grep_native()<CR>",
     { noremap = true, silent = true })
-EOF
-""" End Of Telescope Configurations -------------------------------------------
 
 
-""" LSP Configurations --------------------------------------------------------
-"" Colours
-highlight Pmenu ctermfg=247 ctermbg=235
-highlight PmenuSel ctermfg=0 ctermbg=13
-highlight LspDiagnosticsDefaultError ctermfg=9
-highlight LspDiagnosticsDefaultWarning ctermfg=3
+-- LSP Configurations
+-- Colours
+vim.cmd [[
+    highlight Pmenu ctermfg=247 ctermbg=235
+    highlight PmenuSel ctermfg=0 ctermbg=13
+    highlight LspDiagnosticsDefaultError ctermfg=9
+    highlight LspDiagnosticsDefaultWarning ctermfg=3
+]]
 
-" LSP settings
-lua <<EOF
+-- Settings
 vim.g.coq_settings = {
     auto_start = 'shut-up',
     clients = {
@@ -433,33 +426,15 @@ require'lspsaga'.init_lsp_saga{
         quit = {'<esc>', '<C-c>'}
     },
 }
-EOF
 
-nnoremap <silent>gd :Lspsaga preview_definition<CR>
-nnoremap <silent>gh :Lspsaga hover_doc<CR>
-nnoremap <silent>gf :Lspsaga lsp_finder<CR>
-nnoremap <silent>gr :Lspsaga rename<CR>
-nnoremap <silent>gc :Lspsaga code_action<CR>
-""" End Of LSP Configurations -------------------------------------------------
+remap('n', 'gd', [[ <Cmd>Lspsaga preview_definition<CR> ]], {noremap = true, silent = true })
+remap('n', 'gh', [[ <Cmd>Lspsaga hover_doc<CR> ]], {noremap = true, silent = true })
+remap('n', 'gf', [[ <Cmd>Lspsaga lsp_finder<CR> ]], {noremap = true, silent = true })
+remap('n', 'gr', [[ <Cmd>Lspsaga rename<CR> ]], {noremap = true, silent = true })
+remap('n', 'gc', [[ <Cmd>Lspsaga code_action<CR> ]], {noremap = true, silent = true })
 
 
-""" Undo Tree Configurations --------------------------------------------------
-"" Mappings
-" Activate Undo Tree    Tab
-nmap <Tab> :UndotreeToggle<CR>
-
-"" Settings
-" Loads persistent undo tree to ~/.cache
-if has('persistent_undo')
-    set undodir=~/.cache/nvim/undotree
-    set undofile
-endif
-""" End Of UndoTree Configurations --------------------------------------------
-
-
-""" Autopairs Configurations --------------------------------------------------
-"" Settings
-lua <<EOF
+-- Autopairs Configurations
 local remap = vim.api.nvim_set_keymap
 local npairs = require('nvim-autopairs')
 
@@ -495,35 +470,43 @@ MUtils.BS = function()
     end
 end
 remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
-EOF
-""" End Of Autopairs Configurations -------------------------------------------
 
 
-""" Nerd Commenter Configurations ---------------------------------------------
-"" Settings
-let g:NERDSpaceDelims = 1                      " Add spaces after comment delimiters by default
-let g:NERDCompactSexyComs = 1                  " Use compact syntax for prettified multi-line comments
-let g:NERDAltDelims_java = 1                   " Set a language to use its alternate delimiters by default
-let g:NERDTrimTrailingWhitespace = 1           " Enable trimming of trailing whitespace when uncommenting
-let g:NERDToggleCheckAllLines = 1              " Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDCustomDelimiters = {
-    \ 'python': { 'left': '#', 'right': '' }
-    \ }                                        " Fix for double spacing while commenting Python
-""" End Of Nerd Commenter Configurations --------------------------------------
+-- UndoTree Configurations
+remap('n', '<Tab>', [[ <Cmd>UndotreeToggle<CR> ]], {})
+-- Loads persistent undo tree to ~/.cache
+vim.cmd [[
+    if has('persistent_undo')
+        set undodir=~/.cache/nvim/undotree
+        set undofile
+    endif
+]]
 
 
-""" Doge Configurations -------------------------------------------------------
-let g:doge_mapping = '<Leader>K'
-let g:doge_doc_standard_c = 'kernel_doc'
-""" End of Doge Configurations ------------------------------------------------
+-- Nerd Commenter Configurations
+vim.g.NERDSpaceDelims = 1
+vim.g.NERDCompactSexyComs = 1
+vim.g.NERDAltDelims_java = 1
+vim.g.NERDTrimTrailingWhitespace = 1
+vim.g.NERDToggleCheckAllLines = 1
+vim.g.NERDCustomDelimiters = {
+    python = {
+        left = "#",
+        right = ""
+    },
+}
 
-""" TreeSitter Configurations -------------------------------------------------
-set foldenable!
-set foldlevel=20
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-"" Enable tree sitter
-lua <<EOF
+
+-- Doge Configurations
+vim.g.doge_mapping = '<Leader>K'
+vim.g.doge_doc_standard_c = 'kernel_doc'
+
+
+-- TreeSitter Configurations
+vim.o.foldenable = false
+vim.o.foldlevel = 20
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+
 require'nvim-treesitter.configs'.setup {
     ensure_installed = "maintained",
     highlight = {
@@ -548,11 +531,10 @@ require'nvim-treesitter.configs'.setup {
         },
     },
 }
+
+vim.cmd "highlight TSDefinitionUsage gui=underline"
 EOF
 
-"" Underline definitions
-highlight TSDefinitionUsage gui=underline
-""" End of TreeSitter ---------------------------------------------------------
 
 """ Instant Settings-----------------------------------------------------------
 let g:instant_username = trim(system('whoami'))
