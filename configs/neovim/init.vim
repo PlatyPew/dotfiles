@@ -148,7 +148,7 @@ set list listchars=tab:»·,trail:·,nbsp:·                                " Sh
 set cursorline
 set splitright                                                          " Set vertical split to always split to the right
 set splitbelow
-autocmd Filetype * if &ft!="dashboard" | call matchadd('ColorColumn', '\%101v[^\n]')
+autocmd Filetype * if &ft!="dashboard" && &ft!="" | call matchadd('ColorColumn', '\%101v[^\n]')
 set noshowmode
 set updatetime=50
 set spelllang=en_gb
