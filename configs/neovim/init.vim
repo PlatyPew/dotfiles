@@ -253,22 +253,25 @@ let g:dashboard_custom_header = [
     \]
 let g:dashboard_custom_section={
     \ 'a': {
-        \ 'description': ['  Find files'],
-        \ 'command': ':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"' },
+        \ 'description': ['  New File              :enew'],
+        \ 'command': ':enew' },
     \ 'b': {
-        \ 'description': [' Find Word'],
-        \ 'command': ':FzfLua live_grep' },
+        \ 'description': ['  Find files            <C-p>'],
+        \ 'command': ':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"' },
     \ 'c': {
-        \ 'description': [' Find Marks'],
-        \ 'command': ':FzfLua marks' },
+        \ 'description': ['  Find Word             <C-g>'],
+        \ 'command': ':FzfLua live_grep' },
     \ 'd': {
-        \ 'description': [' Transparency'],
-        \ 'command': ':Transparency' },
+        \ 'description': ['  Find Marks              ,fm'],
+        \ 'command': ':FzfLua marks' },
     \ 'e': {
-        \ 'description': ['  File Explorer'],
-        \ 'command': ':CHADopen' },
+        \ 'description': ['  Transparency          <\-T>'],
+        \ 'command': ':Transparency' },
     \ 'f': {
-        \ 'description': [' Exit'],
+        \ 'description': ['  File Explorer         <C-o>'],
+        \ 'command': ':CHADopen' },
+    \ 'g': {
+        \ 'description': ['  Exit                     :q'],
         \ 'command': ':q' }
     \ }
 
