@@ -16,13 +16,13 @@ call plug#begin()                                                       " Plugin
 " Colours
 Plug 'Pocco81/Catppuccino.nvim', {'branch': 'old-catppuccino'}          " Syntax highlighting with treesitter integration
 " User Interface
-Plug 'glepnir/dashboard-nvim'                                               " Better startup screen for vim
+Plug 'glepnir/dashboard-nvim'                                           " Better startup screen for vim
 Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
 Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
 " Syntax highlighting
 Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
 Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync all'}    " Better syntax parser
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync all'}     " Better syntax parser
 Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better highlighting tool
 
 "" Functionalities
@@ -47,7 +47,7 @@ Plug 'theHamsta/nvim-dap-virtual-text'                                  " Displa
 Plug 'Pocco81/DAPInstall.nvim'                                          " Package manager for debuggers
 "More efficient (lazy) plugins
 Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
-Plug 'liuchengxu/vim-which-key'                                         " Dictionary of features
+Plug 'folke/which-key.nvim'                                             " Dictionary of features
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
 Plug 'phaazon/hop.nvim'
 Plug 'preservim/nerdcommenter'                                          " Easy commenting
@@ -701,33 +701,19 @@ dap.configurations.cpp = {{
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
-
 require'nvim-dap-virtual-text'.setup()
 
 require'dapui'.setup()
 
-vim.cmd [[
-    command DAPContinue lua require'dap'.continue()
-    command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
-    command DAPStepOver lua require'dap'.step_over()
-    command DAPStepInto lua require'dap'.step_into()
-    command DAPStepOut lua require'dap'.step_out()
-    command DAPRepl lua require'dap'.repl.open()
-    command DAPDisconnect lua require'dapui'.disconnect()
-    command DAPClose lua require'dap'.close()
-    command DAPUIToggle lua require'dapui'.toggle()
-    command DAPUIEval lua require'dapui'.eval()
-]]
-
-remap('n', '<F5>', [[ <Cmd>DAPContinue<CR> ]], { noremap = true, silent = true })
-remap('n', '<F6>', [[ <Cmd>DAPTBreakpoint<CR> ]], { noremap = true, silent = true })
-remap('n', '<F10>', [[ <Cmd>DAPStepOver<CR> ]], { noremap = true, silent = true })
-remap('n', '<F11>', [[ <Cmd>DAPStepInto<CR> ]], { noremap = true, silent = true })
-remap('n', '<F12>', [[ <Cmd>DAPStepOut<CR> ]], { noremap = true, silent = true })
-remap('n', '<Leader>dc', [[ <Cmd>DAPClose<CR> ]], { noremap = true, silent = true })
-remap('n', '<Leader>dr', [[ <Cmd>DAPRepl<CR> ]], { noremap = true, silent = true })
-remap('n', '<Leader>du', [[ <Cmd>DAPUIToggle<CR> ]], { noremap = true, silent = true })
-remap('n', '<Leader>de', [[ <Cmd>DAPUIEval<CR> ]], { noremap = true, silent = true })
+remap('n', '<F5>', [[ <Cmd>lua require'dap'.continue()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F6>', [[ <Cmd>lua require'dap'.toggle_breakpoint()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F10>', [[ <Cmd>lua require'dap'.step_over()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F11>', [[ <Cmd>lua require'dap'.step_into()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F12>', [[ <Cmd>lua require'dap'.step_out()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>dc', [[ <Cmd>lua require'dap'.close()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>dr', [[ <Cmd>lua require'dap'.repl.open()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>du', [[ <Cmd>lua require'dapui'.toggle()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>de', [[ <Cmd>lua require'dapui'.eval()<CR> ]], { noremap = true, silent = true })
 
 
 -- Iron REPL Configurations
@@ -757,98 +743,120 @@ vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent
 vim.api.nvim_set_keymap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
 vim.api.nvim_set_keymap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
 vim.api.nvim_set_keymap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
+
+
+-- WhichKey Configurations
+vim.o.timeoutlen = 50
+local wk = require'which-key'
+
+wk.setup{
+    plugins = {
+        marks = false,
+        registers = false,
+        presets = {
+            operators = false,
+            motions = false,
+            text_objects = false,
+            windows = false,
+            nav = false,
+            z = false,
+            g = false,
+        },
+    },
+}
+
+wk.register({
+    D = { '<Cmd>DogeGenerate<CR>', 'Generate docs' },
+    F = { '<Cmd>Neoformat<CR>', 'Format code' },
+    T = { '<Cmd>Transparency<CR>', 'Toggle Transparency' },
+    o = { '<Cmd>CHADopen<CR>', 'File Explorer' },
+    u = { '<Cmd>UndotreeToggle<CR>', 'Toggle UndoTree' },
+
+    d = {
+        name = 'Debugger',
+        C = { "<Cmd>lua require'dap'.close()<CR>", 'Close'},
+        D = { "<Cmd>lua require'dapui'.disconnect()<CR>", 'Disconnect'},
+        R = { "<Cmd>lua require'dap'.repl.open()<CR>", 'REPL'},
+        S = { "<Cmd>lua require'dap'.step_into()<CR>", 'Step Into'},
+        b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", 'Toggle Breakpoint'},
+        c = { "<Cmd>lua require'dap'.continue()<CR>", 'Continue'},
+        e = { "<Cmd>lua require'dapui'.eval()<CR>", 'Evaluate'},
+        o = { "<Cmd>lua require'dap'.step_out()<CR>", 'Step Out'},
+        s = { "<Cmd>lua require'dap'.step_over()<CR>", 'Step Over'},
+        u = { "<Cmd>lua require'dapui'.toggle()<CR>", 'Open UI'},
+    },
+
+    f = {
+        name = 'FZF',
+        ['/'] = { "<Cmd>lua require'fzf-lua'.blines()<CR>", 'Lines in Buffer' },
+        C = { "<Cmd>lua require'fzf-lua'.git_commits()<CR>", 'Commits' },
+        G = { "<Cmd>lua require'fzf-lua'.git_status()<CR>", 'Git Status Files' },
+        M = { "<Cmd>lua require'fzf-lua'.keymaps()<CR>", 'Mappings' },
+        b = { "<Cmd>lua require'fzf-lua'.buffers()<CR>", 'Buffers' },
+        c = { "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", 'Commits for Buffer' },
+        f = { "<Cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>", 'Files' },
+        g = { "<Cmd>lua require'fzf-lua'.git_files()<CR>", 'Git Files' },
+        h = { "<Cmd>lua require'fzf-lua'.command_history()<CR>", 'Command History' },
+        m = { "<Cmd>lua require'fzf-lua'.marks()<CR>", 'Marks' },
+        r = { "<Cmd>lua require'fzf-lua'.live_grep()<CR>", 'Ripgrep' },
+        s = { "<Cmd>lua require'fzf-lua'.spell_suggest()<CR>", 'Spell Suggest' },
+    },
+
+    g = {
+        name = 'Git',
+        R = { '<Cmd>Gitsigns reset_buffer<CR>', 'Reset buffer' },
+        S = { '<Cmd>Gitsigns stage_buffer<CR>', 'Stage buffer' },
+        U = { '<Cmd>Gitsigns reset_buffer_index<CR>', 'Reset buffer index' },
+        ['['] = { '<Cmd>Gitsigns prev_hunk<CR>', 'Previous hunk' },
+        [']'] = { '<Cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
+        b = { '<Cmd>Gitsigns blame_line<CR>', 'Blame line' },
+        d = { '<Cmd>Gitsigns diffthis<CR>', 'Reset buffer index' },
+        p = { '<Cmd>Gitsigns preview_hunk<CR>', 'Preview hunk' },
+        r = { '<Cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
+        s = { '<Cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
+        u = { '<Cmd>Gitsigns undo_stage_hunk<CR>', 'Undo stage hunk' },
+    },
+
+    l = {
+        name = 'LSP' ,
+        D = { '<Cmd>Lspsaga show_line_diagnostics', 'Show line diagnostics' },
+        I = { '<Cmd>LspInstallInfo', 'LSP Installer' },
+        c = { '<Cmd>Lspsaga code_action', 'Code action' },
+        d = { '<Cmd>Lspsaga show_cursor_diagnostics', 'Show cursor diagnostics' },
+        f = { '<Cmd>Lspsaga lsp_finder', 'Find reference' },
+        h = { '<Cmd>Lspsaga hover_doc', 'Docs' },
+        i = { '<Cmd>LspInfo', 'LSP info' },
+        p = { '<Cmd>Lspsaga preview_definition', 'Preview definition' },
+        r = { '<Cmd>Lspsaga rename', 'Rename variable' },
+        s = { '<Cmd>Lspsaga signature_help', 'Show signature' },
+    },
+
+    r = {
+        name = 'REPL',
+        C = { '<Cmd>IronReplHere<CR>', 'Create REPL in same pane' },
+        c = { '<Cmd>IronRepl<CR>', 'Create REPL' },
+        f = { '<Cmd>IronFocus<CR>', 'Focus' },
+        i = { '<Plug>(iron-interrupt)', 'Interrupt REPL' },
+        l = { '<Plug>(iron-clear)', 'Clear REPL' },
+        q = { '<Plug>(iron-exit)', 'Quit REPL' },
+        r = { '<Cmd>IronRestart<CR>', 'Restart REPL' },
+    },
+}, { mode = 'n', prefix = ',' })
+
+wk.register({
+    c = {
+        name = 'Comment',
+        [' '] = { '<Plug>NERDCommenterToggle', 'Toggle' },
+        a = { '<Plug>NERDCommenterAppend', 'Append Comments' },
+        c = { '<Plug>NERDCommenterComment', 'Comment' },
+        s = { '<Plug>NERDCommenterSexy', 'Sexy Comment' },
+        u = { '<Plug>NERDCommenterUncomment', 'Uncomment' },
+    },
+    m = {
+        name = 'Magic',
+        a = { '<Plug>nvim-magic-suggest-alteration', 'Alter Completion' },
+        c = { '<Plug>nvim-magic-append-completion', 'Append Completion' },
+        d = { '<Plug>nvim-magic-suggest-docstring', 'Suggest docstring' },
+    },
+}, { mode = 'v', prefix = ','})
 EOF
-
-let g:maplocalleader = ','
-nnoremap <silent> <localleader> :silent WhichKey ','<CR>
-let g:which_key_sep = '→'
-let g:which_key_use_floating_win = 0
-let g:which_key_map = {}
-
-highlight default link WhichKey          Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Identifier
-highlight default link WhichKeyDesc      Function
-
-" Hide status line
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
-
-let g:which_key_map.D = [':DogeGenerate','Generate docs']
-let g:which_key_map.F = [':Neoformat','Format code']
-let g:which_key_map.T = [':Transparency','Toggle Transparency']
-let g:which_key_map.o = [':CHADopen','File Explorer']
-let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
-
-let g:which_key_map.d = {
-    \ 'name' : '+Debugger',
-    \ 'C' : [':DAPClose', 'Close'],
-    \ 'D' : [':DAPDisconnect', 'Disconnect'],
-    \ 'R' : [':DAPRepl', 'Repl'],
-    \ 'S' : [':DAPStepInto', 'Step into'],
-    \ 'b' : [':DAPTBreakpoint', 'Toggle breakpoint'],
-    \ 'c' : [':DAPContinue','Continue'],
-    \ 'e' : [':DAPUIEval', 'Evaluate'],
-    \ 'o' : [':DAPStepOut', 'Step out'],
-    \ 's' : [':DAPStepOver', 'Step over'],
-    \ 'u' : [':DAPUIToggle', 'Open Ui'],
-    \ }
-
-let g:which_key_map.f = {
-    \ 'name' : '+FZF',
-    \ '/' : [':FzfLua blines','Lines in buffer'],
-    \ 'C' : [':FzfLua git_commits','Commits'],
-    \ 'G' : [':FzfLua git_status','Git status files'],
-    \ 'M' : [':FzfLua keymaps','Mappings'],
-    \ 'b' : [':FzfLua buffers','Buffers'],
-    \ 'c' : [':FzfLua git_bcommits','Commits for buffer'],
-    \ 'f' : [':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"','Files'],
-    \ 'g' : [':FzfLua git_files','Git files'],
-    \ 'h' : [':FzfLua command_history','Command history'],
-    \ 'm' : [':FzfLua marks','Marks'],
-    \ 'r' : [':FzfLua live_grep','Ripgrep'],
-    \ 's' : [':FzfLua spell_suggest','Spell suggest'],
-    \ }
-
-let g:which_key_map.g = {
-    \ 'name' : '+Git' ,
-    \ 'R' : [':Gitsigns reset_buffer','Reset buffer'],
-    \ 'S' : [':Gitsigns stage_buffer','Stage buffer'],
-    \ 'U' : [':Gitsigns reset_buffer_index','Reset buffer index'],
-    \ '[' : [':Gitsigns prev_hunk','Previous hunk'],
-    \ ']' : [':Gitsigns next_hunk','Next hunk'],
-    \ 'b' : [':Gitsigns blame_line','Blame line'],
-    \ 'd' : [':Gitsigns diffthis','Reset buffer index'],
-    \ 'p' : [':Gitsigns preview_hunk','Preview hunk'],
-    \ 'r' : [':Gitsigns reset_hunk','Reset hunk'],
-    \ 's' : [':Gitsigns stage_hunk','Stage hunk'],
-    \ 'u' : [':Gitsigns undo_stage_hunk','Undo stage hunk'],
-    \ }
-
-let g:which_key_map.l = {
-    \ 'name' : '+LSP' ,
-    \ 'D' : [':Lspsaga show_line_diagnostics','Show line diagnostics'],
-    \ 'I' : [':LspInstallInfo','LSP Installer'],
-    \ 'c' : [':Lspsaga code_action','Code action'],
-    \ 'd' : [':Lspsaga show_cursor_diagnostics','Show cursor diagnostics'],
-    \ 'f' : [':Lspsaga lsp_finder','Find reference'],
-    \ 'h' : [':Lspsaga hover_doc','Docs'],
-    \ 'i' : [':LspInfo','LSP info'],
-    \ 'p' : [':Lspsaga preview_definition','Preview definition'],
-    \ 'r' : [':Lspsaga rename','Rename variable'],
-    \ 's' : [':Lspsaga signature_help','Show signature'],
-    \ }
-
-let g:which_key_map.r = {
-    \ 'name': '+REPL',
-    \ 'C': [':IronReplHere', 'Create REPL in same pane'],
-    \ 'c': [':IronRepl', 'Create REPL'],
-    \ 'f': [':IronFocus', 'Focus'],
-    \ 'i': ['<Plug>(iron-interrupt)', 'Interrupt REPL'],
-    \ 'l': ['<Plug>(iron-clear)', 'Clear REPL'],
-    \ 'q': ['<Plug>(iron-exit)', 'Quit REPL'],
-    \ 'r': [':IronRestart', 'Restart REPL'],
-    \ }
-" Register which key map
-call which_key#register(',', "g:which_key_map")
