@@ -8,79 +8,112 @@
 "  ▒ ░   ░   ░ ░  ▒ ░  ░       ░        ░░   ▒ ░░      ░
 "  ░           ░  ░             ░        ░   ░         ░
 "                               ░       ░
-
-""" Vim-Plug -----------------------------------------------------------------
-call plug#begin()                                                       " Plugin manager Vim-Plug
-
-"" Aesthetics
-" Colours
-Plug 'Pocco81/Catppuccino.nvim', {'branch': 'old-catppuccino'}          " Syntax highlighting with treesitter integration
-" User Interface
-Plug 'glepnir/dashboard-nvim'                                           " Better startup screen for vim
-Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
-Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
-" Syntax highlighting
-Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
-Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync all'}     " Better syntax parser
-Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better highlighting tool
-
-"" Functionalities
-" Git
-Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
-" File finding
-Plug 'ibhagwan/fzf-lua'
-Plug 'ms-jpq/chadtree', {'branch': 'chad',
-            \ 'do': 'python3 -m chadtree deps --nvim',
-            \ 'on': 'CHADopen'}                                         " Fast file finder
-" Auto-completion
-Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
-Plug 'williamboman/nvim-lsp-installer'                                  " LSP server installer
-Plug 'tami5/lspsaga.nvim'                                               " LSP extras
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
-Plug 'jameshiew/nvim-magic'
-" Debugger
-Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
-Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
-Plug 'theHamsta/nvim-dap-virtual-text'                                  " Displays variable informations
-Plug 'Pocco81/DAPInstall.nvim'                                          " Package manager for debuggers
-"More efficient (lazy) plugins
-Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
-Plug 'folke/which-key.nvim'                                             " Dictionary of features
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
-Plug 'phaazon/hop.nvim'
-Plug 'preservim/nerdcommenter'                                          " Easy commenting
-Plug 'windwp/nvim-autopairs'                                            " Automatically pair parenthesis and more
-" Misc
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}                    " Nicer unicode for conceal
-Plug 'andweeb/presence.nvim'                                            " Flex on dem vscode plebs with discord rich presence
-Plug 'hkupty/iron.nvim'                                                 " REPL for programming
-Plug 'lewis6991/impatient.nvim'                                         " Lua caching for performance
-Plug 'jbyuki/instant.nvim',
-            \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
-Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
-            \ 'on': 'DogeGenerate'}                                     " Documentation Generator
-Plug 'mattn/emmet-vim',
-            \ {'for': ['html', 'css', 'markdown', 'javascriptreact']}   " Quick way to generatre html
-Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'mhartington/formatter.nvim'                                       " Auto formatter
-Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
-
-"" Dependencies
-Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
-Plug 'nvim-lua/plenary.nvim'                                            " Some library
-Plug 'vijaymarupudi/nvim-fzf'
-Plug 'MunifTanjim/nui.nvim'
-
-call plug#end()
-
-let g:python3_host_prog = $DOTFILES . '/configs/neovim/venv/bin/python3'
-""" End Of Vim-Plug -----------------------------------------------------------
-
-
 lua <<EOF
+-- Packer Configurations
+local packer = require("packer")
+packer.init{
+    enable = true,
+    threshold = 0
+}
+
+local use = packer.use
+packer.reset()
+
+packer.startup(function()
+    use 'wbthomason/packer.nvim'
+
+    use { 'Pocco81/Catppuccino.nvim', branch = 'old-catppuccino' }
+    use {
+        'glepnir/dashboard-nvim',
+        requires = {
+            'ibhagwan/fzf-lua',
+            'kyazdani42/nvim-web-devicons'
+        },
+    }
+    use {
+         'ms-jpq/chadtree',
+         branch = 'chad',
+         run = 'python3 -m chadtree deps --nvim',
+         cmd = 'CHADopen',
+     }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdateSync all',
+        requires = {
+            'nvim-treesitter/nvim-treesitter-refactor',
+            'p00f/nvim-ts-rainbow',
+            'windwp/nvim-autopairs',
+        },
+    }
+    use { 'norcalli/nvim-colorizer.lua' }
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+    }
+    use { 'machakann/vim-highlightedyank' }
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+    }
+    use {
+        'neovim/nvim-lspconfig',
+        requires = {
+            'williamboman/nvim-lsp-installer',
+            'tami5/lspsaga.nvim',
+        {
+            'ms-jpq/coq_nvim',
+            branch = 'coq',
+            run = 'python3 -m coq deps',
+        },
+            { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+        },
+    }
+    use {
+        'jameshiew/nvim-magic',
+        requires = {
+            'MunifTanjim/nui.nvim',
+            'nvim-lua/plenary.nvim',
+        },
+    }
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'rcarriga/nvim-dap-ui',
+            'theHamsta/nvim-dap-virtual-text',
+            'Pocco81/DAPInstall.nvim',
+        },
+    }
+    use { 'anyakichi/vim-surround' }
+    use { 'folke/which-key.nvim' }
+    use { 'mg979/vim-visual-multi', branch = 'master' }
+    use { 'phaazon/hop.nvim' }
+    use { 'preservim/nerdcommenter' }
+    use { 'KeitaNakamura/tex-conceal.vim', ft = 'text' }
+    use { 'andweeb/presence.nvim' }
+    use { 'hkupty/iron.nvim' }
+    use { 'lewis6991/impatient.nvim' }
+    use {
+        'jbyuki/instant.nvim',
+        cmd = { 'InstantStartServer', 'InstantJoinSession' },
+    }
+    use {
+        'kkoomen/vim-doge',
+        run = './scripts/install.sh',
+        cmd = 'DogeGenerate',
+    }
+    use {
+        'mattn/emmet-vim',
+        ft = { 'html', 'css', 'markdown', 'javascriptreact' },
+    }
+    use { 'mbbill/undotree', cmd = 'UndotreeToggle' }
+    use { 'mhartington/formatter.nvim' }
+    use { 'vim-scripts/LargeFile' }
+end)
+
+
+vim.g.python3_host_prog = vim.fn.getenv('DOTFILES') .. '/configs/neovim/venv/bin/python3'
 local remap = vim.api.nvim_set_keymap
+
 -- Optimisation
 require'impatient' -- Lua cache loading
 vim.o.foldmethod = 'expr'
@@ -746,23 +779,11 @@ vim.api.nvim_set_keymap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true}
 
 
 -- WhichKey Configurations
-vim.o.timeoutlen = 50
+vim.o.timeoutlen = 500
 local wk = require'which-key'
 
 wk.setup{
-    plugins = {
-        marks = false,
-        registers = false,
-        presets = {
-            operators = false,
-            motions = false,
-            text_objects = false,
-            windows = false,
-            nav = false,
-            z = false,
-            g = false,
-        },
-    },
+    ignore_missing = true,
 }
 
 wk.register({
