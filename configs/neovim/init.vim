@@ -123,9 +123,9 @@ vim.o.ruler = false
 
 -- Plugin Colouring
 vim.o.termguicolors = true
+
 -- Catppuccino
 vim.g.transparent = true
-
 local catppuccino = require'catppuccino'
 catppuccino.setup{
     colorscheme = 'soft_manilo',
@@ -142,12 +142,12 @@ function transparency()
     vim.cmd("colorscheme catppuccino")
 end
 
--- Colorizer
-require'colorizer'.setup()
-
 vim.cmd "command Transparency lua transparency()"
 
 remap('n', '<Leader>T', [[ <Cmd>Transparency<CR> ]], {noremap = true, silent = true})
+
+-- Colorizer
+require'colorizer'.setup()
 
 
 -- Vanilla Configurations
@@ -378,6 +378,8 @@ vim.cmd [[
     augroup END
 ]]
 
+
+-- Fzf Configurations
 require'fzf-lua'.setup{
     winopts = {
         preview = {
@@ -387,13 +389,11 @@ require'fzf-lua'.setup{
     },
 }
 
-
--- Fzf Configurations
-vim.api.nvim_set_keymap('n', '<C-p>',
+remap('n', '<C-p>',
     "<cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
     { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<C-g>',
+remap('n', '<C-g>',
     "<cmd>lua require'fzf-lua'.live_grep_native()<CR>",
     { noremap = true, silent = true })
 
@@ -700,7 +700,7 @@ require'gitsigns'.setup{
     numhl = true,
 }
 
-vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require"gitsigns".diffthis()<CR>]]', { noremap = true, silent = true })
+remap('n', '<Leader>hd', '[[<cmd>lua require"gitsigns".diffthis()<CR>]]', { noremap = true, silent = true })
 
 
 -- Nvim magic Configurations
@@ -765,17 +765,17 @@ require'iron'.core.set_config {
 vim.g.iron_map_defaults = 0
 vim.g.iron_map_extended = 0
 
-vim.api.nvim_set_keymap('v', 'is', '<Plug>(iron-visual-send)', {})
+remap('v', 'is', '<Plug>(iron-visual-send)', {})
 
 
 -- Hop Configurations
 require'hop'.setup()
-vim.api.nvim_set_keymap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
+remap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
+remap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
+remap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent=true})
+remap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
+remap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
+remap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
 
 
 -- WhichKey Configurations
