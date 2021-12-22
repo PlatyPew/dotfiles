@@ -24,10 +24,11 @@ if not status_ok then
 end
 
 packer.init {
+    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
     display = {
-    open_fn = function()
-        return require('packer.util').float { border = 'rounded' }
-    end,
+        open_fn = function()
+            return require('packer.util').float { border = 'rounded' }
+        end,
     },
 }
 
@@ -36,14 +37,14 @@ function getConfig(name)
 end
 
 return packer.startup(function(use)
+    use { 'wbthomason/packer.nvim' }
+
     use {
         'lewis6991/impatient.nvim',
         config = function()
             require'impatient'
         end
     }
-
-    use 'wbthomason/packer.nvim'
 
     use {
         'Pocco81/Catppuccino.nvim',
@@ -251,6 +252,8 @@ return packer.startup(function(use)
     }
 
     use { 'vim-scripts/LargeFile' }
+
+    require'packer_compiled'
 
     if PACKER_BOOTSTRAP then
         require('packer').sync()
