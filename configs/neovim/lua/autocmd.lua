@@ -1,9 +1,5 @@
 -- Syntax highlight
 vim.cmd [[
-    syntax on
-    colorscheme catppuccino
-    highlight ColorColumn guifg=#d84652 guibg=#000000
-
     augroup highlights
         autocmd!
         autocmd Filetype * if &ft!="dashboard" && &ft!="" | call matchadd('ColorColumn', '\%101v[^\n]')

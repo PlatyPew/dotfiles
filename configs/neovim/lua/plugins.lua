@@ -1,32 +1,69 @@
-local packer = require("packer")
-packer.init{
-    enable = true,
-    threshold = 0
+vim.g.python3_host_prog = vim.fn.getenv('DOTFILES') .. '/configs/neovim/venv/bin/python3'
+
+local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+    PACKER_BOOTSTRAP = vim.fn.system{
+        'git', 'clone', '--depth', '1',
+        'https://github.com/wbthomason/packer.nvim',
+        install_path
+    }
+    print('Installing packer close and reopen Neovim...')
+    vim.cmd 'packadd packer.nvim'
+end
+
+vim.cmd [[
+    augroup packer_user_config
+        autocmd!
+        autocmd BufWritePost plugins.lua source <afile> | PackerSync
+    augroup end
+]]
+
+local status_ok, packer = pcall(require, 'packer')
+if not status_ok then
+    return
+end
+
+packer.init {
+    display = {
+    open_fn = function()
+        return require('packer.util').float { border = 'rounded' }
+    end,
+    },
 }
 
-local use = packer.use
-packer.reset()
+function getConfig(name)
+    return string.format("require('config/%s')", name)
+end
 
-local config = 'config/'
-packer.startup(function()
+return packer.startup(function(use)
+    use {
+        'lewis6991/impatient.nvim',
+        config = function()
+            require'impatient'
+        end
+    }
+
     use 'wbthomason/packer.nvim'
 
     use {
         'Pocco81/Catppuccino.nvim',
         branch = 'old-catppuccino',
-        config = require(config .. 'catppuccino'),
+        config = getConfig('catppuccino'),
     }
+
     use {
         'norcalli/nvim-colorizer.lua',
         config = function()
             require'colorizer'.setup()
         end
     }
+
     use {
         'nvim-lualine/lualine.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
-        config = require(config .. 'lualine'),
+        config = getConfig('lualine'),
     }
+
     use {
         'glepnir/dashboard-nvim',
         requires = {
@@ -45,32 +82,35 @@ packer.startup(function()
             },
             'kyazdani42/nvim-web-devicons'
         },
-        after = 'lualine.nvim',
-        config = require(config .. 'dashboard'),
+        config = getConfig('dashboard'),
     }
+
     use {
          'ms-jpq/chadtree',
          branch = 'chad',
          run = 'python3 -m chadtree deps --nvim',
          cmd = 'CHADopen',
-     }
+    }
+
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdateSync all',
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'p00f/nvim-ts-rainbow',
-            { 'windwp/nvim-autopairs', config = require(config .. 'autopair') },
+            { 'windwp/nvim-autopairs', config = getConfig('autopair') },
         },
-        config = require(config .. 'treesitter'),
+        config = getConfig('treesitter'),
     }
+
     use {
         'machakann/vim-highlightedyank',
         config = function()
-            vim.cmd "highlight HighlightedyankRegion gui=reverse"
+            vim.cmd 'highlight HighlightedyankRegion gui=reverse'
             vim.g.highlightedyank_highlight_duration = -1
         end
     }
+
     use {
         'lewis6991/gitsigns.nvim',
         requires = 'nvim-lua/plenary.nvim',
@@ -85,20 +125,22 @@ packer.startup(function()
             }
         end
     }
+
     use {
         'neovim/nvim-lspconfig',
         requires = {
             'williamboman/nvim-lsp-installer',
             'tami5/lspsaga.nvim',
-        {
-            'ms-jpq/coq_nvim',
-            branch = 'coq',
-            run = 'python3 -m coq deps',
-        },
+            {
+                'ms-jpq/coq_nvim',
+                branch = 'coq',
+                run = 'python3 -m coq deps',
+            },
             { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
         },
-        config = require(config .. 'lsp'),
+        config = getConfig('lsp'),
     }
+
     use {
         'jameshiew/nvim-magic',
         requires = {
@@ -109,6 +151,7 @@ packer.startup(function()
             require'nvim-magic'.setup()
         end
     }
+
     use {
         'mfussenegger/nvim-dap',
         requires = {
@@ -116,20 +159,25 @@ packer.startup(function()
             'theHamsta/nvim-dap-virtual-text',
             'Pocco81/DAPInstall.nvim',
         },
-        config = require(config .. 'dap')
+        config = getConfig('dap')
     }
+
     use { 'anyakichi/vim-surround' }
+
     use {
         'folke/which-key.nvim',
-        config = require(config .. 'whichkey')
+        config = getConfig('whichkey')
     }
+
     use { 'mg979/vim-visual-multi', branch = 'master' }
+
     use {
         'phaazon/hop.nvim',
         config = function()
             require'hop'.setup()
         end
     }
+
     use {
         'preservim/nerdcommenter',
         config = function()
@@ -139,13 +187,11 @@ packer.startup(function()
             vim.g.NERDTrimTrailingWhitespace = 1
             vim.g.NERDToggleCheckAllLines = 1
             vim.g.NERDCustomDelimiters = {
-                python = {
-                    left = "#",
-                    right = ""
-                },
+                python = { left = '#', right = '' },
             }
         end
     }
+
     use {
         'KeitaNakamura/tex-conceal.vim',
         ft = 'text',
@@ -155,19 +201,22 @@ packer.startup(function()
             vim.cmd 'highlight clear Conceal'
         end
     }
+
     use {
         'andweeb/presence.nvim',
         config = function()
             require'presence':setup{ enable_line_number = true }
         end
     }
+
     use { 'hkupty/iron.nvim' }
-    use { 'lewis6991/impatient.nvim' }
+
     use {
         'jbyuki/instant.nvim',
         cmd = { 'InstantStartServer', 'InstantJoinSession' },
-        config = require(config .. 'instant'),
+        config = getConfig('instant'),
     }
+
     use {
         'kkoomen/vim-doge',
         run = './scripts/install.sh',
@@ -177,10 +226,12 @@ packer.startup(function()
             vim.g.doge_doc_standard_c = 'kernel_doc'
         end
     }
+
     use {
         'mattn/emmet-vim',
         ft = { 'html', 'css', 'markdown', 'javascriptreact' },
     }
+
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
@@ -193,12 +244,15 @@ packer.startup(function()
             ]]
         end
     }
+
     use {
         'mhartington/formatter.nvim',
-        config = require(config .. 'format'),
+        config = getConfig('format'),
     }
+
     use { 'vim-scripts/LargeFile' }
+
+    if PACKER_BOOTSTRAP then
+        require('packer').sync()
+    end
 end)
-
-
-vim.g.python3_host_prog = vim.fn.getenv('DOTFILES') .. '/configs/neovim/venv/bin/python3'
