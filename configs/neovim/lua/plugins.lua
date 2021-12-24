@@ -27,7 +27,7 @@ packer.init {
     compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
     display = {
         open_fn = function()
-            return require('packer.util').float { border = 'rounded' }
+            return require('packer.util').float{ border = 'rounded' }
         end,
     },
 }
@@ -54,6 +54,7 @@ return packer.startup(function(use)
 
     use {
         'norcalli/nvim-colorizer.lua',
+        event = 'BufReadPre',
         config = function()
             require'colorizer'.setup()
         end
@@ -62,6 +63,7 @@ return packer.startup(function(use)
     use {
         'nvim-lualine/lualine.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
+        event = 'VimEnter',
         config = getConfig('lualine'),
     }
 
@@ -106,6 +108,7 @@ return packer.startup(function(use)
 
     use {
         'machakann/vim-highlightedyank',
+        event = 'BufReadPost',
         config = function()
             vim.cmd 'highlight HighlightedyankRegion gui=reverse'
             vim.g.highlightedyank_highlight_duration = -1
@@ -115,6 +118,7 @@ return packer.startup(function(use)
     use {
         'lewis6991/gitsigns.nvim',
         requires = 'nvim-lua/plenary.nvim',
+        event = 'BufReadPre',
         config = function()
             require'gitsigns'.setup{
                 signs = {
@@ -148,6 +152,7 @@ return packer.startup(function(use)
             'MunifTanjim/nui.nvim',
             'nvim-lua/plenary.nvim',
         },
+        event = 'VimEnter',
         config = function()
             require'nvim-magic'.setup()
         end
@@ -167,6 +172,7 @@ return packer.startup(function(use)
 
     use {
         'folke/which-key.nvim',
+        event = 'VimEnter',
         config = getConfig('whichkey')
     }
 
@@ -174,6 +180,7 @@ return packer.startup(function(use)
 
     use {
         'phaazon/hop.nvim',
+        event = 'BufReadPre',
         config = function()
             require'hop'.setup()
         end
@@ -244,6 +251,7 @@ return packer.startup(function(use)
 
     use {
         'mhartington/formatter.nvim',
+        cmd = 'Format',
         config = getConfig('format'),
     }
 
