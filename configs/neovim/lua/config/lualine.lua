@@ -55,6 +55,9 @@ require'lualine'.setup{
                     inactive = {bg = '#44475a', fg = '#ffffff'},
                 },
                 padding = 1,
+                filetype_names = {
+                    CHADTree = 'CHADTree',
+                },
             }
         },
         lualine_y = {function () return [[buffers]] end}
