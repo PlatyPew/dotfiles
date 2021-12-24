@@ -765,7 +765,7 @@ require'iron'.core.set_config {
 vim.g.iron_map_defaults = 0
 vim.g.iron_map_extended = 0
 
-remap('v', 'is', '<Plug>(iron-visual-send)', {})
+remap('v', 'is', '<Plug>(iron-visual-send)', {noremap = true})
 
 
 -- Hop Configurations

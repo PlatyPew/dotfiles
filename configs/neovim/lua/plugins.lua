@@ -197,6 +197,7 @@ return packer.startup(function(use)
         'KeitaNakamura/tex-conceal.vim',
         ft = 'text',
         config = function()
+            vim.g.tex_flavor = 'latex'
             vim.g.tex_conceal = 'abdgm'
             vim.g.tex_conceal_frac = 1
             vim.cmd 'highlight clear Conceal'
@@ -212,10 +213,7 @@ return packer.startup(function(use)
 
     use {
         'hkupty/iron.nvim',
-        config = function()
-            vim.g.iron_map_defaults = 0
-            vim.g.iron_map_extended = 0
-        end
+        config = getConfig('iron'),
     }
 
     use {
@@ -242,14 +240,6 @@ return packer.startup(function(use)
     use {
         'mbbill/undotree',
         cmd = 'UndotreeToggle',
-        config = function()
-            vim.cmd [[
-                if has('persistent_undo')
-                    set undodir=~/.cache/nvim/undotree
-                    set undofile
-                endif
-            ]]
-        end
     }
 
     use {
