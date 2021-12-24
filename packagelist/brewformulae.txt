@@ -1,6 +1,5 @@
 autojump
 bat
-bettercap
 bfg
 bitwarden-cli
 commitizen
@@ -13,7 +12,6 @@ git-lfs
 gnu-sed
 gnupg
 k3d
-libmpc
 llvm
 lolcat
 navi
@@ -23,14 +21,13 @@ p7zip
 pandoc
 pinentry-mac
 prettier
+python@3.9
 ripgrep
 tmux
 trash
 universal-ctags
 virtualenv
-wakeonlan
 watch
 wget
 yapf
-youtube-dl
 zsh
