@@ -5,4 +5,5 @@
         stdout: true
         stderr: true
 - link:
-    ~/.config/nvim/init.vim: configs/neovim/init.vim
+    ~/.config/nvim/init.lua: configs/neovim/init.lua
+    ~/.config/nvim/lua: configs/neovim/lua

@@ -6,7 +6,7 @@ wk.setup{
 
 wk.register({
     D = { '<Cmd>DogeGenerate<CR>', 'Generate docs' },
-    F = { '<Cmd>Neoformat<CR>', 'Format code' },
+    F = { '<Cmd>Format<CR>', 'Format code' },
     T = { '<Cmd>Transparency<CR>', 'Toggle Transparency' },
     o = { '<Cmd>CHADopen<CR>', 'File Explorer' },
     u = { '<Cmd>UndotreeToggle<CR>', 'Toggle UndoTree' },
