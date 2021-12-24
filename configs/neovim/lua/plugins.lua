@@ -210,7 +210,13 @@ return packer.startup(function(use)
         end
     }
 
-    use { 'hkupty/iron.nvim' }
+    use {
+        'hkupty/iron.nvim',
+        config = function()
+            vim.g.iron_map_defaults = 0
+            vim.g.iron_map_extended = 0
+        end
+    }
 
     use {
         'jbyuki/instant.nvim',

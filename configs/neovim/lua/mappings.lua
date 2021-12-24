@@ -108,7 +108,7 @@ remap('n', '<Leader>du', [[ <Cmd>lua require'dapui'.toggle()<CR> ]], { noremap =
 remap('n', '<Leader>de', [[ <Cmd>lua require'dapui'.eval()<CR> ]], { noremap = true, silent = true })
 
 -- Iron
-remap('v', 'is', '<Plug>(iron-visual-send)', {})
+remap('v', 'is', '<Plug>(iron-visual-send)', { noremap = true })
 
 -- Hop
 remap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
