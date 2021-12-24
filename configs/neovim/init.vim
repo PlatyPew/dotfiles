@@ -8,106 +8,133 @@
 "  ▒ ░   ░   ░ ░  ▒ ░  ░       ░        ░░   ▒ ░░      ░
 "  ░           ░  ░             ░        ░   ░         ░
 "                               ░       ░
-
-""" Vim-Plug -----------------------------------------------------------------
-call plug#begin()                                                       " Plugin manager Vim-Plug
-
-"" Aesthetics
-" Colours
-Plug 'Pocco81/Catppuccino.nvim', {'branch': 'old-catppuccino'}          " Syntax highlighting with treesitter integration
-" User Interface
-Plug 'glepnir/dashboard-nvim'                                               " Better startup screen for vim
-Plug 'p00f/nvim-ts-rainbow'                                             " Rainbow parenthesis in lua
-Plug 'nvim-lualine/lualine.nvim'                                        " Status line written in lua
-" Syntax highlighting
-Plug 'machakann/vim-highlightedyank'                                    " Higlighting yanked text
-Plug 'norcalli/nvim-colorizer.lua'                                      " Colour for hex colour codes
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdateSync all'}    " Better syntax parser
-Plug 'nvim-treesitter/nvim-treesitter-refactor'                         " Better highlighting tool
-
-"" Functionalities
-" Git
-Plug 'lewis6991/gitsigns.nvim'                                          " Better gitgutter
-" File finding
-Plug 'ibhagwan/fzf-lua'
-Plug 'ms-jpq/chadtree', {'branch': 'chad',
-            \ 'do': 'python3 -m chadtree deps --nvim',
-            \ 'on': 'CHADopen'}                                         " Fast file finder
-" Auto-completion
-Plug 'neovim/nvim-lspconfig'                                            " Neovim native lsp client
-Plug 'williamboman/nvim-lsp-installer'                                  " LSP server installer
-Plug 'tami5/lspsaga.nvim'                                               " LSP extras
-Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}                    " Snippets for coq
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq', 'do': 'python3 -m coq deps'}  " Very fast autocompletion
-Plug 'jameshiew/nvim-magic'
-" Debugger
-Plug 'mfussenegger/nvim-dap'                                            " Debug adapter protocol
-Plug 'rcarriga/nvim-dap-ui'                                             " TUI for DAP
-Plug 'theHamsta/nvim-dap-virtual-text'                                  " Displays variable informations
-Plug 'Pocco81/DAPInstall.nvim'                                          " Package manager for debuggers
-"More efficient (lazy) plugins
-Plug 'anyakichi/vim-surround'                                           " Surround highlighted text easier
-Plug 'liuchengxu/vim-which-key'                                         " Dictionary of features
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}                     " Sublime-styled multiple cursors support
-Plug 'phaazon/hop.nvim'
-Plug 'preservim/nerdcommenter'                                          " Easy commenting
-Plug 'windwp/nvim-autopairs'                                            " Automatically pair parenthesis and more
-" Misc
-Plug 'KeitaNakamura/tex-conceal.vim', {'for': 'tex'}                    " Nicer unicode for conceal
-Plug 'andweeb/presence.nvim'                                            " Flex on dem vscode plebs with discord rich presence
-Plug 'hkupty/iron.nvim'                                                 " REPL for programming
-Plug 'lewis6991/impatient.nvim'                                         " Lua caching for performance
-Plug 'jbyuki/instant.nvim',
-            \ {'on': ['InstantStartServer', 'InstantJoinSession']}      " Peer pair programming
-Plug 'kkoomen/vim-doge', {'do': './scripts/install.sh',
-            \ 'on': 'DogeGenerate'}                                     " Documentation Generator
-Plug 'mattn/emmet-vim',
-            \ {'for': ['html', 'css', 'markdown', 'javascriptreact']}   " Quick way to generatre html
-Plug 'mbbill/undotree', {'on': 'UndotreeToggle'}                        " Undo visualiser
-Plug 'mhartington/formatter.nvim'                                       " Auto formatter
-Plug 'vim-scripts/LargeFile'                                            " Edit large files quickly
-
-"" Dependencies
-Plug 'kyazdani42/nvim-web-devicons'                                     " Allows for nerdfont icons to be displayed
-Plug 'nvim-lua/plenary.nvim'                                            " Some library
-Plug 'vijaymarupudi/nvim-fzf'
-Plug 'MunifTanjim/nui.nvim'
-
-call plug#end()
-
-let g:python3_host_prog = $DOTFILES . '/configs/neovim/venv/bin/python3'
-""" End Of Vim-Plug -----------------------------------------------------------
-
-
-""" Optimisation ---------------------------------------------------------------
-"" Lua cache loading
-lua require('impatient')
-set lazyredraw
-set ttyfast
-set foldmethod=syntax
-set foldmethod=expr
-set showcmd
-set noruler
-let g:did_load_filetypes = 1
-" set eventignore=all " Ultimate optimisation. Basically no plugins or anything run
-""" End Of Optimisation ---------------------------------------------------------
-
-
-""" Plugin Colouring ----------------------------------------------------------
-set termguicolors
 lua <<EOF
+-- Packer Configurations
+local packer = require("packer")
+packer.init{
+    enable = true,
+    threshold = 0
+}
+
+local use = packer.use
+packer.reset()
+
+packer.startup(function()
+    use 'wbthomason/packer.nvim'
+
+    use { 'Pocco81/Catppuccino.nvim', branch = 'old-catppuccino' }
+    use {
+        'glepnir/dashboard-nvim',
+        requires = {
+            'ibhagwan/fzf-lua',
+            'kyazdani42/nvim-web-devicons'
+        },
+    }
+    use {
+         'ms-jpq/chadtree',
+         branch = 'chad',
+         run = 'python3 -m chadtree deps --nvim',
+         cmd = 'CHADopen',
+     }
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdateSync all',
+        requires = {
+            'nvim-treesitter/nvim-treesitter-refactor',
+            'p00f/nvim-ts-rainbow',
+            'windwp/nvim-autopairs',
+        },
+    }
+    use { 'norcalli/nvim-colorizer.lua' }
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+    }
+    use { 'machakann/vim-highlightedyank' }
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = 'nvim-lua/plenary.nvim',
+    }
+    use {
+        'neovim/nvim-lspconfig',
+        requires = {
+            'williamboman/nvim-lsp-installer',
+            'tami5/lspsaga.nvim',
+        {
+            'ms-jpq/coq_nvim',
+            branch = 'coq',
+            run = 'python3 -m coq deps',
+        },
+            { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+        },
+    }
+    use {
+        'jameshiew/nvim-magic',
+        requires = {
+            'MunifTanjim/nui.nvim',
+            'nvim-lua/plenary.nvim',
+        },
+    }
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            'rcarriga/nvim-dap-ui',
+            'theHamsta/nvim-dap-virtual-text',
+            'Pocco81/DAPInstall.nvim',
+        },
+    }
+    use { 'anyakichi/vim-surround' }
+    use { 'folke/which-key.nvim' }
+    use { 'mg979/vim-visual-multi', branch = 'master' }
+    use { 'phaazon/hop.nvim' }
+    use { 'preservim/nerdcommenter' }
+    use { 'KeitaNakamura/tex-conceal.vim', ft = 'text' }
+    use { 'andweeb/presence.nvim' }
+    use { 'hkupty/iron.nvim' }
+    use { 'lewis6991/impatient.nvim' }
+    use {
+        'jbyuki/instant.nvim',
+        cmd = { 'InstantStartServer', 'InstantJoinSession' },
+    }
+    use {
+        'kkoomen/vim-doge',
+        run = './scripts/install.sh',
+        cmd = 'DogeGenerate',
+    }
+    use {
+        'mattn/emmet-vim',
+        ft = { 'html', 'css', 'markdown', 'javascriptreact' },
+    }
+    use { 'mbbill/undotree', cmd = 'UndotreeToggle' }
+    use { 'mhartington/formatter.nvim' }
+    use { 'vim-scripts/LargeFile' }
+end)
+
+
+vim.g.python3_host_prog = vim.fn.getenv('DOTFILES') .. '/configs/neovim/venv/bin/python3'
+local remap = vim.api.nvim_set_keymap
+
+-- Optimisation
+require'impatient' -- Lua cache loading
+vim.o.foldmethod = 'expr'
+vim.o.lazyredraw = true
+vim.o.ruler = false
+
+
+-- Plugin Colouring
+vim.o.termguicolors = true
+
 -- Catppuccino
 vim.g.transparent = true
-
-local catppuccino = require("catppuccino")
-catppuccino.setup({
+local catppuccino = require'catppuccino'
+catppuccino.setup{
     colorscheme = 'soft_manilo',
     transparency = vim.g.transparent,
     integrations = {
         lsp_saga = true,
         gitgutter = true,
     },
-})
+}
 
 function transparency()
     vim.g.transparent = not vim.g.transparent
@@ -115,179 +142,165 @@ function transparency()
     vim.cmd("colorscheme catppuccino")
 end
 
+vim.cmd "command Transparency lua transparency()"
+
+remap('n', '<Leader>T', [[ <Cmd>Transparency<CR> ]], {noremap = true, silent = true})
+
 -- Colorizer
 require'colorizer'.setup()
-EOF
-
-command Transparency lua transparency()
-nnoremap <silent><Leader>T :Transparency<CR>
-""" End Of Plugin Colouring ---------------------------------------------------
 
 
-""" Vanilla Colouring ---------------------------------------------------------
-syntax on                                                               " Enable syntax highlighting
-" Enable true colours
-colorscheme catppuccino
-highlight ColorColumn guifg=#d84652 guibg=#000000
-""" End Of Vanilla Colouring --------------------------------------------------
+-- Vanilla Configurations
+vim.cmd [[
+    syntax on
+    colorscheme catppuccino
+    highlight ColorColumn guifg=#d84652 guibg=#000000
+
+    augroup highlights
+        autocmd!
+        autocmd Filetype * if &ft!="dashboard" && &ft!="" | call matchadd('ColorColumn', '\%101v[^\n]')
+        autocmd FileType text,markdown,tex setlocal spell
+        autocmd FileType text,markdown,tex highlight clear ColorColumn
+    augroup END
+]]
+
+vim.o.cursorline = true
+vim.o.encoding = 'utf-8'
+vim.o.expandtab = true
+vim.o.list = true
+vim.o.listchars = 'tab:»·,trail:·,nbsp:·'
+vim.o.showmode = false
+vim.o.number = true
+vim.o.relativenumber = true
+vim.o.shiftwidth = 4
+vim.o.smartindent = true
+vim.o.softtabstop = 4
+vim.o.spelllang = 'en_gb'
+vim.o.splitbelow = true
+vim.o.splitright = true
+vim.o.tabstop = 4
+vim.o.updatetime = 50
+vim.o.whichwrap = 'b,s,<,>,h,l'
+vim.o.wrap = true
+
+vim.g.tex_flavor = 'latex'
+vim.g.clipboard = {
+    name = "pbcopy",
+    copy = {
+        ["*"] = "pbcopy",
+        ["+"] = "pbcopy"
+    },
+    paste = {
+        ["*"] = "pbpaste",
+        ["+"] = "pbpaste"
+    },
+    cache_enabled = 0,
+}
 
 
-""" Vanilla Configurations ----------------------------------------------------
-set number relativenumber
-set encoding=UTF-8
-set backspace=eol,start,indent
-set whichwrap+=<,>,h,l                                                  " Cursor wrap around in normal mode
-set autoindent
-set smartindent
-set wrap
-set tabstop=4 shiftwidth=4 
-set tabstop=4
-set softtabstop=4
-set expandtab                                                           " #spacemasterrace
-set list listchars=tab:»·,trail:·,nbsp:·                                " Show trailing spaces and hard tabs
-set cursorline
-set splitright                                                          " Set vertical split to always split to the right
-set splitbelow
-autocmd Filetype * if &ft!="dashboard" && &ft!="" | call matchadd('ColorColumn', '\%101v[^\n]')
-set noshowmode
-set updatetime=50
-set spelllang=en_gb
-augroup spell_check
-    autocmd!
-    autocmd FileType text,markdown,tex setlocal spell
-    autocmd FileType text,markdown,tex highlight clear ColorColumn
-augroup END
-let g:tex_flavor = 'latex'
-let g:clipboard = {
-  \ 'name': 'pbcopy',
-  \ 'copy': {
-  \    '+': 'pbcopy',
-  \    '*': 'pbcopy',
-  \  },
-  \ 'paste': {
-  \    '+': 'pbpaste',
-  \    '*': 'pbpaste',
-  \ },
-  \ 'cache_enabled': 0,
-  \ }
-""" End Of Vanilla Configurations ----------------------------------------------
+-- Vanilla Rebindings
+-- Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
+-- Increase horizontal split
+remap('n', '<Up>', [[ <Cmd>resize +2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Up>', [[ <Cmd>resize +2<CR> ]], {noremap = true, silent = true})
+
+-- Decrease horizontal split
+remap('n', '<Down>', [[ <Cmd>resize -2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Down>', [[ <Cmd>resize -2<CR> ]], {noremap = true, silent = true})
+
+-- Decrease vertical split
+remap('n', '<Left>', [[ <Cmd>vertical resize -2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Left>', [[ <Cmd>vertical resize -2<CR> ]], {noremap = true, silent = true})
+
+-- Increase vertical split
+remap('n', '<Right>', [[ <Cmd>vertical resize +2<CR> ]], {noremap = true, silent = true})
+remap('v', '<Right>', [[ <Cmd>vertical resize +2<CR> ]], {noremap = true, silent = true})
+
+-- Better window switching
+-- Move to pane on the left      Ctrl-h
+remap('n', '<C-h>', '<C-w>h', {})
+-- Move to lower pane            Ctrl-j
+remap('n', '<C-j>', '<C-w>j', {})
+-- Move to upper pane            Ctrl-j
+remap('n', '<C-k>', '<C-w>k', {})
+-- Move to pane on the right     Ctrl-h
+remap('n', '<C-l>', '<C-w>l', {})
+
+-- Remap semicolon to colon
+remap('n', ';', ':', {noremap = true})
+
+-- Lazy colon, {noremap = true
+remap('n', ';', ':', {noremap = true})
+
+-- Cycling buffers
+remap('n', '<Leader>bh', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bj', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bk', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bl', [[ <Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR> ]], {noremap = true})
+remap('n', '<Leader>bq', [[ <Cmd>bdelete<CR> ]], {noremap = true})
+
+-- Stops cursor from flying everywhere
+remap('n', 'n', 'nzzzv', {noremap = true})
+remap('n', 'N', 'Nzzzv', {noremap = true})
+
+-- Better undo breakpoints
+remap('i', ',', ',<C-g>u', {noremap = true})
+remap('i', '.', '.<C-g>u', {noremap = true})
+
+-- Move stuff in visual mode
+remap('v', 'J', [[ :m '>+1'<CR>gv=gv ]], {noremap = true})
+remap('v', 'K', [[ :m '<-2'<CR>gv=gv ]], {noremap = true})
 
 
-""" Vanilla Rebindings -------------------------------------------------------
-"" Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
-" Increase horizontal split
-nnoremap <silent> <Up> :resize +2 <CR>
-vnoremap <silent> <Up> :resize +2 <CR>
-" Decrease horizontal split
-nnoremap <silent> <Down> :resize -2 <CR>
-vnoremap <silent> <Down> :resize -2 <CR>
-" Decrease vertical split
-nnoremap <silent> <Left> :vertical resize -2 <CR>
-vnoremap <silent> <Left> :vertical resize -2 <CR>
-" Increase vertical split
-nnoremap <silent> <Right> :vertical resize +2 <CR>
-vnoremap <silent> <Right> :vertical resize +2 <CR>
+-- Dashboard Configurations
+vim.g.dashboard_custom_header = {
+    '          ▀████▀▄▄              ▄█ ',
+    '            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
+    '    ▄        █          ▀▀▀▀▄  ▄▀  ',
+    '   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
+    '  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
+    '  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
+    '   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
+    '    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
+    '   █   █  █      ▄▄           ▄▀   ',
+    '                                   ',
+    '               PikaVim             ',
+}
 
-"" Better window switching
-" Move to pane on the left      Ctrl-h
-nmap <C-h> <C-W>h
-" Move to lower pane            Ctrl-j
-nmap <C-j> <C-W>j
-" Move to upper pane            Ctrl-j
-nmap <C-k> <C-W>k
-" Move to pane on the right     Ctrl-h
-nmap <C-l> <C-W>l
-
-"" Better tab
-" Create new tabs    \t
-nnoremap <leader>tn :tabnew<CR>
-nnoremap <leader>th :tabfirst<CR>
-nnoremap <leader>tj :tabNext<CR>
-nnoremap <leader>tk :tabprevious<CR>
-nnoremap <leader>tl :tablast<CR>
-nnoremap <leader>tq :tabclose<CR>
-
-"" Easy Save
-" Save files    Ctrl-s
-imap <C-s> <Esc>:w<CR>a
-
-"" Remap semicolon to colon
-nnoremap ; :
-
-"" Cycling buffers
-nnoremap <leader>bh :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR>
-nnoremap <leader>bj :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR>
-nnoremap <leader>bk :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>
-nnoremap <leader>bl :if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>
-nnoremap <leader>bq :bdelete<CR>
-
-"" Capital Y now actually makes sense
-nnoremap Y yg_
-
-"" Stops cursor from flying everywhere
-nnoremap n nzzzv
-nnoremap N Nzzzv
-
-"" Better undo breakpoints
-inoremap , ,<c-g>u
-inoremap . .<c-g>u
-
-"" Move stuff in visual mode
-vnoremap J :m '>+1'<CR>gv=gv
-vnoremap K :m '<-2'<CR>gv=gv
-""" End Of Vanilla Rebindings -------------------------------------------------
+vim.g.dashboard_custom_section = {
+    a = {
+      description = {'  New File              :enew'},
+      command = ':enew' },
+    b = {
+      description = {'  Find files            <C-p>'},
+      command = ':FzfLua files cmd=rg\\ --files\\ --hidden\\ --no-ignore-vcs\\ -g\\ "!.git/*"' },
+    c = {
+      description = {'  Find Word             <C-g>'},
+      command = ':FzfLua live_grep' },
+    d = {
+      description = {'  Find Marks              ,fm'},
+      command = ':FzfLua marks' },
+    e = {
+      description = {'  Transparency          <\\-T>'},
+      command = ':Transparency' },
+    f = {
+      description = {'  File Explorer         <C-o>'},
+      command = ':CHADopen' },
+    g = {
+        description = {'  Exit                     :q'},
+        command = ':q' },
+}
 
 
-let g:dashboard_custom_header = [
-    \'          ▀████▀▄▄              ▄█ ',
-    \'            █▀    ▀▀▄▄▄▄▄    ▄▄▀▀█ ',
-    \'    ▄        █          ▀▀▀▀▄  ▄▀  ',
-    \'   ▄▀ ▀▄      ▀▄              ▀▄▀  ',
-    \'  ▄▀    █     █▀   ▄█▀▄      ▄█    ',
-    \'  ▀▄     ▀▄  █     ▀██▀     ██▄█   ',
-    \'   ▀▄    ▄▀ █   ▄██▄   ▄  ▄  ▀▀ █  ',
-    \'    █  ▄▀  █    ▀██▀    ▀▀ ▀▀  ▄▀  ',
-    \'   █   █  █      ▄▄           ▄▀   ',
-    \'                                   ',
-    \'               PikaVim             ',
-    \]
-let g:dashboard_custom_section={
-    \ 'a': {
-        \ 'description': ['  New File              :enew'],
-        \ 'command': ':enew' },
-    \ 'b': {
-        \ 'description': ['  Find files            <C-p>'],
-        \ 'command': ':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"' },
-    \ 'c': {
-        \ 'description': ['  Find Word             <C-g>'],
-        \ 'command': ':FzfLua live_grep' },
-    \ 'd': {
-        \ 'description': ['  Find Marks              ,fm'],
-        \ 'command': ':FzfLua marks' },
-    \ 'e': {
-        \ 'description': ['  Transparency          <\-T>'],
-        \ 'command': ':Transparency' },
-    \ 'f': {
-        \ 'description': ['  File Explorer         <C-o>'],
-        \ 'command': ':CHADopen' },
-    \ 'g': {
-        \ 'description': ['  Exit                     :q'],
-        \ 'command': ':q' }
-    \ }
+-- Highlighted Yank Configurations
+-- Colours
+vim.cmd "highlight HighlightedyankRegion gui=reverse"
+-- Settings
+vim.g.highlightedyank_highlight_duration = -1
 
 
-""" Highlighted Yank Configurations -------------------------------------------
-"" Colours
-highlight HighlightedyankRegion gui=reverse
-
-"" Settings
-let g:highlightedyank_highlight_duration = -1
-""" End Of Highlighted Yank Configurations ------------------------------------
-
-
-""" Lualine Configurations ----------------------------------------------------
-lua <<EOF
-require'lualine'.setup {
+-- Lualine Configurations
+require'lualine'.setup{
     options = {
         icons_enabled = true,
         theme = 'catppuccino',
@@ -350,27 +363,23 @@ require'lualine'.setup {
     },
     extensions = {'chadtree'},
 }
-EOF
-""" End Of Lualine Configurations ---------------------------------------------
 
 
-"" CHADTree Configurations ---------------------------------------------------
-"" Mappings
-" Activate CHADTree    Ctrl-o
-nmap <C-o> :CHADopen<CR>
+-- Chadtree Configurations
+-- Activate CHADTree    Ctrl-o
+remap('n', '<C-o>', [[ <Cmd>CHADopen<CR> ]], {noremap = true })
 
-" Open directories with chadtree instead of netrw
-augroup Chad
-    autocmd!
-    autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") |
-        \ exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
-augroup END
-""" End Of CHADTree Configurations --------------------------------------------
+-- Open directories with chadtree instead of netrw
+vim.cmd [[
+    augroup Chad
+        autocmd!
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
+    augroup END
+]]
 
 
-""" Telescope Configurations --------------------------------------------------
-lua << EOF
+-- Fzf Configurations
 require'fzf-lua'.setup{
     winopts = {
         preview = {
@@ -380,26 +389,25 @@ require'fzf-lua'.setup{
     },
 }
 
-vim.api.nvim_set_keymap('n', '<C-p>',
-    "<cmd>lua require('fzf-lua').files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
+remap('n', '<C-p>',
+    "<cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
     { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<C-g>',
-    "<cmd>lua require('fzf-lua').live_grep_native()<CR>",
+remap('n', '<C-g>',
+    "<cmd>lua require'fzf-lua'.live_grep_native()<CR>",
     { noremap = true, silent = true })
-EOF
-""" End Of Telescope Configurations -------------------------------------------
 
 
-""" LSP Configurations --------------------------------------------------------
-"" Colours
-highlight Pmenu ctermfg=247 ctermbg=235
-highlight PmenuSel ctermfg=0 ctermbg=13
-highlight LspDiagnosticsDefaultError ctermfg=9
-highlight LspDiagnosticsDefaultWarning ctermfg=3
+-- LSP Configurations
+-- Colours
+vim.cmd [[
+    highlight Pmenu ctermfg=247 ctermbg=235
+    highlight PmenuSel ctermfg=0 ctermbg=13
+    highlight LspDiagnosticsDefaultError ctermfg=9
+    highlight LspDiagnosticsDefaultWarning ctermfg=3
+]]
 
-" LSP settings
-lua <<EOF
+-- Settings
 vim.g.coq_settings = {
     auto_start = 'shut-up',
     clients = {
@@ -451,35 +459,16 @@ require'lspsaga'.init_lsp_saga{
         quit = {'<esc>', '<C-c>'}
     },
 }
-EOF
 
-nnoremap <silent>gd :Lspsaga preview_definition<CR>
-nnoremap <silent>gh :Lspsaga hover_doc<CR>
-nnoremap <silent>gf :Lspsaga lsp_finder<CR>
-nnoremap <silent>gr :Lspsaga rename<CR>
-nnoremap <silent>gc :Lspsaga code_action<CR>
-""" End Of LSP Configurations -------------------------------------------------
+remap('n', 'gd', [[ <Cmd>Lspsaga preview_definition<CR> ]], {noremap = true, silent = true })
+remap('n', 'gh', [[ <Cmd>Lspsaga hover_doc<CR> ]], {noremap = true, silent = true })
+remap('n', 'gf', [[ <Cmd>Lspsaga lsp_finder<CR> ]], {noremap = true, silent = true })
+remap('n', 'gr', [[ <Cmd>Lspsaga rename<CR> ]], {noremap = true, silent = true })
+remap('n', 'gc', [[ <Cmd>Lspsaga code_action<CR> ]], {noremap = true, silent = true })
 
 
-""" Undo Tree Configurations --------------------------------------------------
-"" Mappings
-" Activate Undo Tree    Tab
-nmap <Tab> :UndotreeToggle<CR>
-
-"" Settings
-" Loads persistent undo tree to ~/.cache
-if has('persistent_undo')
-    set undodir=~/.cache/nvim/undotree
-    set undofile
-endif
-""" End Of UndoTree Configurations --------------------------------------------
-
-
-""" Autopairs Configurations --------------------------------------------------
-"" Settings
-lua <<EOF
-local remap = vim.api.nvim_set_keymap
-local npairs = require('nvim-autopairs')
+-- Autopairs Configurations
+local npairs = require'nvim-autopairs'
 
 npairs.setup({ map_bs = false })
 
@@ -513,36 +502,44 @@ MUtils.BS = function()
     end
 end
 remap('i', '<bs>', 'v:lua.MUtils.BS()', { expr = true, noremap = true })
-EOF
-""" End Of Autopairs Configurations -------------------------------------------
 
 
-""" Nerd Commenter Configurations ---------------------------------------------
-"" Settings
-let g:NERDSpaceDelims = 1                      " Add spaces after comment delimiters by default
-let g:NERDCompactSexyComs = 1                  " Use compact syntax for prettified multi-line comments
-let g:NERDAltDelims_java = 1                   " Set a language to use its alternate delimiters by default
-let g:NERDTrimTrailingWhitespace = 1           " Enable trimming of trailing whitespace when uncommenting
-let g:NERDToggleCheckAllLines = 1              " Enable NERDCommenterToggle to check all selected lines is commented or not 
-let g:NERDCustomDelimiters = {
-    \ 'python': { 'left': '#', 'right': '' }
-    \ }                                        " Fix for double spacing while commenting Python
-""" End Of Nerd Commenter Configurations --------------------------------------
+-- UndoTree Configurations
+remap('n', '<Tab>', [[ <Cmd>UndotreeToggle<CR> ]], {})
+-- Loads persistent undo tree to ~/.cache
+vim.cmd [[
+    if has('persistent_undo')
+        set undodir=~/.cache/nvim/undotree
+        set undofile
+    endif
+]]
 
 
-""" Doge Configurations -------------------------------------------------------
-let g:doge_mapping = '<Leader>K'
-let g:doge_doc_standard_c = 'kernel_doc'
-""" End of Doge Configurations ------------------------------------------------
+-- Nerd Commenter Configurations
+vim.g.NERDSpaceDelims = 1
+vim.g.NERDCompactSexyComs = 1
+vim.g.NERDAltDelims_java = 1
+vim.g.NERDTrimTrailingWhitespace = 1
+vim.g.NERDToggleCheckAllLines = 1
+vim.g.NERDCustomDelimiters = {
+    python = {
+        left = "#",
+        right = ""
+    },
+}
 
-""" TreeSitter Configurations -------------------------------------------------
-set foldenable!
-set foldlevel=20
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-"" Enable tree sitter
-lua <<EOF
-require'nvim-treesitter.configs'.setup {
+
+-- Doge Configurations
+vim.g.doge_mapping = '<Leader>K'
+vim.g.doge_doc_standard_c = 'kernel_doc'
+
+
+-- TreeSitter Configurations
+vim.o.foldenable = false
+vim.o.foldlevel = 20
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
+
+require'nvim-treesitter.configs'.setup{
     ensure_installed = "maintained",
     highlight = {
         enable = true,
@@ -566,53 +563,13 @@ require'nvim-treesitter.configs'.setup {
         },
     },
 }
-EOF
 
-"" Underline definitions
-highlight TSDefinitionUsage gui=underline
-""" End of TreeSitter ---------------------------------------------------------
-
-""" Instant Settings-----------------------------------------------------------
-let g:instant_username = trim(system('whoami'))
-
-function StartInstantSession()
-    let port = input('Server Port: ')
-    silent execute('InstantStartServer 0.0.0.0 ' . port)
-    silent execute('InstantStartSession 0.0.0.0 ' . port)
-    execute('InstantStatus')
-endfunction
-
-function JoinInstantSession()
-    let host = input('Server Host to connect: ')
-    let port = input('Server Port to connect: ')
-    silent execute('InstantJoinSession ' . host . ' ' . port)
-    execute('InstantStatus')
-endfunction
-
-function StopInstantSession()
-    silent execute('InstantStop')
-    execute('InstantStatus')
-endfunction
-
-function StopInstantServer()
-    silent execute('InstantStopServer')
-    execute('InstantStatus')
-endfunction
-
-nmap <leader>Is :call StartInstantSession()<CR>
-nmap <leader>Ij :call JoinInstantSession()<CR>
-nmap <leader>Iq :call StopInstantSession()<CR>
-nmap <leader>IQ :call StopInstantServer()<CR>
-""" End of Instant  -----------------------------------------------------------
+vim.cmd "highlight TSDefinitionUsage gui=underline"
 
 
-""" Format Settings -----------------------------------------------------------
-"" Mappings
-" Format code
-nnoremap <silent> g= :Format <CR>
+-- Format Configurations
+remap('n', 'g=', [[ <Cmd>Format<CR> ]], { noremap = true, silent = true })
 
-"" Settings
-lua <<EOF
 local clang_format = {
     function()
         return {
@@ -653,7 +610,7 @@ local yapf = {
     end
 }
 
-require('formatter').setup({
+require'formatter'.setup{
     filetype = {
         c = clang_format,
         cpp = clang_format,
@@ -667,43 +624,74 @@ require('formatter').setup({
         jsx = prettier,
         python = yapf,
     },
-})
-EOF
-""" End of format Settings ----------------------------------------------------
+}
 
 
-""" Tex Conceal Setings -------------------------------------------------------
-let g:tex_conceal="abdgm"
-let g:tex_conceal_frac=1
-highlight clear Conceal
-""" End of Tex Conceal Setings ------------------------------------------------
+-- Instant Configurations
+vim.g.instant_username = io.popen('whoami'):read('*a'):sub(0, -2)
+
+function InstantStartSession()
+    local port = vim.fn.input('Server Port: ')
+    vim.api.nvim_exec('InstantStartServer 0.0.0.0 ' .. port, true)
+    vim.api.nvim_exec('InstantStartSession 0.0.0.0 ' .. port, true)
+    vim.cmd 'InstantStatus'
+end
+
+function InstantJoinSession()
+    local host = vim.fn.input('Server Host: ')
+    local port = vim.fn.input('Server Port: ')
+    vim.api.nvim_exec('InstantJoinSession ' .. host .. ' ' .. port , true)
+    vim.cmd 'InstantStatus'
+end
+
+function InstantStopSession()
+    vim.api.nvim_exec('InstantStop')
+    vim.cmd 'InstantStatus'
+end
+
+function InstantStopServer()
+    vim.api.nvim_exec('InstantStopServer')
+    vim.cmd 'InstantStatus'
+end
+
+remap('n', '<Leader>Is', [[ <Cmd>lua InstantStartSession()<CR> ]], {})
+remap('n', '<Leader>Ij', [[ <Cmd>lua InstantJoinSession()<CR> ]], {})
+remap('n', '<Leader>Iq', [[ <Cmd>lua InstantStopSession()<CR> ]], {})
+remap('n', '<Leader>IQ', [[ <Cmd>lua InstantStopServer()<CR> ]], {})
 
 
-""" Terminal Settings ---------------------------------------------------------
-"" Settings
-augroup term_nonumber
-    autocmd!
-    autocmd TermOpen * setlocal nonumber norelativenumber                        " Set no number when opening terminal
-augroup END
-" Allow better window switching in terminal mode
-augroup vimrc_term
-    autocmd!
-    autocmd WinEnter term://* nohlsearch
-    autocmd WinEnter term://* startinsert
-    autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
-    autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
-    autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
-    autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
-    autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
-augroup END
-""" End of Terminal Settings --------------------------------------------------
+-- Tex Conceal Configurations
+vim.g.tex_conceal = 'abdgm'
+vim.g.tex_conceal_frac = 1
+vim.cmd 'highlight clear Conceal'
 
-lua <<EOF
--- Discord Rich Presence
-require("presence"):setup({ enable_line_number = true })
 
--- Gitsigns
-require('gitsigns').setup{
+-- Terminal Configurations
+vim.cmd [[
+    augroup term_nonumber
+        autocmd!
+        autocmd TermOpen * setlocal nonumber norelativenumber
+    augroup END
+
+    augroup vimrc_term
+        autocmd!
+        autocmd WinEnter term://* nohlsearch
+        autocmd WinEnter term://* startinsert
+        autocmd TermOpen * setlocal listchars= | set nocursorline | set nocursorcolumn
+        autocmd TermOpen * tnoremap <buffer> <C-h> <C-\><C-n><C-w>h
+        autocmd TermOpen * tnoremap <buffer> <C-j> <C-\><C-n><C-w>j
+        autocmd TermOpen * tnoremap <buffer> <C-k> <C-\><C-n><C-w>k
+        autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
+    augroup END
+]]
+
+
+-- Discord Rich Presence Configurations
+require"presence":setup{ enable_line_number = true }
+
+
+-- Gitsigns Configurations
+require'gitsigns'.setup{
     signs = {
         delete = { text = '│' },
         topdelete = { text = '│' },
@@ -712,16 +700,20 @@ require('gitsigns').setup{
     numhl = true,
 }
 
-vim.api.nvim_set_keymap('n', '<Leader>hd', '[[<cmd>lua require("gitsigns").diffthis()<CR>]]', { noremap = true, silent = true })
+remap('n', '<Leader>hd', '[[<cmd>lua require"gitsigns".diffthis()<CR>]]', { noremap = true, silent = true })
 
-require('nvim-magic').setup()
 
-local dap_install = require("dap-install")
+-- Nvim magic Configurations
+require'nvim-magic'.setup()
+
+
+-- Nvim DAP Configurations
+local dap_install = require'dap-install'
 for _, debugger in ipairs(require("dap-install.api.debuggers").get_installed_debuggers()) do
     dap_install.config(debugger)
 end
 
-local dap = require('dap')
+local dap = require'dap'
 dap.adapters.lldb = {
     type = 'executable',
     command = 'lldb-vscode',
@@ -742,12 +734,22 @@ dap.configurations.cpp = {{
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
 
-
 require'nvim-dap-virtual-text'.setup()
 
-require("dapui").setup()
+require'dapui'.setup()
 
--- Iron REPL
+remap('n', '<F5>', [[ <Cmd>lua require'dap'.continue()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F6>', [[ <Cmd>lua require'dap'.toggle_breakpoint()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F10>', [[ <Cmd>lua require'dap'.step_over()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F11>', [[ <Cmd>lua require'dap'.step_into()<CR> ]], { noremap = true, silent = true })
+remap('n', '<F12>', [[ <Cmd>lua require'dap'.step_out()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>dc', [[ <Cmd>lua require'dap'.close()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>dr', [[ <Cmd>lua require'dap'.repl.open()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>du', [[ <Cmd>lua require'dapui'.toggle()<CR> ]], { noremap = true, silent = true })
+remap('n', '<Leader>de', [[ <Cmd>lua require'dapui'.eval()<CR> ]], { noremap = true, silent = true })
+
+
+-- Iron REPL Configurations
 local pythonrepl = 'python'
 if vim.api.nvim_call_function('executable', {'ipython'}) == 1 then
     pythonrepl = 'ipython'
@@ -763,127 +765,119 @@ require'iron'.core.set_config {
 vim.g.iron_map_defaults = 0
 vim.g.iron_map_extended = 0
 
-vim.api.nvim_set_keymap('v', 'is', '<Plug>(iron-visual-send)', {})
+remap('v', 'is', '<Plug>(iron-visual-send)', {noremap = true})
 
+
+-- Hop Configurations
 require'hop'.setup()
-vim.api.nvim_set_keymap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
-vim.api.nvim_set_keymap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
+remap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
+remap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
+remap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent=true})
+remap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
+remap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
+remap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})
+
+
+-- WhichKey Configurations
+vim.o.timeoutlen = 500
+local wk = require'which-key'
+
+wk.setup{
+    ignore_missing = true,
+}
+
+wk.register({
+    D = { '<Cmd>DogeGenerate<CR>', 'Generate docs' },
+    F = { '<Cmd>Neoformat<CR>', 'Format code' },
+    T = { '<Cmd>Transparency<CR>', 'Toggle Transparency' },
+    o = { '<Cmd>CHADopen<CR>', 'File Explorer' },
+    u = { '<Cmd>UndotreeToggle<CR>', 'Toggle UndoTree' },
+
+    d = {
+        name = 'Debugger',
+        C = { "<Cmd>lua require'dap'.close()<CR>", 'Close'},
+        D = { "<Cmd>lua require'dapui'.disconnect()<CR>", 'Disconnect'},
+        R = { "<Cmd>lua require'dap'.repl.open()<CR>", 'REPL'},
+        S = { "<Cmd>lua require'dap'.step_into()<CR>", 'Step Into'},
+        b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", 'Toggle Breakpoint'},
+        c = { "<Cmd>lua require'dap'.continue()<CR>", 'Continue'},
+        e = { "<Cmd>lua require'dapui'.eval()<CR>", 'Evaluate'},
+        o = { "<Cmd>lua require'dap'.step_out()<CR>", 'Step Out'},
+        s = { "<Cmd>lua require'dap'.step_over()<CR>", 'Step Over'},
+        u = { "<Cmd>lua require'dapui'.toggle()<CR>", 'Open UI'},
+    },
+
+    f = {
+        name = 'FZF',
+        ['/'] = { "<Cmd>lua require'fzf-lua'.blines()<CR>", 'Lines in Buffer' },
+        C = { "<Cmd>lua require'fzf-lua'.git_commits()<CR>", 'Commits' },
+        G = { "<Cmd>lua require'fzf-lua'.git_status()<CR>", 'Git Status Files' },
+        M = { "<Cmd>lua require'fzf-lua'.keymaps()<CR>", 'Mappings' },
+        b = { "<Cmd>lua require'fzf-lua'.buffers()<CR>", 'Buffers' },
+        c = { "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", 'Commits for Buffer' },
+        f = { "<Cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>", 'Files' },
+        g = { "<Cmd>lua require'fzf-lua'.git_files()<CR>", 'Git Files' },
+        h = { "<Cmd>lua require'fzf-lua'.command_history()<CR>", 'Command History' },
+        m = { "<Cmd>lua require'fzf-lua'.marks()<CR>", 'Marks' },
+        r = { "<Cmd>lua require'fzf-lua'.live_grep()<CR>", 'Ripgrep' },
+        s = { "<Cmd>lua require'fzf-lua'.spell_suggest()<CR>", 'Spell Suggest' },
+    },
+
+    g = {
+        name = 'Git',
+        R = { '<Cmd>Gitsigns reset_buffer<CR>', 'Reset buffer' },
+        S = { '<Cmd>Gitsigns stage_buffer<CR>', 'Stage buffer' },
+        U = { '<Cmd>Gitsigns reset_buffer_index<CR>', 'Reset buffer index' },
+        ['['] = { '<Cmd>Gitsigns prev_hunk<CR>', 'Previous hunk' },
+        [']'] = { '<Cmd>Gitsigns next_hunk<CR>', 'Next hunk' },
+        b = { '<Cmd>Gitsigns blame_line<CR>', 'Blame line' },
+        d = { '<Cmd>Gitsigns diffthis<CR>', 'Reset buffer index' },
+        p = { '<Cmd>Gitsigns preview_hunk<CR>', 'Preview hunk' },
+        r = { '<Cmd>Gitsigns reset_hunk<CR>', 'Reset hunk' },
+        s = { '<Cmd>Gitsigns stage_hunk<CR>', 'Stage hunk' },
+        u = { '<Cmd>Gitsigns undo_stage_hunk<CR>', 'Undo stage hunk' },
+    },
+
+    l = {
+        name = 'LSP' ,
+        D = { '<Cmd>Lspsaga show_line_diagnostics', 'Show line diagnostics' },
+        I = { '<Cmd>LspInstallInfo', 'LSP Installer' },
+        c = { '<Cmd>Lspsaga code_action', 'Code action' },
+        d = { '<Cmd>Lspsaga show_cursor_diagnostics', 'Show cursor diagnostics' },
+        f = { '<Cmd>Lspsaga lsp_finder', 'Find reference' },
+        h = { '<Cmd>Lspsaga hover_doc', 'Docs' },
+        i = { '<Cmd>LspInfo', 'LSP info' },
+        p = { '<Cmd>Lspsaga preview_definition', 'Preview definition' },
+        r = { '<Cmd>Lspsaga rename', 'Rename variable' },
+        s = { '<Cmd>Lspsaga signature_help', 'Show signature' },
+    },
+
+    r = {
+        name = 'REPL',
+        C = { '<Cmd>IronReplHere<CR>', 'Create REPL in same pane' },
+        c = { '<Cmd>IronRepl<CR>', 'Create REPL' },
+        f = { '<Cmd>IronFocus<CR>', 'Focus' },
+        i = { '<Plug>(iron-interrupt)', 'Interrupt REPL' },
+        l = { '<Plug>(iron-clear)', 'Clear REPL' },
+        q = { '<Plug>(iron-exit)', 'Quit REPL' },
+        r = { '<Cmd>IronRestart<CR>', 'Restart REPL' },
+    },
+}, { mode = 'n', prefix = ',' })
+
+wk.register({
+    c = {
+        name = 'Comment',
+        [' '] = { '<Plug>NERDCommenterToggle', 'Toggle' },
+        a = { '<Plug>NERDCommenterAppend', 'Append Comments' },
+        c = { '<Plug>NERDCommenterComment', 'Comment' },
+        s = { '<Plug>NERDCommenterSexy', 'Sexy Comment' },
+        u = { '<Plug>NERDCommenterUncomment', 'Uncomment' },
+    },
+    m = {
+        name = 'Magic',
+        a = { '<Plug>nvim-magic-suggest-alteration', 'Alter Completion' },
+        c = { '<Plug>nvim-magic-append-completion', 'Append Completion' },
+        d = { '<Plug>nvim-magic-suggest-docstring', 'Suggest docstring' },
+    },
+}, { mode = 'v', prefix = ','})
 EOF
-command DAPContinue lua require'dap'.continue()
-command DAPTBreakpoint lua require'dap'.toggle_breakpoint()
-command DAPStepOver lua require'dap'.step_over()
-command DAPStepInto lua require'dap'.step_into()
-command DAPStepOut lua require'dap'.step_out()
-command DAPRepl lua require'dap'.repl.open()
-command DAPDisconnect lua require'dapui'.disconnect()
-command DAPClose lua require'dap'.close()
-command DAPUIToggle lua require'dapui'.toggle()
-command DAPUIEval lua require'dapui'.eval()
-
-nnoremap <silent> <F5> :DAPContinue<CR>
-nnoremap <silent> <F6> :DAPTBreakpoint<CR>
-nnoremap <silent> <F10> :DAPStepOver<CR>
-nnoremap <silent> <F11> :DAPStepInto<CR>
-nnoremap <silent> <F12> :DAPStepOut<CR>
-nnoremap <silent> <leader>dc :DAPClose<CR>
-nnoremap <silent> <leader>dr :DAPRepl<CR>
-nnoremap <silent> <leader>du :DAPUIToggle<CR>
-nnoremap <silent> <leader>de :DAPUIEval<CR>
-
-let g:maplocalleader = ','
-nnoremap <silent> <localleader> :silent WhichKey ','<CR>
-let g:which_key_sep = '→'
-let g:which_key_use_floating_win = 0
-let g:which_key_map = {}
-
-highlight default link WhichKey          Operator
-highlight default link WhichKeySeperator DiffAdded
-highlight default link WhichKeyGroup     Identifier
-highlight default link WhichKeyDesc      Function
-
-" Hide status line
-autocmd! FileType which_key
-autocmd  FileType which_key set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 noshowmode ruler
-
-let g:which_key_map.D = [':DogeGenerate','Generate docs']
-let g:which_key_map.F = [':Neoformat','Format code']
-let g:which_key_map.T = [':Transparency','Toggle Transparency']
-let g:which_key_map.o = [':CHADopen','File Explorer']
-let g:which_key_map.u = [':UndotreeToggle','Toggle UndoTree']
-
-let g:which_key_map.d = {
-    \ 'name' : '+Debugger',
-    \ 'C' : [':DAPClose', 'Close'],
-    \ 'D' : [':DAPDisconnect', 'Disconnect'],
-    \ 'R' : [':DAPRepl', 'Repl'],
-    \ 'S' : [':DAPStepInto', 'Step into'],
-    \ 'b' : [':DAPTBreakpoint', 'Toggle breakpoint'],
-    \ 'c' : [':DAPContinue','Continue'],
-    \ 'e' : [':DAPUIEval', 'Evaluate'],
-    \ 'o' : [':DAPStepOut', 'Step out'],
-    \ 's' : [':DAPStepOver', 'Step over'],
-    \ 'u' : [':DAPUIToggle', 'Open Ui'],
-    \ }
-
-let g:which_key_map.f = {
-    \ 'name' : '+FZF',
-    \ '/' : [':FzfLua blines','Lines in buffer'],
-    \ 'C' : [':FzfLua git_commits','Commits'],
-    \ 'G' : [':FzfLua git_status','Git status files'],
-    \ 'M' : [':FzfLua keymaps','Mappings'],
-    \ 'b' : [':FzfLua buffers','Buffers'],
-    \ 'c' : [':FzfLua git_bcommits','Commits for buffer'],
-    \ 'f' : [':FzfLua files cmd=rg\ --files\ --hidden\ --no-ignore-vcs\ -g\ "!.git/*"','Files'],
-    \ 'g' : [':FzfLua git_files','Git files'],
-    \ 'h' : [':FzfLua command_history','Command history'],
-    \ 'm' : [':FzfLua marks','Marks'],
-    \ 'r' : [':FzfLua live_grep','Ripgrep'],
-    \ 's' : [':FzfLua spell_suggest','Spell suggest'],
-    \ }
-
-let g:which_key_map.g = {
-    \ 'name' : '+Git' ,
-    \ 'R' : [':Gitsigns reset_buffer','Reset buffer'],
-    \ 'S' : [':Gitsigns stage_buffer','Stage buffer'],
-    \ 'U' : [':Gitsigns reset_buffer_index','Reset buffer index'],
-    \ '[' : [':Gitsigns prev_hunk','Previous hunk'],
-    \ ']' : [':Gitsigns next_hunk','Next hunk'],
-    \ 'b' : [':Gitsigns blame_line','Blame line'],
-    \ 'd' : [':Gitsigns diffthis','Reset buffer index'],
-    \ 'p' : [':Gitsigns preview_hunk','Preview hunk'],
-    \ 'r' : [':Gitsigns reset_hunk','Reset hunk'],
-    \ 's' : [':Gitsigns stage_hunk','Stage hunk'],
-    \ 'u' : [':Gitsigns undo_stage_hunk','Undo stage hunk'],
-    \ }
-
-let g:which_key_map.l = {
-    \ 'name' : '+LSP' ,
-    \ 'D' : [':Lspsaga show_line_diagnostics','Show line diagnostics'],
-    \ 'I' : [':LspInstallInfo','LSP Installer'],
-    \ 'c' : [':Lspsaga code_action','Code action'],
-    \ 'd' : [':Lspsaga show_cursor_diagnostics','Show cursor diagnostics'],
-    \ 'f' : [':Lspsaga lsp_finder','Find reference'],
-    \ 'h' : [':Lspsaga hover_doc','Docs'],
-    \ 'i' : [':LspInfo','LSP info'],
-    \ 'p' : [':Lspsaga preview_definition','Preview definition'],
-    \ 'r' : [':Lspsaga rename','Rename variable'],
-    \ 's' : [':Lspsaga signature_help','Show signature'],
-    \ }
-
-let g:which_key_map.r = {
-    \ 'name': '+REPL',
-    \ 'C': [':IronReplHere', 'Create REPL in same pane'],
-    \ 'c': [':IronRepl', 'Create REPL'],
-    \ 'f': [':IronFocus', 'Focus'],
-    \ 'i': ['<Plug>(iron-interrupt)', 'Interrupt REPL'],
-    \ 'l': ['<Plug>(iron-clear)', 'Clear REPL'],
-    \ 'q': ['<Plug>(iron-exit)', 'Quit REPL'],
-    \ 'r': [':IronRestart', 'Restart REPL'],
-    \ }
-" Register which key map
-call which_key#register(',', "g:which_key_map")
