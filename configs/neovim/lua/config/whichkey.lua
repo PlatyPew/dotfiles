@@ -83,14 +83,7 @@ wk.register({
 }, { mode = 'n', prefix = ',' })
 
 wk.register({
-    c = {
-        name = 'Comment',
-        [' '] = { '<Plug>NERDCommenterToggle', 'Toggle' },
-        a = { '<Plug>NERDCommenterAppend', 'Append Comments' },
-        c = { '<Plug>NERDCommenterComment', 'Comment' },
-        s = { '<Plug>NERDCommenterSexy', 'Sexy Comment' },
-        u = { '<Plug>NERDCommenterUncomment', 'Uncomment' },
-    },
+    c = { "<Cmd>lua require('Comment.api').call('toggle_linewise_op')<CR>g@", 'Comment' },
     m = {
         name = 'Magic',
         a = { '<Plug>nvim-magic-suggest-alteration', 'Alter Completion' },

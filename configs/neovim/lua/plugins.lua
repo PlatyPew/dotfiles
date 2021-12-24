@@ -187,34 +187,21 @@ return packer.startup(function(use)
     }
 
     use {
-        'preservim/nerdcommenter',
+        'numToStr/Comment.nvim',
+        event = 'VimEnter',
         config = function()
-            vim.g.NERDSpaceDelims = 1
-            vim.g.NERDCompactSexyComs = 1
-            vim.g.NERDAltDelims_java = 1
-            vim.g.NERDTrimTrailingWhitespace = 1
-            vim.g.NERDToggleCheckAllLines = 1
-            vim.g.NERDCustomDelimiters = {
-                python = { left = '#', right = '' },
-            }
+            require'Comment'.setup()
         end
     }
 
     use {
         'KeitaNakamura/tex-conceal.vim',
-        ft = 'text',
+        ft = 'tex',
         config = function()
             vim.g.tex_flavor = 'latex'
             vim.g.tex_conceal = 'abdgm'
             vim.g.tex_conceal_frac = 1
             vim.cmd 'highlight clear Conceal'
-        end
-    }
-
-    use {
-        'andweeb/presence.nvim',
-        config = function()
-            require'presence':setup{ enable_line_number = true }
         end
     }
 
@@ -242,6 +229,7 @@ return packer.startup(function(use)
     use {
         'mattn/emmet-vim',
         ft = { 'html', 'css', 'markdown', 'javascriptreact' },
+        event = 'InsertCharPre',
     }
 
     use {
