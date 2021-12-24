@@ -168,7 +168,10 @@ return packer.startup(function(use)
         config = getConfig('dap')
     }
 
-    use { 'anyakichi/vim-surround' }
+    use {
+        'anyakichi/vim-surround',
+        requires = 'tpope/vim-repeat',
+    }
 
     use {
         'folke/which-key.nvim',
