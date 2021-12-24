@@ -14,7 +14,7 @@ vim.g.dashboard_custom_header = {
 
 vim.g.dashboard_custom_section = {
     a = {
-      description = {'  New File              :enew'},
+      description = {'  New File                  e'},
       command = ':enew' },
     b = {
       description = {'  Find files            <C-p>'},
@@ -26,12 +26,9 @@ vim.g.dashboard_custom_section = {
       description = {'  Find Marks              ,fm'},
       command = ':FzfLua marks' },
     e = {
-      description = {'  Transparency          <\\-T>'},
-      command = ':Transparency' },
-    f = {
       description = {'  File Explorer         <C-o>'},
       command = ':CHADopen' },
-    g = {
-        description = {'  Exit                     :q'},
-        command = ':q' },
+    f = {
+        description = {'  Exit                      q'},
+        command = ':exit' },
 }

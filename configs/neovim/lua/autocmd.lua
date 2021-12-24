@@ -17,6 +17,16 @@ vim.cmd [[
     augroup END
 ]]
 
+-- Dashboard
+vim.cmd [[
+    augroup dashboard_au
+        autocmd! * <buffer>
+        autocmd User DashboardReady nnoremap <buffer> i <Cmd>enew<CR>i
+        autocmd User DashboardReady nnoremap <buffer> e <Cmd>enew<CR>
+        autocmd User DashboardReady nnoremap <buffer> q <Cmd>exit<CR>
+    augroup END
+]]
+
 -- Terminal
 vim.cmd [[
     augroup term_nonumber
