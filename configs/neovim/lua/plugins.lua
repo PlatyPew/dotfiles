@@ -23,7 +23,7 @@ if not status_ok then
     return
 end
 
-packer.init {
+packer.init{
     compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
     display = {
         open_fn = function()
@@ -165,6 +165,7 @@ return packer.startup(function(use)
             'theHamsta/nvim-dap-virtual-text',
             'Pocco81/DAPInstall.nvim',
         },
+        event = 'BufReadPre',
         config = getConfig('dap')
     }
 
