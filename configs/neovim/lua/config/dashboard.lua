@@ -32,3 +32,5 @@ vim.g.dashboard_custom_section = {
         description = {'  Exit                      q'},
         command = ':exit' },
 }
+
+vim.g.dashboard_custom_footer =  { 'Stay hydrated folks' }
