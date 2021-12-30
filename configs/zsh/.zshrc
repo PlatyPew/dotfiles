@@ -85,18 +85,18 @@ source $HOME/dotfiles/configs/zsh/.p10k.zsh
 #############################################################
 
 ## Syntax highlighting configs ##############################
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-ZSH_HIGHLIGHT_STYLES[arg0]='fg=10,bold'
-ZSH_HIGHLIGHT_STYLES[redirection]='fg=14'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=6'
-ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=11'
-ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=11'
-ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=15'
-ZSH_HIGHLIGHT_STYLES[path]='fg=12'
-ZSH_HIGHLIGHT_STYLES[assign]='fg=3,bold'
-ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=13,bold'
-ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
-ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
+ typeset -g ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
+ typeset -g ZSH_HIGHLIGHT_STYLES[arg0]='fg=10,bold'
+ typeset -g ZSH_HIGHLIGHT_STYLES[redirection]='fg=14'
+ typeset -g ZSH_HIGHLIGHT_STYLES[globbing]='fg=6'
+ typeset -g ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=11'
+ typeset -g ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=11'
+ typeset -g ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=15'
+ typeset -g ZSH_HIGHLIGHT_STYLES[path]='fg=12'
+ typeset -g ZSH_HIGHLIGHT_STYLES[assign]='fg=3,bold'
+ typeset -g ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=13,bold'
+ typeset -g ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
+ typeset -g ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
 
 # Disable highlight on paste
 zle_highlight+=(paste:none)
