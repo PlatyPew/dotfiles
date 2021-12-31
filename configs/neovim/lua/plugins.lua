@@ -101,7 +101,11 @@ return packer.startup(function(use)
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'p00f/nvim-ts-rainbow',
-            { 'windwp/nvim-autopairs', config = getConfig('autopair') },
+            {
+                'windwp/nvim-autopairs',
+                event = 'InsertEnter',
+                config = getConfig('autopair')
+            },
         },
         config = getConfig('treesitter'),
     }

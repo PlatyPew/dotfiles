@@ -212,7 +212,7 @@ publish() {
 ############################################################
 
 ## Aliases #################################################
-alias vi="nvim -O"
+alias vi="nvim"
 alias :q='exit'
 alias cls='clear'
 alias speed='speed-test -v'
