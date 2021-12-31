@@ -58,16 +58,16 @@ wk.register({
 
     l = {
         name = 'LSP' ,
-        D = { '<Cmd>Lspsaga show_line_diagnostics', 'Show line diagnostics' },
-        I = { '<Cmd>LspInstallInfo', 'LSP Installer' },
-        c = { '<Cmd>Lspsaga code_action', 'Code action' },
-        d = { '<Cmd>Lspsaga show_cursor_diagnostics', 'Show cursor diagnostics' },
-        f = { '<Cmd>Lspsaga lsp_finder', 'Find reference' },
-        h = { '<Cmd>Lspsaga hover_doc', 'Docs' },
-        i = { '<Cmd>LspInfo', 'LSP info' },
-        p = { '<Cmd>Lspsaga preview_definition', 'Preview definition' },
-        r = { '<Cmd>Lspsaga rename', 'Rename variable' },
-        s = { '<Cmd>Lspsaga signature_help', 'Show signature' },
+        D = { '<Cmd>Lspsaga show_line_diagnostics<CR>', 'Show line diagnostics' },
+        I = { '<Cmd>LspInstallInfo<CR>', 'LSP Installer' },
+        c = { '<Cmd>Lspsaga code_action<CR>', 'Code action' },
+        d = { '<Cmd>Lspsaga show_cursor_diagnostics<CR>', 'Show cursor diagnostics' },
+        f = { '<Cmd>Lspsaga lsp_finder<CR>', 'Find reference' },
+        h = { '<Cmd>Lspsaga hover_doc<CR>', 'Docs' },
+        i = { '<Cmd>LspInfo<CR>', 'LSP info' },
+        p = { '<Cmd>Lspsaga preview_definition<CR>', 'Preview definition' },
+        r = { '<Cmd>Lspsaga rename<CR>', 'Rename variable' },
+        s = { '<Cmd>Lspsaga signature_help<CR>', 'Show signature' },
     },
 
     r = {
