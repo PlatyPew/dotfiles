@@ -188,7 +188,7 @@
 
   function _nvim_version() {
     local content
-    content="$(nvim --version | cut -d ' ' -f 2 | head -n 1)" || content=
+    content="$(nvim --version | cut -d 'v' -f 2 | head -n 1)" || content=
     _nvim_version=$content
   }
 
