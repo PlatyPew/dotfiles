@@ -32,6 +32,10 @@ lspinstall.on_server_ready(function(server)
         capabilities = capabilities,
         flags = { debounce_text_changes = 500 },
         root_dir = lspconfig.util.path.dirname,
+        on_attach = function(client)
+            client.resolved_capabilities.document_formatting = false
+            client.resolved_capabilities.document_range_formatting = false
+        end,
     }
 
     if server.name == 'texlab' then

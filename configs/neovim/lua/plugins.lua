@@ -242,9 +242,9 @@ return packer.startup(function(use)
     }
 
     use {
-        'mhartington/formatter.nvim',
-        cmd = 'Format',
-        config = getConfig('format'),
+        'jose-elias-alvarez/null-ls.nvim',
+        event = 'BufReadPre',
+        config = getConfig('nullls'),
     }
 
     use { 'vim-scripts/LargeFile' }

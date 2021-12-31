@@ -85,7 +85,7 @@ remap('i', '<s-tab>', [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, norema
 remap('n', '<Tab>', [[ <Cmd>UndotreeToggle<CR> ]], {})
 
 -- Format
-remap('n', 'g=', [[ <Cmd>Format<CR> ]], { noremap = true, silent = true })
+remap('n', 'g=', [[ <Cmd>lua vim.lsp.buf.formatting_sync()<CR> ]], { noremap = true, silent = true })
 
 -- Instant
 remap('n', '<Leader>Is', [[ <Cmd>lua InstantStartSession()<CR> ]], {})
