@@ -62,6 +62,7 @@ return packer.startup(function(use)
 
     use {
         'nvim-lualine/lualine.nvim',
+        commit = '4b68b8dd2aa5bb74fe8cd058797322d81df1f455',
         requires = 'kyazdani42/nvim-web-devicons',
         event = 'VimEnter',
         config = getConfig('lualine'),
