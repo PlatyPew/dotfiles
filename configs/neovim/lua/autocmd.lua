@@ -1,3 +1,8 @@
+-- Remove comment on newline
+vim.cmd [[
+    autocmd BufNewFile,Bufread * setlocal formatoptions-=cro
+]]
+
 -- Syntax highlight
 vim.cmd [[
     augroup highlights
