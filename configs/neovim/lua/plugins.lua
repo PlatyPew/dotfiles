@@ -150,8 +150,9 @@ return packer.startup(function(use)
             'ms-jpq/coq.artifacts',
             'ms-jpq/coq.thirdparty',
             {
-                'github/copilot.vim',
-                event = 'VimEnter',
+                'PlatyPew/copilot.vim',
+                branch = 'removevirt',
+                event = 'InsertEnter',
             },
         },
         config = getConfig('lsp'),
