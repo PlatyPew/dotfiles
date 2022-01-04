@@ -152,7 +152,7 @@ return packer.startup(function(use)
             {
                 'PlatyPew/copilot.vim',
                 branch = 'removevirt',
-                event = 'InsertCharPre',
+                cmd = 'Copilot',
             },
         },
         config = getConfig('lsp'),
