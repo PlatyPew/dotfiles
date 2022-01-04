@@ -148,7 +148,10 @@ return packer.startup(function(use)
             },
             'ms-jpq/coq.artifacts',
             'ms-jpq/coq.thirdparty',
-            'github/copilot.vim',
+            {
+                'github/copilot.vim',
+                event = 'VimEnter',
+            },
         },
         config = getConfig('lsp'),
     }
