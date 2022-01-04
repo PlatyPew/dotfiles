@@ -157,6 +157,7 @@ return packer.startup(function(use)
             'MunifTanjim/nui.nvim',
             'nvim-lua/plenary.nvim',
         },
+        ft = { 'python', 'javascript', 'typescript', 'go', 'sh' },
         event = 'VimEnter',
         config = function()
             require'nvim-magic'.setup()
