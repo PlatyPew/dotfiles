@@ -146,7 +146,13 @@ return packer.startup(function(use)
                 branch = 'coq',
                 run = 'python3 -m coq deps',
             },
-            { 'ms-jpq/coq.artifacts', branch = 'artifacts' },
+            'ms-jpq/coq.artifacts',
+            'ms-jpq/coq.thirdparty',
+            {
+                'PlatyPew/copilot.vim',
+                branch = 'removevirt',
+                cmd = 'Copilot',
+            },
         },
         config = getConfig('lsp'),
     }

@@ -11,6 +11,15 @@ wk.register({
     o = { '<Cmd>CHADopen<CR>', 'File Explorer' },
     u = { '<Cmd>UndotreeToggle<CR>', 'Toggle UndoTree' },
 
+    c = {
+        name = 'Copilot',
+        S = { '<Cmd>Copilot status<CR>', 'Copilot Status' },
+        d = { '<Cmd>Copilot disable<CR>', 'Disable Copilot' },
+        e = { '<Cmd>Copilot enable<CR>', 'Enable Copilot' },
+        r = { '<Cmd>Copilot restart<CR>', 'Restart Copilot' },
+        s = { '<Cmd>Copilot split<CR>', 'Split Screen' },
+    },
+
     d = {
         name = 'Debugger',
         C = { "<Cmd>lua require'dap'.close()<CR>", 'Close'},
