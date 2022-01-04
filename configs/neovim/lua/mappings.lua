@@ -109,11 +109,3 @@ remap('n', '<Leader>de', [[ <Cmd>lua require'dapui'.eval()<CR> ]], { noremap = t
 
 -- Iron
 remap('v', 'is', '<Plug>(iron-visual-send)', { noremap = true })
-
--- Hop
-remap('n', '<Leader><Leader>w', ":HopWordAC<CR>", {silent=true})
-remap('n', '<Leader><Leader>b', ":HopWordBC<CR>", {silent=true})
-remap('n', '<Leader><Leader>j', ":HopLineStartAC<CR>", {silent=true})
-remap('n', '<Leader><Leader>k', ":HopLineStartBC<CR>", {silent=true})
-remap('n', '<Leader><Leader>1', ":HopChar1<CR>", {silent=true})
-remap('n', '<Leader><Leader>2', ":HopChar2<CR>", {silent=true})

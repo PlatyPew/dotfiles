@@ -101,6 +101,7 @@ return packer.startup(function(use)
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'p00f/nvim-ts-rainbow',
+            'windwp/nvim-ts-autotag',
             {
                 'windwp/nvim-autopairs',
                 event = 'InsertEnter',
@@ -185,14 +186,6 @@ return packer.startup(function(use)
     }
 
     use { 'mg979/vim-visual-multi', branch = 'master' }
-
-    use {
-        'phaazon/hop.nvim',
-        event = 'BufReadPre',
-        config = function()
-            require'hop'.setup()
-        end
-    }
 
     use {
         'numToStr/Comment.nvim',
