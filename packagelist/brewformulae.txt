@@ -23,6 +23,7 @@ pinentry-mac
 prettier
 python@3.9
 ripgrep
+shfmt
 tmux
 trash
 universal-ctags
