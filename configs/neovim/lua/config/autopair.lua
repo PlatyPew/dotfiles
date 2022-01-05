@@ -2,7 +2,7 @@ local npairs = require'nvim-autopairs'
 local rule = require'nvim-autopairs.rule'
 local cond = require'nvim-autopairs.conds'
 
-npairs.setup({ map_bs = false })
+npairs.setup({ map_bs = true })
 
 npairs.add_rules {
   rule(' ', ' ')
