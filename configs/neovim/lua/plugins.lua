@@ -101,7 +101,10 @@ return packer.startup(function(use)
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
             'p00f/nvim-ts-rainbow',
-            'windwp/nvim-ts-autotag',
+            {
+                'windwp/nvim-ts-autotag',
+                event = 'InsertEnter',
+            },
             {
                 'windwp/nvim-autopairs',
                 event = 'InsertEnter',
