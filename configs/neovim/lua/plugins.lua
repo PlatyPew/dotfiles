@@ -215,6 +215,7 @@ return packer.startup(function(use)
 
     use {
         'hkupty/iron.nvim',
+        cmd = { 'IronRepl', 'IronReplHere' },
         config = getConfig('iron'),
     }
 
