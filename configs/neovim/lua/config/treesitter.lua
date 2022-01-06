@@ -3,6 +3,10 @@ require'nvim-treesitter.configs'.setup{
         enable = true,
     },
     ensure_installed = "maintained",
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+    },
     highlight = {
         enable = true,
         disable = {},

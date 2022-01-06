@@ -197,9 +197,8 @@ return packer.startup(function(use)
     use {
         'numToStr/Comment.nvim',
         event = 'VimEnter',
-        config = function()
-            require'Comment'.setup()
-        end
+        requires = 'JoosepAlviste/nvim-ts-context-commentstring',
+        config = getConfig('comment'),
     }
 
     use {
