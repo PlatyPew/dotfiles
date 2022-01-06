@@ -72,6 +72,7 @@ return packer.startup(function(use)
         requires = {
             {
                 'ibhagwan/fzf-lua',
+                event = 'VimEnter',
                 config = function()
                     require'fzf-lua'.setup{
                         winopts = {
