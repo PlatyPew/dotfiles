@@ -250,7 +250,7 @@ return packer.startup(function(use)
 
     use {
         'jose-elias-alvarez/null-ls.nvim',
-        event = 'BufReadPre',
+        requires = 'PlatyPew/format-installer.nvim',
         config = getConfig('nullls'),
     }
 
