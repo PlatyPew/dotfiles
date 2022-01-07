@@ -74,14 +74,12 @@ return packer.startup(function(use)
                 'ibhagwan/fzf-lua',
                 event = 'VimEnter',
                 config = function()
-                    require'fzf-lua'.setup{
-                        winopts = {
+                    require'fzf-lua'.setup{ winopts = {
                             preview = {
                                 scrollbar = false,
                                 wrap = 'wrap',
                             },
-                        },
-                    }
+                        }, }
                 end
             },
             'kyazdani42/nvim-web-devicons'
@@ -101,7 +99,10 @@ return packer.startup(function(use)
         run = ':TSUpdateSync all',
         requires = {
             'nvim-treesitter/nvim-treesitter-refactor',
-            'p00f/nvim-ts-rainbow',
+            {
+                'p00f/nvim-ts-rainbow',
+                event = 'BufReadPre',
+            },
             {
                 'windwp/nvim-ts-autotag',
                 event = 'InsertEnter',
@@ -196,7 +197,10 @@ return packer.startup(function(use)
         config = getConfig('whichkey')
     }
 
-    use { 'mg979/vim-visual-multi', branch = 'master' }
+    use {
+        'mg979/vim-visual-multi',
+        event = 'BufReadPre',
+    }
 
     use {
         'numToStr/Comment.nvim',
