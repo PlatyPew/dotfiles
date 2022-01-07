@@ -76,6 +76,8 @@ wk.register({
         c = { "<Cmd>Lspsaga code_action<CR>", "Code action" },
         d = { "<Cmd>Lspsaga show_cursor_diagnostics<CR>", "Show cursor diagnostics" },
         f = { "<Cmd>Lspsaga lsp_finder<CR>", "Find reference" },
+        d = { "<Cmd>Lspsaga show_cursor_diagnostics<CR>", "Show Cursor Diagnostics" },
+        f = { "<Cmd>Lspsaga lsp_finder<CR>", "Find Reference" },
         h = { "<Cmd>Lspsaga hover_doc<CR>", "Docs" },
         i = { "<Cmd>LspInfo<CR>", "LSP info" },
         p = { "<Cmd>Lspsaga preview_definition<CR>", "Preview definition" },
