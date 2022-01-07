@@ -1,9 +1,8 @@
 - shell:
-    -
-        command: [/bin/sh configs/neovim/install.sh]
-        stdin: true
-        stdout: true
-        stderr: true
+    - command: [/bin/sh configs/neovim/install.sh]
+      stdin: true
+      stdout: true
+      stderr: true
 - link:
     ~/.config/nvim/init.lua: configs/neovim/init.lua
     ~/.config/nvim/lua: configs/neovim/lua

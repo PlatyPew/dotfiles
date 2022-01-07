@@ -4,7 +4,7 @@ brew upgrade --cask --greedy && brew cleanup
 brew autoremove
 npm update -g
 PIP=$DOTFILES/configs/neovim/venv/bin/pip3
-$PIP install --upgrade `$PIP freeze | cut -d '=' -f 1`
+$PIP install --upgrade $($PIP freeze | cut -d '=' -f 1)
 zgenom update
 nvim -c ':PlugUpdate' -c ':PlugUpgrade' -c ':qall' update.c
-rm -rf ~/.npm ~/Library/Caches/pip `brew --cache`
+rm -rf ~/.npm ~/Library/Caches/pip $(brew --cache)

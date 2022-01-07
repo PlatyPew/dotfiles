@@ -1,66 +1,72 @@
-require'lualine'.setup{
+require("lualine").setup({
     options = {
         icons_enabled = true,
-        theme = 'catppuccino',
-        section_separators = {left = '', right = ''},
-        component_separators = {left = '', right = ''},
+        theme = "catppuccino",
+        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
     },
     sections = {
-        lualine_a = {'mode'},
-        lualine_b = {'branch', 'diff'},
-        lualine_c = {'filename', 'filesize'},
+        lualine_a = { "mode" },
+        lualine_b = { "branch", "diff" },
+        lualine_c = { "filename", "filesize" },
         lualine_x = {
-            'location',
+            "location",
             {
-                'filetype',
+                "filetype",
                 colored = true,
             },
         },
         lualine_y = {
             {
-                'encoding',
+                "encoding",
                 padding = { left = 1, right = 0 },
             },
-            'fileformat',
+            "fileformat",
         },
         lualine_z = {
             {
-                'diagnostics',
-                sources = { 'nvim_diagnostic' },
-                symbols = { error = ' ', warn = ' ', info = ' ' },
+                "diagnostics",
+                sources = { "nvim_diagnostic" },
+                symbols = { error = " ", warn = " ", info = " " },
                 diagnostics_color = {
-                    error = {bg = "#222424", fg = "#cf637e"},
-                    warn = {bg = "#222424", fg = "#f4a261"},
-                    info = {bg = "#222424", fg = "#dbc074"},
-                    hint = {bg = "#222424", fg = "#dbc074"},
-                }
+                    error = { bg = "#222424", fg = "#cf637e" },
+                    warn = { bg = "#222424", fg = "#f4a261" },
+                    info = { bg = "#222424", fg = "#dbc074" },
+                    hint = { bg = "#222424", fg = "#dbc074" },
+                },
             },
         },
     },
     inactive_sections = {
         lualine_a = {},
-        lualine_b = {'branch', {
-                'diff',
+        lualine_b = {
+            "branch",
+            {
+                "diff",
                 colored = false,
-            }
+            },
         },
-        lualine_c = {'filename'},
-        lualine_x = {'filetype'},
+        lualine_c = { "filename" },
+        lualine_x = { "filetype" },
     },
     tabline = {
         lualine_a = {
             {
-                'buffers',
+                "buffers",
                 buffers_color = {
-                    inactive = {bg = '#44475a', fg = '#ffffff'},
+                    inactive = { bg = "#44475a", fg = "#ffffff" },
                 },
                 padding = 1,
                 filetype_names = {
-                    CHADTree = 'CHADTree',
+                    CHADTree = "CHADTree",
                 },
-            }
+            },
         },
-        lualine_y = {function () return [[buffers]] end}
+        lualine_y = {
+            function()
+                return [[buffers]]
+            end,
+        },
     },
-    extensions = {'chadtree'},
-}
+    extensions = { "chadtree" },
+})

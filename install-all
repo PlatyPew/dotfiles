@@ -2,15 +2,15 @@
 sudo spctl --master-disable
 
 which -s brew
-if [[ $? != 0 ]] ; then
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [[ $? != 0 ]]; then
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-    brew update
+	brew update
 fi
 
-./install-standalone git && \
-./install-standalone iterm2 && \
-./install-standalone macos && \
-./install-standalone neovim && \
-./install-standalone tmux && \
-./install-standalone zsh
+./install-standalone git &&
+	./install-standalone iterm2 &&
+	./install-standalone macos &&
+	./install-standalone neovim &&
+	./install-standalone tmux &&
+	./install-standalone zsh

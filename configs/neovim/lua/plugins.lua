@@ -1,269 +1,274 @@
-vim.g.python3_host_prog = vim.fn.getenv('DOTFILES') .. '/configs/neovim/venv/bin/python3'
+vim.g.python3_host_prog = vim.fn.getenv("DOTFILES") .. "/configs/neovim/venv/bin/python3"
 
-local install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = vim.fn.system{
-        'git', 'clone', '--depth', '1',
-        'https://github.com/wbthomason/packer.nvim',
-        install_path
-    }
-    print('Installing packer close and reopen Neovim...')
-    vim.cmd 'packadd packer.nvim'
+    PACKER_BOOTSTRAP = vim.fn.system({
+        "git",
+        "clone",
+        "--depth",
+        "1",
+        "https://github.com/wbthomason/packer.nvim",
+        install_path,
+    })
+    print("Installing packer close and reopen Neovim...")
+    vim.cmd("packadd packer.nvim")
 end
 
-vim.cmd [[
+vim.cmd([[
     augroup packer_user_config
         autocmd!
         autocmd BufWritePost plugins.lua source <afile> | PackerSync
     augroup end
-]]
+]])
 
-local status_ok, packer = pcall(require, 'packer')
+local status_ok, packer = pcall(require, "packer")
 if not status_ok then
     return
 end
 
-packer.init{
-    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua',
+packer.init({
+    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua",
     display = {
         open_fn = function()
-            return require('packer.util').float{ border = 'rounded' }
+            return require("packer.util").float({ border = "rounded" })
         end,
     },
-}
+})
 
 function getConfig(name)
     return string.format("require('config/%s')", name)
 end
 
 return packer.startup(function(use)
-    use { 'wbthomason/packer.nvim' }
+    use({ "wbthomason/packer.nvim" })
 
-    use {
-        'lewis6991/impatient.nvim',
+    use({
+        "lewis6991/impatient.nvim",
         config = function()
-            require'impatient'
-        end
-    }
+            require("impatient")
+        end,
+    })
 
-    use {
-        'Pocco81/Catppuccino.nvim',
-        branch = 'old-catppuccino',
-        config = getConfig('catppuccino'),
-    }
+    use({
+        "Pocco81/Catppuccino.nvim",
+        branch = "old-catppuccino",
+        config = getConfig("catppuccino"),
+    })
 
-    use {
-        'norcalli/nvim-colorizer.lua',
-        event = 'BufReadPre',
+    use({
+        "norcalli/nvim-colorizer.lua",
+        event = "BufReadPre",
         config = function()
-            require'colorizer'.setup()
-        end
-    }
+            require("colorizer").setup()
+        end,
+    })
 
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = 'kyazdani42/nvim-web-devicons',
-        event = 'VimEnter',
-        config = getConfig('lualine'),
-    }
+    use({
+        "nvim-lualine/lualine.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+        event = "VimEnter",
+        config = getConfig("lualine"),
+    })
 
-    use {
-        'glepnir/dashboard-nvim',
+    use({
+        "glepnir/dashboard-nvim",
         requires = {
             {
-                'ibhagwan/fzf-lua',
-                event = 'VimEnter',
+                "ibhagwan/fzf-lua",
+                event = "VimEnter",
                 config = function()
-                    require'fzf-lua'.setup{ winopts = {
+                    require("fzf-lua").setup({
+                        winopts = {
                             preview = {
                                 scrollbar = false,
-                                wrap = 'wrap',
+                                wrap = "wrap",
                             },
-                        }, }
-                end
+                        },
+                    })
+                end,
             },
-            'kyazdani42/nvim-web-devicons'
+            "kyazdani42/nvim-web-devicons",
         },
-        config = getConfig('dashboard'),
-    }
+        config = getConfig("dashboard"),
+    })
 
-    use {
-         'ms-jpq/chadtree',
-         branch = 'chad',
-         run = 'python3 -m chadtree deps --nvim',
-         cmd = 'CHADopen',
-    }
+    use({
+        "ms-jpq/chadtree",
+        branch = "chad",
+        run = "python3 -m chadtree deps --nvim",
+        cmd = "CHADopen",
+    })
 
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdateSync all',
+    use({
+        "nvim-treesitter/nvim-treesitter",
+        run = ":TSUpdateSync all",
         requires = {
-            'nvim-treesitter/nvim-treesitter-refactor',
+            "nvim-treesitter/nvim-treesitter-refactor",
             {
-                'p00f/nvim-ts-rainbow',
-                event = 'BufReadPre',
+                "p00f/nvim-ts-rainbow",
+                event = "BufReadPre",
             },
             {
-                'windwp/nvim-ts-autotag',
-                event = 'InsertEnter',
+                "windwp/nvim-ts-autotag",
+                event = "InsertEnter",
             },
             {
-                'windwp/nvim-autopairs',
-                event = 'InsertEnter',
-                config = getConfig('autopair')
+                "windwp/nvim-autopairs",
+                event = "InsertEnter",
+                config = getConfig("autopair"),
             },
         },
-        config = getConfig('treesitter'),
-    }
+        config = getConfig("treesitter"),
+    })
 
-    use {
-        'machakann/vim-highlightedyank',
-        event = 'BufReadPost',
+    use({
+        "machakann/vim-highlightedyank",
+        event = "BufReadPost",
         config = function()
-            vim.cmd 'highlight HighlightedyankRegion gui=reverse'
+            vim.cmd("highlight HighlightedyankRegion gui=reverse")
             vim.g.highlightedyank_highlight_duration = -1
-        end
-    }
+        end,
+    })
 
-    use {
-        'lewis6991/gitsigns.nvim',
-        requires = 'nvim-lua/plenary.nvim',
-        event = 'BufReadPre',
+    use({
+        "lewis6991/gitsigns.nvim",
+        requires = "nvim-lua/plenary.nvim",
+        event = "BufReadPre",
         config = function()
-            require'gitsigns'.setup{
+            require("gitsigns").setup({
                 signs = {
-                    delete = { text = '│' },
-                    topdelete = { text = '│' },
-                    changedelete = { text = '│' },
+                    delete = { text = "│" },
+                    topdelete = { text = "│" },
+                    changedelete = { text = "│" },
                 },
                 numhl = true,
-            }
-        end
-    }
+            })
+        end,
+    })
 
-    use {
-        'neovim/nvim-lspconfig',
+    use({
+        "neovim/nvim-lspconfig",
         requires = {
-            'williamboman/nvim-lsp-installer',
-            'tami5/lspsaga.nvim',
+            "williamboman/nvim-lsp-installer",
+            "tami5/lspsaga.nvim",
             {
-                'ms-jpq/coq_nvim',
-                branch = 'coq',
-                run = 'python3 -m coq deps',
+                "ms-jpq/coq_nvim",
+                branch = "coq",
+                run = "python3 -m coq deps",
             },
-            'ms-jpq/coq.artifacts',
-            'ms-jpq/coq.thirdparty',
+            "ms-jpq/coq.artifacts",
+            "ms-jpq/coq.thirdparty",
             {
-                'PlatyPew/copilot.vim',
-                branch = 'removevirt',
-                cmd = 'Copilot',
+                "PlatyPew/copilot.vim",
+                branch = "removevirt",
+                cmd = "Copilot",
             },
         },
-        config = getConfig('lsp'),
-    }
+        config = getConfig("lsp"),
+    })
 
-    use {
-        'jameshiew/nvim-magic',
+    use({
+        "jameshiew/nvim-magic",
         requires = {
-            'MunifTanjim/nui.nvim',
-            'nvim-lua/plenary.nvim',
+            "MunifTanjim/nui.nvim",
+            "nvim-lua/plenary.nvim",
         },
-        ft = { 'python', 'javascript', 'typescript', 'go', 'sh' },
-        event = 'VimEnter',
+        ft = { "python", "javascript", "typescript", "go", "sh" },
+        event = "VimEnter",
         config = function()
-            require'nvim-magic'.setup()
-        end
-    }
+            require("nvim-magic").setup()
+        end,
+    })
 
-    use {
-        'mfussenegger/nvim-dap',
+    use({
+        "mfussenegger/nvim-dap",
         requires = {
-            'rcarriga/nvim-dap-ui',
-            'theHamsta/nvim-dap-virtual-text',
-            'Pocco81/DAPInstall.nvim',
+            "rcarriga/nvim-dap-ui",
+            "theHamsta/nvim-dap-virtual-text",
+            "Pocco81/DAPInstall.nvim",
         },
-        event = 'BufReadPre',
-        config = getConfig('dap')
-    }
+        event = "BufReadPre",
+        config = getConfig("dap"),
+    })
 
-    use {
-        'anyakichi/vim-surround',
-        requires = 'tpope/vim-repeat',
-    }
+    use({
+        "anyakichi/vim-surround",
+        requires = "tpope/vim-repeat",
+    })
 
-    use {
-        'folke/which-key.nvim',
-        event = 'VimEnter',
-        config = getConfig('whichkey')
-    }
+    use({
+        "folke/which-key.nvim",
+        event = "VimEnter",
+        config = getConfig("whichkey"),
+    })
 
-    use {
-        'mg979/vim-visual-multi',
-        event = 'BufReadPre',
-    }
+    use({
+        "mg979/vim-visual-multi",
+        event = "BufReadPre",
+    })
 
-    use {
-        'numToStr/Comment.nvim',
-        event = 'VimEnter',
-        requires = 'JoosepAlviste/nvim-ts-context-commentstring',
-        config = getConfig('comment'),
-    }
+    use({
+        "numToStr/Comment.nvim",
+        event = "VimEnter",
+        requires = "JoosepAlviste/nvim-ts-context-commentstring",
+        config = getConfig("comment"),
+    })
 
-    use {
-        'KeitaNakamura/tex-conceal.vim',
-        ft = 'tex',
+    use({
+        "KeitaNakamura/tex-conceal.vim",
+        ft = "tex",
         config = function()
-            vim.g.tex_flavor = 'latex'
-            vim.g.tex_conceal = 'abdgm'
+            vim.g.tex_flavor = "latex"
+            vim.g.tex_conceal = "abdgm"
             vim.g.tex_conceal_frac = 1
-            vim.cmd 'highlight clear Conceal'
-        end
-    }
+            vim.cmd("highlight clear Conceal")
+        end,
+    })
 
-    use {
-        'hkupty/iron.nvim',
-        cmd = { 'IronRepl', 'IronReplHere' },
-        config = getConfig('iron'),
-    }
+    use({
+        "hkupty/iron.nvim",
+        cmd = { "IronRepl", "IronReplHere" },
+        config = getConfig("iron"),
+    })
 
-    use {
-        'jbyuki/instant.nvim',
-        cmd = { 'InstantStartServer', 'InstantJoinSession' },
-        config = getConfig('instant'),
-    }
+    use({
+        "jbyuki/instant.nvim",
+        cmd = { "InstantStartServer", "InstantJoinSession" },
+        config = getConfig("instant"),
+    })
 
-    use {
-        'kkoomen/vim-doge',
-        run = './scripts/install.sh',
-        cmd = 'DogeGenerate',
+    use({
+        "kkoomen/vim-doge",
+        run = "./scripts/install.sh",
+        cmd = "DogeGenerate",
         config = function()
-            vim.g.doge_mapping = '<Leader>K'
-            vim.g.doge_doc_standard_c = 'kernel_doc'
-        end
-    }
+            vim.g.doge_mapping = "<Leader>K"
+            vim.g.doge_doc_standard_c = "kernel_doc"
+        end,
+    })
 
-    use {
-        'mattn/emmet-vim',
-        ft = { 'html', 'css', 'markdown', 'javascriptreact' },
-        event = 'InsertCharPre',
-    }
+    use({
+        "mattn/emmet-vim",
+        ft = { "html", "css", "markdown", "javascriptreact" },
+        event = "InsertCharPre",
+    })
 
-    use {
-        'mbbill/undotree',
-        cmd = 'UndotreeToggle',
-    }
+    use({
+        "mbbill/undotree",
+        cmd = "UndotreeToggle",
+    })
 
-    use {
-        'jose-elias-alvarez/null-ls.nvim',
-        requires = 'PlatyPew/format-installer.nvim',
-        config = getConfig('nullls'),
-    }
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        requires = "PlatyPew/format-installer.nvim",
+        config = getConfig("nullls"),
+    })
 
-    use { 'vim-scripts/LargeFile' }
+    use({ "vim-scripts/LargeFile" })
 
-    require'packer_compiled'
+    require("packer_compiled")
 
     if PACKER_BOOTSTRAP then
-        require('packer').sync()
+        require("packer").sync()
     end
 end)

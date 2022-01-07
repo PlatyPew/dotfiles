@@ -9,7 +9,7 @@
 -- _,88,_,dP   8I   Yb,_,88,_ ,d88b,  d8b ,d8b,_ ,d8b,  ,d8b,,d8,   ,d8b,
 -- 8P""Y88P'   8I   `Y88P""Y888P""Y88 Y8P 8P'"Y888P'"Y88P"`Y8P"Y8888P"`Y8
 
-require('options')
-require('plugins')
-require('mappings')
-require('autocmd')
+require("options")
+require("plugins")
+require("mappings")
+require("autocmd")
