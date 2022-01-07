@@ -99,6 +99,11 @@ wk.register({
 
 wk.register({
     c = { "<Cmd>lua require('Comment.api').call('toggle_linewise_op')<CR>g@", "Comment" },
+    g = {
+        name = "Git",
+        s = { "<Cmd>Gitsigns stage_hunk<CR>", "Stage Hunk" },
+        u = { "<Cmd>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
+    },
     r = {
         name = "REPL",
         s = { "<Plug>(iron-visual-send)", "Send to REPL" },
