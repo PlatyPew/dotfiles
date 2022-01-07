@@ -12,6 +12,9 @@ require("nvim-treesitter.configs").setup({
         disable = {},
         additional_vim_regex_highlighting = true,
     },
+    indent = {
+        enable = true,
+    },
     refactor = {
         highlight_definitions = { enable = true },
         smart_rename = {
