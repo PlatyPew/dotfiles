@@ -266,6 +266,12 @@ return packer.startup(function(use)
 
     use({ "vim-scripts/LargeFile" })
 
+    use({
+        "iamcco/markdown-preview.nvim",
+        ft = "markdown",
+        run = "cd app && npm install",
+    })
+
     require("packer_compiled")
 
     if PACKER_BOOTSTRAP then

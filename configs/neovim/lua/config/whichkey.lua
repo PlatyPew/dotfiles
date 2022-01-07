@@ -10,6 +10,7 @@ wk.register({
     T = { "<Cmd>Transparency<CR>", "Toggle Transparency" },
     o = { "<Cmd>CHADopen<CR>", "File Explorer" },
     u = { "<Cmd>UndotreeToggle<CR>", "Toggle UndoTree" },
+    m = { "<Cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
 
     c = {
         name = "Copilot",
