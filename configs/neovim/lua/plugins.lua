@@ -128,16 +128,7 @@ return packer.startup(function(use)
         "lewis6991/gitsigns.nvim",
         requires = "nvim-lua/plenary.nvim",
         event = "BufReadPre",
-        config = function()
-            require("gitsigns").setup({
-                signs = {
-                    delete = { text = "│" },
-                    topdelete = { text = "│" },
-                    changedelete = { text = "│" },
-                },
-                numhl = true,
-            })
-        end,
+        config = getConfig("gitsigns"),
     })
 
     use({

@@ -66,6 +66,7 @@ wk.register({
         p = { "<Cmd>Gitsigns preview_hunk<CR>", "Preview Hunk" },
         r = { "<Cmd>Gitsigns reset_hunk<CR>", "Reset Hunk" },
         s = { "<Cmd>Gitsigns stage_hunk<CR>", "Stage Hunk" },
+        t = { "<Cmd>Gitsigns toggle_word_diff<CR>", "Toggle Word Diff" },
         u = { "<Cmd>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
     },
 
