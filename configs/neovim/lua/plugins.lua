@@ -104,14 +104,8 @@ return packer.startup(function(use)
         run = ":TSUpdateSync all",
         requires = {
             "nvim-treesitter/nvim-treesitter-refactor",
-            {
-                "p00f/nvim-ts-rainbow",
-                event = "BufReadPre",
-            },
-            {
-                "windwp/nvim-ts-autotag",
-                event = "InsertEnter",
-            },
+            "windwp/nvim-ts-autotag",
+            "p00f/nvim-ts-rainbow",
             {
                 "windwp/nvim-autopairs",
                 event = "InsertEnter",
