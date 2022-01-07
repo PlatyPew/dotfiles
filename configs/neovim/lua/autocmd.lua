@@ -7,7 +7,7 @@ vim.cmd([[
 vim.cmd([[
     augroup highlights
         autocmd!
-        autocmd Filetype * if &ft!="dashboard" && &ft!="WhichKey" && &ft!="packer" | call matchadd('ColorColumn', '\%101v[^\n]')
+        autocmd Filetype * if &ft!="dashboard" && &ft!="WhichKey" && &ft!="packer" && &ft!="lsp-installer" | call matchadd('ColorColumn', '\%101v[^\n]')
         autocmd FileType text,markdown,tex setlocal spell
         autocmd FileType text,markdown,tex highlight clear ColorColumn
     augroup END
