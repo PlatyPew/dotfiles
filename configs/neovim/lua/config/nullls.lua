@@ -19,6 +19,10 @@ for _, formatter in ipairs(formatter_install.get_installed_formatters()) do
     table.insert(sources, null_ls.builtins.formatting[formatter.name].with(config))
 end
 
+table.insert(sources, null_ls.builtins.formatting.stylua.with{
+    extra_args = { '--column-width=100', '--indent-type=Spaces' }
+})
+
 null_ls.setup{
     sources = sources,
 }

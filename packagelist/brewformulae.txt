@@ -1,7 +1,6 @@
 autojump
 bat
 bfg
-bitwarden-cli
 commitizen
 entr
 exa
@@ -20,15 +19,13 @@ neovim
 p7zip
 pandoc
 pinentry-mac
-prettier
 python@3.9
 ripgrep
-shfmt
+stylua
 tmux
 trash
 universal-ctags
 virtualenv
 watch
 wget
-yapf
 zsh
