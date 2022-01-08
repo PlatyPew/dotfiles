@@ -89,12 +89,13 @@ wk.register({
     r = {
         name = "REPL",
         C = { "<Cmd>IronReplHere<CR>", "Create REPL Here" },
+        R = { "<Cmd>IronRestart<CR>", "Restart REPL" },
         c = { "<Cmd>IronRepl<CR>", "Create REPL" },
         f = { "<Cmd>IronFocus<CR>", "Focus" },
         i = { "<Plug>(iron-interrupt)", "Interrupt REPL" },
         l = { "<Plug>(iron-clear)", "Clear REPL" },
         q = { "<Plug>(iron-exit)", "Quit REPL" },
-        r = { "<Cmd>IronRestart<CR>", "Restart REPL" },
+        r = { "<Plug>(iron-repeat-cmd)", "Repeat Command" },
     },
 }, { mode = "n", prefix = "," })
 
