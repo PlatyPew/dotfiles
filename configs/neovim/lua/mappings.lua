@@ -100,6 +100,8 @@ remap("n", "gh", [[<Cmd>Lspsaga hover_doc<CR>]], { noremap = true, silent = true
 remap("n", "gf", [[<Cmd>Lspsaga lsp_finder<CR>]], { noremap = true, silent = true })
 remap("n", "gr", [[<Cmd>Lspsaga rename<CR>]], { noremap = true, silent = true })
 remap("n", "gc", [[<Cmd>Lspsaga code_action<CR>]], { noremap = true, silent = true })
+remap("n", "[g", [[<Cmd>Lspsaga diagnostic_jump_prev<CR>]], { noremap = true, silent = true })
+remap("n", "]g", [[<Cmd>Lspsaga diagnostic_jump_next<CR>]], { noremap = true, silent = true })
 
 -- COQ Autopairs
 remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
