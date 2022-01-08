@@ -58,7 +58,9 @@ require("lualine").setup({
                 },
                 padding = 1,
                 filetype_names = {
-                    CHADTree = "CHADTree",
+                    dashboard = "舘Dashboard",
+                    CHADTree = " CHADTree",
+                    ["lsp-installer"] = " LSP Install",
                 },
             },
         },
