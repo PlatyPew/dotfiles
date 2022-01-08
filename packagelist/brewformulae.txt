@@ -21,7 +21,6 @@ pandoc
 pinentry-mac
 python@3.9
 ripgrep
-stylua
 tmux
 trash
 universal-ctags
