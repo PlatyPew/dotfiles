@@ -70,6 +70,14 @@ wk.register({
         u = { "<Cmd>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
     },
 
+    i = {
+        name = "Instant",
+        Q = { "<Cmd>call v:lua.InstantStopServer()<CR>", "Stop Instant Server" },
+        j = { "<Cmd>call v:lua.InstantJoinSession()<CR>", "Join Instant Session" },
+        q = { "<Cmd>call v:lua.InstantStopSession()<CR>", "Stop Instant Session" },
+        s = { "<Cmd>call v:lua.InstantStartSession()<CR>", "Start Instant Session" },
+    },
+
     l = {
         name = "LSP",
         D = { "<Cmd>Lspsaga show_line_diagnostics<CR>", "Show Line Diagnostics" },
