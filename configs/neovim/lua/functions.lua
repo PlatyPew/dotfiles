@@ -42,3 +42,5 @@ function _G.install_javadebug()
             .. " && JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home ./mvnw clean install"
     )
 end
+
+vim.cmd("command! JavaDebugInstall call v:lua.install_javadebug")
