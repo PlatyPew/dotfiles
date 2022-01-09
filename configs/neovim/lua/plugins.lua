@@ -220,7 +220,9 @@ return packer.startup(function(use)
     use({
         "jbyuki/instant.nvim",
         cmd = { "InstantStartServer", "InstantJoinSession" },
-        config = getConfig("instant"),
+        config = function()
+            vim.g.instant_username = io.popen("whoami"):read("*a"):sub(0, -2)
+        end,
     })
 
     use({
