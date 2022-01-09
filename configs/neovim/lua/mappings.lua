@@ -116,10 +116,10 @@ remap("n", "<Tab>", [[<Cmd>UndotreeToggle<CR>]], {})
 remap("n", "g=", [[<Cmd>lua vim.lsp.buf.formatting_sync()<CR>]], { noremap = true, silent = true })
 
 -- Instant
-remap("n", "<Leader>Is", [[<Cmd>lua InstantStartSession()<CR>]], {})
-remap("n", "<Leader>Ij", [[<Cmd>lua InstantJoinSession()<CR>]], {})
-remap("n", "<Leader>Iq", [[<Cmd>lua InstantStopSession()<CR>]], {})
-remap("n", "<Leader>IQ", [[<Cmd>lua InstantStopServer()<CR>]], {})
+remap("n", "<Leader>Is", [[<Cmd>call v:lua.InstantStartSession()<CR>]], {})
+remap("n", "<Leader>Ij", [[<Cmd>call v:lua.InstantJoinSession()<CR>]], {})
+remap("n", "<Leader>Iq", [[<Cmd>call v:lua.InstantStopSession()<CR>]], {})
+remap("n", "<Leader>IQ", [[<Cmd>call v:lua.InstantStopServer()<CR>]], {})
 
 -- Gitsigns
 remap(
