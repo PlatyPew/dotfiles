@@ -95,7 +95,7 @@ return packer.startup(function(use)
     use({
         "ms-jpq/chadtree",
         branch = "chad",
-        run = "python3 -m chadtree deps --nvim",
+        run = ":CHADdeps",
         cmd = "CHADopen",
     })
 
@@ -139,7 +139,7 @@ return packer.startup(function(use)
             {
                 "ms-jpq/coq_nvim",
                 branch = "coq",
-                run = "python3 -m coq deps",
+                run = ":COQdeps",
             },
             "ms-jpq/coq.artifacts",
             "ms-jpq/coq.thirdparty",
