@@ -43,4 +43,4 @@ function _G.install_javadebug()
     )
 end
 
-vim.cmd("command! JavaDebugInstall call v:lua.install_javadebug")
+vim.cmd("command! JavaDebugInstall call v:lua.install_javadebug()")
