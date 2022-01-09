@@ -170,6 +170,7 @@ return packer.startup(function(use)
         requires = {
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
+            "mfussenegger/nvim-jdtls",
             "Pocco81/DAPInstall.nvim",
         },
         event = "BufReadPre",
