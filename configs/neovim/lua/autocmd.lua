@@ -50,3 +50,16 @@ vim.cmd([[
         autocmd TermOpen * tnoremap <buffer> <C-l> <C-\><C-n><C-w>l
     augroup END
 ]])
+
+-- COQ
+vim.cmd([[
+    augroup coq
+        autocmd!
+        autocmd VimEnter * highlight Pmenu ctermfg=247 ctermbg=235
+        autocmd VimEnter * highlight PmenuSel ctermfg=0 ctermbg=13
+        autocmd VimEnter * highlight LspDiagnosticsDefaultError ctermfg=9
+        autocmd VimEnter * highlight LspDiagnosticsDefaultWarning ctermfg=3
+        autocmd VimEnter * highlight COQMarks guifg=#FFE37E guibg=#353B45
+    augroup END
+]])
+

@@ -1,11 +1,3 @@
--- Colours
-vim.cmd([[
-    highlight Pmenu ctermfg=247 ctermbg=235
-    highlight PmenuSel ctermfg=0 ctermbg=13
-    highlight LspDiagnosticsDefaultError ctermfg=9
-    highlight LspDiagnosticsDefaultWarning ctermfg=3
-]])
-
 -- Settings
 vim.g.coq_settings = {
     auto_start = "shut-up",
@@ -13,6 +5,9 @@ vim.g.coq_settings = {
         tabnine = {
             enabled = true,
         },
+    },
+    display = {
+        mark_highlight_group = "COQMarks",
     },
     keymap = {
         recommended = false,
