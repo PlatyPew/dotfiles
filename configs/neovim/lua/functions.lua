@@ -1,3 +1,4 @@
+-- Instant
 function _G.InstantStartSession()
     local port = vim.fn.input("Server Port: ")
     vim.api.nvim_exec("InstantStartServer 0.0.0.0 " .. port, true)
@@ -22,6 +23,7 @@ function _G.InstantStopServer()
     vim.cmd("InstantStatus")
 end
 
+-- DAP
 function _G.install_javadebug()
     local installation_path = vim.fn.stdpath("data") .. "/dapinstall/"
 
@@ -43,4 +45,12 @@ function _G.install_javadebug()
     )
 end
 
-vim.cmd("command! JavaDebugInstall call v:lua.install_javadebug()")
+function _G.uninstall_javadebug()
+    local installation_path = vim.fn.stdpath("data") .. "/dapinstall/java-debug"
+    vim.fn.delete(installation_path, "rf")
+
+    print("Java-debug uninstalled")
+end
+
+vim.cmd("command! DIInstallJava call v:lua.install_javadebug()")
+vim.cmd("command! DIUninstallJava call v:lua.uninstall_javadebug()")
