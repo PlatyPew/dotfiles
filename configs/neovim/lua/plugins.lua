@@ -249,6 +249,7 @@ return packer.startup(function(use)
     use({
         "jose-elias-alvarez/null-ls.nvim",
         requires = "PlatyPew/format-installer.nvim",
+        after = "nvim-lspconfig",
         config = getConfig("nullls"),
     })
 
