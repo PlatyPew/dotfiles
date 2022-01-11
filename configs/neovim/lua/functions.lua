@@ -39,9 +39,10 @@ function _G.install_javadebug()
     vim.fn.system({ "git", "clone", git_url, installation_path })
 
     vim.cmd(
-        "split | terminal cd "
-            .. installation_path
-            .. " && JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home ./mvnw clean install"
+        string.format(
+            "split | terminal cd %s && JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-11.jdk/Contents/Home ./mvnw clean install",
+            installation_path
+        )
     )
 end
 
