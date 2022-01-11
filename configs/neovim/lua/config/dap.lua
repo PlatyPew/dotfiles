@@ -25,6 +25,7 @@ dap.configurations.cpp = {
 }
 dap.configurations.c = dap.configurations.cpp
 dap.configurations.rust = dap.configurations.cpp
+dap.configurations.javascript[1].program = "${file}"
 
 require("nvim-dap-virtual-text").setup()
 
