@@ -1,34 +1,38 @@
+local opt = vim.o
+local glo = vim.g
+local cmd = vim.cmd
+
 -- Optimisation
-vim.o.foldmethod = "expr"
-vim.o.lazyredraw = true
-vim.o.ruler = false
+opt.foldmethod = "expr"
+opt.lazyredraw = true
+opt.ruler = false
 
 -- Colouring
-vim.o.termguicolors = true
+opt.termguicolors = true
 
 -- Configurations
-vim.o.cursorline = true
-vim.o.encoding = "utf-8"
-vim.o.expandtab = true
-vim.o.list = true
-vim.o.listchars = "tab:»·,trail:·,nbsp:·"
-vim.o.mouse = "nvi"
-vim.o.number = true
-vim.o.relativenumber = true
-vim.o.shiftwidth = 4
-vim.o.showmode = false
-vim.o.smartindent = true
-vim.o.softtabstop = 4
-vim.o.spelllang = "en_gb"
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.tabstop = 4
-vim.o.updatetime = 50
-vim.o.whichwrap = "b,s,<,>,h,l"
-vim.o.wrap = true
+opt.cursorline = true
+opt.encoding = "utf-8"
+opt.expandtab = true
+opt.list = true
+opt.listchars = "tab:»·,trail:·,nbsp:·"
+opt.mouse = "nvi"
+opt.number = true
+opt.relativenumber = true
+opt.shiftwidth = 4
+opt.showmode = false
+opt.smartindent = true
+opt.softtabstop = 4
+opt.spelllang = "en_gb"
+opt.splitbelow = true
+opt.splitright = true
+opt.tabstop = 4
+opt.updatetime = 50
+opt.whichwrap = "b,s,<,>,h,l"
+opt.wrap = true
 
 -- Copy Paste
-vim.g.clipboard = {
+glo.clipboard = {
     name = "pbcopy",
     copy = {
         ["*"] = "pbcopy",
@@ -42,15 +46,15 @@ vim.g.clipboard = {
 }
 
 -- TreeSitter
-vim.o.foldenable = false
-vim.o.foldlevel = 20
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldenable = false
+opt.foldlevel = 20
+opt.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- WhichKey
-vim.o.timeoutlen = 500
+opt.timeoutlen = 500
 
 -- UndoTree
-vim.cmd([[
+cmd([[
     set undodir=~/.cache/nvim/undotree
     set undofile
 ]])

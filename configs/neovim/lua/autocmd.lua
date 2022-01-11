@@ -1,10 +1,12 @@
+local cmd = vim.cmd
+
 -- Remove comment on newline
-vim.cmd([[
+cmd([[
     autocmd BufNewFile,Bufread * setlocal formatoptions-=cro
 ]])
 
 -- Syntax highlight
-vim.cmd([[
+cmd([[
     augroup highlights
         autocmd!
         autocmd Filetype * if &ft!="dashboard" && &ft!="WhichKey" && &ft!="packer" && &ft!="lsp-installer" | call matchadd('ColorColumn', '\%101v[^\n]')
@@ -14,7 +16,7 @@ vim.cmd([[
 ]])
 
 -- CHADTree
-vim.cmd([[
+cmd([[
     augroup Chad
         autocmd!
         autocmd StdinReadPre * let s:std_in=1
@@ -23,7 +25,7 @@ vim.cmd([[
 ]])
 
 -- Dashboard
-vim.cmd([[
+cmd([[
     augroup dashboard_au
         autocmd! * <buffer>
         autocmd User DashboardReady nnoremap <buffer> i <Cmd>enew<CR>i
@@ -33,7 +35,7 @@ vim.cmd([[
 ]])
 
 -- Terminal
-vim.cmd([[
+cmd([[
     augroup term_nonumber
         autocmd!
         autocmd TermOpen * setlocal nonumber norelativenumber
@@ -52,7 +54,7 @@ vim.cmd([[
 ]])
 
 -- COQ
-vim.cmd([[
+cmd([[
     augroup coq
         autocmd!
         autocmd VimEnter * highlight Pmenu ctermfg=247 ctermbg=235
@@ -62,4 +64,3 @@ vim.cmd([[
         autocmd VimEnter * highlight COQMarks guifg=#FFE37E guibg=#353B45
     augroup END
 ]])
-

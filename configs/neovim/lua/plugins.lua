@@ -35,7 +35,7 @@ packer.init({
     },
 })
 
-function getConfig(name)
+local function getConfig(name)
     return string.format("require('config/%s')", name)
 end
 
@@ -101,7 +101,7 @@ return packer.startup(function(use)
 
     use({
         "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdateSync all",
+        run = ":TSUpdate all",
         requires = {
             "nvim-treesitter/nvim-treesitter-refactor",
             "windwp/nvim-ts-autotag",
