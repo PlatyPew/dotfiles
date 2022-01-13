@@ -57,6 +57,7 @@ lspinstall.on_server_ready(function(server)
                         .. "/dapinstall/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
                 ),
             },
+            extendedCapabilities = require("jdtls").extendedClientCapabilities,
         }
     end
 
