@@ -11,7 +11,7 @@ for _, formatter in ipairs(formatter_install.get_installed_formatters()) do
     if formatter.name == "clang_format" then
         config["extra_args"] = {
             "--style",
-            "{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100}",
+            "{IndentWidth: 4, PointerAlignment: Left, ColumnLimit: 100, AllowShortFunctionsOnASingleLine: Empty}",
         }
     elseif formatter.name == "prettier" then
         config["extra_args"] = { "--tab-width=4", "--print-width=100" }
