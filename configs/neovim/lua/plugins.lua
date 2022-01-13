@@ -106,6 +106,7 @@ return packer.startup(function(use)
             "nvim-treesitter/nvim-treesitter-refactor",
             "windwp/nvim-ts-autotag",
             "p00f/nvim-ts-rainbow",
+            "nvim-treesitter/nvim-treesitter-textobjects",
             {
                 "windwp/nvim-autopairs",
                 event = "InsertEnter",
