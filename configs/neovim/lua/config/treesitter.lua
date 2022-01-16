@@ -12,10 +12,6 @@ require("nvim-treesitter.configs").setup({
         disable = {},
         additional_vim_regex_highlighting = true,
     },
-    indent = {
-        enable = true,
-        disable = { "c", "cpp", "python", "java" },
-    },
     refactor = {
         highlight_definitions = { enable = true },
         smart_rename = {
@@ -49,6 +45,9 @@ require("nvim-treesitter.configs").setup({
                 ["ic"] = "@class.inner",
             },
         },
+    },
+    yati = {
+        enable = true,
     },
 })
 

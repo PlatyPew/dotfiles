@@ -21,7 +21,6 @@ opt.number = true
 opt.relativenumber = true
 opt.shiftwidth = 4
 opt.showmode = false
-opt.smartindent = true
 opt.softtabstop = 4
 opt.spelllang = "en_gb"
 opt.splitbelow = true
