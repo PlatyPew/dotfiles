@@ -14,11 +14,11 @@ wk.register({
 
     c = {
         name = "Copilot",
-        S = { "<Cmd>Copilot status<CR>", "Copilot Status" },
+        S = { "<Cmd>Copilot split<CR>", "Split Screen" },
         d = { "<Cmd>Copilot disable<CR>", "Disable Copilot" },
         e = { "<Cmd>Copilot enable<CR>", "Enable Copilot" },
         r = { "<Cmd>Copilot restart<CR>", "Restart Copilot" },
-        s = { "<Cmd>Copilot split<CR>", "Split Screen" },
+        s = { "<Cmd>Copilot status<CR>", "Copilot Status" },
     },
 
     d = {
