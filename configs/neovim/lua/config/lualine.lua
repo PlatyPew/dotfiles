@@ -27,7 +27,7 @@ require("lualine").setup({
             {
                 "diagnostics",
                 sources = { "nvim_diagnostic" },
-                symbols = { error = " ", warn = " ", info = " " },
+                symbols = { error = " ", warn = " ", info = " " },
                 diagnostics_color = {
                     error = { bg = "#222424", fg = "#cf637e" },
                     warn = { bg = "#222424", fg = "#f4a261" },
