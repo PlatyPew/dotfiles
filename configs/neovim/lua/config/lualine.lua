@@ -61,6 +61,8 @@ require("lualine").setup({
                     dashboard = "舘Dashboard",
                     CHADTree = " CHADTree",
                     ["lsp-installer"] = " LSP Install",
+                    undotree = " UndoTree",
+                    lspinfo = " LSP Info",
                 },
             },
         },
