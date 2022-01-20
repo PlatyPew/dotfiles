@@ -39,10 +39,12 @@ wk.register({
         name = "FZF",
         ["/"] = { "<Cmd>lua require'fzf-lua'.blines()<CR>", "Lines in Buffer" },
         C = { "<Cmd>lua require'fzf-lua'.git_commits()<CR>", "Commits" },
+        D = { "<Cmd>lua require'fzf-lua'.lsp_workspace_diagnostics()<CR>", "Workspace Diagnostics" },
         G = { "<Cmd>lua require'fzf-lua'.git_status()<CR>", "Git Status Files" },
         M = { "<Cmd>lua require'fzf-lua'.keymaps()<CR>", "Mappings" },
         b = { "<Cmd>lua require'fzf-lua'.buffers()<CR>", "Buffers" },
         c = { "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", "Commits for Buffer" },
+        d = { "<Cmd>lua require'fzf-lua'.lsp_document_diagnostics()<CR>", "Document Diagnostics" },
         f = {
             "<Cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
             "Files",
