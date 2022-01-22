@@ -76,9 +76,6 @@ remap("v", "K", [[:m '<-2'<CR>gv=gv]], { noremap = true })
 -- Colorizer
 remap("n", "<Leader>T", [[<Cmd>Transparency<CR>]], { noremap = true, silent = true })
 
--- CHADTree
-remap("n", "<C-o>", [[<Cmd>CHADopen<CR>]], { noremap = true })
-
 -- FZF-Lua
 remap(
     "n",
