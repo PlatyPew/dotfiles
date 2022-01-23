@@ -264,7 +264,10 @@ return packer.startup(function(use)
         cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
     })
 
-    require("packer_compiled")
+    local status_ok, packer = pcall(require, "packer_compiled")
+    if not status_ok then
+        return
+    end
 
     if PACKER_BOOTSTRAP then
         require("packer").sync()
