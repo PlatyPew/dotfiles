@@ -266,6 +266,7 @@ return packer.startup(function(use)
 
     local status_ok, packer = pcall(require, "packer_compiled")
     if not status_ok then
+        vim.cmd("PackerCompile")
         return
     end
 
