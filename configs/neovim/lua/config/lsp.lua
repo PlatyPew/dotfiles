@@ -21,6 +21,7 @@ local lspinstall = require("nvim-lsp-installer")
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.offsetEncoding = { "utf-16" }
 
 lspinstall.on_server_ready(function(server)
     local config = {
