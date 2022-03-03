@@ -125,6 +125,8 @@ remap(
     '[[<cmd>lua require"gitsigns".diffthis()<CR>]]',
     { noremap = true, silent = true }
 )
+remap("n", "]c", "&diff ? ']c' : '<Cmd>Gitsigns next_hunk<CR>'", { expr = true })
+remap("n", "[c", "&diff ? '[c' : '<Cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
 -- DAP
 remap("n", "<F5>", [[<Cmd>lua require'dap'.continue()<CR>]], { noremap = true, silent = true })
