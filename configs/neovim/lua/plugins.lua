@@ -155,19 +155,6 @@ return packer.startup(function(use)
     })
 
     use({
-        "jameshiew/nvim-magic",
-        requires = {
-            "MunifTanjim/nui.nvim",
-            "nvim-lua/plenary.nvim",
-        },
-        ft = { "python", "javascript", "typescript", "go", "sh" },
-        event = "VimEnter",
-        config = function()
-            require("nvim-magic").setup()
-        end,
-    })
-
-    use({
         "mfussenegger/nvim-dap",
         requires = {
             "rcarriga/nvim-dap-ui",
