@@ -17,6 +17,7 @@ wk.register({
         S = { "<Cmd>Copilot split<CR>", "Split Screen" },
         d = { "<Cmd>Copilot disable<CR>", "Disable Copilot" },
         e = { "<Cmd>Copilot enable<CR>", "Enable Copilot" },
+        p = { "<Cmd>Copilot panel<CR>", "Copilot Panel" },
         r = { "<Cmd>Copilot restart<CR>", "Restart Copilot" },
         s = { "<Cmd>Copilot status<CR>", "Copilot Status" },
     },
@@ -24,7 +25,6 @@ wk.register({
     d = {
         name = "Debugger",
         C = { "<Cmd>lua require'dap'.close()<CR>", "Close" },
-        D = { "<Cmd>lua require'dapui'.disconnect()<CR>", "Disconnect" },
         R = { "<Cmd>lua require'dap'.repl.open()<CR>", "REPL" },
         S = { "<Cmd>lua require'dap'.step_into()<CR>", "Step Into" },
         b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
@@ -39,7 +39,10 @@ wk.register({
         name = "FZF",
         ["/"] = { "<Cmd>lua require'fzf-lua'.blines()<CR>", "Lines in Buffer" },
         C = { "<Cmd>lua require'fzf-lua'.git_commits()<CR>", "Commits" },
-        D = { "<Cmd>lua require'fzf-lua'.lsp_workspace_diagnostics()<CR>", "Workspace Diagnostics" },
+        D = {
+            "<Cmd>lua require'fzf-lua'.lsp_workspace_diagnostics()<CR>",
+            "Workspace Diagnostics",
+        },
         G = { "<Cmd>lua require'fzf-lua'.git_status()<CR>", "Git Status Files" },
         M = { "<Cmd>lua require'fzf-lua'.keymaps()<CR>", "Mappings" },
         b = { "<Cmd>lua require'fzf-lua'.buffers()<CR>", "Buffers" },
@@ -119,11 +122,5 @@ wk.register({
     r = {
         name = "REPL",
         s = { "<Plug>(iron-visual-send)", "Send to REPL" },
-    },
-    m = {
-        name = "Magic",
-        a = { "<Plug>nvim-magic-suggest-alteration", "Alter Completion" },
-        c = { "<Plug>nvim-magic-append-completion", "Append Completion" },
-        d = { "<Plug>nvim-magic-suggest-docstring", "Suggest docstring" },
     },
 }, { mode = "v", prefix = "," })
