@@ -37,8 +37,6 @@
     my_python_version
     my_pip_version
     java_version
-    node_version
-    my_npm_version
 
     background_jobs
     date
@@ -116,14 +114,6 @@
   typeset -g POWERLEVEL9K_JAVA_VERSION_BACKGROUND=""
   typeset -g POWERLEVEL9K_JAVA_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
-  typeset -g POWERLEVEL9K_NODE_VERSION_SHOW_ON_COMMAND="node"
-  typeset -g POWERLEVEL9K_NODE_VERSION_FOREGROUND="2"
-  typeset -g POWERLEVEL9K_NODE_VERSION_BACKGROUND=""
-  typeset -g POWERLEVEL9K_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
-  typeset -g POWERLEVEL9K_MY_NPM_VERSION_SHOW_ON_COMMAND="npm|npx"
-  typeset -g POWERLEVEL9K_MY_NPM_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND="6"
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND="0"
 
@@ -166,7 +156,6 @@
   typeset -g _nvim_version
   typeset -g _python_version
   typeset -g _pip_version
-  typeset -g _npm_version
 
   function _brew_version() {
     local content
@@ -204,12 +193,6 @@
     _pip_version=$content
   }
 
-  function _npm_version() {
-    local content
-    content="$(npm --version)" || content=
-    _npm_version=$content
-  }
-
   function prompt_my_brew_version() {
     [ -z $_brew_version ] && zsh-defer -a _brew_version
     p10k segment -f 9 -b "" -i " " -c $_brew_version -t $_brew_version
@@ -238,11 +221,6 @@
   function prompt_my_pip_version() {
     [ -z $_pip_version ] && zsh-defer -a _pip_version
     p10k segment -f 4 -b "" -i " " -c $_pip_version -t $_pip_version
-  }
-
-  function prompt_my_npm_version() {
-    [ -z $_npm_version ] && zsh-defer -a _npm_version
-    p10k segment -f 2 -b "" -i " " -c $_npm_version -t $_npm_version
   }
 
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
