@@ -53,6 +53,7 @@ fi
 
 # Plugins ####################################################
 ZSH_DISABLE_COMPFIX=true
+DISABLE_AUTO_UPDATE=true
 
 source "${HOME}/.zgenom/zgenom.zsh"
 
