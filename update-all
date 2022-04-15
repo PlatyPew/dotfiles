@@ -1,10 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/zsh
+
+# Update and upgrade latest brew packages
 brew update && brew outdated && brew upgrade && brew cleanup
 brew upgrade --cask --greedy && brew cleanup
 brew autoremove
+
+# Update npm packages
 npm update -g
+
+# Update virtual environment for python
 PIP=$DOTFILES/configs/neovim/venv/bin/pip3
 $PIP install --upgrade $($PIP freeze | cut -d '=' -f 1)
-zgenom update
-nvim -c ':PlugUpdate' -c ':PlugUpgrade' -c ':qall' update.c
+
+# Update zgenom
+source "${HOME}/.zgenom/zgenom.zsh" && zgenom update
+
+# Clear all cache
 rm -rf ~/.npm ~/Library/Caches/pip $(brew --cache)
+
+# Get new shell
+exec zsh
