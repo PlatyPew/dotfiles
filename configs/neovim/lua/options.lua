@@ -52,6 +52,9 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- WhichKey
 opt.timeoutlen = 500
 
+-- Vim DoGe
+glo.doge_comment_interactive = 0
+
 -- UndoTree
 cmd([[
     set undodir=~/.cache/nvim/undotree
