@@ -160,7 +160,10 @@ return packer.startup(function(use)
             "rcarriga/nvim-dap-ui",
             "theHamsta/nvim-dap-virtual-text",
             "mfussenegger/nvim-jdtls",
-            "Pocco81/DAPInstall.nvim",
+            {
+                "Pocco81/dap-buddy.nvim",
+                branch = "dev",
+            },
         },
         event = "BufReadPre",
         config = getConfig("dap"),
