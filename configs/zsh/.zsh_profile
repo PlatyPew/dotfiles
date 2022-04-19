@@ -250,3 +250,7 @@ if [ -d "${HOME}/PwnBox2" ]; then
     source $HOME/PwnBox2/_p2-autocomplete.zsh
 fi
 ############################################################
+
+# FZF Colours ##############################################
+export FZF_DEFAULT_OPTS='--color=spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,header:#F28FAD,info:#DF97DB,pointer:#F8BD96 --color=marker:#F8BD96,fg+:#F2CDCD,prompt:#DF97DB,hl+:#F28FAD'
+############################################################
