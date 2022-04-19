@@ -55,5 +55,5 @@ opt.timeoutlen = 500
 glo.doge_comment_interactive = 0
 
 -- UndoTree
-opt.undodir = "~/.cache/nvim/undotree"
+opt.undodir = vim.fn.getenv("HOME") .. "/.cache/nvim/undotree"
 opt.undofile = true
