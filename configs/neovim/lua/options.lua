@@ -1,6 +1,5 @@
 local opt = vim.o
 local glo = vim.g
-local cmd = vim.cmd
 
 -- Optimisation
 opt.foldmethod = "expr"
@@ -56,7 +55,5 @@ opt.timeoutlen = 500
 glo.doge_comment_interactive = 0
 
 -- UndoTree
-cmd([[
-    set undodir=~/.cache/nvim/undotree
-    set undofile
-]])
+opt.undodir = "~/.cache/nvim/undotree"
+opt.undofile = true
