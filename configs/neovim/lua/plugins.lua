@@ -119,7 +119,7 @@ return packer.startup(function(use)
 
     use({
         "machakann/vim-highlightedyank",
-        event = "BufReadPost",
+        event = "BufEnter",
         config = function()
             vim.cmd("highlight HighlightedyankRegion gui=reverse")
             vim.g.highlightedyank_highlight_duration = -1
@@ -251,8 +251,8 @@ return packer.startup(function(use)
 
     use({
         "michaelb/sniprun",
-        run = "bash ./install.sh",
-        event = "BufReadPost",
+        run = "bash ./install.sh 1",
+        event = "BufEnter",
         config = function()
             require("sniprun").setup({
                 snipruncolors = { SniprunVirtualTextOk = { bg = "#b1e3ad", fg = "#000000" } },
