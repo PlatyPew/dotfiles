@@ -4,6 +4,10 @@ for _, debugger in ipairs(require("dap-install.api.debuggers").get_installed_deb
 end
 
 local dap = require("dap")
+
+vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Conditional" })
+vim.fn.sign_define("DapStopped", { text = "", texthl = "String" })
+
 dap.adapters.lldb = {
     type = "executable",
     command = "lldb-vscode",

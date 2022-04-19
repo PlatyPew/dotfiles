@@ -24,7 +24,7 @@ wk.register({
 
     d = {
         name = "Debugger",
-        C = { "<Cmd>lua require'dap'.close()<CR>", "Close" },
+        C = { "<Cmd>lua require'dap'.disconnect()<CR>", "Close" },
         R = { "<Cmd>lua require'dap'.repl.open()<CR>", "REPL" },
         S = { "<Cmd>lua require'dap'.step_into()<CR>", "Step Into" },
         b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
