@@ -100,15 +100,13 @@ wk.register({
     },
 
     r = {
-        name = "REPL",
-        C = { "<Cmd>IronReplHere<CR>", "Create REPL Here" },
-        R = { "<Cmd>IronRestart<CR>", "Restart REPL" },
-        c = { "<Cmd>IronRepl<CR>", "Create REPL" },
-        f = { "<Cmd>IronFocus<CR>", "Focus" },
-        i = { "<Plug>(iron-interrupt)", "Interrupt REPL" },
-        l = { "<Plug>(iron-clear)", "Clear REPL" },
-        q = { "<Plug>(iron-exit)", "Quit REPL" },
-        r = { "<Plug>(iron-repeat-cmd)", "Repeat Command" },
+        name = "Runner",
+        C = { "<Plug>SnipReplMemoryClean", "Clean REPL memory" },
+        R = { "<Plug>SnipReset", "Reset SnipRun" },
+        c = { "<Plug>SnipClose", "Close SnipRun" },
+        i = { "<Plug>SnipInfo", "Get SnipRun Info" },
+        r = { "<Plug>SnipRun", "Run Code" },
+        t = { "<Plug>SnipTerminate", "Terminate SnipRun" },
     },
 }, { mode = "n", prefix = "," })
 
@@ -120,7 +118,7 @@ wk.register({
         u = { "<Cmd>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
     },
     r = {
-        name = "REPL",
-        s = { "<Plug>(iron-visual-send)", "Send to REPL" },
+        name = "Runner",
+        r = { "<Plug>SnipRun", "Run Code" },
     },
 }, { mode = "v", prefix = "," })

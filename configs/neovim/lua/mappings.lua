@@ -154,5 +154,6 @@ remap(
 )
 remap("n", "<Leader>de", [[<Cmd>lua require'dapui'.eval()<CR>]], { noremap = true, silent = true })
 
--- Iron
-remap("v", "is", "<Plug>(iron-visual-send)", { noremap = true })
+-- SnipRun
+remap("n", "<Leader>f", [[<Plug>SnipRun]], { silent = true })
+remap("v", "f", [[<Plug>SnipRun]], { silent = true })

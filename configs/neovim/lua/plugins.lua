@@ -201,12 +201,6 @@ return packer.startup(function(use)
     })
 
     use({
-        "hkupty/iron.nvim",
-        cmd = { "IronRepl", "IronReplHere" },
-        config = getConfig("iron"),
-    })
-
-    use({
         "jbyuki/instant.nvim",
         cmd = { "InstantStartServer", "InstantJoinSession" },
         config = function()
@@ -250,6 +244,17 @@ return packer.startup(function(use)
         ft = "markdown",
         run = "cd app && npm install",
         cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
+    })
+
+    use({
+        "michaelb/sniprun",
+        run = "bash ./install.sh",
+        event = "BufReadPost",
+        config = function()
+            require("sniprun").setup({
+                snipruncolors = { SniprunVirtualTextOk = { bg = "#b1e3ad", fg = "#000000" } },
+            })
+        end,
     })
 
     local status_ok, packer = pcall(require, "packer_compiled")
