@@ -89,6 +89,7 @@ return packer.startup(function(use)
             },
             "kyazdani42/nvim-web-devicons",
         },
+        after = "Catppuccino.nvim",
         config = getConfig("dashboard"),
     })
 
