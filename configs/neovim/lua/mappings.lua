@@ -1,4 +1,4 @@
-local remap = vim.api.nvim_set_keymap
+local remap = vim.keymap.set
 
 -- Vanilla
 -- Rebinds arrow keys to increase/decrease size of pane while in normal/visual mode
@@ -20,13 +20,13 @@ remap("v", "<Right>", [[<Cmd>vertical resize +2<CR>]], { noremap = true, silent 
 
 -- Better window switching
 -- Move to pane on the left      Ctrl-h
-remap("n", "<C-h>", "<C-w>h", {})
+remap("n", "<C-h>", "<C-w>h", { noremap = true, silent = true })
 -- Move to lower pane            Ctrl-j
-remap("n", "<C-j>", "<C-w>j", {})
+remap("n", "<C-j>", "<C-w>j", { noremap = true, silent = true })
 -- Move to upper pane            Ctrl-j
-remap("n", "<C-k>", "<C-w>k", {})
+remap("n", "<C-k>", "<C-w>k", { noremap = true, silent = true })
 -- Move to pane on the right     Ctrl-h
-remap("n", "<C-l>", "<C-w>l", {})
+remap("n", "<C-l>", "<C-w>l", { noremap = true, silent = true })
 
 -- Remap semicolon to colon
 remap("n", ";", ":", { noremap = true })
@@ -77,28 +77,36 @@ remap("v", "K", [[:m '<-2'<CR>gv=gv]], { noremap = true })
 remap("n", "<Leader>T", [[<Cmd>Transparency<CR>]], { noremap = true, silent = true })
 
 -- FZF-Lua
-remap(
-    "n",
-    "<C-p>",
-    "<cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
-    { noremap = true, silent = true }
-)
+remap("n", "<C-p>", function()
+    require("fzf-lua").files({ cmd = 'rg --files --hidden --no-ignore-vcs -g "!.git/*"' })
+end, { noremap = true, silent = true })
 
-remap(
-    "n",
-    "<C-g>",
-    "<cmd>lua require'fzf-lua'.live_grep_native()<CR>",
-    { noremap = true, silent = true }
-)
+remap("n", "<C-g>", function()
+    require("fzf-lua").live_grep_native()
+end, { noremap = true, silent = true })
 
 -- LSPSaga
-remap("n", "[g", [[<Cmd>Lspsaga diagnostic_jump_prev<CR>]], { noremap = true, silent = true })
-remap("n", "]g", [[<Cmd>Lspsaga diagnostic_jump_next<CR>]], { noremap = true, silent = true })
-remap("n", "ga", [[<Cmd>Lspsaga code_action<CR>]], { noremap = true, silent = true })
-remap("n", "gd", [[<Cmd>Lspsaga preview_definition<CR>]], { noremap = true, silent = true })
-remap("n", "gf", [[<Cmd>Lspsaga lsp_finder<CR>]], { noremap = true, silent = true })
-remap("n", "gh", [[<Cmd>Lspsaga hover_doc<CR>]], { noremap = true, silent = true })
-remap("n", "gr", [[<Cmd>Lspsaga rename<CR>]], { noremap = true, silent = true })
+remap("n", "[g", function()
+    require("lspsaga.diagnostic").lsp_jump_diagnostic_prev()
+end, { noremap = true, silent = true })
+remap("n", "]g", function()
+    require("lspsaga.diagnostic").lsp_jump_diagnostic_next()
+end, { noremap = true, silent = true })
+remap("n", "ga", function()
+    require("lspsaga.codeaction").code_action()
+end, { noremap = true, silent = true })
+remap("n", "gd", function()
+    require("lspsaga.provider").preview_definition()
+end, { noremap = true, silent = true })
+remap("n", "gf", function()
+    require("lspsaga.provider").lsp_finder()
+end, { noremap = true, silent = true })
+remap("n", "gh", function()
+    require("lspsaga.hover").render_hover_doc()
+end, { noremap = true, silent = true })
+remap("n", "gr", function()
+    require("lspsaga.rename").rename()
+end, { noremap = true, silent = true })
 
 -- COQ Autopairs
 remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]], { expr = true, noremap = true })
@@ -110,7 +118,9 @@ remap("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]], { expr = true, norema
 remap("n", "<Tab>", [[<Cmd>UndotreeToggle<CR>]], {})
 
 -- Format
-remap("n", "g=", [[<Cmd>lua vim.lsp.buf.formatting_sync()<CR>]], { noremap = true, silent = true })
+remap("n", "g=", function()
+    vim.lsp.buf.formatting_sync()
+end, { noremap = true, silent = true })
 
 -- Instant
 remap("n", "<Leader>Is", [[<Cmd>call v:lua.InstantStartSession()<CR>]], {})
@@ -119,40 +129,40 @@ remap("n", "<Leader>Iq", [[<Cmd>call v:lua.InstantStopSession()<CR>]], {})
 remap("n", "<Leader>IQ", [[<Cmd>call v:lua.InstantStopServer()<CR>]], {})
 
 -- Gitsigns
-remap(
-    "n",
-    "<Leader>hd",
-    '[[<cmd>lua require"gitsigns".diffthis()<CR>]]',
-    { noremap = true, silent = true }
-)
+remap("n", "<Leader>hd", function()
+    require("gitsigns").diffthis()
+end, { noremap = true, silent = true })
 remap("n", "]c", "&diff ? ']c' : '<Cmd>Gitsigns next_hunk<CR>'", { expr = true })
 remap("n", "[c", "&diff ? '[c' : '<Cmd>Gitsigns prev_hunk<CR>'", { expr = true })
 
 -- DAP
-remap("n", "<F5>", [[<Cmd>lua require'dap'.continue()<CR>]], { noremap = true, silent = true })
-remap(
-    "n",
-    "<F6>",
-    [[<Cmd>lua require'dap'.toggle_breakpoint()<CR>]],
-    { noremap = true, silent = true }
-)
-remap("n", "<F10>", [[<Cmd>lua require'dap'.step_over()<CR>]], { noremap = true, silent = true })
-remap("n", "<F11>", [[<Cmd>lua require'dap'.step_into()<CR>]], { noremap = true, silent = true })
-remap("n", "<F12>", [[<Cmd>lua require'dap'.step_out()<CR>]], { noremap = true, silent = true })
-remap("n", "<Leader>dc", [[<Cmd>lua require'dap'.close()<CR>]], { noremap = true, silent = true })
-remap(
-    "n",
-    "<Leader>dr",
-    [[<Cmd>lua require'dap'.repl.open()<CR>]],
-    { noremap = true, silent = true }
-)
-remap(
-    "n",
-    "<Leader>du",
-    [[<Cmd>lua require'dapui'.toggle()<CR>]],
-    { noremap = true, silent = true }
-)
-remap("n", "<Leader>de", [[<Cmd>lua require'dapui'.eval()<CR>]], { noremap = true, silent = true })
+remap("n", "<F5>", function()
+    require("dap").continue()
+end, { noremap = true, silent = true })
+remap("n", "<F6>", function()
+    require("dap").toggle_breakpoint()
+end, { noremap = true, silent = true })
+remap("n", "<F10>", function()
+    require("dap").step_over()
+end, { noremap = true, silent = true })
+remap("n", "<F11>", function()
+    require("dap").step_into()
+end, { noremap = true, silent = true })
+remap("n", "<F12>", function()
+    require("dap").step_out()
+end, { noremap = true, silent = true })
+remap("n", "<Leader>dc", function()
+    require("dap").close()
+end, { noremap = true, silent = true })
+remap("n", "<Leader>dr", function()
+    require("dap").repl.open()
+end, { noremap = true, silent = true })
+remap("n", "<Leader>du", function()
+    require("dapui").toggle()
+end, { noremap = true, silent = true })
+remap("n", "<Leader>de", function()
+    require("dapui").eval()
+end, { noremap = true, silent = true })
 
 -- SnipRun
 remap("n", "<Leader>f", [[<Plug>SnipRun]], { silent = true })
