@@ -50,4 +50,4 @@ require("nvim-treesitter.configs").setup({
     },
 })
 
-vim.cmd("highlight TSDefinitionUsage gui=underline")
+vim.api.nvim_set_hl(0, "TSDefinitionUsage", { underline = true })

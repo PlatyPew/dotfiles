@@ -122,7 +122,7 @@ return packer.startup(function(use)
         "machakann/vim-highlightedyank",
         event = "BufEnter",
         config = function()
-            vim.cmd("highlight HighlightedyankRegion gui=reverse")
+            vim.api.nvim_set_hl(0, "HighlightedyankRegion", { reverse = true })
             vim.g.highlightedyank_highlight_duration = -1
         end,
     })
@@ -202,7 +202,7 @@ return packer.startup(function(use)
             vim.g.tex_flavor = "latex"
             vim.g.tex_conceal = "abdgm"
             vim.g.tex_conceal_frac = 1
-            vim.cmd("highlight clear Conceal")
+            vim.api.nvim_set_hl(0, "Conceal", {})
         end,
     })
 

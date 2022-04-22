@@ -1,28 +1,32 @@
 local cmd = vim.cmd
+local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 -- Remove comment on newline
-cmd([[
-    autocmd BufNewFile,Bufread * setlocal formatoptions-=cro
-]])
+autocmd({ "BufNewFile", "Bufread" }, {
+    pattern = "*",
+    command = "setlocal formatoptions-=cro",
+})
 
 -- Syntax highlight
-cmd([[
-    augroup highlights
-        autocmd!
-        autocmd Filetype * if &ft!="dashboard" && &ft!="WhichKey" && &ft!="packer" && &ft!="lsp-installer" | call matchadd('ColorColumn', '\%101v[^\n]')
-        autocmd FileType text,markdown,tex setlocal spell
-        autocmd FileType text,markdown,tex highlight clear ColorColumn
-    augroup END
-]])
-
--- CHADTree
-cmd([[
-    augroup Chad
-        autocmd!
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'CHADopen' | wincmd p | ene | exe 'cd '.argv()[0] | endif
-    augroup END
-]])
+local highlights = augroup("highlights", { clear = true })
+autocmd("FileType", {
+    pattern = "*",
+    group = highlights,
+    command = "if &ft!='dashboard' && &ft!='WhichKey' && &ft!='packer' && &ft!='lsp-installer' | call matchadd('ColorColumn', '\\%101v[^\n]')",
+})
+autocmd("FileType", {
+    pattern = { "text", "markdown", "text" },
+    group = highlights,
+    command = "setlocal spell",
+})
+autocmd("FileType", {
+    pattern = { "text", "markdown", "text" },
+    group = highlights,
+    callback = function()
+        vim.api.nvim_set_hl(0, "ColorColumn", {})
+    end,
+})
 
 -- Dashboard
 cmd([[

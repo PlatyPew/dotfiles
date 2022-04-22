@@ -7,8 +7,6 @@ require("gitsigns").setup({
     numhl = true,
 })
 
-vim.cmd([[
-    highlight GitSignsAddLn guifg=#222424 guibg=#90c7f4
-    highlight GitSignsChangeLn guifg=#222424 guibg=#dbc074
-    highlight GitSignsDeleteLn guifg=#222424 guibg=#cf637e
-]])
+vim.api.nvim_set_hl(0, "GitSignsAddLn", { fg = "#222424", bg = "#90c7f4" })
+vim.api.nvim_set_hl(0, "GitSignsChangeLn", { fg = "#222424", bg = "#dbc074" })
+vim.api.nvim_set_hl(0, "GitSignsDeleteLn", { fg = "#222424", bg = "#cf637e" })
