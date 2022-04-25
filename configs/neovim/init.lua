@@ -11,7 +11,12 @@
 
 if vim.fn.has('nvim-0.7') == 1 then
     require("options")
-    require("plugins")
+
+    local status_ok, _ = pcall(require, "plugins")
+    if not status_ok then
+        return
+    end
+
     require("mappings")
     require("autocmd")
     require("functions")
