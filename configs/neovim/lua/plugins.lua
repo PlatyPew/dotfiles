@@ -136,17 +136,17 @@ return packer.startup(function(use)
 
     use({
         "neovim/nvim-lspconfig",
-        event = "BufEnter",
+        event = "BufReadPost",
         requires = {
-            "williamboman/nvim-lsp-installer",
-            "tami5/lspsaga.nvim",
+            { "williamboman/nvim-lsp-installer", after = "nvim-lspconfig" },
+            { "tami5/lspsaga.nvim", event = "BufReadPost" },
             {
                 "ms-jpq/coq_nvim",
                 branch = "coq",
                 run = "rm -rf .vars && python3 -m coq deps",
-                after = "nvim-lspconfig",
+                event = "InsertCharPre",
             },
-            "ms-jpq/coq.artifacts",
+            { "ms-jpq/coq.artifacts", after = "nvim-lspconfig" },
             "ms-jpq/coq.thirdparty",
             {
                 "PlatyPew/copilot.vim",
@@ -230,10 +230,7 @@ return packer.startup(function(use)
         event = "InsertCharPre",
     })
 
-    use({
-        "mbbill/undotree",
-        cmd = "UndotreeToggle",
-    })
+    use({ "mbbill/undotree", cmd = "UndotreeToggle" })
 
     use({
         "jose-elias-alvarez/null-ls.nvim",
