@@ -139,7 +139,7 @@ return packer.startup(function(use)
         event = "BufReadPost",
         requires = {
             { "williamboman/nvim-lsp-installer", after = "nvim-lspconfig" },
-            { "tami5/lspsaga.nvim", event = "BufReadPost" },
+            { "tami5/lspsaga.nvim", event = "BufEnter" },
             {
                 "ms-jpq/coq_nvim",
                 branch = "coq",
