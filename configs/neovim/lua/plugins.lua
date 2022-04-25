@@ -49,6 +49,8 @@ return packer.startup(function(use)
         end,
     })
 
+    use({ "nathom/filetype.nvim" })
+
     use({
         "Pocco81/Catppuccino.nvim",
         branch = "old-catppuccino",
@@ -104,11 +106,11 @@ return packer.startup(function(use)
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate all",
         requires = {
-            "nvim-treesitter/nvim-treesitter-refactor",
-            "windwp/nvim-ts-autotag",
-            "p00f/nvim-ts-rainbow",
-            "nvim-treesitter/nvim-treesitter-textobjects",
-            "yioneko/nvim-yati",
+            { "nvim-treesitter/nvim-treesitter-refactor", event = "VimEnter" },
+            { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+            { "p00f/nvim-ts-rainbow", event = "BufEnter" },
+            { "nvim-treesitter/nvim-treesitter-textobjects", event = "BufReadPost" },
+            { "yioneko/nvim-yati", event = "BufReadPost" },
             {
                 "windwp/nvim-autopairs",
                 event = "InsertEnter",
@@ -120,7 +122,7 @@ return packer.startup(function(use)
 
     use({
         "machakann/vim-highlightedyank",
-        event = "BufEnter",
+        event = "BufReadPost",
         config = function()
             vim.api.nvim_set_hl(0, "HighlightedyankRegion", { reverse = true })
             vim.g.highlightedyank_highlight_duration = -1
@@ -130,7 +132,7 @@ return packer.startup(function(use)
     use({
         "lewis6991/gitsigns.nvim",
         requires = "nvim-lua/plenary.nvim",
-        event = "BufReadPre",
+        event = "BufReadPost",
         config = getConfig("gitsigns"),
     })
 
@@ -168,14 +170,14 @@ return packer.startup(function(use)
                 branch = "dev",
             },
         },
-        event = "BufReadPre",
+        event = "BufReadPost",
         config = getConfig("dap"),
     })
 
     use({
         "anyakichi/vim-surround",
         requires = "tpope/vim-repeat",
-        event = "BufEnter",
+        event = "BufReadPost",
     })
 
     use({
@@ -186,12 +188,12 @@ return packer.startup(function(use)
 
     use({
         "mg979/vim-visual-multi",
-        event = "BufReadPre",
+        event = "BufReadPost",
     })
 
     use({
         "numToStr/Comment.nvim",
-        event = "VimEnter",
+        event = "BufReadPost",
         requires = "JoosepAlviste/nvim-ts-context-commentstring",
         config = getConfig("comment"),
     })
