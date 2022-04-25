@@ -57,7 +57,7 @@ return packer.startup(function(use)
 
     use({
         "norcalli/nvim-colorizer.lua",
-        event = "BufReadPre",
+        event = "BufReadPost",
         config = function()
             require("colorizer").setup()
         end,
@@ -175,6 +175,7 @@ return packer.startup(function(use)
     use({
         "anyakichi/vim-surround",
         requires = "tpope/vim-repeat",
+        event = "BufEnter",
     })
 
     use({
@@ -252,7 +253,14 @@ return packer.startup(function(use)
     use({
         "michaelb/sniprun",
         run = "bash ./install.sh 1",
-        event = "BufEnter",
+        keys = {
+            "<Plug>SnipReplMemoryClean",
+            "<Plug>SnipReset",
+            "<Plug>SnipClose",
+            "<Plug>SnipInfo",
+            "<Plug>SnipRun",
+            "<Plug>SnipTerminate",
+        },
         config = function()
             require("sniprun").setup({
                 snipruncolors = { SniprunVirtualTextOk = { bg = "#b1e3ad", fg = "#000000" } },
