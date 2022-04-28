@@ -96,10 +96,15 @@ return packer.startup(function(use)
     })
 
     use({
-        "ms-jpq/chadtree",
-        branch = "chad",
-        run = "rm -rf .vars && python3 -m chadtree deps --nvim",
-        cmd = "CHADopen",
+        "kyazdani42/nvim-tree.lua",
+        requires = "kyazdani42/nvim-web-devicons",
+        cmd = "NvimTreeToggle",
+        config = function()
+            require("nvim-tree").setup({
+                disable_netrw = true,
+                hijack_cursor = true,
+            })
+        end,
     })
 
     use({
