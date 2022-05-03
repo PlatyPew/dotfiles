@@ -1,4 +1,3 @@
-basictex
 docker
 font-iosevka-nerd-font
 iterm2
