@@ -143,7 +143,7 @@ return packer.startup(function(use)
 
     use({
         "neovim/nvim-lspconfig",
-        event = "BufReadPost",
+        event = "BufEnter",
         requires = {
             { "williamboman/nvim-lsp-installer", event = "VimEnter" },
             { "tami5/lspsaga.nvim", event = "BufEnter" },
