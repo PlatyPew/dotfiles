@@ -172,7 +172,7 @@ return packer.startup(function(use)
             "mfussenegger/nvim-jdtls",
             {
                 "Pocco81/dap-buddy.nvim",
-                branch = "dev",
+                commit = "24923c3819a450a772bb8f675926d530e829665f",
             },
         },
         event = "BufReadPost",
