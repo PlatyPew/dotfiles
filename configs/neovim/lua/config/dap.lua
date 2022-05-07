@@ -40,6 +40,8 @@ dap.configurations.java = {
     },
 }
 
+dap.configurations.javascriptreact[1].name = "Attach To Chrome"
+dap.configurations.typescriptreact[1].name = "Attach To Chrome"
 dap.configurations.javascript[1].name = "Launch Node2"
 dap.configurations.javascript[2] = {
     name = "Attach To Process",
@@ -47,6 +49,7 @@ dap.configurations.javascript[2] = {
     request = "attach",
     processId = require("dap.utils").pick_process,
 }
+dap.configurations.javascript[3] = dap.configurations.javascriptreact[1]
 
 require("nvim-dap-virtual-text").setup()
 
