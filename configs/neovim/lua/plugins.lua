@@ -250,8 +250,7 @@ return packer.startup(function(use)
     use({ "vim-scripts/LargeFile" })
 
     use({
-        "GregBowyer/markdown-preview.nvim",
-        branch = "katex",
+        "iamcco/markdown-preview.nvim",
         ft = "markdown",
         run = "cd app && npm install",
         cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
