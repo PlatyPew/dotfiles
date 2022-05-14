@@ -186,13 +186,13 @@ publish() {
             return 1
         fi
 
-        if [ ! -f "$HOME/.ngrok2/ngrok.yml" ]; then
+        if [ ! -f "$HOME/Library/Application Support/ngrok/ngrok.yml" ]; then
             printf "Enter auth token: "
             read token
-            ngrok authtoken $token
+            ngrok config add-authtoken $token
         fi
 
-        ngrok tcp -log=stdout ${2} > /dev/null &
+        ngrok tcp --log=stdout ${2} > /dev/null &
         export NGROK_PID=$!
         sleep 2
         export NGROK_PORT=${2}
@@ -242,13 +242,6 @@ rate() {
 
 # k3d autocomplete #########################################
 source <(k3d completion zsh && print "compdef _k3d k3d")
-############################################################
-
-# PwnBox2 Integration ######################################
-if [ -d "${HOME}/PwnBox2" ]; then
-    alias p2="${HOME}/PwnBox2/p2"
-    source $HOME/PwnBox2/_p2-autocomplete.zsh
-fi
 ############################################################
 
 # FZF Colours ##############################################
