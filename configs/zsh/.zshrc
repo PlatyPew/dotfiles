@@ -70,7 +70,6 @@ if ! zgenom saved; then
 
     zgenom load DarrinTisdale/zsh-aliases-exa
     zgenom load hlissner/zsh-autopair
-    zgenom load zsh-users/zsh-autosuggestions
     zgenom load zsh-users/zsh-syntax-highlighting
     zgenom load b4b4r07/zsh-vimode-visual
     zgenom load romkatv/zsh-defer
