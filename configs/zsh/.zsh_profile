@@ -241,7 +241,8 @@ rate() {
 ############################################################
 
 # k3d autocomplete #########################################
-source <(k3d completion zsh && print "compdef _k3d k3d")
+source <(k3d completion zsh)
+source <(kubectl completion zsh)
 ############################################################
 
 # FZF Colours ##############################################
