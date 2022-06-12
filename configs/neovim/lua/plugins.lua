@@ -74,6 +74,7 @@ return packer.startup(function(use)
 
     use({
         "glepnir/dashboard-nvim",
+        commit = "a36b3232c98616149784f2ca2654e77caea7a522",
         requires = {
             {
                 "ibhagwan/fzf-lua",
@@ -149,6 +150,7 @@ return packer.startup(function(use)
             { "tami5/lspsaga.nvim", event = "BufEnter" },
             {
                 "ms-jpq/coq_nvim",
+                commit = "bb03037d7888b40e9bd205b0b05365dd94a5b06e",
                 branch = "coq",
                 run = "rm -rf .vars && python3 -m coq deps",
                 event = "InsertCharPre",
