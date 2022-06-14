@@ -155,8 +155,15 @@ return packer.startup(function(use)
                 run = "rm -rf .vars && python3 -m coq deps",
                 event = "InsertCharPre",
             },
-            { "ms-jpq/coq.artifacts", after = "nvim-lspconfig" },
-            "ms-jpq/coq.thirdparty",
+            {
+                "ms-jpq/coq.artifacts",
+                commit = "400d13cbd2ddadc5347d498c046d8ed94efe513c",
+                after = "nvim-lspconfig",
+            },
+            {
+                "ms-jpq/coq.thirdparty",
+                commit = "4346162aae5854355985196cb24ab9d14f123de4",
+            },
             {
                 "PlatyPew/copilot.vim",
                 branch = "removevirt",
