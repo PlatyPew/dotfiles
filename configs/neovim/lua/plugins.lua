@@ -150,7 +150,7 @@ return packer.startup(function(use)
             { "tami5/lspsaga.nvim", event = "BufEnter" },
             {
                 "ms-jpq/coq_nvim",
-                commit = "cd76fefc230e4e1126f8c5cc296337d0b3545fd5",
+                commit = "d6936fc9b6d71148f8e72aa0fd75f2617bde9320",
                 branch = "coq",
                 run = "rm -rf .vars && python3 -m coq deps",
                 event = "InsertCharPre",
