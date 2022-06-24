@@ -149,9 +149,8 @@ return packer.startup(function(use)
             { "williamboman/nvim-lsp-installer", event = "VimEnter" },
             { "tami5/lspsaga.nvim", event = "BufEnter" },
             {
-                "ms-jpq/coq_nvim",
-                commit = "d6936fc9b6d71148f8e72aa0fd75f2617bde9320",
-                branch = "coq",
+                "PlatyPew/coq_nvim",
+                branch = "fix/tabnine",
                 run = "rm -rf .vars && python3 -m coq deps",
                 event = "InsertCharPre",
             },
