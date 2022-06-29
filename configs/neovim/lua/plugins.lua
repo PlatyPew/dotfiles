@@ -150,7 +150,7 @@ return packer.startup(function(use)
             { "tami5/lspsaga.nvim", event = "BufEnter" },
             {
                 "PlatyPew/coq_nvim",
-                branch = "fix/tabnine",
+                branch = "fix/upstream",
                 run = "rm -rf .vars && python3 -m coq deps",
                 event = "InsertCharPre",
             },
