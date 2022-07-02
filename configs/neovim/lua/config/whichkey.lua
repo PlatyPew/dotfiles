@@ -55,7 +55,7 @@ wk.register({
         g = { "<Cmd>lua require'fzf-lua'.git_files()<CR>", "Git Files" },
         h = { "<Cmd>lua require'fzf-lua'.command_history()<CR>", "Command History" },
         m = { "<Cmd>lua require'fzf-lua'.marks()<CR>", "Marks" },
-        r = { "<Cmd>lua require'fzf-lua'.live_grep()<CR>", "Ripgrep" },
+        r = { "<Cmd>lua require'fzf-lua'.live_grep_native()<CR>", "Ripgrep" },
         s = { "<Cmd>lua require'fzf-lua'.spell_suggest()<CR>", "Spell Suggest" },
     },
 
