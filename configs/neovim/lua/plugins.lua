@@ -147,7 +147,7 @@ return packer.startup(function(use)
         event = "BufEnter",
         requires = {
             { "williamboman/nvim-lsp-installer", event = "VimEnter" },
-            { "tami5/lspsaga.nvim", event = "BufEnter" },
+            { "kkharji/lspsaga.nvim", event = "BufEnter" },
             {
                 "PlatyPew/coq_nvim",
                 branch = "fix/upstream",
