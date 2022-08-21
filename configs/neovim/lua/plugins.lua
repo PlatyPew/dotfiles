@@ -150,7 +150,7 @@ return packer.startup(function(use)
             { "kkharji/lspsaga.nvim", event = "BufEnter" },
             {
                 "PlatyPew/coq_nvim",
-                branch = "fix/upstream",
+                branch = "coq",
                 run = "rm -rf .vars && python3 -m coq deps",
                 event = "InsertCharPre",
             },
