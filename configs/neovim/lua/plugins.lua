@@ -53,7 +53,7 @@ return packer.startup(function(use)
 
     use({
         "Pocco81/Catppuccino.nvim",
-        branch = "old-catppuccino",
+        tag = "v0.1",
         config = getConfig("catppuccino"),
     })
 
