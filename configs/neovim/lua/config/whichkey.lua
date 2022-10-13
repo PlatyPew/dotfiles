@@ -6,7 +6,7 @@ wk.setup({
 
 wk.register({
     D = { "<Cmd>DogeGenerate<CR>", "Generate docs" },
-    F = { "<Cmd>lua vim.lsp.buf.formatting_sync()<CR>", "Format code" },
+    F = { "<Cmd>lua vim.lsp.buf.format()<CR>", "Format code" },
     T = { "<Cmd>Transparency<CR>", "Toggle Transparency" },
     o = { "<Cmd>NvimTreeToggle<CR>", "File Explorer" },
     u = { "<Cmd>UndotreeToggle<CR>", "Toggle UndoTree" },
