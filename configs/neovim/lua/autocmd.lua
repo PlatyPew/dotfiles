@@ -28,6 +28,13 @@ autocmd("FileType", {
     end,
 })
 
+autocmd("FileType", {
+    pattern = { "yaml" },
+    callback = function()
+        vim.o.shiftwidth = 4
+    end,
+})
+
 -- Dashboard
 cmd([[
     augroup dashboard_au
