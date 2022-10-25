@@ -22,7 +22,7 @@ vim.g.dashboard_custom_section = {
         command = ':FzfLua files cmd=rg\\ --files\\ --hidden\\ --no-ignore-vcs\\ -g\\ "!.git/*"',
     },
     c = {
-        description = { "  Find Word               .fr" },
+        description = { "  Find Word               ,fr" },
         command = ":FzfLua live_grep",
     },
     d = {
