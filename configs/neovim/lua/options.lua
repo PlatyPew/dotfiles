@@ -57,6 +57,3 @@ glo.doge_comment_interactive = 0
 -- UndoTree
 opt.undodir = vim.fn.getenv("HOME") .. "/.cache/nvim/undotree"
 opt.undofile = true
-
--- Copilot
-glo.copilot_node_command = "/opt/homebrew/opt/node@16/bin/node"
