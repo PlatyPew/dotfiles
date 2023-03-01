@@ -61,6 +61,9 @@ remap("n", "<Leader>bq", "<Cmd>bdelete<CR>")
 remap("n", "n", "nzzzv")
 remap("n", "N", "Nzzzv")
 
+-- Prevents pasted over text from replacing register
+remap("x", "p", "pgvy")
+
 -- Better undo breakpoints
 remap("i", ",", ",<C-g>u")
 remap("i", ".", ".<C-g>u")
