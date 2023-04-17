@@ -107,12 +107,6 @@ remap("n", "gr", function()
     require("lspsaga.rename").rename()
 end)
 
--- COQ Autopairs
-remap("i", "<esc>", [[pumvisible() ? "<c-e><esc>" : "<esc>"]])
-remap("i", "<c-c>", [[pumvisible() ? "<c-e><c-c>" : "<c-c>"]])
-remap("i", "<tab>", [[pumvisible() ? "<c-n>" : "<tab>"]])
-remap("i", "<s-tab>", [[pumvisible() ? "<c-p>" : "<bs>"]])
-
 -- UndoTree
 remap("n", "<Tab>", "<Cmd>UndotreeToggle<CR>")
 

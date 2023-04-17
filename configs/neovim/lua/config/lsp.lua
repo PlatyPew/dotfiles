@@ -1,83 +1,84 @@
--- Settings
-vim.g.coq_settings = {
-    auto_start = "shut-up",
-    clients = {
-        tabnine = {
-            enabled = true,
-        },
-    },
-    display = {
-        mark_highlight_group = "COQMarks",
-    },
-    keymap = {
-        recommended = false,
-        jump_to_mark = "<C-s>",
-    },
+-- LSP settings.
+--  This function gets run when an LSP connects to a particular buffer.
+local on_attach = function(_, bufnr)
+end
+
+-- Enable the following language servers
+--  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+--
+--  Add any additional override configuration in the following tables. They will be passed to
+--  the `settings` field of the server config. You must look up that documentation yourself.
+local servers = {
 }
 
-local coq = require("coq")
-local coq_3p = require("coq_3p")
-local lspinstall = require("nvim-lsp-installer")
+-- Setup neovim lua configuration
+require('neodev').setup()
 
+-- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.offsetEncoding = { "utf-16" }
+capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-lspinstall.on_server_ready(function(server)
-    local config = {
-        capabilities = capabilities,
-        flags = { debounce_text_changes = 500 },
-        on_attach = function(client)
-            client.server_capabilities.documentFormattingProvider = false
-            client.server_capabilities.documentRangeFormattingProvider = false
+-- Setup mason so it can manage external tooling
+require('mason').setup()
 
-            if client.name == "jdtls" then
-                require("jdtls").setup_dap({ hotcodereplace = "auto" })
-                require("jdtls.dap").setup_dap_main_class_configs()
-            end
+-- Ensure the servers above are installed
+local mason_lspconfig = require 'mason-lspconfig'
+
+mason_lspconfig.setup {
+    ensure_installed = vim.tbl_keys(servers),
+}
+
+mason_lspconfig.setup_handlers {
+    function(server_name)
+        require('lspconfig')[server_name].setup {
+            capabilities = capabilities,
+            on_attach = on_attach,
+            settings = servers[server_name],
+        }
+    end,
+}
+
+-- nvim-cmp setup
+local cmp = require 'cmp'
+local luasnip = require 'luasnip'
+
+luasnip.config.setup {}
+
+cmp.setup {
+    snippet = {
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
         end,
-    }
-
-    if server.name == "texlab" then
-        config.settings = {
-            texlab = {
-                build = {
-                    args = { "-halt-on-error", "%f" },
-                    executable = "pdflatex",
-                    onSave = true,
-                },
-            },
-        }
-    elseif server.name == "html" or server.name == "emmet_ls" then
-        config.filetypes = { "html", "css", "javascriptreact" }
-    elseif server.name == "jdtls" then
-        config.init_options = {
-            bundles = {
-                vim.fn.glob(
-                    vim.fn.stdpath("data")
-                        .. "/dapinstall/java-debug/com.microsoft.java.debug.plugin/target/com.microsoft.java.debug.plugin-*.jar"
-                ),
-            },
-            extendedCapabilities = require("jdtls").extendedClientCapabilities,
-        }
-    end
-
-    server:setup(coq.lsp_ensure_capabilities(config))
-end)
-
-coq_3p({
-    { src = "copilot", short_name = "COP", accept_key = "<C-f>" },
-})
-
-require("lspsaga").init_lsp_saga({
-    finder_action_keys = {
-        open = { "<CR>", "o" },
-        quit = { "q", "<esc>", "<C-c>" },
     },
-    code_action_keys = {
-        quit = { "q", "<esc>", "<C-c>" },
+    mapping = cmp.mapping.preset.insert {
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete {},
+        ['<CR>'] = cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = true,
+        },
+        ['<Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
+        ['<S-Tab>'] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, { 'i', 's' }),
     },
-    rename_action_keys = {
-        quit = { "<esc>", "<C-c>" },
+    sources = {
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
     },
-})
+}

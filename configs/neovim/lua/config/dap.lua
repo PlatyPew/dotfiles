@@ -1,14 +1,23 @@
-local dap_install = require("dap-install")
-
-dap_install.setup()
-for debugger, _ in pairs(require("dap-install.core.debuggers_list").debuggers) do
-    dap_install.config(debugger, {})
-end
-
 local dap = require("dap")
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Conditional" })
 vim.fn.sign_define("DapStopped", { text = "", texthl = "String" })
+
+require('mason-nvim-dap').setup {
+    -- Makes a best effort to setup the various debuggers with
+    -- reasonable debug configurations
+    automatic_setup = true,
+
+    -- You can provide additional configuration to the handlers,
+    -- see mason-nvim-dap README for more information
+    handlers = {},
+
+    -- You'll need to check that you have the required things installed
+    -- online, please don't ask me how to install them :)
+    ensure_installed = {
+        -- Update this to ensure that you have the debuggers for the langs you want
+    },
+}
 
 dap.configurations.cpp = {
     {
@@ -39,23 +48,6 @@ dap.configurations.java = {
         port = 5005,
     },
 }
-
-if dap.configurations.javascript ~= nil then
-    dap.configurations.javascript[1].name = "Launch Node2"
-    dap.configurations.javascript[1].program = "${file}"
-    dap.configurations.javascript[2] = {
-        name = "Attach To Process",
-        type = "node2",
-        request = "attach",
-        processId = require("dap.utils").pick_process,
-    }
-end
-
-if dap.configurations.javascriptreact ~= nil then
-    dap.configurations.javascriptreact[1].name = "Attach To Chrome"
-    dap.configurations.typescriptreact[1].name = "Attach To Chrome"
-    dap.configurations.javascript[3] = dap.configurations.javascriptreact[1]
-end
 
 require("nvim-dap-virtual-text").setup()
 
