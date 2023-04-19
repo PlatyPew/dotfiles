@@ -3,6 +3,10 @@ local dap = require("dap")
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "Conditional" })
 vim.fn.sign_define("DapStopped", { text = "", texthl = "String" })
 
+require("neodev").setup({
+    library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+
 require('mason-nvim-dap').setup {
     -- Makes a best effort to setup the various debuggers with
     -- reasonable debug configurations
@@ -25,7 +29,7 @@ dap.configurations.cpp = {
         type = "lldb",
         request = "launch",
         program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+            return vim.fn.input("Path to executable: " .. vim.fn.getcwd() .. "/" .. "file")
         end,
         cwd = "${workspaceFolder}",
         stopOnEntry = false,

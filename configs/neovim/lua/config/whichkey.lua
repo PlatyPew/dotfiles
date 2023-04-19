@@ -8,20 +8,10 @@ wk.register({
     D = { "<Cmd>DogeGenerate<CR>", "Generate docs" },
     F = { "<Cmd>lua vim.lsp.buf.format()<CR>", "Format code" },
     T = { "<Cmd>Transparency<CR>", "Toggle Transparency" },
+    i = { "<Cmd>Mason<CR>", "Installer" },
     o = { "<Cmd>NvimTreeToggle<CR>", "File Explorer" },
     u = { "<Cmd>UndotreeToggle<CR>", "Toggle UndoTree" },
     m = { "<Cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
-
-    c = {
-        name = "Copilot",
-        S = { "<Cmd>Copilot split<CR>", "Split Screen" },
-        d = { "<Cmd>Copilot disable<CR>", "Disable Copilot" },
-        e = { "<Cmd>Copilot enable<CR>", "Enable Copilot" },
-        p = { "<Cmd>Copilot panel<CR>", "Copilot Panel" },
-        r = { "<Cmd>Copilot restart<CR>", "Restart Copilot" },
-        s = { "<Cmd>Copilot status<CR>", "Copilot Status" },
-    },
-
     d = {
         name = "Debugger",
         C = { "<Cmd>lua require'dap'.disconnect()<CR>", "Close" },
@@ -34,31 +24,21 @@ wk.register({
         s = { "<Cmd>lua require'dap'.step_over()<CR>", "Step Over" },
         u = { "<Cmd>lua require'dapui'.toggle()<CR>", "Open UI" },
     },
-
     f = {
-        name = "FZF",
-        ["/"] = { "<Cmd>lua require'fzf-lua'.blines()<CR>", "Lines in Buffer" },
-        C = { "<Cmd>lua require'fzf-lua'.git_commits()<CR>", "Commits" },
-        D = {
-            "<Cmd>lua require'fzf-lua'.lsp_workspace_diagnostics()<CR>",
-            "Workspace Diagnostics",
-        },
-        G = { "<Cmd>lua require'fzf-lua'.git_status()<CR>", "Git Status Files" },
-        M = { "<Cmd>lua require'fzf-lua'.keymaps()<CR>", "Mappings" },
-        b = { "<Cmd>lua require'fzf-lua'.buffers()<CR>", "Buffers" },
-        c = { "<Cmd>lua require'fzf-lua'.git_bcommits()<CR>", "Commits for Buffer" },
-        d = { "<Cmd>lua require'fzf-lua'.lsp_document_diagnostics()<CR>", "Document Diagnostics" },
-        f = {
-            "<Cmd>lua require'fzf-lua'.files({cmd='rg --files --hidden --no-ignore-vcs -g \"!.git/*\"'})<CR>",
-            "Files",
-        },
-        g = { "<Cmd>lua require'fzf-lua'.git_files()<CR>", "Git Files" },
-        h = { "<Cmd>lua require'fzf-lua'.command_history()<CR>", "Command History" },
-        m = { "<Cmd>lua require'fzf-lua'.marks()<CR>", "Marks" },
-        r = { "<Cmd>lua require'fzf-lua'.live_grep_native()<CR>", "Ripgrep" },
-        s = { "<Cmd>lua require'fzf-lua'.spell_suggest()<CR>", "Spell Suggest" },
+        name = "Telescope",
+        C = { "<Cmd>Telescope git_commits<CR>", "Commits" },
+        D = { "<Cmd>Telescope diagnostics<CR>", "Workspace Diagnostics" },
+        G = { "<Cmd>Telescope git_status<CR>", "Git Status Files" },
+        M = { "<Cmd>Telescope keymaps<CR>", "Mappings" },
+        b = { "<Cmd>Telescope buffers<CR>", "Buffers" },
+        c = { "<Cmd>Telescope git_bcommits<CR>", "Commits for Buffer" },
+        f = { "<Cmd>Telescope find_files<CR>", "Files" },
+        g = { "<Cmd>Telescope git_files<CR>", "Git Files" },
+        h = { "<Cmd>Telescope command_history<CR>", "Command History" },
+        m = { "<Cmd>Telescope marks<CR>", "Marks" },
+        r = { "<Cmd>Telescope live_grep<CR>", "Ripgrep" },
+        s = { "<Cmd>Telescope spell_suggest<CR>", "Spell Suggest" },
     },
-
     g = {
         name = "Git",
         R = { "<Cmd>Gitsigns reset_buffer<CR>", "Reset Buffer" },
@@ -74,19 +54,16 @@ wk.register({
         t = { "<Cmd>Gitsigns toggle_word_diff<CR>", "Toggle Word Diff" },
         u = { "<Cmd>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
     },
-
-    i = {
+    I = {
         name = "Instant",
         Q = { "<Cmd>call v:lua.InstantStopServer()<CR>", "Stop Instant Server" },
         j = { "<Cmd>call v:lua.InstantJoinSession()<CR>", "Join Instant Session" },
         q = { "<Cmd>call v:lua.InstantStopSession()<CR>", "Stop Instant Session" },
         s = { "<Cmd>call v:lua.InstantStartSession()<CR>", "Start Instant Session" },
     },
-
     l = {
         name = "LSP",
         D = { "<Cmd>Lspsaga show_line_diagnostics<CR>", "Show Line Diagnostics" },
-        I = { "<Cmd>LspInstallInfo<CR>", "LSP Installer" },
         ["["] = { "<Cmd>Lspsaga diagnostic_jump_prev<CR>", "Previous Diagnostic" },
         ["]"] = { "<Cmd>Lspsaga diagnostic_jump_next<CR>", "Next Diagnostic" },
         c = { "<Cmd>Lspsaga code_action<CR>", "Code Action" },
@@ -98,7 +75,6 @@ wk.register({
         r = { "<Cmd>Lspsaga rename<CR>", "Rename Variable" },
         s = { "<Cmd>Lspsaga signature_help<CR>", "Show Signature" },
     },
-
     r = {
         name = "Runner",
         C = { "<Plug>SnipReplMemoryClean", "Clean REPL memory" },

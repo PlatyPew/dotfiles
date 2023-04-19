@@ -14,17 +14,20 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = '\\'
 vim.g.maplocalleader = '\\'
 
-local function getConfig(name)
-    return string.format("require('config/%s')", name)
-end
-
 return require('lazy').setup({
     {
         "catppuccin/nvim",
+        name = 'catppuccino',
         tag = "v0.1",
+        priority = 1000,
         config = function()
-            require('config/catppuccino')
+            require('config.catppuccino')
         end,
+    },
+
+    {
+        "kyazdani42/nvim-web-devicons",
+        lazy = true,
     },
 
     {
@@ -37,50 +40,31 @@ return require('lazy').setup({
 
     {
         "nvim-lualine/lualine.nvim",
-        event = "VimEnter",
+        event = "VeryLazy",
         config = function()
-            require('config/lualine')
+            require('config.lualine')
         end,
     },
 
     {
         'nvim-telescope/telescope.nvim',
-        dependencies = { 'nvim-lua/plenary.nvim' }
-    },
-
-    {
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-            return vim.fn.executable 'make' == 1
+        cmd = 'Telescope',
+        lazy = true,
+        config = function()
+            require('config.telescope')
         end,
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            {
+                'nvim-telescope/telescope-fzf-native.nvim',
+                build = 'make',
+                cond = function()
+                    return vim.fn.executable 'make' == 1
+                end,
+            },
+        }
     },
 
-    --[[ use({ ]]
-    --[[     "glepnir/dashboard-nvim", ]]
-    --[[     commit = "a36b3232c98616149784f2ca2654e77caea7a522", ]]
-    --[[     requires = { ]]
-    --[[         { ]]
-    --[[             "ibhagwan/fzf-lua", ]]
-    --[[             event = "VimEnter", ]]
-    --[[             config = function() ]]
-    --[[                 require("fzf-lua").setup({ ]]
-    --[[                     winopts = { ]]
-    --[[                         preview = { ]]
-    --[[                             scrollbar = false, ]]
-    --[[                             wrap = "wrap", ]]
-    --[[                         }, ]]
-    --[[                     }, ]]
-    --[[                 }) ]]
-    --[[             end, ]]
-    --[[         }, ]]
-    --[[         "kyazdani42/nvim-web-devicons", ]]
-    --[[     }, ]]
-    --[[     after = "Catppuccino.nvim", ]]
-    --[[     config = getConfig("dashboard"), ]]
-    --[[ }) ]]
 
     {
         "kyazdani42/nvim-tree.lua",
@@ -93,35 +77,42 @@ return require('lazy').setup({
         end,
         dependencies = {
             "kyazdani42/nvim-web-devicons",
-        }
+        },
     },
 
     {
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
-        event = 'VimEnter',
+        lazy = true,
         dependencies = {
             'nvim-treesitter/nvim-treesitter-textobjects',
             'nvim-treesitter/nvim-treesitter-refactor',
-            'windwp/nvim-ts-autotag',
             'p00f/nvim-ts-rainbow',
             'yioneko/nvim-yati',
-            {
-                'windwp/nvim-autopairs',
-                config = function()
-                    require('config/autopair')
-                end,
-            },
         },
         config = function()
-            require('config/treesitter')
+            require('config.treesitter')
         end,
         build = ":TSUpdate",
     },
 
     {
+        'windwp/nvim-autopairs',
+        event = "InsertEnter",
+        config = function()
+            require('config.autopair')
+        end,
+    },
+
+    {
+        'windwp/nvim-ts-autotag',
+        ft = { 'html', 'javascriptreact', 'typescriptreact' },
+        event = "InsertEnter",
+    },
+
+    {
         "machakann/vim-highlightedyank",
-        event = "BufReadPost",
+        event = "VeryLazy",
         config = function()
             vim.api.nvim_set_hl(0, "HighlightedyankRegion", { reverse = true })
             vim.g.highlightedyank_highlight_duration = 200
@@ -130,9 +121,9 @@ return require('lazy').setup({
 
     {
         "lewis6991/gitsigns.nvim",
-        event = "BufReadPost",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
-            require('config/gitsigns')
+            require('config.gitsigns')
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -155,27 +146,45 @@ return require('lazy').setup({
             'folke/neodev.nvim',
         },
         config = function()
-            require('config/lsp')
+            require('config.lsp')
         end,
     },
 
     {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
+        event = 'InsertEnter',
         dependencies = {
             'hrsh7th/cmp-nvim-lsp',
             'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip'
+            'saadparwaiz1/cmp_luasnip',
+            'onsails/lspkind.nvim',
         },
+        config = function()
+            require('config.cmp')
+        end,
+    },
+
+    {
+        "jose-elias-alvarez/null-ls.nvim",
+        event = { "BufReadPost", "BufNewFile" },
+        dependencies = {
+            "williamboman/mason.nvim",
+            "jay-babu/mason-null-ls.nvim",
+        },
+        config = function()
+            require("config.nullls") -- require your null-ls config here (example below)
+        end,
     },
 
     {
         -- NOTE: Yes, you can install new plugins here!
-        'mfussenegger/nvim-dap',
+        'rcarriga/nvim-dap-ui',
+        lazy = true,
         -- NOTE: And you can specify dependencies as well
         dependencies = {
+            'mfussenegger/nvim-dap',
             -- Creates a beautiful debugger UI
-            'rcarriga/nvim-dap-ui',
             "theHamsta/nvim-dap-virtual-text",
 
             -- Installs the debug adapters for you
@@ -186,29 +195,13 @@ return require('lazy').setup({
             "mfussenegger/nvim-jdtls",
         },
         config = function()
-            require('config/dap')
+            require('config.dap')
         end,
     },
 
-    --
-    --     use({
-    --         "mfussenegger/nvim-dap",
-    --         requires = {
-    --             "rcarriga/nvim-dap-ui",
-    --             "theHamsta/nvim-dap-virtual-text",
-    --             "mfussenegger/nvim-jdtls",
-    --             {
-    --                 "Pocco81/dap-buddy.nvim",
-    --                 commit = "24923c3819a450a772bb8f675926d530e829665f",
-    --             },
-    --         },
-    --         event = "BufReadPost",
-    --         config = getConfig("dap"),
-    --     })
-
     {
         "anyakichi/vim-surround",
-        event = "BufReadPost",
+        event = { "BufReadPost", "BufNewFile" },
         dependencies = {
             "tpope/vim-repeat",
         },
@@ -216,20 +209,22 @@ return require('lazy').setup({
 
     {
         "folke/which-key.nvim",
-        event = "VimEnter",
-        config = getConfig("whichkey"),
+        event = "VeryLazy",
+        config = function()
+            require('config.whichkey')
+        end
     },
 
     {
         "mg979/vim-visual-multi",
-        event = "BufReadPost",
+        event = { "BufReadPost", "BufNewFile" },
     },
 
     {
         "numToStr/Comment.nvim",
-        event = "BufReadPost",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
-            require("config/comment")
+            require("config.comment")
         end,
         dependencies = {
             "JoosepAlviste/nvim-ts-context-commentstring",
@@ -258,12 +253,10 @@ return require('lazy').setup({
     {
         "mattn/emmet-vim",
         ft = { "html", "css", "markdown", "javascriptreact", "typescriptreact" },
-        event = "InsertCharPre",
+        event = "InsertEnter",
     },
 
-    { "mbbill/undotree",      cmd = "UndotreeToggle" },
-
-    { "vim-scripts/LargeFile" },
+    { "mbbill/undotree", cmd = "UndotreeToggle" },
 
     {
         "iamcco/markdown-preview.nvim",
