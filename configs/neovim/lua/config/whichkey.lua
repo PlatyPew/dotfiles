@@ -17,6 +17,7 @@ wk.register({
         C = { "<Cmd>lua require'dap'.disconnect()<CR>", "Close" },
         R = { "<Cmd>lua require'dap'.repl.open()<CR>", "REPL" },
         S = { "<Cmd>lua require'dap'.step_into()<CR>", "Step Into" },
+        a = { "<Cmd>lua _G.dap_args()<CR>", "Set Program Arguments" },
         b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
         c = { "<Cmd>lua require'dap'.continue()<CR>", "Continue" },
         e = { "<Cmd>lua require'dapui'.eval()<CR>", "Evaluate" },

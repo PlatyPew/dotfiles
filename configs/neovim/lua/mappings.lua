@@ -38,22 +38,22 @@ remap("n", ";", ":")
 remap(
     "n",
     "<Leader>bh",
-    "<Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bfirst<CR><CR>"
+    "<Cmd>:bfirst<CR>"
 )
 remap(
     "n",
     "<Leader>bj",
-    "<Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bnext<CR><CR>"
+    "<Cmd>:bnext<CR>"
 )
 remap(
     "n",
     "<Leader>bk",
-    "<Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:bprevious<CR><CR>"
+    "<Cmd>:bprevious<CR>"
 )
 remap(
     "n",
     "<Leader>bl",
-    "<Cmd>if &modifiable && !&readonly && &modified <CR> :write<CR> :endif<CR>:blast<CR><CR>"
+    "<Cmd>:blast<CR>"
 )
 remap("n", "<Leader>bq", "<Cmd>bdelete<CR>")
 

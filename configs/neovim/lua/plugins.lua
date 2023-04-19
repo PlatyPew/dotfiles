@@ -32,6 +32,7 @@ return require('lazy').setup({
 
     {
         "norcalli/nvim-colorizer.lua",
+        event = { "BufReadPost", "BufNewFile" },
         ft = { "html", "css", "markdown", "javascriptreact", "typescriptreact" },
         config = function()
             require("colorizer").setup()
@@ -44,6 +45,7 @@ return require('lazy').setup({
         config = function()
             require('config.lualine')
         end,
+        dependencies = { "kyazdani42/nvim-web-devicons" },
     },
 
     {
@@ -75,9 +77,7 @@ return require('lazy').setup({
                 hijack_cursor = true,
             })
         end,
-        dependencies = {
-            "kyazdani42/nvim-web-devicons",
-        },
+        dependencies = { "kyazdani42/nvim-web-devicons" },
     },
 
     {

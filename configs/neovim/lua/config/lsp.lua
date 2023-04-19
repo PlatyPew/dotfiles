@@ -34,4 +34,22 @@ mason_lspconfig.setup_handlers {
             settings = servers[server_name],
         }
     end,
+    ["jdtls"] = function()
+        require('lspconfig').jdtls.setup({
+            init_options = {
+                bundles = {
+                    vim.fn.glob(
+                        require("mason-registry").get_package("java-debug-adapter"):get_install_path() ..
+                        "/extension/server/com.microsoft.java.debug.plugin-*.jar"
+                    ),
+                },
+            },
+            extendedCapabilities = require("jdtls").extendedClientCapabilities,
+            filetypes = { "java" },
+            on_attach = function()
+                require("jdtls").setup_dap({ hotcodereplace = "auto" })
+                require("jdtls.dap").setup_dap_main_class_configs()
+            end,
+        })
+    end,
 }
