@@ -190,7 +190,6 @@ return require("lazy").setup({
         cmd = "Copilot",
         opts = {
             suggestion = {
-                -- enabled = false
                 auto_trigger = true,
                 keymap = {
                     accept = "<A-CR>",
@@ -304,21 +303,19 @@ return require("lazy").setup({
         cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle" },
     },
 
-    --[[ use({ ]]
-    --[[     "michaelb/sniprun", ]]
-    --[[     run = "bash ./install.sh 1", ]]
-    --[[     keys = { ]]
-    --[[         "<Plug>SnipReplMemoryClean", ]]
-    --[[         "<Plug>SnipReset", ]]
-    --[[         "<Plug>SnipClose", ]]
-    --[[         "<Plug>SnipInfo", ]]
-    --[[         "<Plug>SnipRun", ]]
-    --[[         "<Plug>SnipTerminate", ]]
-    --[[     }, ]]
-    --[[     config = function() ]]
-    --[[         require("sniprun").setup({ ]]
-    --[[             snipruncolors = { SniprunVirtualTextOk = { bg = "#b1e3ad", fg = "#000000" } }, ]]
-    --[[         }) ]]
-    --[[     end, ]]
-    --[[ }) ]]
+    {
+        "michaelb/sniprun",
+        build = "bash ./install.sh 1",
+        keys = {
+            "<Plug>SnipReplMemoryClean",
+            "<Plug>SnipReset",
+            "<Plug>SnipClose",
+            "<Plug>SnipInfo",
+            "<Plug>SnipRun",
+            "<Plug>SnipTerminate",
+        },
+        opts = {
+            snipruncolors = { SniprunVirtualTextOk = { bg = "#b1e3ad", fg = "#000000" } },
+        },
+    },
 })
