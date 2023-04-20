@@ -49,6 +49,15 @@ return require("lazy").setup({
     },
 
     {
+        "nvimdev/dashboard-nvim",
+        commit = "a36b3232c98616149784f2ca2654e77caea7a522",
+        event = "VimEnter",
+        config = function()
+            require("config.dashboard")
+        end,
+    },
+
+    {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
         lazy = true,
