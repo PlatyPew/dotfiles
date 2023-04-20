@@ -5,13 +5,18 @@ wk.setup({
 })
 
 wk.register({
-    D = { "<Cmd>DogeGenerate<CR>", "Generate docs" },
     F = { "<Cmd>lua vim.lsp.buf.format()<CR>", "Format code" },
     T = { "<Cmd>Transparency<CR>", "Toggle Transparency" },
     i = { "<Cmd>Mason<CR>", "Installer" },
     o = { "<Cmd>NvimTreeToggle<CR>", "File Explorer" },
     u = { "<Cmd>UndotreeToggle<CR>", "Toggle UndoTree" },
     m = { "<Cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
+    c = {
+        name = "Copilot",
+        t = { "<Cmd>Copilot toggle<CR>", "Toggle Copilot" },
+        p = { "<Cmd>Copilot panel<CR>", "Copilot Panel" },
+        s = { "<Cmd>Copilot status<CR>", "Copilot Status" },
+    },
     d = {
         name = "Debugger",
         C = { "<Cmd>lua require'dap'.disconnect()<CR>", "Close" },
@@ -72,9 +77,8 @@ wk.register({
         f = { "<Cmd>Lspsaga lsp_finder<CR>", "Find Reference" },
         h = { "<Cmd>Lspsaga hover_doc<CR>", "Docs" },
         i = { "<Cmd>LspInfo<CR>", "LSP Info" },
-        p = { "<Cmd>Lspsaga preview_definition<CR>", "Preview Definition" },
+        p = { "<Cmd>Lspsaga peek_definition<CR>", "Preview Definition" },
         r = { "<Cmd>Lspsaga rename<CR>", "Rename Variable" },
-        s = { "<Cmd>Lspsaga signature_help<CR>", "Show Signature" },
     },
     r = {
         name = "Runner",

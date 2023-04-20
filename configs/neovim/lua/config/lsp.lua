@@ -16,6 +16,7 @@ require('neodev').setup()
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+capabilities.offsetEncoding = { "utf-16" }
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
@@ -46,7 +47,9 @@ mason_lspconfig.setup_handlers {
             },
             extendedCapabilities = require("jdtls").extendedClientCapabilities,
             filetypes = { "java" },
-            on_attach = function()
+            on_attach = function(client)
+                client.server_capabilities.documentFormattingProvider = false
+                client.server_capabilities.documentRangeFormattingProvider = false
                 require("jdtls").setup_dap({ hotcodereplace = "auto" })
                 require("jdtls.dap").setup_dap_main_class_configs()
             end,

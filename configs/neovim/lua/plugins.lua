@@ -11,17 +11,17 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.mapleader = '\\'
-vim.g.maplocalleader = '\\'
+vim.g.mapleader = "\\"
+vim.g.maplocalleader = "\\"
 
-return require('lazy').setup({
+return require("lazy").setup({
     {
         "catppuccin/nvim",
-        name = 'catppuccino',
+        name = "catppuccino",
         tag = "v0.1",
         priority = 1000,
         config = function()
-            require('config.catppuccino')
+            require("config.catppuccino")
         end,
     },
 
@@ -43,70 +43,67 @@ return require('lazy').setup({
         "nvim-lualine/lualine.nvim",
         event = "VeryLazy",
         config = function()
-            require('config.lualine')
+            require("config.lualine")
         end,
         dependencies = { "kyazdani42/nvim-web-devicons" },
     },
 
     {
-        'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
+        "nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
         lazy = true,
         config = function()
-            require('config.telescope')
+            require("config.telescope")
         end,
         dependencies = {
-            'nvim-lua/plenary.nvim',
+            "nvim-lua/plenary.nvim",
             {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make",
                 cond = function()
-                    return vim.fn.executable 'make' == 1
+                    return vim.fn.executable("make") == 1
                 end,
             },
-        }
+        },
     },
-
 
     {
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",
-        config = function()
-            require("nvim-tree").setup({
-                disable_netrw = true,
-                hijack_cursor = true,
-            })
-        end,
+        opts = {
+            disable_netrw = true,
+            hijack_cursor = true,
+        },
         dependencies = { "kyazdani42/nvim-web-devicons" },
     },
 
     {
         -- Highlight, edit, and navigate code
-        'nvim-treesitter/nvim-treesitter',
+        "nvim-treesitter/nvim-treesitter",
         lazy = true,
         dependencies = {
-            'nvim-treesitter/nvim-treesitter-textobjects',
-            'nvim-treesitter/nvim-treesitter-refactor',
-            'p00f/nvim-ts-rainbow',
-            'yioneko/nvim-yati',
+            "nvim-treesitter/nvim-treesitter-textobjects",
+            "nvim-treesitter/nvim-treesitter-refactor",
+            "p00f/nvim-ts-rainbow",
+            "yioneko/nvim-yati",
         },
         config = function()
-            require('config.treesitter')
+            require("config.treesitter")
         end,
         build = ":TSUpdate",
     },
 
     {
-        'windwp/nvim-autopairs',
+        "windwp/nvim-autopairs",
         event = "InsertEnter",
         config = function()
-            require('config.autopair')
+            require("config.autopair")
         end,
     },
 
     {
-        'windwp/nvim-ts-autotag',
-        ft = { 'html', 'javascriptreact', 'typescriptreact' },
+        "windwp/nvim-ts-autotag",
+        ft = { "html", "javascriptreact", "typescriptreact" },
         event = "InsertEnter",
     },
 
@@ -123,7 +120,7 @@ return require('lazy').setup({
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPost", "BufNewFile" },
         config = function()
-            require('config.gitsigns')
+            require("config.gitsigns")
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -132,37 +129,70 @@ return require('lazy').setup({
 
     {
         -- LSP Configuration & Plugins
-        'neovim/nvim-lspconfig',
+        "neovim/nvim-lspconfig",
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
-            'williamboman/mason.nvim',
-            'williamboman/mason-lspconfig.nvim',
-
-            -- Useful status updates for LSP
-            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', opts = {} },
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
 
             -- Additional lua configuration, makes nvim stuff amazing!
-            'folke/neodev.nvim',
+            "folke/neodev.nvim",
         },
         config = function()
-            require('config.lsp')
+            require("config.lsp")
         end,
     },
 
     {
+        "nvimdev/lspsaga.nvim",
+        event = "LspAttach",
+        opts = {
+            symbol_in_winbar = {
+                enable = false,
+            },
+        },
+    },
+
+    {
         -- Autocompletion
-        'hrsh7th/nvim-cmp',
-        event = 'InsertEnter',
+        "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'L3MON4D3/LuaSnip',
-            'saadparwaiz1/cmp_luasnip',
-            'onsails/lspkind.nvim',
+            "hrsh7th/cmp-nvim-lsp",
+            "onsails/lspkind.nvim",
+
+            -- Snippets
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets",
+
+            -- Extra sources
+            "FelipeLema/cmp-async-path",
+            "ray-x/cmp-treesitter",
+            "hrsh7th/cmp-buffer",
         },
         config = function()
-            require('config.cmp')
+            require("config.cmp")
         end,
+    },
+
+    {
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        opts = {
+            suggestion = {
+                -- enabled = false
+                auto_trigger = true,
+                keymap = {
+                    accept = "<A-CR>",
+                    accept_word = false,
+                    accept_line = false,
+                    next = "<A-Tab>",
+                    prev = "<A-S-Tab>",
+                    dismiss = "<A-[>",
+                },
+            },
+        },
     },
 
     {
@@ -179,23 +209,23 @@ return require('lazy').setup({
 
     {
         -- NOTE: Yes, you can install new plugins here!
-        'rcarriga/nvim-dap-ui',
+        "rcarriga/nvim-dap-ui",
         lazy = true,
         -- NOTE: And you can specify dependencies as well
         dependencies = {
-            'mfussenegger/nvim-dap',
+            "mfussenegger/nvim-dap",
             -- Creates a beautiful debugger UI
             "theHamsta/nvim-dap-virtual-text",
 
             -- Installs the debug adapters for you
-            'williamboman/mason.nvim',
-            'jay-babu/mason-nvim-dap.nvim',
+            "williamboman/mason.nvim",
+            "jay-babu/mason-nvim-dap.nvim",
 
             -- Add your own debuggers here
             "mfussenegger/nvim-jdtls",
         },
         config = function()
-            require('config.dap')
+            require("config.dap")
         end,
     },
 
@@ -211,8 +241,8 @@ return require('lazy').setup({
         "folke/which-key.nvim",
         event = "VeryLazy",
         config = function()
-            require('config.whichkey')
-        end
+            require("config.whichkey")
+        end,
     },
 
     {
