@@ -19,7 +19,9 @@ dap.configurations.java = {
 
 require("mason-nvim-dap").setup({
     ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
+        "python",
+        "node2",
+        "codelldb",
     },
     -- Makes a best effort to setup the various debuggers with
     -- reasonable debug configurations
