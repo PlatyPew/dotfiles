@@ -34,9 +34,7 @@ return require("lazy").setup({
         "norcalli/nvim-colorizer.lua",
         event = { "BufReadPost", "BufNewFile" },
         ft = { "html", "css", "markdown", "javascriptreact", "typescriptreact" },
-        config = function()
-            require("colorizer").setup()
-        end,
+        opts = {},
     },
 
     {
@@ -90,6 +88,7 @@ return require("lazy").setup({
         -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
         lazy = true,
+        build = ":TSUpdate",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
             "nvim-treesitter/nvim-treesitter-refactor",
@@ -99,7 +98,6 @@ return require("lazy").setup({
         config = function()
             require("config.treesitter")
         end,
-        build = ":TSUpdate",
     },
 
     {
@@ -305,7 +303,7 @@ return require("lazy").setup({
 
     {
         "michaelb/sniprun",
-        build = "bash ./install.sh 1",
+        build = "bash ./install.sh",
         keys = {
             "<Plug>SnipReplMemoryClean",
             "<Plug>SnipReset",
@@ -317,5 +315,15 @@ return require("lazy").setup({
         opts = {
             snipruncolors = { SniprunVirtualTextOk = { bg = "#b1e3ad", fg = "#000000" } },
         },
+    },
+
+    {
+        "kkoomen/vim-doge",
+        build = "./scripts/install.sh",
+        event = { "BufReadPost", "BufNewFile" },
+        config = function()
+            vim.g.doge_mapping = "<Leader>K"
+            vim.g.doge_doc_standard_c = "kernel_doc"
+        end,
     },
 })
