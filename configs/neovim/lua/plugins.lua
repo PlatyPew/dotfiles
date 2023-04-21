@@ -175,6 +175,11 @@ return require("lazy").setup({
         "nvimdev/lspsaga.nvim",
         event = "LspAttach",
         opts = {
+            finder = {
+                keys = {
+                    expand_or_jump = "<CR>",
+                },
+            },
             lightbulb = {
                 enable = false,
             },
