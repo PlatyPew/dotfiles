@@ -5,6 +5,7 @@ wk.setup({
 })
 
 wk.register({
+    D = { "<Cmd>DogeGenerate<CR>", "Generate Docs" },
     F = { "<Cmd>lua vim.lsp.buf.format()<CR>", "Format code" },
     T = { "<Cmd>Transparency<CR>", "Toggle Transparency" },
     i = { "<Cmd>Mason<CR>", "Installer" },
