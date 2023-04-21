@@ -1,9 +1,12 @@
 local servers = {
-    clangd = {},
     lua_ls = {},
     pyright = {},
     tsserver = {},
 }
+
+if require("jit").os ~= "Linux" or require("jit").arch ~= "arm64" then
+    servers.clangd = {}
+end
 
 -- Setup neovim lua configuration
 require('neodev').setup()
