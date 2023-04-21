@@ -4,10 +4,6 @@ local servers = {
     tsserver = {},
 }
 
-if require("jit").os ~= "Linux" or require("jit").arch ~= "arm64" then
-    servers.clangd = {}
-end
-
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -15,6 +11,14 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 capabilities.offsetEncoding = { "utf-16" }
+
+if require("jit").os == "Linux" and require("jit").arch == "arm64" then
+    require('lspconfig').clangd.setup({
+        capabilities = capabilities,
+    })
+else
+    servers.clangd = {}
+end
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
