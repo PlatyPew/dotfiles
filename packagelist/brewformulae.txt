@@ -10,13 +10,10 @@ gnupg
 k3d
 llvm
 navi
-neofetch
 neovim
 node
-openjdk
-openjdk@11
+openjdk@17
 p7zip
-pandoc
 pinentry-mac
 ripgrep
 rust

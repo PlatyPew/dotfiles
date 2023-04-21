@@ -1,7 +1,11 @@
 docker
 font-iosevka-nerd-font
+google-chrome
 iterm2
 miniforge
+mos
 ngrok
 rar
 rectangle
+utm
+zulu8
