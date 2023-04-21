@@ -27,6 +27,7 @@ wk.register({
         b = { "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", "Toggle Breakpoint" },
         c = { "<Cmd>lua require'dap'.continue()<CR>", "Continue" },
         e = { "<Cmd>lua require'dapui'.eval()<CR>", "Evaluate" },
+        p = { "<Cmd>lua _G.dap_program()<CR>", "Set Executable Path" },
         o = { "<Cmd>lua require'dap'.step_out()<CR>", "Step Out" },
         s = { "<Cmd>lua require'dap'.step_over()<CR>", "Step Over" },
         u = { "<Cmd>lua require'dapui'.toggle()<CR>", "Open UI" },

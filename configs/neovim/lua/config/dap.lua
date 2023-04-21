@@ -44,3 +44,8 @@ function _G.dap_args()
 
     dap.configurations[vim.bo.filetype][1].args = t
 end
+
+function _G.dap_program()
+    dap.configurations[vim.bo.filetype][1].program =
+        vim.fn.input("Path: ", vim.fn.getcwd() .. "/", "file")
+end
