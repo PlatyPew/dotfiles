@@ -61,20 +61,11 @@ remap("n", "<Leader>T", [[<Cmd>Transparency<CR>]])
 
 -- FZF-Lua
 remap("n", "<C-p>", function()
-    require("telescope.builtin").find_files({
-        find_command = {
-            "rg",
-            "--files",
-            "--hidden",
-            "--no-ignore-vcs",
-            "-g",
-            "!.git/*",
-        },
-    })
+    require("fzf-lua").files({ cmd = 'rg --files --hidden --no-ignore-vcs -g "!.git/*"' })
 end)
 
 remap("n", "<C-g>", function()
-    require("telescope.builtin").live_grep()
+    require("fzf-lua").live_grep_native()
 end)
 
 -- LSPSaga

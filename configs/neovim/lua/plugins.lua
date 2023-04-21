@@ -77,20 +77,14 @@ return require("lazy").setup({
     },
 
     {
-        "nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
+        "ibhagwan/fzf-lua",
         lazy = true,
-        config = function()
-            require("config.telescope")
-        end,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            {
-                "nvim-telescope/telescope-fzf-native.nvim",
-                build = "make",
-                cond = function()
-                    return vim.fn.executable("make") == 1
-                end,
+        opts = {
+            winopts = {
+                preview = {
+                    scrollbar = false,
+                    wrap = "wrap",
+                },
             },
         },
     },
