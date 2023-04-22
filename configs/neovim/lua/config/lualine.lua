@@ -65,6 +65,7 @@ require("lualine").setup({
                     mason = " Mason",
                     undotree = " UndoTree",
                     lspinfo = " LSP Info",
+                    lazy = "󰒲  Lazy",
                 },
             },
         },
@@ -74,5 +75,5 @@ require("lualine").setup({
             end,
         },
     },
-    extensions = { "chadtree" },
+    extensions = { "fzf", "nvim-tree", "nvim-dap-ui", "quickfix" },
 })

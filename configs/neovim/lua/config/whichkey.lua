@@ -8,7 +8,6 @@ wk.register({
     D = { "<Cmd>DogeGenerate<CR>", "Generate Docs" },
     F = { "<Cmd>lua vim.lsp.buf.format()<CR>", "Format code" },
     T = { "<Cmd>Transparency<CR>", "Toggle Transparency" },
-    i = { "<Cmd>Mason<CR>", "Installer" },
     o = { "<Cmd>NvimTreeToggle<CR>", "File Explorer" },
     u = { "<Cmd>UndotreeToggle<CR>", "Toggle UndoTree" },
     m = { "<Cmd>MarkdownPreviewToggle<CR>", "Toggle Markdown Preview" },
@@ -70,6 +69,11 @@ wk.register({
         s = { "<Cmd>Gitsigns stage_hunk<CR>", "Stage Hunk" },
         t = { "<Cmd>Gitsigns toggle_word_diff<CR>", "Toggle Word Diff" },
         u = { "<Cmd>Gitsigns undo_stage_hunk<CR>", "Undo Stage Hunk" },
+    },
+    i = {
+        name = "Installers",
+        l = { "<Cmd>Lazy<CR>", "Lazy" },
+        m = { "<Cmd>Mason<CR>", "Mason" },
     },
     I = {
         name = "Instant",
