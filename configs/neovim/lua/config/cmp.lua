@@ -4,6 +4,11 @@ local luasnip = require("luasnip")
 
 require("luasnip.loaders.from_vscode").lazy_load()
 
+local border_opts = {
+    border = "single",
+    winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
+}
+
 cmp.setup({
     snippet = {
         expand = function(args)
@@ -49,7 +54,15 @@ cmp.setup({
                 buffer = "[BUF]",
                 luasnip = "[SNIP]",
             },
+            symbol_map = {
+                String = "󰊄",
+                Comment = "󰅺",
+            }
         }),
+    },
+    window = {
+        completion = cmp.config.window.bordered(border_opts),
+        documentation = cmp.config.window.bordered(border_opts),
     },
     sources = {
         { name = "nvim_lsp" },
@@ -71,6 +84,7 @@ vim.api.nvim_set_hl(0, "CmpItemKindMethod", { link = "@method" })
 vim.api.nvim_set_hl(0, "CmpItemKindModule", { link = "@include" })
 vim.api.nvim_set_hl(0, "CmpItemKindSnippet", { link = "@character" })
 vim.api.nvim_set_hl(0, "CmpItemKindStruct", { link = "@lsp.type.struct" })
+vim.api.nvim_set_hl(0, "CmpItemKindText", { link = "@exception" })
 vim.api.nvim_set_hl(0, "CmpItemKindVariable", { link = "@variable" })
 
 vim.api.nvim_set_hl(0, "ColorColumn", {})
