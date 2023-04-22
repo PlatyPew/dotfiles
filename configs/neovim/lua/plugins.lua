@@ -33,7 +33,6 @@ return require("lazy").setup({
     {
         "norcalli/nvim-colorizer.lua",
         event = { "BufReadPost", "BufNewFile" },
-        ft = { "html", "css", "markdown", "javascriptreact", "typescriptreact" },
         opts = {},
     },
 
@@ -51,7 +50,6 @@ return require("lazy").setup({
         event = "VeryLazy",
         opts = {
             lsp = {
-                -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                 override = {
                     ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
                     ["vim.lsp.util.stylize_markdown"] = true,
@@ -62,9 +60,7 @@ return require("lazy").setup({
                 long_message_to_split = true,
             },
         },
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-        },
+        dependencies = { "MunifTanjim/nui.nvim" },
     },
 
     {
@@ -110,7 +106,7 @@ return require("lazy").setup({
     {
         -- Highlight, edit, and navigate code
         "nvim-treesitter/nvim-treesitter",
-        lazy = true,
+        event = "VeryLazy",
         build = ":TSUpdate",
         dependencies = {
             "nvim-treesitter/nvim-treesitter-textobjects",
@@ -133,8 +129,16 @@ return require("lazy").setup({
 
     {
         "windwp/nvim-ts-autotag",
-        ft = { "html", "javascriptreact", "typescriptreact" },
         event = "InsertEnter",
+        cond = function()
+            local ft = { "html", "javascriptreact", "typescriptreact" }
+            for _, value in ipairs(ft) do
+                if value == vim.bo.filetype then
+                    return true
+                end
+            end
+            return false
+        end,
     },
 
     {
@@ -175,7 +179,7 @@ return require("lazy").setup({
 
     {
         "nvimdev/lspsaga.nvim",
-        event = "LspAttach",
+        cmd = "Lspsaga",
         opts = {
             finder = {
                 keys = {
@@ -234,7 +238,7 @@ return require("lazy").setup({
 
     {
         "jose-elias-alvarez/null-ls.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+        event = "LspAttach",
         dependencies = {
             "williamboman/mason.nvim",
             "jay-babu/mason-null-ls.nvim",
@@ -284,12 +288,16 @@ return require("lazy").setup({
 
     {
         "mg979/vim-visual-multi",
-        event = { "BufReadPost", "BufNewFile" },
+        keys = { "<C-N>", "<Plug>(VM-Find-Under)" },
     },
 
     {
         "numToStr/Comment.nvim",
-        event = { "BufReadPost", "BufNewFile" },
+        keys = {
+            { "gcc", "<Plug>(comment_toggle_linewise_current)" },
+            { "gc", "<Plug>(comment_toggle_linewise_current)", mode = "v" },
+            { "gb", "<Plug>(comment_toggle_blockwise_current)", mode = "v" },
+        },
         config = function()
             require("config.comment")
         end,
