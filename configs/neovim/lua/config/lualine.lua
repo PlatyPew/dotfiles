@@ -11,6 +11,7 @@ require("lualine").setup({
         lualine_b = { "branch", "diff" },
         lualine_c = { "filename", "filesize" },
         lualine_x = {
+            "%S",
             "location",
             {
                 "filetype",
@@ -61,7 +62,7 @@ require("lualine").setup({
                 filetype_names = {
                     dashboard = "舘Dashboard",
                     NvimTree = " NvimTree",
-                    ["lsp-installer"] = " LSP Install",
+                    mason = " Mason",
                     undotree = " UndoTree",
                     lspinfo = " LSP Info",
                 },

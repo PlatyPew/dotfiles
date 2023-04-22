@@ -28,6 +28,7 @@ opt.updatetime = 50
 opt.whichwrap = "b,s,<,>,h,l"
 opt.wrap = true
 opt.cmdheight = 0
+opt.showcmdloc = "statusline"
 
 -- Copy Paste
 glo.clipboard = {
