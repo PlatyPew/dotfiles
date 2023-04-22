@@ -95,6 +95,14 @@ return require("lazy").setup({
         opts = {
             disable_netrw = true,
             hijack_cursor = true,
+            update_cwd = true,
+            filesystem_watchers = { enable = true },
+            renderer = {
+                indent_markers = { enable = true },
+                icons = {
+                    show = { folder_arrow = false },
+                },
+            },
         },
         dependencies = { "kyazdani42/nvim-web-devicons" },
     },
