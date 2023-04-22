@@ -4,3 +4,6 @@
 [submodule "configs/git/gitz"]
 	path = configs/git/gitz
 	url = https://github.com/rec/gitz
+[submodule "configs/neovim"]
+	path = configs/neovim
+	url = https://github.com/PlatyPew/neovim-init.lua.git
