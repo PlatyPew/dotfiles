@@ -231,6 +231,18 @@ alias n='navi'
 alias del='trash -F'
 ############################################################
 
+## Browse web in terminal ##################################
+browse() {
+    font="16"
+    if [ ! -z ${2} ]; then
+        font=${2}
+    fi
+    kitty @ set-font-size 1 && \
+    carbonyl --zoom=300 --bitmap "${1}" 2> /dev/null && \
+    kitty @ set-font-size ${font}
+}
+############################################################
+
 # Other QoL functions #######################################
 # Get Weather
 weather() {
