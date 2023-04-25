@@ -1,7 +1,7 @@
 docker
 font-iosevka-nerd-font
 google-chrome
-iterm2
+kitty
 miniforge
 mos
 ngrok
