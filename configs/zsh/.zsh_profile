@@ -125,7 +125,7 @@ ff() {
 }
 
 ffo() {
-    nvim $(_ff ${MYPATH})
+    nvim "$(_ff ${MYPATH})"
 }
 
 fd() {
