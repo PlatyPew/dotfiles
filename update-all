@@ -11,9 +11,8 @@ brew autoremove
 # Update npm packages
 npm update -g
 
-# Update virtual environment for python
-PIP=$DOTFILES/configs/neovim/venv/bin/pip3
-$PIP install --upgrade $($PIP freeze | cut -d '=' -f 1)
+# Update neovim
+nvim --headless "+Lazy! sync" +qa
 
 # Update zgenom
 source "${HOME}/.zgenom/zgenom.zsh" && zgenom update
