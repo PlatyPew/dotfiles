@@ -1,7 +1,11 @@
 #!/bin/zsh
 
 DIR=$(dirname $0)
+STASH=$(git -C $DIR stash)
 git -C $DIR fetch && git -C $DIR pull --rebase
+if [ "${STASH}" != "No local changes to save" ]; then
+    git -C $DIR stash pop
+fi
 
 # Update and upgrade latest brew packages
 brew update && brew outdated && brew upgrade --no-quarantine && brew cleanup
@@ -12,6 +16,7 @@ brew autoremove
 npm update -g
 
 # Update neovim
+git submodule update configs/neovim
 nvim --headless "+Lazy! sync" +qa
 
 # Update zgenom
