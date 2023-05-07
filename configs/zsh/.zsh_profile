@@ -267,4 +267,7 @@ export FZF_DEFAULT_OPTS='--color=spinner:#F8BD96,hl:#F28FAD --color=fg:#D9E0EE,h
 # PwnPad Integration #######################################
 alias p2="${HOME}/pwnpad/p2"
 source "${HOME}/pwnpad/_p2-autocomplete.zsh"
+# Crossover integration
+export CX_BOTTLE='pwnpad'
+export PATH='/Applications/CrossOver.app/Contents/SharedSupport/CrossOver/bin'":$PATH"
 ############################################################
