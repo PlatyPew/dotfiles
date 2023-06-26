@@ -17,7 +17,7 @@ npm update -g
 
 # Update neovim
 git submodule update configs/neovim
-nvim --headless "+Lazy! sync" +qa
+nvim -c "lua require('lazy').sync({wait = true})" +qa
 
 # Update zgenom
 source "${HOME}/.zgenom/zgenom.zsh" && zgenom update
