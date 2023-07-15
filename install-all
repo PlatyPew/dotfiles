@@ -7,3 +7,20 @@ if [[ $? != 0 ]]; then
 else
 	brew update
 fi
+
+brew install $(cat packagelist/brewformulae.txt)
+brew install --cask $(cat packagelist/brewcask.txt)
+
+git submodule init
+git submodule update --init --remote
+
+stow git
+stow kitty
+stow macos
+stow neovim
+stow tmux
+stow zsh
+
+nvim -c "lua require('lazy').restore({wait = true})" +qa
+zsh -c "source ~/.zshrc && zgenom update && fast-theme CONFIG:catppuccin-mocha"
+~/.tmux/plugins/tpm/scripts/install_plugins.sh
