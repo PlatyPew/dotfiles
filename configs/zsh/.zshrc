@@ -74,7 +74,7 @@ if ! zgenom saved; then
 
     zgenom load DarrinTisdale/zsh-aliases-exa
     zgenom load hlissner/zsh-autopair
-    zgenom load zsh-users/zsh-syntax-highlighting
+    zgenom load z-shell/F-Sy-H
     zgenom load b4b4r07/zsh-vimode-visual
     zgenom load romkatv/zsh-defer
 
@@ -87,24 +87,6 @@ fi
 # Powerlevel10k configs ######################################
 source $HOME/dotfiles/configs/zsh/.p10k.zsh
 #############################################################
-
-## Syntax highlighting configs ##############################
- typeset -g ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
- typeset -g ZSH_HIGHLIGHT_STYLES[arg0]='fg=10,bold'
- typeset -g ZSH_HIGHLIGHT_STYLES[redirection]='fg=14'
- typeset -g ZSH_HIGHLIGHT_STYLES[globbing]='fg=6'
- typeset -g ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=11'
- typeset -g ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=11'
- typeset -g ZSH_HIGHLIGHT_STYLES[path_pathseparator]='fg=15'
- typeset -g ZSH_HIGHLIGHT_STYLES[path]='fg=12'
- typeset -g ZSH_HIGHLIGHT_STYLES[assign]='fg=3,bold'
- typeset -g ZSH_HIGHLIGHT_STYLES[reserved-word]='fg=13,bold'
- typeset -g ZSH_HIGHLIGHT_STYLES[single-hyphen-option]='fg=220,bold'
- typeset -g ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=220,bold'
-
-# Disable highlight on paste
-zle_highlight+=(paste:none)
-############################################################
 
 ## Autosuggestions config ##################################
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20

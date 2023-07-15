@@ -6,3 +6,5 @@
 - link:
     ~/.zshrc: configs/zsh/.zshrc
     ~/.zsh_profile: configs/zsh/.zsh_profile
+    ~/.config/bat/themes/Catppuccin-mocha.tmTheme: configs/zsh/Catppuccin-mocha.tmTheme
+    ~/.config/f-sy-h/catppuccin-mocha.ini: configs/zsh/catppuccin-mocha.ini
