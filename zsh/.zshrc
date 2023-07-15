@@ -38,7 +38,6 @@ export PATH=$PATH:$BREW_PREFIX/opt/llvm/bin
 ############################################################
 
 local zshrc=$HOME/.zshrc
-export DOTFILES=${zshrc:A:h:h:h}
 
 # Use beam shape cursor on startup.
 echo -ne '\e[5 q'
@@ -85,7 +84,7 @@ fi
 ##############################################################
 
 # Powerlevel10k configs ######################################
-source $HOME/dotfiles/configs/zsh/.p10k.zsh
+source $HOME/.p10k.zsh
 #############################################################
 
 ## Autosuggestions config ##################################
@@ -157,5 +156,5 @@ fi
 ############################################################
 
 ## Additional stuff ########################################
-source $DOTFILES/configs/zsh/.zsh_profile
+source $HOME/.zsh_profile
 ############################################################
