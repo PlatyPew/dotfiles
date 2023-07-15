@@ -1,3 +1,0 @@
-carbonyl
-npm
-speed-test
