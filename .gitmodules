@@ -1,9 +1,12 @@
-[submodule "meta/dotbot"]
-	path = meta/dotbot
-	url = https://github.com/anishathalye/dotbot.git
-[submodule "configs/git/gitz"]
-	path = configs/git/gitz
-	url = https://github.com/rec/gitz
-[submodule "configs/neovim"]
-	path = configs/neovim
+[submodule "neovim/.config/nvim"]
+	path = neovim/.config/nvim
 	url = https://github.com/PlatyPew/neovim-init.lua.git
+[submodule "git/.local/share/gitz"]
+	path = git/.local/share/gitz
+	url = https://github.com/rec/gitz.git
+[submodule "zsh/.zgenom"]
+	path = zsh/.zgenom
+	url = https://github.com/jandamm/zgenom.git
+[submodule "tmux/.tmux/plugins/tpm"]
+	path = tmux/.tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git

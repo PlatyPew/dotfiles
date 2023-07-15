@@ -7,10 +7,3 @@ if [[ $? != 0 ]]; then
 else
 	brew update
 fi
-
-./install-standalone git &&
-	./install-standalone iterm2 &&
-	./install-standalone macos &&
-	./install-standalone neovim &&
-	./install-standalone tmux &&
-	./install-standalone zsh

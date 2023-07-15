@@ -1,7 +1,0 @@
-- shell:
-    - command: [/bin/sh configs/macos/install.sh]
-      stdin: true
-      stdout: true
-      stderr: true
-- link:
-    ~/.hushlogin: configs/macos/.hushlogin

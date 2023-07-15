@@ -1,7 +1,0 @@
-- shell:
-    - command: [/bin/sh configs/tmux/install.sh]
-      stdin: true
-      stdout: true
-      stderr: true
-- link:
-    ~/.tmux.conf: configs/tmux/.tmux.conf

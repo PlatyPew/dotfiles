@@ -1,5 +1,0 @@
-- shell:
-    - command: [/bin/sh configs/iterm2/install.sh]
-      stdin: true
-      stdout: true
-      stderr: true
