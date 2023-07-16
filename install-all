@@ -3,9 +3,16 @@ sudo spctl --master-disable
 
 which -s brew
 if [[ $? != 0 ]]; then
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 else
-	brew update
+    brew update
+fi
+
+DIR=$(dirname $0)
+STASH=$(git -C $DIR stash)
+git -C $DIR fetch && git -C $DIR pull --rebase
+if [ "${STASH}" != "No local changes to save" ]; then
+    git -C $DIR stash pop
 fi
 
 brew install $(cat packagelist/brewformulae.txt)
