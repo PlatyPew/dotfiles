@@ -14,12 +14,12 @@ brew install --cask $(cat packagelist/brewcask.txt)
 git submodule init
 git submodule update --init --remote
 
-stow git
-stow kitty
-stow macos
-stow neovim
-stow tmux
-stow zsh
+stow -v git
+stow -v kitty
+stow -v macos
+stow -v neovim
+stow -v tmux
+stow -v zsh
 
 nvim -c "lua require('lazy').restore({wait = true})" +qa
 zsh -c "source ~/.zshrc && zgenom update && fast-theme CONFIG:catppuccin-mocha"
