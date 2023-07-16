@@ -1,16 +1,18 @@
 <div align="center">
-    <img width="200" height="200" src="images/logo_circle.png"/>
+    <img width="200" height="200" src="images/logo.png"/>
     <br/>
     <br/>
-    <img src="https://img.shields.io/badge/Coded%20By%20Humans-100%25-brightgreen"/>
     <img src="https://img.shields.io/badge/license-MIT-green.svg"/>
     <img src="https://img.shields.io/badge/macOS-Ventura-blue.svg"/>
     <br/>
+    <img src="https://img.shields.io/github/actions/workflow/status/PlatyPew/dotfiles/dotfiles-build.yml"/>
+    <img src="https://img.shields.io/badge/Coded%20By%20Humans-100%25-brightgreen"/>
+    <br/>
     <h1>Platy's MacOS Dotfiles</h1>
     <p>
-    These Dotfiles are used to transform a vanilla system, into one that is loaded with all the tools a developer needs and never look like a normie every again.
+    These Dotfiles are used to transform a vanilla system, into one that is loaded with all the tools a developer needs and never look like a normie ever again.
     </p>
-    <img width="800" height="500" src="images/money_shot.png"/>
+    <img width="100%" src="images/money_shot.png"/>
     <br/>
 </div>
 
