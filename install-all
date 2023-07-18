@@ -15,6 +15,8 @@ if [ "${STASH}" != "No local changes to save" ]; then
     git -C $DIR stash pop
 fi
 
+brew tap homebrew/cask-fonts
+brew tap homebrew/cask-versions
 brew install $(cat packagelist/brewformulae.txt)
 brew install --cask $(cat packagelist/brewcask.txt)
 
@@ -28,6 +30,6 @@ stow -v neovim
 stow -v tmux
 stow -v zsh
 
-nvim -c "lua require('lazy').restore({wait = true})" +qa
 zsh -c "source ~/.zshrc && zgenom update && fast-theme CONFIG:catppuccin-mocha && bat cache --build"
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
+nvim -c "lua require('lazy').restore({wait = true})" +qa
