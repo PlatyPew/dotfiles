@@ -29,5 +29,5 @@ stow -v tmux
 stow -v zsh
 
 nvim -c "lua require('lazy').restore({wait = true})" +qa
-zsh -c "source ~/.zshrc && zgenom update && fast-theme CONFIG:catppuccin-mocha"
+zsh -c "source ~/.zshrc && zgenom update && fast-theme CONFIG:catppuccin-mocha && bat cache --build"
 ~/.tmux/plugins/tpm/scripts/install_plugins.sh
