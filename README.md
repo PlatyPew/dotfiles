@@ -41,10 +41,15 @@ git clone --recursive https://github.com/PlatyPew/dotfiles.git ~/dotfiles && \
 -   tmux
 -   zsh
 
-### Miscellaneous
-
-The font used is a paid font called Comic Code.
-Please support the official [release](https://www.myfonts.com/products/coding-essentials-package-596221).
+<br/>
+<div align="center">
+    <h1>Credits</h1>
+    <p>
+        The font used is a paid font <a href="https://tosche.net/fonts/comic-code">Comic Code by 大曲都市.</a>
+        <br/>
+        The terminal background image is <a href="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=39759178">灯柱 by コーラ.</a>
+    </p>
+</div>
 
 <br/>
 <div align="center">
