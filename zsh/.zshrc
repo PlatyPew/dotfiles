@@ -69,14 +69,13 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/docker
     zgenom ohmyzsh plugins/extract
     zgenom ohmyzsh plugins/macos
-    zgenom ohmyzsh plugins/vi-mode
 
     zgenom load DarrinTisdale/zsh-aliases-exa
     zgenom load hlissner/zsh-autopair
     zgenom load z-shell/F-Sy-H
-    zgenom load b4b4r07/zsh-vimode-visual
     zgenom load romkatv/zsh-defer
     zgenom load zsh-users/zsh-autosuggestions
+    zgenom load jeffreytse/zsh-vi-mode
 
     zgenom load romkatv/powerlevel10k powerlevel10k
 
@@ -94,6 +93,11 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585b70"
 # Disables lag
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
+############################################################
+
+## Vi mode config ##########################################
+ZVM_VI_HIGHLIGHT_BACKGROUND=#585b70
+ZVM_VI_HIGHLIGHT_FOREGROUND=#b4befe
 ############################################################
 
 ## Vi-Mode ZSH #############################################
