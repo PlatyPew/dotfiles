@@ -95,6 +95,11 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#585b70"
 zstyle ':bracketed-paste-magic' active-widgets '.self-*'
 ############################################################
 
+## Autopair config #########################################
+zvm_after_init_commands=(autopair-init)
+AUTOPAIR_INIT_INHIBIT=1
+############################################################
+
 ## Vi mode config ##########################################
 ZVM_VI_HIGHLIGHT_BACKGROUND=#585b70
 ZVM_VI_HIGHLIGHT_FOREGROUND=#b4befe
