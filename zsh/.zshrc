@@ -76,6 +76,7 @@ if ! zgenom saved; then
     zgenom load romkatv/zsh-defer
     zgenom load zsh-users/zsh-autosuggestions
     zgenom load jeffreytse/zsh-vi-mode
+    zgenom load zsh-users/zsh-history-substring-search
 
     zgenom load romkatv/powerlevel10k powerlevel10k
 
@@ -104,44 +105,20 @@ ZVM_VI_HIGHLIGHT_FOREGROUND=#b4befe
 # Better searching in command mode
 bindkey -M vicmd '?' history-incremental-search-backward
 bindkey -M vicmd '/' history-incremental-search-forward
+############################################################
 
-# Beginning search with arrow keys
-bindkey "^[OA" up-line-or-beginning-search
-bindkey "^[OB" down-line-or-beginning-search
-bindkey -M vicmd "k" up-line-or-beginning-search
-bindkey -M vicmd "j" down-line-or-beginning-search
+## ZSH substring search ####################################
+HISTORY_SUBSTRING_SEARCH_ENSURE_UNIQUE=true
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="bg=0,fg=green,underline"
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND=""
 
-# Remove mode switching delay.
-KEYTIMEOUT=5
+bindkey -M vicmd "k" history-substring-search-up
+bindkey -M vicmd "j" history-substring-search-down
 
-# Change cursor shape for different vi modes.
-function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] ||
-     [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[5 q'
-  fi
+zvm_after_init() {
+    bindkey '^[OA' history-substring-search-up
+    bindkey '^[OB' history-substring-search-down
 }
-zle -N zle-keymap-select
-
-# Allow for text objects
-autoload -U select-bracketed select-quoted
-zle -N select-bracketed
-zle -N select-quoted
-for km in viopp visual; do
-    bindkey -M $km -- '-' vi-up-line-or-history
-    for c in {a,i}{\',\",\`}; do
-        bindkey -M $km $c select-quoted
-    done
-    for c in {a,i}${(s..):-'()[]{}<>bB'}; do
-        bindkey -M $km $c select-bracketed
-    done
-done
 ############################################################
 
 ## Fix git completion ######################################
