@@ -22,6 +22,9 @@ nvim -c "lua require('lazy').sync({wait = true})" +qa
 # Update zgenom
 source "${HOME}/.zgenom/zgenom.zsh" && zgenom update
 
+# Update tmux
+~/.tmux/plugins/tpm/scripts/update_plugin.sh
+
 # Clear all cache
 rm -rf ~/.npm ~/Library/Caches/pip $(brew --cache)
 
