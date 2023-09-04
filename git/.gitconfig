@@ -21,6 +21,7 @@
     sh = !"git log --oneline | fzf -m -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1 | xargs -n 9999"
     split = !"~/.local/share/gitz/git-split"
     st = !"cd -- ${GIT_PREFIX:-.}; ~/.local/share/gitz/git-st"
+    submodules = submodule status
     tags = tag -l
     yolo = !"git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\""
 [commit]
