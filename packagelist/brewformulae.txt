@@ -1,7 +1,7 @@
 autojump
 bat
 commitizen
-exa
+eza
 fzf
 gawk
 git

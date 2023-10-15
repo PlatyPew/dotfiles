@@ -50,7 +50,7 @@ fi
 
 # List directories when directory is changed
 chpwd() {
-    exa -a --icons
+    eza -a --icons
 }
 
 # Plugins ####################################################
@@ -69,7 +69,6 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/extract
     zgenom ohmyzsh plugins/macos
 
-    zgenom load DarrinTisdale/zsh-aliases-exa
     zgenom load hlissner/zsh-autopair
     zgenom load z-shell/F-Sy-H
     zgenom load romkatv/zsh-defer
