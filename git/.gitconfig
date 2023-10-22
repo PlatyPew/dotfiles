@@ -4,7 +4,7 @@
     adjust = !"~/.local/share/gitz/git-adjust"
     aliases = config --get-regexp alias
     branches = branch -a
-    cm = !"cz commit -s"
+    cm = !"cz commit -- -s"
     copy = !"~/.local/share/gitz/git-copy"
     delete = !"~/.local/share/gitz/git-delete"
     go = !"~/.local/share/gitz/git-go"
@@ -12,7 +12,7 @@
     lg = !"git lg1"
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all
     lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)' --all -p
-    ls = !"cd -- ${GIT_PREFIX:-.}; ~/.local/share/gitz/git-when -a"
+    ls = !"cd -- \"${GIT_PREFIX:-.}\"; ~/.local/share/gitz/git-when -a"
     multipick = !"~/.local/share/gitz/git-multi-pick"
     permute = !"~/.local/share/gitz/git-permute"
     remotes = remote -v
@@ -20,7 +20,7 @@
     ri = !"git rebase -i `git sh`^1"
     sh = !"git log --oneline | fzf -m -d ' ' --preview \"git show --color=always {1}\" | cut -d ' ' -f 1 | xargs -n 9999"
     split = !"~/.local/share/gitz/git-split"
-    st = !"cd -- ${GIT_PREFIX:-.}; ~/.local/share/gitz/git-st"
+    st = !"cd -- \"${GIT_PREFIX:-.}\"; ~/.local/share/gitz/git-st"
     submodules = submodule status
     tags = tag -l
     yolo = !"git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\""
