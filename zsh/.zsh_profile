@@ -250,7 +250,7 @@ alias ql='quick-look'
 alias n='navi'
 alias del='trash -F'
 
-alias ls='eza --git --icons'
+alias ls='eza --git --icons always'
 alias l='eza -lbF --git'
 alias ll='eza -lbGF --git'
 alias llm='eza -lbGF --git --sort=modified'

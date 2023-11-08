@@ -50,7 +50,7 @@ fi
 
 # List directories when directory is changed
 chpwd() {
-    eza -a --icons
+    eza -a --icons always
 }
 
 # Plugins ####################################################
