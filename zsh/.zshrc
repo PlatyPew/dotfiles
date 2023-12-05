@@ -129,6 +129,11 @@ zvm_after_init() {
 [ ! -z "${TMUX+x}" ] && export TERM="screen-256color"
 ############################################################
 
+## Fix git autocomplete commits ############################
+[ -e /opt/homebrew/share/zsh/site-functions/_git ] && \
+    rm /opt/homebrew/share/zsh/site-functions/_git
+############################################################
+
 ## Additional stuff ########################################
 source $HOME/.zsh_profile
 ############################################################
