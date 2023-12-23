@@ -75,6 +75,7 @@ if ! zgenom saved; then
     zgenom load zsh-users/zsh-autosuggestions
     zgenom load jeffreytse/zsh-vi-mode
     zgenom load zsh-users/zsh-history-substring-search
+    zgenom load zsh-users/zsh-completions
 
     zgenom load romkatv/powerlevel10k powerlevel10k
 
