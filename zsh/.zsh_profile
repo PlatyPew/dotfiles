@@ -273,3 +273,5 @@ export LS_COLORS="*~=0;38;2;88;91;112:bd=0;38;2;116;199;236;48;2;49;50;68:ca=0:c
 # alias p2="${HOME}/.local/share/pwnpad/p2"
 # source "${HOME}/.local/share/pwnpad/_p2-autocomplete.zsh"
 ############################################################
+
+# vim: ft=bash

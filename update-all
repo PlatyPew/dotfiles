@@ -30,3 +30,5 @@ rm -rf ~/.npm ~/Library/Caches/pip $(brew --cache)
 
 # Get new shell
 exec zsh
+
+# vim: ft=bash
