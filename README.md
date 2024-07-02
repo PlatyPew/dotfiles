@@ -27,6 +27,13 @@ git clone --recursive https://github.com/PlatyPew/dotfiles.git ~/dotfiles && \
     cd ~/dotfiles && ./install-all
 ```
 
+Fix for undercurl not working in Tmux in Neovim.
+
+```sh
+# Run this command in a Tmux session. Make sure your TERM is set to screen-256color
+tic -x <(infocmp | sed "s/\(smul=.*4m,\)/\1 Smulx=\\\E[4\\\:%p1%dm,/")
+```
+
 ### Software Used
 
 -   autojump
