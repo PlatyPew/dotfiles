@@ -53,6 +53,8 @@ chpwd() {
 ZSH_DISABLE_COMPFIX=true
 DISABLE_AUTO_UPDATE=true
 
+ZVM_INIT_MODE=sourcing
+
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
@@ -129,10 +131,6 @@ zvm_after_init() {
 ## Fix git autocomplete commits ############################
 [ -e /opt/homebrew/share/zsh/site-functions/_git ] && \
     rm /opt/homebrew/share/zsh/site-functions/_git
-############################################################
-
-## FZF Shortcuts ###########################################
-source <(fzf --zsh)
 ############################################################
 
 ## Additional stuff ########################################
