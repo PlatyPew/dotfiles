@@ -53,8 +53,6 @@ chpwd() {
 ZSH_DISABLE_COMPFIX=true
 DISABLE_AUTO_UPDATE=true
 
-ZVM_INIT_MODE=sourcing
-
 source "${HOME}/.zgenom/zgenom.zsh"
 
 if ! zgenom saved; then
