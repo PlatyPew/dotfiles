@@ -8,7 +8,9 @@ gawk
 git
 git-lfs
 gnu-sed
+gnu-tar
 gnupg
+imagemagick
 k3d
 llvm
 neovim
@@ -18,15 +20,12 @@ p7zip
 pandoc
 pinentry-mac
 pngpaste
-pwnpad/tap/pwnpad
-python
 ripgrep
-rustup-init
+rustup
 sshuttle
 stow
 tmux
 trash
 virtualenv
-watch
 wget
 zsh
