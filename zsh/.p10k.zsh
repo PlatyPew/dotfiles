@@ -161,7 +161,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _brew_version() {
     local content
-    content="$(brew --version | head -n 1 | cut -d ' ' -f 2)" || content=
+    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew --version | head -n 1 | cut -d ' ' -f 2)" || content=
     _brew_version=$content
   }
 
@@ -173,25 +173,25 @@ ZLE_RPROMPT_INDENT=0
 
   function _git_version() {
     local content
-    content="$(git --version | cut -d ' ' -f 3)" || content=
+    [[ -f "/opt/homebrew/bin/git" ]] && content="$(git --version | cut -d ' ' -f 3)" || content=
     _git_version=$content
   }
 
   function _nvim_version() {
     local content
-    content="$(nvim --version | cut -d 'v' -f 2 | head -n 1)" || content=
+    [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim --version | cut -d 'v' -f 2 | head -n 1)" || content=
     _nvim_version=$content
   }
 
   function _python_version() {
     local content
-    content="$(python3 -V | cut -d ' ' -f 2)" || content=
+    [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -d ' ' -f 2)" || content=
     _python_version=$content
   }
 
   function _pip_version() {
     local content
-    content="$(pip3 --version | cut  -d ' ' -f 2)" || content=
+    [[ -f "/opt/homebrew/bin/pip3" ]] && content="$(pip3 --version | cut  -d ' ' -f 2)" || content=
     _pip_version=$content
   }
 
