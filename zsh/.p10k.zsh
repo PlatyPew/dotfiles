@@ -167,7 +167,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _docker_version() {
     local content
-    content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
+    [[ -f "/usr/local/bin/docker" ]] && content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
     _docker_version=$content
   }
 
