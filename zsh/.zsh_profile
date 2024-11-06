@@ -224,7 +224,6 @@ alias sed='gsed'
 alias awk='gawk'
 alias tar='gtar'
 alias ql='quick-look'
-alias n='navi'
 alias del='trash -F'
 
 alias ls='eza --git --icons always'
