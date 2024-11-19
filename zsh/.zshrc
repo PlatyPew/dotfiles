@@ -122,10 +122,6 @@ zvm_after_init() {
 }
 ############################################################
 
-## Fix tmux comment highlighting on vim ####################
-[ ! -z "${TMUX+x}" ] && export TERM="screen-256color"
-############################################################
-
 ## Fix git autocomplete commits ############################
 [ -e /opt/homebrew/share/zsh/site-functions/_git ] && \
     rm /opt/homebrew/share/zsh/site-functions/_git
