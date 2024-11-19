@@ -127,6 +127,12 @@ zvm_after_init() {
     rm /opt/homebrew/share/zsh/site-functions/_git
 ############################################################
 
+## Kitty SSH fix ###########################################
+if [ -e /opt/homebrew/bin/kitty ]; then
+    alias ssh='kitten ssh'
+fi
+############################################################
+
 ## Additional stuff ########################################
 source $HOME/.zsh_profile
 ############################################################
