@@ -215,6 +215,51 @@ publish() {
 }
 ############################################################
 
+kanata() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: $0 {start|stop|status}"
+        return 1
+    fi
+
+    case "$1" in
+        start)
+            if ! /opt/homebrew/bin/tmux -f /dev/null -L new-socket has-session -t kanata 2> /dev/null; then
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket new-session -d -s kanata
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:0 " sudo '/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon'" Enter
+                /bin/sleep 0.1
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket new-window -t kanata
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:1 " sudo /usr/local/bin/kanata --nodelay --quiet" Enter
+            else
+                printf "kanata is already running\n"
+                return 1
+            fi
+            ;;
+        stop)
+            if /opt/homebrew/bin/tmux -f /dev/null -L new-socket has-session -t kanata 2> /dev/null; then
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:1 C-c
+                /bin/sleep 0.1
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:0 C-c
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket kill-session -t kanata
+            else
+                printf "kanata is not running\n"
+                return 1
+            fi
+            ;;
+        status)
+            if /opt/homebrew/bin/tmux -f /dev/null -L new-socket has-session -t kanata 2> /dev/null; then
+                printf "kanata is running\n"
+            else
+                printf "kanata is not running\n"
+                return 1
+            fi
+            ;;
+        *)
+            echo "Invalid option: $1"
+            return 1
+            ;;
+    esac
+}
+
 ## Aliases #################################################
 alias vi="nvim"
 alias :q='exit'
