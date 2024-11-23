@@ -225,10 +225,7 @@ kanata() {
         start)
             if ! /opt/homebrew/bin/tmux -f /dev/null -L new-socket has-session -t kanata 2> /dev/null; then
                 /opt/homebrew/bin/tmux -f /dev/null -L new-socket new-session -d -s kanata
-                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:0 " sudo '/Library/Application Support/org.pqrs/Karabiner-DriverKit-VirtualHIDDevice/Applications/Karabiner-VirtualHIDDevice-Daemon.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Daemon'" Enter
-                /bin/sleep 0.1
-                /opt/homebrew/bin/tmux -f /dev/null -L new-socket new-window -t kanata
-                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:1 " sudo /usr/local/bin/kanata --nodelay --quiet" Enter
+                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:0 " sudo /usr/local/bin/kanata --nodelay --quiet; exit" Enter
             else
                 printf "kanata is already running\n"
                 return 1
@@ -236,8 +233,6 @@ kanata() {
             ;;
         stop)
             if /opt/homebrew/bin/tmux -f /dev/null -L new-socket has-session -t kanata 2> /dev/null; then
-                /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:1 C-c
-                /bin/sleep 0.1
                 /opt/homebrew/bin/tmux -f /dev/null -L new-socket send-keys -t kanata:0 C-c
                 /opt/homebrew/bin/tmux -f /dev/null -L new-socket kill-session -t kanata
             else
