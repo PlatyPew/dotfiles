@@ -9,14 +9,20 @@
 (defcfg
   process-unmapped-keys yes
 )
+
 (defsrc
-  a   s   d   f   j   k   l   ;
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc grv
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
+
 (defvar
   ;; Note: consider using different time values for your different fingers.
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
-  tap-time 0
+  tap-time 150
   hold-time 200
 
   left-hand-keys (
@@ -30,20 +36,32 @@
     n m , . /
   )
 )
+
 (deflayer base
-  @a  @s  @d  @f  @j  @k  @l  @;
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc grv
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps @a   @s   @d   @f   g    h    @j   @k   @l   @;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
 
 (deflayer nomods
-  a   s   d   f   j   k   l   ;
+  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc grv
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
 )
+
 (deffakekeys
   to-base (layer-switch base)
 )
+
 (defalias
+  ;; Activates nomods when typing fast
   tap (multi
     (layer-switch nomods)
-    (on-idle-fakekey to-base tap 20)
+    (on-idle-fakekey to-base tap 35)
   )
 
   a (tap-hold-release-keys $tap-time $hold-time (multi a @tap) lmet $left-hand-keys)
