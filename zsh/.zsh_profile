@@ -216,6 +216,17 @@ publish() {
 ############################################################
 
 kanata() {
+    # Setup Kanata
+    # /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager activate
+    # sudo launchctl load /Library/LaunchDaemons/com.example.karabinerdriverdaemon.plist
+    # sudo launchctl start com.example.karabinerdriverdaemon.plist
+    # sudo kanata --nodelay --quiet --cfg kanata.kbd
+    #
+    # Remove Kanata
+    # /Applications/.Karabiner-VirtualHIDDevice-Manager.app/Contents/MacOS/Karabiner-VirtualHIDDevice-Manager deactivate
+    # sudo launchctl stop com.example.karabinerdriverdaemon.plist
+    # sudo launchctl unload /Library/LaunchDaemons/com.example.karabinerdriverdaemon.plist
+
     if [ "$#" -ne 1 ]; then
         echo "Usage: $0 {start|stop|status}"
         return 1
