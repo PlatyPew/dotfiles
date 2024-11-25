@@ -11,11 +11,12 @@
 )
 
 (defsrc
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc grv
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  lsgt 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  lsft grv  z    x    c    v    b    n    m    ,    .    /    rsft
+  fn   lctl lalt lmet           spc            rmet ralt
 )
 
 (defvar
@@ -23,7 +24,7 @@
   ;; For example, your pinkies might be slower to release keys and index
   ;; fingers faster.
   tap-time 150
-  hold-time 200
+  hold-time 150
 
   left-hand-keys (
     q w e r t
@@ -38,19 +39,20 @@
 )
 
 (deflayer base
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc grv
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps @a   @s   @d   @f   g    h    @j   @k   @l   @;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
-)
+  esc  🔅   🔆    ✗    ✗    ✗    ✗    ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  lsgt 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps @a   @s   @d   @f   g    h    @j   @k   @l   @;   '    \    ret
+  lsft grv  z    x    c    v    b    n    m    ,    .    /    rsft
+  fn   lctl lalt lmet           spc            rmet ralt)
 
 (deflayer nomods
-  esc  1    2    3    4    5    6    7    8    9    0    -    =    bspc grv
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  caps a    s    d    f    g    h    j    k    l    ;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           spc            ralt rmet rctl
+  esc  🔅   🔆    ✗    ✗    ✗    ✗    ◀◀   ▶⏸   ▶▶   🔇   🔉   🔊
+  lsgt 1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]
+  caps a    s    d    f    g    h    j    k    l    ;    '    \    ret
+  lsft grv  z    x    c    v    b    n    m    ,    .    /    rsft
+  fn   lctl lalt lmet           spc            rmet ralt
 )
 
 (deffakekeys
