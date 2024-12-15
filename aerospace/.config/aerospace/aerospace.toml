@@ -50,9 +50,9 @@ automatically-unhide-macos-hidden-apps = false
 [key-mapping]
 preset = 'qwerty'
 
-# [[on-window-detected]]
-# if.app-id = 'com.apple.finder'
-# run = 'layout floating'
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'
 
 # Gaps between windows (inner-*) and between monitor edges (outer-*).
 # Possible values:
