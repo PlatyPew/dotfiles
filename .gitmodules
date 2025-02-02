@@ -1,6 +1,6 @@
 [submodule "neovim/.config/nvim"]
 	path = neovim/.config/nvim
-	url = https://github.com/PlatyPew/neovim-init.lua.git
+	url = https://github.com/PlatyPew/nvim.git
 [submodule "git/.local/share/gitz"]
 	path = git/.local/share/gitz
 	url = https://github.com/rec/gitz.git
