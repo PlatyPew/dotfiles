@@ -23,7 +23,7 @@
     st = !"cd -- \"${GIT_PREFIX:-.}\"; ~/.local/share/gitz/git-st"
     submodules = submodule status
     tags = tag -l
-    yolo = !"git commit -m \"$(curl -s http://whatthecommit.com/index.txt)\""
+    yolo = !"git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\""
 [commit]
     gpgsign = true
 [gpg]
