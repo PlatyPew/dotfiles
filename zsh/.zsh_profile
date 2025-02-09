@@ -288,8 +288,8 @@ alias lt='eza --tree --level=2'
 ############################################################
 
 # k3d autocomplete #########################################
-source <(k3d completion zsh)
-source <(kubectl completion zsh)
+source <(command -v k3d > /dev/null && k3d completion zsh)
+source <(command -v kubectl > /dev/null && kubectl completion zsh)
 ############################################################
 
 # Set ls colours ###########################################
