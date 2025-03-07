@@ -161,7 +161,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _brew_version() {
     local content
-    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew --version | head -n 1 | cut -d ' ' -f 2)" || content=
+    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew --version | head -n 1 | cut -d ' ' -f 2 | cut -d '-' -f 1)" || content=
     _brew_version=$content
   }
 
