@@ -148,40 +148,34 @@ ZLE_RPROMPT_INDENT=0
     [[ $P9K_TTY == old ]] && p10k display '1'=hide 'empty_line'=show '*/load'=hide '*/ram'=hide '*/wifi'=hide
   }
 
-  typeset -g _brew_version
-  typeset -g _docker_version
-  typeset -g _git_version
-  typeset -g _nvim_version
-  typeset -g _python_version
-
   function _brew_version() {
     local content
     [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew --version | head -n 1 | cut -d ' ' -f 2 | cut -d '-' -f 1)" || content=
-    _brew_version=$content
+    typeset -g _brew_version=$content
   }
 
   function _docker_version() {
     local content
     [[ -f "/usr/local/bin/docker" ]] && content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
-    _docker_version=$content
+    typeset -g _docker_version=$content
   }
 
   function _git_version() {
     local content
     [[ -f "/opt/homebrew/bin/git" ]] && content="$(git --version | cut -d ' ' -f 3)" || content=
-    _git_version=$content
+    typeset -g _git_version=$content
   }
 
   function _nvim_version() {
     local content
     [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim --version | cut -d 'v' -f 2 | head -n 1)" || content=
-    _nvim_version=$content
+    typeset -g _nvim_version=$content
   }
 
   function _python_version() {
     local content
     [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -d ' ' -f 2)" || content=
-    _python_version=$content
+    typeset -g _python_version=$content
   }
 
   function prompt_my_brew_version() {
