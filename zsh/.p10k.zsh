@@ -37,6 +37,7 @@ ZLE_RPROMPT_INDENT=0
     my_git_version
     my_nvim_version
     my_python_version
+    my_node_version
     java_version
 
     background_jobs
@@ -106,6 +107,9 @@ ZLE_RPROMPT_INDENT=0
 
   typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_SHOW_ON_COMMAND="python3"
   typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_NODE_VERSION_SHOW_ON_COMMAND="node"
+  typeset -g POWERLEVEL9K_MY_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_JAVA_VERSION_SHOW_ON_COMMAND="java|javac|jar"
   typeset -g POWERLEVEL9K_JAVA_VERSION_FOREGROUND="9"
@@ -196,6 +200,16 @@ ZLE_RPROMPT_INDENT=0
   function prompt_my_python_version() {
     [ -z $_prompt_python_version ] && zsh-defer -a _python_version
     p10k segment -f 4 -b "" -i " " -c $_prompt_python_version -t $_prompt_python_version
+  }
+
+  function _node_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/node" ]] && content="$(node --version | cut -d 'v' -f 2)" || content=
+    typeset -g _prompt_node_version=$content
+  }
+  function prompt_my_node_version() {
+    [ -z $_prompt_node_version ] && zsh-defer -a _node_version
+    p10k segment -f 2 -b "" -i " " -c $_prompt_node_version -t $_prompt_node_version
   }
 
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
