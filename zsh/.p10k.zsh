@@ -151,56 +151,51 @@ ZLE_RPROMPT_INDENT=0
   function _brew_version() {
     local content
     [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew --version | head -n 1 | cut -d ' ' -f 2 | cut -d '-' -f 1)" || content=
-    typeset -g _brew_version=$content
+    typeset -g _prompt_brew_version=$content
+  }
+  function prompt_my_brew_version() {
+    [ -z $_prompt_brew_version ] && zsh-defer -a _brew_version
+    p10k segment -f 9 -b "" -i " " -c $_prompt_brew_version -t $_prompt_brew_version
   }
 
   function _docker_version() {
     local content
     [[ -f "/usr/local/bin/docker" ]] && content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
-    typeset -g _docker_version=$content
+    typeset -g _prompt_docker_version=$content
+  }
+  function prompt_my_docker_version() {
+    [ -z $_prompt_docker_version ] && zsh-defer -a _docker_version
+    p10k segment -f 4 -b "" -i " " -c $_prompt_docker_version -t $_prompt_docker_version
   }
 
   function _git_version() {
     local content
     [[ -f "/opt/homebrew/bin/git" ]] && content="$(git --version | cut -d ' ' -f 3)" || content=
-    typeset -g _git_version=$content
+    typeset -g _prompt_git_version=$content
+  }
+  function prompt_my_git_version() {
+    [ -z $_prompt_git_version ] && zsh-defer -a _git_version
+    p10k segment -f 9 -b "" -i " " -c $_prompt_git_version -t $_prompt_git_version
   }
 
   function _nvim_version() {
     local content
     [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim --version | cut -d 'v' -f 2 | head -n 1)" || content=
-    typeset -g _nvim_version=$content
+    typeset -g _prompt_nvim_version=$content
+  }
+  function prompt_my_nvim_version() {
+    [ -z $_prompt_nvim_version ] && zsh-defer -a _nvim_version
+    p10k segment -f 10 -b "" -i " " -c $_prompt_nvim_version -t $_prompt_nvim_version
   }
 
   function _python_version() {
     local content
     [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -d ' ' -f 2)" || content=
-    typeset -g _python_version=$content
+    typeset -g _prompt_python_version=$content
   }
-
-  function prompt_my_brew_version() {
-    [ -z $_brew_version ] && zsh-defer -a _brew_version
-    p10k segment -f 9 -b "" -i " " -c $_brew_version -t $_brew_version
-  }
-
-  function prompt_my_docker_version() {
-    [ -z $_docker_version ] && zsh-defer -a _docker_version
-    p10k segment -f 4 -b "" -i " " -c $_docker_version -t $_docker_version
-  }
-
-  function prompt_my_git_version() {
-    [ -z $_git_version ] && zsh-defer -a _git_version
-    p10k segment -f 9 -b "" -i " " -c $_git_version -t $_git_version
-  }
-
-  function prompt_my_nvim_version() {
-    [ -z $_nvim_version ] && zsh-defer -a _nvim_version
-    p10k segment -f 10 -b "" -i " " -c $_nvim_version -t $_nvim_version
-  }
-
   function prompt_my_python_version() {
-    [ -z $_python_version ] && zsh-defer -a _python_version
-    p10k segment -f 4 -b "" -i " " -c $_python_version -t $_python_version
+    [ -z $_prompt_python_version ] && zsh-defer -a _python_version
+    p10k segment -f 4 -b "" -i " " -c $_prompt_python_version -t $_prompt_python_version
   }
 
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
