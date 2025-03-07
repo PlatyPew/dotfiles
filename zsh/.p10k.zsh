@@ -37,7 +37,6 @@ ZLE_RPROMPT_INDENT=0
     my_git_version
     my_nvim_version
     my_python_version
-    my_pip_version
     java_version
 
     background_jobs
@@ -108,9 +107,6 @@ ZLE_RPROMPT_INDENT=0
   typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_SHOW_ON_COMMAND="python3"
   typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
-  typeset -g POWERLEVEL9K_MY_PIP_VERSION_SHOW_ON_COMMAND="pip3"
-  typeset -g POWERLEVEL9K_MY_PIP_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
   typeset -g POWERLEVEL9K_JAVA_VERSION_SHOW_ON_COMMAND="java|javac|jar"
   typeset -g POWERLEVEL9K_JAVA_VERSION_FOREGROUND="9"
   typeset -g POWERLEVEL9K_JAVA_VERSION_BACKGROUND=""
@@ -157,7 +153,6 @@ ZLE_RPROMPT_INDENT=0
   typeset -g _git_version
   typeset -g _nvim_version
   typeset -g _python_version
-  typeset -g _pip_version
 
   function _brew_version() {
     local content
@@ -189,12 +184,6 @@ ZLE_RPROMPT_INDENT=0
     _python_version=$content
   }
 
-  function _pip_version() {
-    local content
-    [[ -f "/opt/homebrew/bin/pip3" ]] && content="$(pip3 --version | cut  -d ' ' -f 2)" || content=
-    _pip_version=$content
-  }
-
   function prompt_my_brew_version() {
     [ -z $_brew_version ] && zsh-defer -a _brew_version
     p10k segment -f 9 -b "" -i " " -c $_brew_version -t $_brew_version
@@ -202,7 +191,7 @@ ZLE_RPROMPT_INDENT=0
 
   function prompt_my_docker_version() {
     [ -z $_docker_version ] && zsh-defer -a _docker_version
-    p10k segment -f 4 -b "" -i " " -c $_docker_version -t $_docker_version
+    p10k segment -f 4 -b "" -i " " -c $_docker_version -t $_docker_version
   }
 
   function prompt_my_git_version() {
@@ -212,17 +201,12 @@ ZLE_RPROMPT_INDENT=0
 
   function prompt_my_nvim_version() {
     [ -z $_nvim_version ] && zsh-defer -a _nvim_version
-    p10k segment -f 10 -b "" -i " " -c $_nvim_version -t $_nvim_version
+    p10k segment -f 10 -b "" -i " " -c $_nvim_version -t $_nvim_version
   }
 
   function prompt_my_python_version() {
     [ -z $_python_version ] && zsh-defer -a _python_version
     p10k segment -f 4 -b "" -i " " -c $_python_version -t $_python_version
-  }
-
-  function prompt_my_pip_version() {
-    [ -z $_pip_version ] && zsh-defer -a _pip_version
-    p10k segment -f 4 -b "" -i " " -c $_pip_version -t $_pip_version
   }
 
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
