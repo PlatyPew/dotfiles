@@ -38,6 +38,13 @@ ZLE_RPROMPT_INDENT=0
     my_nvim_version
     my_python_version
     my_node_version
+    my_autojump_version
+    my_bat_version
+    my_deno_version
+    my_eza_version
+    my_fzf_version
+    my_rust_version
+    my_ripgrep_version
     java_version
 
     background_jobs
@@ -110,6 +117,27 @@ ZLE_RPROMPT_INDENT=0
 
   typeset -g POWERLEVEL9K_MY_NODE_VERSION_SHOW_ON_COMMAND="node"
   typeset -g POWERLEVEL9K_MY_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_AUTOJUMP_VERSION_SHOW_ON_COMMAND="autojump|j"
+  typeset -g POWERLEVEL9K_MY_AUTOJUMP_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_BAT_VERSION_SHOW_ON_COMMAND="bat"
+  typeset -g POWERLEVEL9K_MY_BAT_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_DENO_VERSION_SHOW_ON_COMMAND="deno"
+  typeset -g POWERLEVEL9K_MY_DENO_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_EZA_VERSION_SHOW_ON_COMMAND="eza"
+  typeset -g POWERLEVEL9K_MY_EZA_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_FZF_VERSION_SHOW_ON_COMMAND="fzf|ff|ft|fd"
+  typeset -g POWERLEVEL9K_MY_FZF_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_RIPGREP_VERSION_SHOW_ON_COMMAND="rg"
+  typeset -g POWERLEVEL9K_MY_RIPGREP_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_RUST_VERSION_SHOW_ON_COMMAND="rustc|cargo"
+  typeset -g POWERLEVEL9K_MY_RUST_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_JAVA_VERSION_SHOW_ON_COMMAND="java|javac|jar"
   typeset -g POWERLEVEL9K_JAVA_VERSION_FOREGROUND="9"
@@ -210,6 +238,76 @@ ZLE_RPROMPT_INDENT=0
   function prompt_my_node_version() {
     [ -z $_prompt_node_version ] && zsh-defer -a _node_version
     p10k segment -f 2 -b "" -i " " -c $_prompt_node_version -t $_prompt_node_version
+  }
+
+  function _autojump_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/autojump" ]] && content="$(autojump -v 2>&1 | cut -c 11-)" || content=
+    typeset -g _prompt_autojump_version=$content
+  }
+  function prompt_my_autojump_version() {
+    [ -z $_prompt_autojump_version ] && zsh-defer -a _autojump_version
+    p10k segment -f 7 -b "" -i "󱉆 " -c $_prompt_autojump_version -t $_prompt_autojump_version
+  }
+
+  function _bat_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/bat" ]] && content="$(bat -V | cut -c 5-)" || content=
+    typeset -g _prompt_bat_version=$content
+  }
+  function prompt_my_bat_version() {
+    [ -z $_prompt_bat_version ] && zsh-defer -a _bat_version
+    p10k segment -f 11 -b "" -i " " -c $_prompt_bat_version -t $_prompt_bat_version
+  }
+
+  function _deno_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/deno" ]] && content="$(deno -v | cut -c 6-)" || content=
+    typeset -g _prompt_deno_version=$content
+  }
+  function prompt_my_deno_version() {
+    [ -z $_prompt_deno_version ] && zsh-defer -a _deno_version
+    p10k segment -f 15 -b "" -i " " -c $_prompt_deno_version -t $_prompt_deno_version
+  }
+
+  function _eza_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/eza" ]] && content="$(eza -v | sed -n '2p' | cut -d ' ' -f 1 | cut -c 2-)" || content=
+    typeset -g _prompt_eza_version=$content
+  }
+  function prompt_my_eza_version() {
+    [ -z $_prompt_eza_version ] && zsh-defer -a _eza_version
+    p10k segment -f 5 -b "" -i " " -c $_prompt_eza_version -t $_prompt_eza_version
+  }
+
+  function _fzf_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/fzf" ]] && content="$(fzf --version | cut -d ' ' -f 1)" || content=
+    typeset -g _prompt_fzf_version=$content
+  }
+  function prompt_my_fzf_version() {
+    [ -z $_prompt_fzf_version ] && zsh-defer -a _fzf_version
+    p10k segment -f 14 -b "" -i "󰈞 " -c $_prompt_fzf_version -t $_prompt_fzf_version
+  }
+
+  function _ripgrep_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/rg" ]] && content="$(rg -V | cut -c 9-)" || content=
+    typeset -g _prompt_ripgrep_version=$content
+  }
+  function prompt_my_ripgrep_version() {
+    [ -z $_prompt_ripgrep_version ] && zsh-defer -a _ripgrep_version
+    p10k segment -f 1 -b "" -i "󰮗 " -c $_prompt_ripgrep_version -t $_prompt_ripgrep_version
+  }
+
+  function _rust_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/rustc" ]] && content="$(rustc -V | cut -d ' ' -f 2)" || content=
+    typeset -g _prompt_rust_version=$content
+  }
+  function prompt_my_rust_version() {
+    [ -z $_prompt_rust_version ] && zsh-defer -a _rust_version
+    p10k segment -f 9 -b "" -i " " -c $_prompt_rust_version -t $_prompt_rust_version
   }
 
   typeset -g POWERLEVEL9K_DISABLE_HOT_RELOAD=true
