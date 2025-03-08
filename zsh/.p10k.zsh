@@ -154,7 +154,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _brew_version() {
     local content
-    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew --version | head -n 1 | cut -d ' ' -f 2 | cut -d '-' -f 1)" || content=
+    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew -v | cut -c 10- | cut -d '-' -f 1)" || content=
     typeset -g _prompt_brew_version=$content
   }
   function prompt_my_brew_version() {
@@ -174,7 +174,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _git_version() {
     local content
-    [[ -f "/opt/homebrew/bin/git" ]] && content="$(git --version | cut -d ' ' -f 3)" || content=
+    [[ -f "/opt/homebrew/bin/git" ]] && content="$(git -v | cut -d ' ' -f 3)" || content=
     typeset -g _prompt_git_version=$content
   }
   function prompt_my_git_version() {
@@ -184,7 +184,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _nvim_version() {
     local content
-    [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim --version | cut -d 'v' -f 2 | head -n 1)" || content=
+    [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim -v | head -n1 | cut -c 7-)" || content=
     typeset -g _prompt_nvim_version=$content
   }
   function prompt_my_nvim_version() {
@@ -194,7 +194,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _python_version() {
     local content
-    [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -d ' ' -f 2)" || content=
+    [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -c 8-)" || content=
     typeset -g _prompt_python_version=$content
   }
   function prompt_my_python_version() {
@@ -204,7 +204,7 @@ ZLE_RPROMPT_INDENT=0
 
   function _node_version() {
     local content
-    [[ -f "/opt/homebrew/bin/node" ]] && content="$(node --version | cut -d 'v' -f 2)" || content=
+    [[ -f "/opt/homebrew/bin/node" ]] && content="$(node -v | cut -c 2-)" || content=
     typeset -g _prompt_node_version=$content
   }
   function prompt_my_node_version() {
