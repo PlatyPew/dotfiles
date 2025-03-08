@@ -32,19 +32,19 @@ ZLE_RPROMPT_INDENT=0
 
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
-    my_brew_version
-    my_docker_version
-    my_git_version
-    my_nvim_version
-    my_python_version
-    my_node_version
     my_autojump_version
     my_bat_version
+    my_brew_version
     my_deno_version
+    my_docker_version
     my_eza_version
     my_fzf_version
-    my_rust_version
+    my_git_version
+    my_node_version
+    my_nvim_version
+    my_python_version
     my_ripgrep_version
+    my_rust_version
     java_version
 
     background_jobs
@@ -100,38 +100,38 @@ ZLE_RPROMPT_INDENT=0
   typeset -g POWERLEVEL9K_PROMPT_CHAR_BACKGROUND=""
   typeset -g POWERLEVEL9K_PROMPT_CHAR_LEFT_SEGMENT_SEPARATOR=''
 
-  typeset -g POWERLEVEL9K_MY_BREW_VERSION_SHOW_ON_COMMAND="brew"
-  typeset -g POWERLEVEL9K_MY_BREW_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
-  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_SHOW_ON_COMMAND="docker"
-  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
-  typeset -g POWERLEVEL9K_MY_GIT_VERSION_SHOW_ON_COMMAND="git"
-  typeset -g POWERLEVEL9K_MY_GIT_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
-  typeset -g POWERLEVEL9K_MY_NVIM_VERSION_SHOW_ON_COMMAND="nvim"
-  typeset -g POWERLEVEL9K_MY_NVIM_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
-  typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_SHOW_ON_COMMAND="python3"
-  typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
-  typeset -g POWERLEVEL9K_MY_NODE_VERSION_SHOW_ON_COMMAND="node"
-  typeset -g POWERLEVEL9K_MY_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
-
   typeset -g POWERLEVEL9K_MY_AUTOJUMP_VERSION_SHOW_ON_COMMAND="autojump|j"
   typeset -g POWERLEVEL9K_MY_AUTOJUMP_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_MY_BAT_VERSION_SHOW_ON_COMMAND="bat"
   typeset -g POWERLEVEL9K_MY_BAT_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
+  typeset -g POWERLEVEL9K_MY_BREW_VERSION_SHOW_ON_COMMAND="brew"
+  typeset -g POWERLEVEL9K_MY_BREW_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
   typeset -g POWERLEVEL9K_MY_DENO_VERSION_SHOW_ON_COMMAND="deno"
   typeset -g POWERLEVEL9K_MY_DENO_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_SHOW_ON_COMMAND="docker"
+  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_MY_EZA_VERSION_SHOW_ON_COMMAND="eza"
   typeset -g POWERLEVEL9K_MY_EZA_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_MY_FZF_VERSION_SHOW_ON_COMMAND="fzf|ff|ft|fd"
   typeset -g POWERLEVEL9K_MY_FZF_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_GIT_VERSION_SHOW_ON_COMMAND="git"
+  typeset -g POWERLEVEL9K_MY_GIT_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_NODE_VERSION_SHOW_ON_COMMAND="node"
+  typeset -g POWERLEVEL9K_MY_NODE_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_NVIM_VERSION_SHOW_ON_COMMAND="nvim"
+  typeset -g POWERLEVEL9K_MY_NVIM_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+
+  typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_SHOW_ON_COMMAND="python3"
+  typeset -g POWERLEVEL9K_MY_PYTHON_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_MY_RIPGREP_VERSION_SHOW_ON_COMMAND="rg"
   typeset -g POWERLEVEL9K_MY_RIPGREP_VERSION_RIGHT_SEGMENT_SEPARATOR=''
@@ -180,66 +180,6 @@ ZLE_RPROMPT_INDENT=0
     [[ $P9K_TTY == old ]] && p10k display '1'=hide 'empty_line'=show '*/load'=hide '*/ram'=hide '*/wifi'=hide
   }
 
-  function _brew_version() {
-    local content
-    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew -v | cut -c 10- | cut -d '-' -f 1)" || content=
-    typeset -g _prompt_brew_version=$content
-  }
-  function prompt_my_brew_version() {
-    [ -z $_prompt_brew_version ] && zsh-defer -a _brew_version
-    p10k segment -f 9 -b "" -i " " -c $_prompt_brew_version -t $_prompt_brew_version
-  }
-
-  function _docker_version() {
-    local content
-    [[ -f "/usr/local/bin/docker" ]] && content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
-    typeset -g _prompt_docker_version=$content
-  }
-  function prompt_my_docker_version() {
-    [ -z $_prompt_docker_version ] && zsh-defer -a _docker_version
-    p10k segment -f 4 -b "" -i " " -c $_prompt_docker_version -t $_prompt_docker_version
-  }
-
-  function _git_version() {
-    local content
-    [[ -f "/opt/homebrew/bin/git" ]] && content="$(git -v | cut -d ' ' -f 3)" || content=
-    typeset -g _prompt_git_version=$content
-  }
-  function prompt_my_git_version() {
-    [ -z $_prompt_git_version ] && zsh-defer -a _git_version
-    p10k segment -f 9 -b "" -i " " -c $_prompt_git_version -t $_prompt_git_version
-  }
-
-  function _nvim_version() {
-    local content
-    [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim -v | head -n1 | cut -c 7-)" || content=
-    typeset -g _prompt_nvim_version=$content
-  }
-  function prompt_my_nvim_version() {
-    [ -z $_prompt_nvim_version ] && zsh-defer -a _nvim_version
-    p10k segment -f 10 -b "" -i " " -c $_prompt_nvim_version -t $_prompt_nvim_version
-  }
-
-  function _python_version() {
-    local content
-    [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -c 8-)" || content=
-    typeset -g _prompt_python_version=$content
-  }
-  function prompt_my_python_version() {
-    [ -z $_prompt_python_version ] && zsh-defer -a _python_version
-    p10k segment -f 4 -b "" -i " " -c $_prompt_python_version -t $_prompt_python_version
-  }
-
-  function _node_version() {
-    local content
-    [[ -f "/opt/homebrew/bin/node" ]] && content="$(node -v | cut -c 2-)" || content=
-    typeset -g _prompt_node_version=$content
-  }
-  function prompt_my_node_version() {
-    [ -z $_prompt_node_version ] && zsh-defer -a _node_version
-    p10k segment -f 2 -b "" -i " " -c $_prompt_node_version -t $_prompt_node_version
-  }
-
   function _autojump_version() {
     local content
     [[ -f "/opt/homebrew/bin/autojump" ]] && content="$(autojump -v 2>&1 | cut -c 11-)" || content=
@@ -260,6 +200,16 @@ ZLE_RPROMPT_INDENT=0
     p10k segment -f 11 -b "" -i " " -c $_prompt_bat_version -t $_prompt_bat_version
   }
 
+  function _brew_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/brew" ]] && content="$(brew -v | cut -c 10- | cut -d '-' -f 1)" || content=
+    typeset -g _prompt_brew_version=$content
+  }
+  function prompt_my_brew_version() {
+    [ -z $_prompt_brew_version ] && zsh-defer -a _brew_version
+    p10k segment -f 9 -b "" -i " " -c $_prompt_brew_version -t $_prompt_brew_version
+  }
+
   function _deno_version() {
     local content
     [[ -f "/opt/homebrew/bin/deno" ]] && content="$(deno -v | cut -c 6-)" || content=
@@ -268,6 +218,16 @@ ZLE_RPROMPT_INDENT=0
   function prompt_my_deno_version() {
     [ -z $_prompt_deno_version ] && zsh-defer -a _deno_version
     p10k segment -f 15 -b "" -i " " -c $_prompt_deno_version -t $_prompt_deno_version
+  }
+
+  function _docker_version() {
+    local content
+    [[ -f "/usr/local/bin/docker" ]] && content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
+    typeset -g _prompt_docker_version=$content
+  }
+  function prompt_my_docker_version() {
+    [ -z $_prompt_docker_version ] && zsh-defer -a _docker_version
+    p10k segment -f 4 -b "" -i " " -c $_prompt_docker_version -t $_prompt_docker_version
   }
 
   function _eza_version() {
@@ -288,6 +248,46 @@ ZLE_RPROMPT_INDENT=0
   function prompt_my_fzf_version() {
     [ -z $_prompt_fzf_version ] && zsh-defer -a _fzf_version
     p10k segment -f 14 -b "" -i "󰈞 " -c $_prompt_fzf_version -t $_prompt_fzf_version
+  }
+
+  function _git_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/git" ]] && content="$(git -v | cut -d ' ' -f 3)" || content=
+    typeset -g _prompt_git_version=$content
+  }
+  function prompt_my_git_version() {
+    [ -z $_prompt_git_version ] && zsh-defer -a _git_version
+    p10k segment -f 9 -b "" -i " " -c $_prompt_git_version -t $_prompt_git_version
+  }
+
+  function _node_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/node" ]] && content="$(node -v | cut -c 2-)" || content=
+    typeset -g _prompt_node_version=$content
+  }
+  function prompt_my_node_version() {
+    [ -z $_prompt_node_version ] && zsh-defer -a _node_version
+    p10k segment -f 2 -b "" -i " " -c $_prompt_node_version -t $_prompt_node_version
+  }
+
+  function _nvim_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/nvim" ]] && content="$(nvim -v | head -n1 | cut -c 7-)" || content=
+    typeset -g _prompt_nvim_version=$content
+  }
+  function prompt_my_nvim_version() {
+    [ -z $_prompt_nvim_version ] && zsh-defer -a _nvim_version
+    p10k segment -f 10 -b "" -i " " -c $_prompt_nvim_version -t $_prompt_nvim_version
+  }
+
+  function _python_version() {
+    local content
+    [[ -f "/opt/homebrew/bin/python3" ]] && content="$(python3 -V | cut -c 8-)" || content=
+    typeset -g _prompt_python_version=$content
+  }
+  function prompt_my_python_version() {
+    [ -z $_prompt_python_version ] && zsh-defer -a _python_version
+    p10k segment -f 4 -b "" -i " " -c $_prompt_python_version -t $_prompt_python_version
   }
 
   function _ripgrep_version() {
