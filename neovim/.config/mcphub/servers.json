@@ -1,38 +1,63 @@
 {
   "nativeMCPServers": {
-    "mcphub": {
-      "autoApprove": ["get_current_servers", "toggle_mcp_server"]
-    },
     "neovim": {
-      "autoApprove": []
+      "autoApprove": [
+        
+      ]
+    },
+    "mcphub": {
+      "autoApprove": [
+        "get_current_servers",
+        "toggle_mcp_server"
+      ]
     }
   },
   "mcpServers": {
-    "github.com/upstash/context7-mcp": {
-      "args": ["-y", "@upstash/context7-mcp"],
-      "disabled": false,
+    "github.com/executeautomation/mcp-playwright": {
       "command": "npx",
-      "autoApprove": ["resolve-library-id", "get-library-docs"]
+      "disabled": false,
+      "args": [
+        "-y",
+        "@executeautomation/playwright-mcp-server"
+      ]
+    },
+    "docker-desktop-mcp-toolkit": {
+      "command": "docker",
+      "autoApprove": [
+        
+      ],
+      "disabled": true,
+      "args": [
+        "mcp",
+        "gateway",
+        "run"
+      ]
+    },
+    "github.com/upstash/context7-mcp": {
+      "command": "npx",
+      "autoApprove": [
+        "resolve-library-id",
+        "get-library-docs"
+      ],
+      "disabled": false,
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ]
     },
     "github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking": {
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "command": "npx",
       "custom_instructions": {
         "text": "Input parameters should use camelCase, not snake_case. For example, thoughts_needed should be changed to thoughtsNeeded."
       },
-      "disabled": false,
-      "autoApprove": ["sequentialthinking"]
-    },
-    "docker-desktop-mcp-toolkit": {
-      "args": ["mcp", "gateway", "run"],
-      "disabled": true,
-      "command": "docker",
-      "autoApprove": []
-    },
-    "github.com/executeautomation/mcp-playwright": {
-      "args": ["-y", "@executeautomation/playwright-mcp-server"],
       "command": "npx",
-      "disabled": false
+      "autoApprove": [
+        "sequentialthinking"
+      ],
+      "disabled": false,
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-sequential-thinking"
+      ]
     }
   }
 }
