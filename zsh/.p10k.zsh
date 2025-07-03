@@ -36,7 +36,7 @@ ZLE_RPROMPT_INDENT=0
     my_bat_version
     my_brew_version
     my_deno_version
-    my_docker_version
+    my_podman_version
     my_eza_version
     my_fzf_version
     my_git_version
@@ -112,8 +112,8 @@ ZLE_RPROMPT_INDENT=0
   typeset -g POWERLEVEL9K_MY_DENO_VERSION_SHOW_ON_COMMAND="deno"
   typeset -g POWERLEVEL9K_MY_DENO_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
-  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_SHOW_ON_COMMAND="docker"
-  typeset -g POWERLEVEL9K_MY_DOCKER_VERSION_RIGHT_SEGMENT_SEPARATOR=''
+  typeset -g POWERLEVEL9K_MY_PODMAN_VERSION_SHOW_ON_COMMAND="podman"
+  typeset -g POWERLEVEL9K_MY_PODMAN_VERSION_RIGHT_SEGMENT_SEPARATOR=''
 
   typeset -g POWERLEVEL9K_MY_EZA_VERSION_SHOW_ON_COMMAND="eza"
   typeset -g POWERLEVEL9K_MY_EZA_VERSION_RIGHT_SEGMENT_SEPARATOR=''
@@ -220,14 +220,14 @@ ZLE_RPROMPT_INDENT=0
     p10k segment -f 15 -b "" -i " " -c $_prompt_deno_version -t $_prompt_deno_version
   }
 
-  function _docker_version() {
+  function _podman_version() {
     local content
-    [[ -f "/usr/local/bin/docker" ]] && content="$(docker -v | cut -d ' ' -f 3 | sed 's/.$//')" || content=
-    typeset -g _prompt_docker_version=$content
+    [[ -f "/opt/homebrew/bin/podman" ]] && content="$(podman -v | cut -d ' ' -f 3)" || content=
+    typeset -g _prompt_podman_version=$content
   }
-  function prompt_my_docker_version() {
-    [ -z $_prompt_docker_version ] && zsh-defer -a _docker_version
-    p10k segment -f 4 -b "" -i " " -c $_prompt_docker_version -t $_prompt_docker_version
+  function prompt_my_podman_version() {
+    [ -z $_prompt_podman_version ] && zsh-defer -a _podman_version
+    p10k segment -f 5 -b "" -i " " -c $_prompt_podman_version -t $_prompt_podman_version
   }
 
   function _eza_version() {
