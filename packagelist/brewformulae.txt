@@ -3,6 +3,7 @@ bat
 commitizen
 deno
 eza
+fd
 felixkratz/formulae/borders
 fzf
 gawk
@@ -13,15 +14,17 @@ gnu-tar
 gnupg
 hashcat
 imagemagick
-llvm
+jython
+lima
 neovim
 node
 ollama
-openjdk@17
+openjdk@21
 p7zip
 pandoc
 pinentry-mac
 pngpaste
+podman
 pwnpad/tap/pwnpad
 ripgrep
 rust
