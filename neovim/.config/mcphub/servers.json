@@ -1,40 +1,48 @@
 {
   "mcpServers": {
-    "docker-desktop-mcp-toolkit": {
+    "Burpsuite": {
+      "url": "http://127.0.0.1:9876/sse",
+      "autoApprove": [
+        "send_http1_request",
+        "send_http2_request",
+        "create_repeater_tab",
+        "send_to_intruder",
+        "url_encode",
+        "url_decode",
+        "base64_encode",
+        "base64_decode",
+        "generate_random_string",
+        "output_project_options",
+        "output_user_options",
+        "set_project_options",
+        "set_user_options",
+        "get_scanner_issues",
+        "get_proxy_http_history",
+        "get_proxy_http_history_regex",
+        "get_proxy_websocket_history",
+        "get_proxy_websocket_history_regex",
+        "set_task_execution_engine_state",
+        "set_proxy_intercept_state",
+        "get_active_editor_contents",
+        "set_active_editor_contents"
+      ],
       "disabled": true,
-      "autoApprove": [],
-      "command": "docker",
-      "args": ["mcp", "gateway", "run"]
+      "type": "streamable-http"
     },
-    "github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking": {
-      "autoApprove": ["sequentialthinking"],
-      "custom_instructions": {
-        "text": "Input parameters should use camelCase, not snake_case. For example, thoughts_needed should be changed to thoughtsNeeded."
-      },
-      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
-      "command": "npx",
-      "disabled": true
-    },
-    "github.com/upstash/context7-mcp": {
-      "disabled": false,
+    "Context7": {
       "autoApprove": ["resolve-library-id", "get-library-docs"],
-      "command": "npx",
-      "args": ["-y", "@upstash/context7-mcp"]
-    },
-    "github.com/executeautomation/mcp-playwright": {
-      "disabled": true,
-      "command": "npx",
-      "args": ["-y", "@executeautomation/playwright-mcp-server"]
+      "type": "streamable-http",
+      "url": "https://mcp.context7.com/mcp"
     }
   },
   "nativeMCPServers": {
-    "neovim": {
-      "disabled": true,
-      "autoApprove": []
-    },
     "mcphub": {
       "disabled": false,
       "autoApprove": ["get_current_servers", "toggle_mcp_server"]
+    },
+    "neovim": {
+      "disabled": true,
+      "autoApprove": []
     }
   }
 }
