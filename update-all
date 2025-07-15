@@ -12,9 +12,6 @@ brew update && brew outdated && brew upgrade --no-quarantine && brew cleanup
 brew upgrade --cask --greedy --no-quarantine && brew cleanup
 brew autoremove
 
-# Update npm packages
-npm update -g
-
 # Update neovim
 git submodule update configs/neovim
 nvim -c "lua require('lazy').sync({wait = true})" +qa
@@ -24,9 +21,6 @@ source "${HOME}/.zgenom/zgenom.zsh" && zgenom update
 
 # Update tmux
 ~/.tmux/plugins/tpm/scripts/update_plugin.sh
-
-# Clear all cache
-rm -rf ~/.npm ~/Library/Caches/pip $(brew --cache)
 
 # Get new shell
 exec zsh
