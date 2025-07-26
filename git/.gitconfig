@@ -8,6 +8,7 @@
     copy = !"~/.local/share/gitz/git-copy"
     delete = !"~/.local/share/gitz/git-delete"
     go = !"~/.local/share/gitz/git-go"
+    ignore = "!gi() { local IFS=','; curl -sL https://www.toptal.com/developers/gitignore/api/\"$*\"; }; gi"
     infer = !"~/.local/share/gitz/git-infer"
     lg = !"git lg1"
     lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- <%an>%C(reset)%C(bold yellow)%d%C(reset)' --all
@@ -26,12 +27,14 @@
     yolo = !"git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\""
 [commit]
     gpgsign = true
+    verbose = true
 [gpg]
     format = ssh
 [gpg "ssh"]
     allowedSignersFile = ~/.ssh/allowed_signers
 [diff]
     tool = vimdiff
+    algorithm = histogram
 [merge]
     tool = vimdiff
     ff = false
@@ -41,8 +44,22 @@
     path = nvim
 [core]
     editor = nvim
+    compression = 9
+    whitespace = trailing-space
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
+[branch]
+    sort = -committerdate
+[tag]
+    sort = -version:refname
+[push]
+    autoSetupRemote = true
+[maintenance]
+    auto = true
+    strategy = incremental
+[rerere]
+    enabled = true
+    autoUpdate = true
