@@ -25,41 +25,41 @@
     submodules = submodule status
     tags = tag -l
     yolo = !"git commit -m \"$(curl -s https://whatthecommit.com/index.txt)\""
+[branch]
+    sort = -committerdate
 [commit]
     gpgsign = true
     verbose = true
-[gpg]
-    format = ssh
-[gpg "ssh"]
-    allowedSignersFile = ~/.ssh/allowed_signers
-[diff]
-    tool = vimdiff
-    algorithm = histogram
-[merge]
-    tool = vimdiff
-    ff = false
-[difftool "vimdiff"]
-    path = nvim
-[mergetool "vimdiff"]
-    path = nvim
 [core]
     editor = nvim
     compression = 9
     whitespace = trailing-space
+[diff]
+    algorithm = histogram
+    tool = vimdiff
+[difftool "vimdiff"]
+    path = nvim
 [filter "lfs"]
     clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
-[branch]
-    sort = -committerdate
-[tag]
-    sort = -version:refname
-[push]
-    autoSetupRemote = true
+    smudge = git-lfs smudge -- %f
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.ssh/allowed_signers
 [maintenance]
     auto = true
     strategy = incremental
+[merge]
+    tool = vimdiff
+    ff = false
+[mergetool "vimdiff"]
+    path = nvim
+[push]
+    autoSetupRemote = true
 [rerere]
     enabled = true
     autoUpdate = true
+[tag]
+    sort = -version:refname
