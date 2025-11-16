@@ -9,7 +9,7 @@ fi
 
 # Update and upgrade latest brew packages
 brew update && brew outdated && brew upgrade --no-quarantine && brew cleanup
-brew upgrade --cask --greedy --no-quarantine && brew cleanup
+brew upgrade --cask --greedy && brew cleanup
 brew autoremove
 
 # Update neovim
