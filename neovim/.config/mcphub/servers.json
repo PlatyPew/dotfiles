@@ -1,7 +1,6 @@
 {
   "mcpServers": {
     "Burpsuite": {
-      "url": "http://127.0.0.1:9876/sse",
       "autoApprove": [
         "send_http1_request",
         "send_http2_request",
@@ -27,22 +26,24 @@
         "set_active_editor_contents"
       ],
       "disabled": true,
-      "type": "streamable-http"
+      "type": "streamable-http",
+      "url": "http://127.0.0.1:9876/sse"
     },
     "Context7": {
       "autoApprove": ["resolve-library-id", "get-library-docs"],
+      "disabled": true,
       "type": "streamable-http",
       "url": "https://mcp.context7.com/mcp"
     }
   },
   "nativeMCPServers": {
     "mcphub": {
-      "disabled": false,
-      "autoApprove": ["get_current_servers", "toggle_mcp_server"]
+      "autoApprove": ["get_current_servers", "toggle_mcp_server"],
+      "disabled": true
     },
     "neovim": {
-      "disabled": true,
-      "autoApprove": []
+      "autoApprove": [],
+      "disabled": false
     }
   }
 }
