@@ -27,6 +27,7 @@ export PATH=$BREW_PREFIX/bin:$PATH
 export PATH=$BREW_PREFIX/sbin:$PATH
 
 export PATH=$PATH:$BREW_PREFIX/opt/llvm/bin
+export PATH=$PATH:$HOME/.local/bin
 ############################################################
 
 # Use beam shape cursor on startup.
