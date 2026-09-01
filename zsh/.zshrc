@@ -66,8 +66,8 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/extract
     zgenom ohmyzsh plugins/macos
 
+    zgenom load z-shell/F-Sy-H F-Sy-H.plugin.zsh aa8fc30c1de7f5ae550d9f9c490507532d798cd3 --pin
     zgenom load hlissner/zsh-autopair
-    zgenom load z-shell/F-Sy-H
     zgenom load romkatv/zsh-defer
     zgenom load zsh-users/zsh-autosuggestions
     zgenom load jeffreytse/zsh-vi-mode
@@ -98,6 +98,8 @@ AUTOPAIR_INIT_INHIBIT=1
 ############################################################
 
 ## Vi mode config ##########################################
+ZVM_INIT_MODE=sourcing
+ZVM_READKEY_ENGINE=zle
 ZVM_VI_HIGHLIGHT_BACKGROUND=#585b70
 ZVM_VI_HIGHLIGHT_FOREGROUND=#b4befe
 ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
